@@ -8,8 +8,8 @@
 import UIKit
 import DesignSystem
 import Domain
-import Repository
-import Presantation
+import Data
+import Presentation
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
@@ -24,14 +24,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: scene)
         let vc = UIViewController()
         vc.view.backgroundColor = .white
+        vc.modalPresentationStyle = .fullScreen
         window.rootViewController = vc
         self.window = window
         window.makeKeyAndVisible()
-        
-        DesignTest()
-        DomainTest()
-        RepositoryTest()
-        PresentationTest()
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {
