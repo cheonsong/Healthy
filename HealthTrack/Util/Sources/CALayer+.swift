@@ -10,7 +10,7 @@ import UIKit
 import QuartzCore
 
 extension CALayer {
-    func addBorder(_ arr_edge: [UIRectEdge], color: UIColor, width: CGFloat) {
+    public func addBorder(_ arr_edge: [UIRectEdge], color: UIColor, width: CGFloat) {
         for edge in arr_edge {
             let border = CALayer()
             switch edge {
@@ -30,7 +30,7 @@ extension CALayer {
         }
     }
     
-    func applySketchShadow(
+    public func applySketchShadow(
         color: UIColor,
         alpha: Float,
         x: CGFloat,

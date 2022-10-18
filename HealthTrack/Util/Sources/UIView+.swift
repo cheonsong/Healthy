@@ -14,7 +14,7 @@ extension UIView {
     /// - Parameters:
     ///   - corners: 라운드 코너 [.topLeft, .topRight]
     ///   - radius: 8.0
-    func roundCorners(_ corners: UIRectCorner, radius: CGFloat) {
+    public func roundCorners(_ corners: UIRectCorner, radius: CGFloat) {
         if #available(iOS 11.0, *) {
             clipsToBounds = true
             layer.cornerRadius = radius

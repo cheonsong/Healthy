@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 extension UIApplication {
-    class func getMostTopViewController(base: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
+    public class func getMostTopViewController(base: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
         if let nav = base as? UINavigationController {
             return getMostTopViewController(base: nav.visibleViewController)
         }
@@ -25,7 +25,7 @@ extension UIApplication {
         return base
     }
     
-    class func isUpdateAvailable()-> Bool {
+    public class func isUpdateAvailable()-> Bool {
         guard let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String,
               let url = URL(string: "http://itunes.apple.com/lookup?bundleId=com.heelpass.good-listener"),
               let data = try? Data(contentsOf: url),

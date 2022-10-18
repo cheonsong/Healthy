@@ -10,7 +10,7 @@ import UIKit
 
 extension UILabel {
     // 컬러만 변경
-    func textColorChange(text: String, color: UIColor, range: [String]){
+    public func textColorChange(text: String, color: UIColor, range: [String]){
         let attributedStr = NSMutableAttributedString(string: text)
         
         range.forEach {
@@ -20,7 +20,7 @@ extension UILabel {
         self.attributedText = attributedStr
     }
     // 폰트만 변경
-    func textFontChange(text: String, font: UIFont, range: [String]){
+    public func textFontChange(text: String, font: UIFont, range: [String]){
         let attributedStr = NSMutableAttributedString(string: text)
         range.forEach {
             attributedStr.addAttribute(.font, value: font, range: (text as NSString).range(of: $0))
@@ -29,7 +29,7 @@ extension UILabel {
         self.attributedText = attributedStr
     }
     // 컬러, 폰트 변경
-    func textColorAndFontChange(text: String, color: UIColor, font: UIFont, range: [String]){
+    public func textColorAndFontChange(text: String, color: UIColor, font: UIFont, range: [String]){
         let attributedStr = NSMutableAttributedString(string: text)
         
         range.forEach {
@@ -41,7 +41,7 @@ extension UILabel {
         
     }
     
-    func asFontColor(targetStringList: [String], font: UIFont?, color: UIColor?) {
+    public func asFontColor(targetStringList: [String], font: UIFont?, color: UIColor?) {
         let fullText = text ?? ""
         let attributedString = NSMutableAttributedString(string: fullText)
 

@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 extension UIButton {
-    var title: String {
+    public var title: String {
         get {
             return self.title(for: .normal) ?? ""
         }
@@ -20,7 +20,7 @@ extension UIButton {
         
     }
     
-    var titleColor: UIColor {
+    public var titleColor: UIColor {
         get {
             return self.titleColor(for: .normal) ?? .white
         }
@@ -30,7 +30,7 @@ extension UIButton {
         }
     }
     
-    var color: UIColor {
+    public var color: UIColor {
         get {
             return self.backgroundColor ?? .white
         }
@@ -40,7 +40,7 @@ extension UIButton {
         }
     }
     
-    var font: UIFont {
+    public var font: UIFont {
         get {
             return self.titleLabel?.font ?? .systemFont(ofSize: 15)
         }
