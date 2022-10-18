@@ -9,84 +9,15 @@ import UIKit
 import Util
 import SnapKit
 import Then
-
-public enum Health: String {
-    case water
-    case steps
-    case calolies
-    case sleep
-    
-    var text: String { return self.rawValue.uppercased() }
-    
-    var mainColor: UIColor {
-        switch self {
-        case .water:
-            return .b2
-        case .steps:
-            return .r2
-        case .calolies:
-            return .g2
-        case .sleep:
-            return .y2
-        }
-    }
-    
-    var unit: String {
-        switch self {
-        case .water:
-            return "ml"
-        case .steps:
-            return "steps"
-        case .calolies:
-            return "kcal"
-        case .sleep:
-            return "hours"
-        }
-    }
-    
-    var lightColor: UIColor {
-        switch self {
-        case .water:
-            return .b3
-        case .steps:
-            return .r3
-        case .calolies:
-            return .g3
-        case .sleep:
-            return .y3
-        }
-    }
-    
-    var deepColor: UIColor {
-        switch self {
-        case .water:
-            return .b1
-        case .steps:
-            return .r1
-        case .calolies:
-            return .g1
-        case .sleep:
-            return .y1
-        }
-    }
-    
-    var icon: UIImage {
-        switch self {
-        case .water:
-            return DesignSystemAsset.icoWater.image
-        case .steps:
-            return DesignSystemAsset.icoSteps.image
-        case .calolies:
-            return DesignSystemAsset.icoCalories.image
-        case .sleep:
-            return DesignSystemAsset.icoSleep.image
-        }
-    }
-}
+import RxSwift
+import RxCocoa
 
 public class MainInfoView: UIView {
     
     var type: Health = .water
+    var isSelected: BehaviorRelay<Bool>!
+    var disposeBag = DisposeBag()
+    let innerShadowLayer = CAShapeLayer()
     
     lazy var titleLabel = UILabel().then {
         $0.text = self.type.text
@@ -109,9 +40,10 @@ public class MainInfoView: UIView {
         $0.image = self.type.icon
     }
     
-    public convenience init(type: Health, frame: CGRect = .zero) {
+    public convenience init(type: Health, isSelected: BehaviorRelay<Bool>, frame: CGRect = .zero) {
         self.init(frame: frame)
         self.type = type
+        self.isSelected = isSelected
         addComponents()
         setConstraints()
         bind()
@@ -158,14 +90,20 @@ public class MainInfoView: UIView {
     }
     
     func bind() {
-        
+        // MainView Selected Action
+        isSelected.subscribe(onNext: { [weak self] isSelected in
+            guard let self = self else { return }
+            
+            isSelected ? self.drawInnerShadow() : self.innerShadowLayer.removeFromSuperlayer()
+            self.layoutIfNeeded()
+        })
+        .disposed(by: disposeBag)
     }
     
     override public func draw(_ rect: CGRect) {
         super.draw(rect)
         drawBaseCircle()
         drawCircle()
-//        drawInnerCirle()
     }
     
     func drawBaseCircle() {
@@ -210,5 +148,22 @@ public class MainInfoView: UIView {
         layer.add(gaugeAnimation, forKey: "strokeEnd")
         
         circleView.layer.addSublayer(layer)
+    }
+    
+    /// Draw Inner Shadow When Selected
+    func drawInnerShadow() {
+        innerShadowLayer.shadowColor = UIColor.black.cgColor
+        innerShadowLayer.shadowOffset = CGSize(width: 0.0, height: 0.0)
+        innerShadowLayer.shadowOpacity = 0.25
+        innerShadowLayer.shadowRadius = 10
+        innerShadowLayer.fillRule = .evenOdd
+        
+        let shadowPath = CGMutablePath()
+        let inset = -innerShadowLayer.shadowRadius * 2.0
+        shadowPath.addRect(self.bounds.insetBy(dx: inset, dy: inset))
+        shadowPath.addRect(self.bounds)
+        innerShadowLayer.path = shadowPath
+        
+        self.layer.addSublayer(innerShadowLayer)
     }
 }
