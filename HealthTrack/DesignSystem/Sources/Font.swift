@@ -9,12 +9,12 @@ import Foundation
 import UIKit
 
 extension UIFont {
-    public static let bold25 = UIFont(name: "SUIT-Bold", size: 25)
-    public static let bold20 = UIFont(name: "SUIT-Bold", size: 20)
-    public static let bold16 = UIFont(name: "SUIT-Bold", size: 16)
-    public static let bold10 = UIFont(name: "SUIT-Bold", size: 10)
+    public static let bold25 = DesignSystemFontFamily.Suit.bold.font(size: 25)
+    public static let bold20 = DesignSystemFontFamily.Suit.bold.font(size: 20)
+    public static let bold16 = DesignSystemFontFamily.Suit.bold.font(size: 16)
+    public static let bold10 = DesignSystemFontFamily.Suit.bold.font(size: 10)
     
-    public static let regular10 = UIFont(name: "SUIT-Regular", size: 10)
+    public static let regular10 = DesignSystemFontFamily.Suit.regular.font(size: 10)
 }
 
 public struct FontManagser{

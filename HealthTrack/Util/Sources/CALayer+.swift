@@ -36,13 +36,15 @@ extension CALayer {
         x: CGFloat,
         y: CGFloat,
         blur: CGFloat,
-        spread: CGFloat
+        spread: CGFloat,
+        radius: CGFloat
     ) {
         masksToBounds = false
+        cornerRadius = 10
         shadowColor = color.cgColor
         shadowOpacity = alpha
         shadowOffset = CGSize(width: x, height: y)
-        shadowRadius = blur / UIScreen.main.scale
+        shadowRadius = radius
         if spread == 0 {
             shadowPath = nil
         } else {

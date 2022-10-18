@@ -15,7 +15,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
     
-    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
@@ -24,8 +23,36 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: scene)
         let vc = UIViewController()
         vc.view.backgroundColor = .white
-        vc.modalPresentationStyle = .fullScreen
         window.rootViewController = vc
+        
+        let infoView = MainView(type: .water)
+        vc.view.addSubview(infoView)
+        infoView.snp.makeConstraints {
+            $0.top.equalTo(vc.view.safeAreaLayoutGuide).inset(104)
+            $0.left.equalToSuperview().inset(30)
+        }
+        
+        let infoView2 = MainView(type: .steps)
+        vc.view.addSubview(infoView2)
+        infoView2.snp.makeConstraints {
+            $0.top.equalTo(vc.view.safeAreaLayoutGuide).inset(104)
+            $0.right.equalToSuperview().inset(30)
+        }
+        
+        let infoView3 = MainView(type: .calolies)
+        vc.view.addSubview(infoView3)
+        infoView3.snp.makeConstraints {
+            $0.top.equalTo(infoView.snp.bottom).offset(30)
+            $0.left.equalToSuperview().inset(30)
+        }
+        
+        let infoView4 = MainView(type: .sleep)
+        vc.view.addSubview(infoView4)
+        infoView4.snp.makeConstraints {
+            $0.top.equalTo(infoView.snp.bottom).offset(30)
+            $0.right.equalToSuperview().inset(30)
+        }
+        
         self.window = window
         window.makeKeyAndVisible()
     }
