@@ -14,6 +14,7 @@ extension UIFont {
     public static let bold16 = DesignSystemFontFamily.Suit.bold.font(size: 16)
     public static let bold10 = DesignSystemFontFamily.Suit.bold.font(size: 10)
     
+    public static let regular16 = DesignSystemFontFamily.Suit.regular.font(size: 16)
     public static let regular10 = DesignSystemFontFamily.Suit.regular.font(size: 10)
 }
 
