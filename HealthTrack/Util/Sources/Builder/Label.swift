@@ -15,6 +15,11 @@ public class Label {
         label.text = text
     }
     
+    public func backgroundColor(_ color: UIColor)-> Label {
+        label.backgroundColor = color
+        return self
+    }
+    
     public func font(_ font: UIFont)-> Label {
         label.font = font
         return self

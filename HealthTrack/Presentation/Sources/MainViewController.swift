@@ -9,9 +9,14 @@ import Foundation
 import UIKit
 import DesignSystem
 import Util
+import RxSwift
+import RxCocoa
+import RxGesture
 
 public class MainViewController: UIViewController {
-
+    
+    var disposeBag = DisposeBag()
+    
     let dateLabel = Label("2022년 11월 30일")
         .font(.regular10)
         .textColor(.black)

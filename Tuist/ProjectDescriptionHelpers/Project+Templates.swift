@@ -95,4 +95,5 @@ public extension TargetDependency {
     static let lottie: TargetDependency          = .external(name: "Lottie")
     static let rxGesture: TargetDependency       = .external(name: "RxGesture")
     static let swiftyJson: TargetDependency      = .external(name: "SwiftyJSON")
+    static let transition: TargetDependency      = .external(name: "Transition")
 }
