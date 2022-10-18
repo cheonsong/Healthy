@@ -165,51 +165,50 @@ public class MainInfoView: UIView {
         super.draw(rect)
         drawBaseCircle()
         drawCircle()
-        drawInnerCirle()
+//        drawInnerCirle()
     }
     
     func drawBaseCircle() {
-        let center = circleView.center
+        let center = CGPoint(x: self.center.x/2, y: self.center.y/2 - 10)
         let path = UIBezierPath()
-        path.move(to: center)
         path.addArc(withCenter: center,
-                    radius: circleView.frame.height/2,
-                    startAngle: 0,
-                    endAngle: .pi * 2,
+                    radius: circleView.frame.height / 2,
+                    startAngle: -.pi,
+                    endAngle: .pi,
                     clockwise: true)
         
-        path.close()
-        type.lightColor.set()
-        path.fill()
+        let layer = CAShapeLayer()
+        layer.path = path.cgPath
+        layer.strokeColor = type.lightColor.cgColor
+        layer.fillColor = UIColor.clear.cgColor
+        layer.lineWidth = 10
+        layer.lineCap = .round
+        
+        circleView.layer.addSublayer(layer)
     }
     
     func drawCircle() {
-        let center = circleView.center
+        let center = CGPoint(x: self.center.x/2, y: self.center.y/2 - 10)
         let path = UIBezierPath()
-        path.move(to: center)
-        path.addArc(withCenter: self.center,
+        path.addArc(withCenter: center,
                     radius: circleView.frame.height / 2,
                     startAngle: (-(.pi) / 2),
                     endAngle: .pi,
                     clockwise: true)
-
-        path.close()
-        type.deepColor.set()
-        path.fill()
-    }
-    
-    func drawInnerCirle() {
-        let center = circleView.center
-        let path = UIBezierPath()
-        path.move(to: center)
-        path.addArc(withCenter: center,
-                    radius: circleView.frame.height/2 - 10,
-                    startAngle: 0,
-                    endAngle: .pi * 2,
-                    clockwise: true)
         
-        path.close()
-        type.mainColor.set()
-        path.fill()
+        let layer = CAShapeLayer()
+        layer.path = path.cgPath
+        layer.strokeColor = type.deepColor.cgColor
+        layer.fillColor = UIColor.clear.cgColor
+        layer.lineWidth = 10
+        layer.lineCap = .round
+        
+        let gaugeAnimation = CABasicAnimation(keyPath: "strokeEnd")
+        gaugeAnimation.fromValue = 0
+        gaugeAnimation.toValue = 1
+        gaugeAnimation.duration = 1
+        layer.add(gaugeAnimation, forKey: "strokeEnd")
+        
+        circleView.layer.addSublayer(layer)
     }
 }
