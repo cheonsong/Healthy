@@ -144,7 +144,8 @@ public class MainInfoView: UIView {
         let gaugeAnimation = CABasicAnimation(keyPath: "strokeEnd")
         gaugeAnimation.fromValue = 0
         gaugeAnimation.toValue = 1
-        gaugeAnimation.duration = 1
+        gaugeAnimation.duration = 0.7
+        gaugeAnimation.timingFunction = CAMediaTimingFunction(controlPoints: 0.4, 0.02, 1, 0.05)
         layer.add(gaugeAnimation, forKey: "strokeEnd")
         
         circleView.layer.addSublayer(layer)
