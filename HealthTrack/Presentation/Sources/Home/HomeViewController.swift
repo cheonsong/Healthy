@@ -13,7 +13,9 @@ import RxSwift
 import RxCocoa
 import RxGesture
 
-public class MainViewController: UIViewController {
+public class HomeViewController: UIViewController {
+    
+    var coordinator: HomeCoordinator?
     
     var disposeBag = DisposeBag()
     
@@ -38,8 +40,8 @@ public class MainViewController: UIViewController {
     let sleepView = MainView(type: .sleep)
     
     /// MainViewController DI를 위한 Create 함수
-    public static func create()-> MainViewController {
-        let vc = MainViewController()
+    public static func create()-> HomeViewController {
+        let vc = HomeViewController()
         return vc
     }
     
