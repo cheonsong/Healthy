@@ -60,7 +60,7 @@ public class HomeViewController: UIViewController {
     
     func setConstraints() {
         dateLabel.snp.makeConstraints {
-            $0.top.equalTo(self.view.safeAreaLayoutGuide).inset(12)
+            $0.top.equalTo(self.view.safeAreaLayoutGuide).inset(20)
             $0.left.equalToSuperview().inset(Const.padding)
         }
         
@@ -99,6 +99,24 @@ public class HomeViewController: UIViewController {
     }
     
     func bind() {
-        
+        waterView.rx.tapGesture()
+            .when(.recognized)
+            .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
+            .subscribe(onNext: { _ in
+                let vc = WaterViewController()
+                vc.modalPresentationStyle = .fullScreen
+                vc.transitioningDelegate = self
+                self.present(vc, animated: true)
+            })
+            .disposed(by: disposeBag)
+    }
+}
+
+extension HomeViewController: UIViewControllerTransitioningDelegate {
+    public func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        WaterTransition()
+    }
+    public func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        nil
     }
 }
