@@ -11,6 +11,10 @@ import UIKit
 public class View {
     public var view = UIView()
     
+    public init (_ view: UIView = UIView()) {
+        self.view = view
+    }
+    
     public func backgrouondColor(_ color: UIColor)-> View {
         view.backgroundColor = color
         return self

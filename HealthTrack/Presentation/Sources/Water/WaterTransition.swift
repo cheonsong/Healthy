@@ -44,6 +44,12 @@ extension WaterTransition: UIViewControllerAnimatedTransitioning {
         toView.backgroundColor = .b2
         toView.layer.cornerRadius = 10
         
+        let views = [toVC.mainLabel, toVC.drinkButton, toVC.setButton, toVC.chartView, toVC.waterBaseView]
+        views.forEach {
+            $0.transform = CGAffineTransform(translationX: -200, y: -350).scaledBy(x: 0.1, y: 0.1)
+            $0.alpha = 0
+        }
+        
         // 3. 커스텀 애니메이션 정의
         UIView.animateKeyframes(
             withDuration: Constants.duration,
@@ -56,6 +62,10 @@ extension WaterTransition: UIViewControllerAnimatedTransitioning {
                         toView.layer.cornerRadius = 0
                         toView.backgroundColor = .white
                         toView.frame = fromVC.view.frame
+                        views.forEach {
+                            $0.transform = .identity
+                            $0.alpha = 1
+                        }
                     }
                 )
             },

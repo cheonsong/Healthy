@@ -6,7 +6,9 @@
 //
 
 import Foundation
+import UIKit
 
 public struct Const {
     public static let padding: CGFloat = 30
+    public static let fullWidth: CGFloat = UIScreen.main.bounds.width - padding * 2
 }

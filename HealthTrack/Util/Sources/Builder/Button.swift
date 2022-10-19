@@ -9,7 +9,11 @@ import Foundation
 import UIKit
 
 public class Button {
-    public var button = UIButton()
+    public var button: UIButton
+    
+    public init(_ button: UIButton = UIButton()) {
+        self.button = button
+    }
     
     public func backgroundColor(_ color: UIColor)-> Button {
         button.backgroundColor = color
