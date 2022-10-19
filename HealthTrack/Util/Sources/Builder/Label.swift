@@ -85,4 +85,24 @@ public class Label {
         label.attributedText = attributedText
         return self
     }
+    
+    public func isHidden(_ isHidden: Bool)-> Label {
+        label.isHidden = isHidden
+        return self
+    }
+    
+    public func alpha(_ alpha: CGFloat)-> Label {
+        label.alpha = alpha
+        return self
+    }
+    
+    public func cornerRadius(_ cornerRadius: CGFloat)-> Label {
+        label.layer.cornerRadius = cornerRadius
+        return self
+    }
+    
+    public func masksToBounds(_ masksToBounds: Bool)-> Label  {
+        label.layer.masksToBounds = masksToBounds
+        return self
+    }
 }

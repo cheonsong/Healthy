@@ -51,4 +51,24 @@ public class Button {
         return self
     }
     
+    public func isHidden(_ isHidden: Bool)-> Button {
+        button.isHidden = isHidden
+        return self
+    }
+    
+    public func alpha(_ alpha: CGFloat)-> Button {
+        button.alpha = alpha
+        return self
+    }
+    
+    public func cornerRadius(_ cornerRadius: CGFloat)-> Button {
+        button.layer.cornerRadius = cornerRadius
+        return self
+    }
+    
+    public func masksToBounds(_ masksToBounds: Bool)-> Button  {
+        button.layer.masksToBounds = masksToBounds
+        return self
+    }
+    
 }
