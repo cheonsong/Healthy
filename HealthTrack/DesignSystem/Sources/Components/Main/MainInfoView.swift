@@ -19,26 +19,20 @@ public class MainInfoView: UIView {
     var disposeBag = DisposeBag()
     let innerShadowLayer = CAShapeLayer()
     
-    lazy var titleLabel = UILabel().then {
-        $0.text = self.type.text
-        $0.textColor = .white
-        $0.font = .bold16
-    }
+    lazy var titleLabel = Label(self.type.text)
+        .textColor(.white)
+        .font(.bold16)
+        .label
     
-    let circleView = UIView().then {
-        $0.backgroundColor = .clear
-    }
+    let circleView = View().backgrouondColor(.clear).view
     
-    lazy var unitLabel = UILabel().then {
-        $0.text = "1000 " + self.type.unit
-        $0.textColor = .white
-        $0.font = .bold20
-        $0.textFontChange(text: "1000 " + self.type.unit, font: .bold10, range: [self.type.unit])
-    }
+    lazy var unitLabel = Label("1000 " + self.type.unit)
+        .textColor(.white)
+        .font(.bold20)
+        .attributedTextChangeFont("1000 " + self.type.unit, .bold10, [self.type.unit])
+        .label
     
-    lazy var icon = UIImageView().then {
-        $0.image = self.type.icon
-    }
+    lazy var icon = ImageView(self.type.icon).imageView
     
     public convenience init(type: Health, isSelected: BehaviorRelay<Bool>, frame: CGRect = .zero) {
         self.init(frame: frame)

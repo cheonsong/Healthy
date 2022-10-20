@@ -105,4 +105,32 @@ public class Label {
         label.layer.masksToBounds = masksToBounds
         return self
     }
+    
+    public func attributedTextChangeFont(_ text: String, _ font: UIFont, _ range: [String])-> Label {
+        let attributedStr = NSMutableAttributedString(string: text)
+        range.forEach {
+            attributedStr.addAttribute(.font, value: font, range: (text as NSString).range(of: $0))
+        }
+        label.attributedText = attributedStr
+        return self
+    }
+    
+    public func attributedTextChangeColor(_ text: String, _ color: UIColor, _ range: [String])-> Label {
+        let attributedStr = NSMutableAttributedString(string: text)
+        range.forEach {
+            attributedStr.addAttribute(.foregroundColor, value: color, range: (text as NSString).range(of: $0))
+        }
+        label.attributedText = attributedStr
+        return self
+    }
+    
+    public func attributedTextChangeFontAndColor(_ text: String, _ font: UIFont, _ color: UIColor, _ range: [String])-> Label {
+        let attributedStr = NSMutableAttributedString(string: text)
+        range.forEach {
+            attributedStr.addAttribute(.foregroundColor, value: color, range: (text as NSString).range(of: $0))
+            attributedStr.addAttribute(.font, value: font, range: (text as NSString).range(of: $0))
+        }
+        label.attributedText = attributedStr
+        return self
+    }
 }
