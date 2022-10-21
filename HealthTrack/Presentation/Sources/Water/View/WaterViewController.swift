@@ -9,8 +9,11 @@ import Foundation
 import UIKit
 import DesignSystem
 import Util
+import RxSwift
 
 public class WaterViewController: UIViewController {
+    
+    var disposeBag = DisposeBag()
     
     let mainLabel = Label("오늘 당신이 마신\n물은 750 ml 입니다")
         .numberOfLines(0)
@@ -119,7 +122,13 @@ public class WaterViewController: UIViewController {
     }
     
     func bind() {
-        
+        drinkButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                guard let self = self else { return }
+                let waterAddModal = WaterAddModal()
+                waterAddModal.present(target: self.view)
+            })
+            .disposed(by: disposeBag)
     }
     
     func updateValue(_ value: CGFloat) {

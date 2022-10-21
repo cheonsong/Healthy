@@ -10,6 +10,14 @@ import UIKit
 import DesignSystem
 import Util
 
-class WaterAddModal: UIView {
+public class WaterAddModal: ModalView {
+    
+    public override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    public required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
     
 }
