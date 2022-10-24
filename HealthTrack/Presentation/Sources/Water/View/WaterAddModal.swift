@@ -12,12 +12,71 @@ import Util
 
 public class WaterAddModal: ModalView {
     
+    let cupImageView = ImageView(PresentationAsset.icoCup.image).imageView
+    
+    let plusButton = Button(IcoButton(type: .water, icon: .plus)).button as! IcoButton
+    let minusButton = Button(IcoButton(type: .water, icon: .minus)).button as! IcoButton
+    
+    let buttonStackView = StackView().spacing(30).axis(.horizontal).backgrouondColor(.clear).distributon(.fillEqually).stackView
+    let addButton = Button(MainButton(.water)).title("추가하기").button as! MainButton
+    let cancelButton = Button(MainButton(.water)).title("취소").button as! MainButton
+    
+    let countLabel = Label("물 한잔 200 ml").textColor(.black).font(.bold16).label
+    
     public override init(frame: CGRect) {
         super.init(frame: frame)
+        addComponents()
+        setConstraints()
+        bind()
     }
     
     public required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
     
+    func addComponents() {
+        [cupImageView, plusButton, minusButton, buttonStackView, countLabel].forEach { modal.addSubview($0) }
+        buttonStackView.addArrangedSubview(cancelButton)
+        buttonStackView.addArrangedSubview(addButton)
+        
+        minusButton.configure(false)
+        addButton.configure(false)
+    }
+    
+    func setConstraints() {
+        cupImageView.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.top.equalToSuperview().inset(68)
+        }
+        
+        plusButton.snp.makeConstraints {
+            $0.centerY.equalTo(cupImageView)
+            $0.left.equalTo(cupImageView.snp.right).offset(41)
+        }
+        
+        minusButton.snp.makeConstraints {
+            $0.centerY.equalTo(cupImageView)
+            $0.right.equalTo(cupImageView.snp.left).offset(-41)
+        }
+        
+        buttonStackView.snp.makeConstraints {
+            $0.width.equalTo(Const.fullWidth)
+            $0.height.equalTo(50)
+            $0.centerX.equalToSuperview()
+            $0.bottom.equalTo(safeAreaLayoutGuide).inset(38)
+        }
+        
+        countLabel.snp.makeConstraints {
+            $0.top.equalTo(cupImageView.snp.bottom).offset(35)
+            $0.centerX.equalToSuperview()
+        }
+        
+        addButton.snp.removeConstraints()
+        cancelButton.snp.removeConstraints()
+        
+    }
+    
+    func bind() {
+        
+    }
 }
