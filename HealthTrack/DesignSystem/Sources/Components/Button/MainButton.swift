@@ -40,6 +40,16 @@ public class MainButton: UIButton {
         self.backgroundColor = type.mainColor
     }
     
+    public func configure(_ isActivate: Bool) {
+        if !isActivate {
+            self.backgroundColor = .gr2
+            self.isUserInteractionEnabled = false
+        } else {
+            self.backgroundColor = type.mainColor
+            self.isUserInteractionEnabled = true
+        }
+    }
+    
     private override init(frame: CGRect) {
         super.init(frame: frame)
     }
