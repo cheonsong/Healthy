@@ -141,7 +141,20 @@ public class WaterViewController: UIViewController {
             self.view.layoutIfNeeded()
         }, completion: nil)
         
-        ballonLabel.text = "\(Int(value*100))%"
+        updateValueAnimation(value: value)
+    }
+    
+    func updateValueAnimation(value: CGFloat) {
+        let max = value * 100
+        updateLabel(value: 0, max: max)
+    }
+    
+    func updateLabel(value: CGFloat, max: CGFloat) {
+        if value == max { return }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1/max, execute: {
+            self.ballonLabel.text = "\(Int(value) + 1)%"
+            self.updateLabel(value: value + 1, max: max)
+        })
         
     }
 }
