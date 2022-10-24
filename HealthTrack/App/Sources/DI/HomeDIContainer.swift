@@ -30,5 +30,8 @@ extension HomeDIContainer: HomeCoordinatorDependencies {
         return HomeViewController.create()
     }
     
+    func makeWaterCoordinator(navigation: UINavigationController) -> WaterCoordinator {
+        return WaterDIContainer().makeWaterCoordinator(navigation: navigation)
+    }
 }
 

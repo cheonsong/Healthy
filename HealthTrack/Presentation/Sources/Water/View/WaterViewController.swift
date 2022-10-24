@@ -11,9 +11,10 @@ import DesignSystem
 import Util
 import RxSwift
 
-public class WaterViewController: UIViewController {
+public final class WaterViewController: UIViewController {
     
     var disposeBag = DisposeBag()
+    var coordinator: WaterCoordinator?
     
     let mainLabel = Label("오늘 당신이 마신\n물은 750 ml 입니다")
         .numberOfLines(0)
@@ -54,6 +55,12 @@ public class WaterViewController: UIViewController {
         .textColor(.white)
         .font(.bold16)
         .label
+    
+    public static func create()-> WaterViewController {
+        let vc = WaterViewController()
+        
+        return vc
+    }
     
     override public func viewDidLoad() {
         super.viewDidLoad()

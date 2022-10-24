@@ -12,6 +12,7 @@ import Util
 // 의존성 주입을 위한 Coordinator Dependency
 public protocol HomeCoordinatorDependencies {
     func makeHomeViewController() -> HomeViewController
+    func makeWaterCoordinator(navigation: UINavigationController)-> WaterCoordinator
 }
 
 public class HomeCoordinator: CoordinatorType {
@@ -33,6 +34,11 @@ public class HomeCoordinator: CoordinatorType {
         homeVC.coordinator = self
         
         self.navigationController.pushViewController(homeVC, animated: false)
+    }
+    
+    public func presentWaterViewController() {
+        let coordinator = dependencies.makeWaterCoordinator(navigation: self.navigationController)
+        coordinator.start()
     }
     
     deinit {

@@ -102,21 +102,9 @@ public class HomeViewController: UIViewController {
         waterView.rx.tapGesture()
             .when(.recognized)
             .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
-            .subscribe(onNext: { _ in
-                let vc = WaterViewController()
-                vc.modalPresentationStyle = .fullScreen
-                vc.transitioningDelegate = self
-                self.present(vc, animated: true)
+            .subscribe(onNext: { [weak self] _ in
+                self?.coordinator?.presentWaterViewController()
             })
             .disposed(by: disposeBag)
-    }
-}
-
-extension HomeViewController: UIViewControllerTransitioningDelegate {
-    public func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        WaterTransition()
-    }
-    public func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        nil
     }
 }
