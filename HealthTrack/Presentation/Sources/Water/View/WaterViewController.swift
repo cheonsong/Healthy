@@ -136,6 +136,14 @@ public final class WaterViewController: UIViewController {
                 waterAddModal.present(target: self.view)
             })
             .disposed(by: disposeBag)
+        
+        setButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                guard let self = self else { return }
+                let waterSetModal = WaterSetModal()
+                waterSetModal.present(target: self.view)
+            })
+            .disposed(by: disposeBag)
     }
     
     func updateValue(_ value: CGFloat) {
