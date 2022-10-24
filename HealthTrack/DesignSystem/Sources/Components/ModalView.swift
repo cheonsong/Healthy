@@ -15,7 +15,7 @@ import RxGesture
 
 open class ModalView: UIView {
     
-    private let background = View().backgrouondColor(.clear).view
+    private let background = View().backgrouondColor(.dim).view
     
     private let modalShadowView = View().backgrouondColor(.clear).view
     
@@ -85,13 +85,13 @@ open class ModalView: UIView {
             $0.edges.equalToSuperview()
         }
         modal.transform = CGAffineTransform(translationX: 0, y: Const.modalHeight)
-        UIView.animate(withDuration: 0.5, animations: {
+        UIView.animate(withDuration: 0.35, animations: {
             self.modal.transform = .identity
-        })
+        }) 
     }
     
     public func dismiss() {
-        UIView.animate(withDuration: 0.5, animations: {
+        UIView.animate(withDuration: 0.35, animations: {
             self.modal.transform = CGAffineTransform(translationX: 0, y: Const.modalHeight)
         }, completion: { _ in
             self.removeFromSuperview()

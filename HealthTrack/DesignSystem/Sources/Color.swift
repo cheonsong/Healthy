@@ -31,4 +31,6 @@ extension UIColor {
     public static let gr3 = UIColor(hex: "#F9F9F9")
     
     public static let error = UIColor(hex: "#FF6961")
+    
+    public static let dim = UIColor.black.withAlphaComponent(0.5)
 }
