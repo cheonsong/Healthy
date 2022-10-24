@@ -8,69 +8,69 @@
 import Foundation
 import UIKit
 
-public class Button {
-    public var button: UIButton
+open class Button {
+    open var button: UIButton
     
     public init(_ button: UIButton = UIButton()) {
         self.button = button
     }
     
-    public func backgroundColor(_ color: UIColor)-> Button {
+    open func backgroundColor(_ color: UIColor)-> Button {
         button.backgroundColor = color
         return self
     }
     
-    public func title(_ title: String)-> Button {
+    open func title(_ title: String)-> Button {
         button.setTitle(title, for: .normal)
         return self
     }
     
-    public func titleColor(_ color: UIColor)-> Button {
+    open func titleColor(_ color: UIColor)-> Button {
         button.setTitleColor(color, for: .normal)
         return self
     }
     
-    public func font(_ font: UIFont)-> Button {
+    open func font(_ font: UIFont)-> Button {
         button.titleLabel?.font = font
         return self
     }
     
-    public func isUserInteractionEnabled(_ isUserInteractionEnabled: Bool)-> Button {
+    open func isUserInteractionEnabled(_ isUserInteractionEnabled: Bool)-> Button {
         button.isUserInteractionEnabled = isUserInteractionEnabled
         return self
     }
     
-    public func textAlignment(_ textAlignment: NSTextAlignment)-> Button {
+    open func textAlignment(_ textAlignment: NSTextAlignment)-> Button {
         button.titleLabel?.textAlignment = textAlignment
         return self
     }
     
-    public func numberOfLines(_ numberOfLines: Int)-> Button {
+    open func numberOfLines(_ numberOfLines: Int)-> Button {
         button.titleLabel?.numberOfLines = numberOfLines
         return self
     }
     
-    public func isSelected(_ isSelected: Bool)-> Button {
+    open func isSelected(_ isSelected: Bool)-> Button {
         button.isSelected = isSelected
         return self
     }
     
-    public func isHidden(_ isHidden: Bool)-> Button {
+    open func isHidden(_ isHidden: Bool)-> Button {
         button.isHidden = isHidden
         return self
     }
     
-    public func alpha(_ alpha: CGFloat)-> Button {
+    open func alpha(_ alpha: CGFloat)-> Button {
         button.alpha = alpha
         return self
     }
     
-    public func cornerRadius(_ cornerRadius: CGFloat)-> Button {
+    open func cornerRadius(_ cornerRadius: CGFloat)-> Button {
         button.layer.cornerRadius = cornerRadius
         return self
     }
     
-    public func masksToBounds(_ masksToBounds: Bool)-> Button  {
+    open func masksToBounds(_ masksToBounds: Bool)-> Button  {
         button.layer.masksToBounds = masksToBounds
         return self
     }
