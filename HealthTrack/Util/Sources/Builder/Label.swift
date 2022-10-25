@@ -9,100 +9,102 @@ import Foundation
 import UIKit
 
 open class Label {
-    open var label = UILabel()
+    open var view = UILabel()
+    
+    public init() {}
     
     public init(_ text: String) {
-        label.text = text
+        view.text = text
     }
     
     open func backgroundColor(_ color: UIColor)-> Label {
-        label.backgroundColor = color
+        view.backgroundColor = color
         return self
     }
     
     open func font(_ font: UIFont)-> Label {
-        label.font = font
+        view.font = font
         return self
     }
     
     open func text(_ text: String)-> Label {
-        label.text = text
+        view.text = text
         return self
     }
     
     open func textColor(_ color: UIColor)-> Label {
-        label.textColor = color
+        view.textColor = color
         return self
     }
     
     open func shadowColor(_ shadowColor: UIColor?)-> Label {
-        label.shadowColor = shadowColor
+        view.shadowColor = shadowColor
         return self
     }
 
     open func shadowOffset(_ shadowOffset: CGSize)-> Label {
-        label.shadowOffset = shadowOffset
+        view.shadowOffset = shadowOffset
         return self
     }
     
     open func textAlignment(_ textAlignment: NSTextAlignment)-> Label {
-        label.textAlignment = textAlignment
+        view.textAlignment = textAlignment
         return self
     }
     
     open func lineBreakMode(_ lineBreakMode: NSLineBreakMode)-> Label {
-        label.lineBreakMode = lineBreakMode
+        view.lineBreakMode = lineBreakMode
         return self
     }
     
     open func highlightedTextColor(_ highlightedTextColor: UIColor?)-> Label {
-        label.highlightedTextColor = highlightedTextColor
+        view.highlightedTextColor = highlightedTextColor
         return self
     }
     
     open func isHighlighted(_ isHighlighted: Bool)-> Label {
-        label.isHighlighted = isHighlighted
+        view.isHighlighted = isHighlighted
         return self
     }
     
     open func isUserInteractionEnabled(_ isUserInteractionEnabled: Bool)-> Label {
-        label.isUserInteractionEnabled = isUserInteractionEnabled
+        view.isUserInteractionEnabled = isUserInteractionEnabled
         return self
     }
     
     open func isEnabled(_ isEnabled: Bool)-> Label {
-        label.isEnabled = isEnabled
+        view.isEnabled = isEnabled
         return self
     }
     
     open func numberOfLines(_ numberOfLines: Int)-> Label {
-        label.numberOfLines = numberOfLines
+        view.numberOfLines = numberOfLines
         return self
     }
     
     @available(iOS 6.0, *)
     open func attributedText(_ attributedText: NSAttributedString)-> Label {
-        label.attributedText = attributedText
+        view.attributedText = attributedText
         return self
     }
     
     open func isHidden(_ isHidden: Bool)-> Label {
-        label.isHidden = isHidden
+        view.isHidden = isHidden
         return self
     }
     
     open func alpha(_ alpha: CGFloat)-> Label {
-        label.alpha = alpha
+        view.alpha = alpha
         return self
     }
     
     open func cornerRadius(_ cornerRadius: CGFloat)-> Label {
-        label.layer.cornerRadius = cornerRadius
+        view.layer.cornerRadius = cornerRadius
         return self
     }
     
     open func masksToBounds(_ masksToBounds: Bool)-> Label  {
-        label.layer.masksToBounds = masksToBounds
+        view.layer.masksToBounds = masksToBounds
         return self
     }
     
@@ -111,7 +113,7 @@ open class Label {
         range.forEach {
             attributedStr.addAttribute(.font, value: font, range: (text as NSString).range(of: $0))
         }
-        label.attributedText = attributedStr
+        view.attributedText = attributedStr
         return self
     }
     
@@ -120,7 +122,7 @@ open class Label {
         range.forEach {
             attributedStr.addAttribute(.foregroundColor, value: color, range: (text as NSString).range(of: $0))
         }
-        label.attributedText = attributedStr
+        view.attributedText = attributedStr
         return self
     }
     
@@ -130,7 +132,17 @@ open class Label {
             attributedStr.addAttribute(.foregroundColor, value: color, range: (text as NSString).range(of: $0))
             attributedStr.addAttribute(.font, value: font, range: (text as NSString).range(of: $0))
         }
-        label.attributedText = attributedStr
+        view.attributedText = attributedStr
+        return self
+    }
+    
+    open func borderWidth(_ borderWidth: CGFloat)-> Label {
+        view.layer.borderWidth = borderWidth
+        return self
+    }
+    
+    open func borderColor(_ borderColor: UIColor)-> Label {
+        view.layer.borderColor = borderColor.cgColor
         return self
     }
 }

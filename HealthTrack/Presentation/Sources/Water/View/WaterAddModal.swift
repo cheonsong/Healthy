@@ -12,16 +12,16 @@ import Util
 
 public class WaterAddModal: ModalView {
     
-    let cupImageView = ImageView(PresentationAsset.icoCup.image).imageView
+    let cupImageView = ImageView(PresentationAsset.icoCup.image).view
     
-    let plusButton = Button(IcoButton(type: .water, icon: .plus)).button as! IcoButton
-    let minusButton = Button(IcoButton(type: .water, icon: .minus)).button as! IcoButton
+    let plusButton = Button(IcoButton(type: .water, icon: .plus)).view as! IcoButton
+    let minusButton = Button(IcoButton(type: .water, icon: .minus)).view as! IcoButton
     
-    let buttonStackView = StackView().spacing(30).axis(.horizontal).backgrouondColor(.clear).distributon(.fillEqually).stackView
-    let addButton = Button(MainButton(.water)).title("추가하기").button as! MainButton
-    let cancelButton = Button(MainButton(.water)).title("취소").button as! MainButton
+    let buttonStackView = StackView().spacing(30).axis(.horizontal).backgrouondColor(.clear).distributon(.fillEqually).view
+    let addButton = Button(MainButton(.water)).title("추가하기").view as! MainButton
+    let cancelButton = Button(MainButton(.water)).title("취소").view as! MainButton
     
-    let countLabel = Label("물 한잔 200 ml").textColor(.black).font(.bold16).label
+    let countLabel = Label("물 한잔 200 ml").textColor(.black).font(.bold16).view
     
     public override init(frame: CGRect) {
         super.init(frame: frame)

@@ -22,7 +22,7 @@ public class MainInfoView: UIView {
     lazy var titleLabel = Label(self.type.text)
         .textColor(.white)
         .font(.bold16)
-        .label
+        .view
     
     let circleView = View().backgrouondColor(.clear).view
     
@@ -30,9 +30,9 @@ public class MainInfoView: UIView {
         .textColor(.white)
         .font(.bold20)
         .attributedTextChangeFont("1000 " + self.type.unit, .bold10, [self.type.unit])
-        .label
+        .view
     
-    lazy var icon = ImageView(self.type.icon).imageView
+    lazy var icon = ImageView(self.type.icon).view
     
     public convenience init(type: Health, isSelected: BehaviorRelay<Bool>, frame: CGRect = .zero) {
         self.init(frame: frame)

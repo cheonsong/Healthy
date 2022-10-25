@@ -21,7 +21,7 @@ public final class WaterViewController: UIViewController {
         .textColor(.black)
         .font(.bold25)
         .textAlignment(.center)
-        .label
+        .view
     
     let main = UILabel().then {
         $0.text = "asdfsdaf"
@@ -43,9 +43,7 @@ public final class WaterViewController: UIViewController {
     
     let chartView = View().backgrouondColor(.lightGray).view
     
-    let drinkButton = Button(MainButton(.water)).title("물 마시기").button
-    
-    let setButton = Button(MainButton(.water)).title("목표량 설정하기").button
+    let drinkButton = Button(MainButton(.water)).title("물 마시기").view
     
     let ballonIcon = UIImageView().then {
         $0.image = PresentationAsset.ballon.image
@@ -54,7 +52,11 @@ public final class WaterViewController: UIViewController {
     let ballonLabel = Label("0%")
         .textColor(.white)
         .font(.bold16)
-        .label
+        .view
+    
+    let guideLine = View().backgrouondColor(.clear).view
+    
+    let navigation = Navigation()
     
     public static func create()-> WaterViewController {
         let vc = WaterViewController()
@@ -76,14 +78,18 @@ public final class WaterViewController: UIViewController {
     }
     
     func addComponents() {
-        [mainLabel, waterBaseView, chartView, drinkButton, setButton, ballonIcon].forEach { view.addSubview($0) }
+        [navigation, guideLine, mainLabel, waterBaseView, chartView, drinkButton, ballonIcon].forEach { view.addSubview($0) }
         waterBaseView.addSubview(waterView)
         ballonIcon.addSubview(ballonLabel)
     }
     
     func setConstraints() {
+        navigation.snp.makeConstraints {
+            $0.top.left.right.equalTo(view.safeAreaLayoutGuide)
+        }
+        
         mainLabel.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).inset(25)
+            $0.top.equalTo(view.safeAreaLayoutGuide).inset(75)
             $0.centerX.equalToSuperview()
         }
         
@@ -113,18 +119,19 @@ public final class WaterViewController: UIViewController {
         chartView.snp.makeConstraints {
             $0.width.equalTo(Const.fullWidth)
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(waterBaseView.snp.bottom).offset(22)
+            $0.centerY.equalTo(guideLine)
+            $0.height.equalTo(200)
         }
         
         drinkButton.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(chartView.snp.bottom).offset(22)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(34)
         }
         
-        setButton.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.top.equalTo(drinkButton.snp.bottom).offset(16)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(34)
+        guideLine.snp.makeConstraints {
+            $0.top.equalTo(waterBaseView.snp.bottom)
+            $0.bottom.equalTo(drinkButton.snp.top)
+            $0.left.right.equalToSuperview()
         }
     }
     
@@ -137,11 +144,18 @@ public final class WaterViewController: UIViewController {
             })
             .disposed(by: disposeBag)
         
-        setButton.rx.tap
+        navigation.setButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 guard let self = self else { return }
                 let waterSetModal = WaterSetModal()
-                waterSetModal.present(target: self.view)
+                waterSetModal.present(target: self.view, isLong: true)
+            })
+            .disposed(by: disposeBag)
+        
+        navigation.backButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                guard let self = self else { return }
+                self.dismiss(animated: true)
             })
             .disposed(by: disposeBag)
     }

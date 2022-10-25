@@ -9,69 +9,84 @@ import Foundation
 import UIKit
 
 open class Button {
-    open var button: UIButton
+    open var view: UIButton
     
     public init(_ button: UIButton = UIButton()) {
-        self.button = button
+        self.view = button
     }
     
     open func backgroundColor(_ color: UIColor)-> Button {
-        button.backgroundColor = color
+        view.backgroundColor = color
         return self
     }
     
     open func title(_ title: String)-> Button {
-        button.setTitle(title, for: .normal)
+        view.setTitle(title, for: .normal)
         return self
     }
     
     open func titleColor(_ color: UIColor)-> Button {
-        button.setTitleColor(color, for: .normal)
+        view.setTitleColor(color, for: .normal)
         return self
     }
     
     open func font(_ font: UIFont)-> Button {
-        button.titleLabel?.font = font
+        view.titleLabel?.font = font
         return self
     }
     
     open func isUserInteractionEnabled(_ isUserInteractionEnabled: Bool)-> Button {
-        button.isUserInteractionEnabled = isUserInteractionEnabled
+        view.isUserInteractionEnabled = isUserInteractionEnabled
         return self
     }
     
     open func textAlignment(_ textAlignment: NSTextAlignment)-> Button {
-        button.titleLabel?.textAlignment = textAlignment
+        view.titleLabel?.textAlignment = textAlignment
         return self
     }
     
     open func numberOfLines(_ numberOfLines: Int)-> Button {
-        button.titleLabel?.numberOfLines = numberOfLines
+        view.titleLabel?.numberOfLines = numberOfLines
         return self
     }
     
     open func isSelected(_ isSelected: Bool)-> Button {
-        button.isSelected = isSelected
+        view.isSelected = isSelected
         return self
     }
     
     open func isHidden(_ isHidden: Bool)-> Button {
-        button.isHidden = isHidden
+        view.isHidden = isHidden
         return self
     }
     
     open func alpha(_ alpha: CGFloat)-> Button {
-        button.alpha = alpha
+        view.alpha = alpha
         return self
     }
     
     open func cornerRadius(_ cornerRadius: CGFloat)-> Button {
-        button.layer.cornerRadius = cornerRadius
+        view.layer.cornerRadius = cornerRadius
         return self
     }
     
     open func masksToBounds(_ masksToBounds: Bool)-> Button  {
-        button.layer.masksToBounds = masksToBounds
+        view.layer.masksToBounds = masksToBounds
+        return self
+    }
+    
+    open func borderWidth(_ borderWidth: CGFloat)-> Button {
+        view.layer.borderWidth = borderWidth
+        return self
+    }
+    
+    open func borderColor(_ borderColor: UIColor)-> Button {
+        view.layer.borderColor = borderColor.cgColor
+        return self
+    }
+    
+    open func image(_ image: UIImage)-> Button {
+        view.setImage(image, for: .normal)
         return self
     }
     

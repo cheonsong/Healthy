@@ -59,4 +59,14 @@ open class View {
         view.layer.masksToBounds = masksToBounds
         return self
     }
+    
+    open func borderWidth(_ borderWidth: CGFloat)-> View {
+        view.layer.borderWidth = borderWidth
+        return self
+    }
+    
+    open func borderColor(_ borderColor: UIColor)-> View {
+        view.layer.borderColor = borderColor.cgColor
+        return self
+    }
 }

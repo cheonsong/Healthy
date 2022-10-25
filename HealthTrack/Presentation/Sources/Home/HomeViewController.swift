@@ -22,17 +22,17 @@ public class HomeViewController: UIViewController {
     let dateLabel = Label("2022년 11월 30일")
         .font(.regular10)
         .textColor(.black)
-        .label
+        .view
     
     let welcomeLabel = Label("안녕하세요, 천송님")
         .font(.bold20)
         .textColor(.black)
-        .label
+        .view
     
     let subTitleLabel = Label("건강 정보")
         .font(.bold16)
         .textColor(.black)
-        .label
+        .view
     
     let waterView = MainView(type: .water)
     let stepView = MainView(type: .steps)
@@ -104,6 +104,7 @@ public class HomeViewController: UIViewController {
             .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] _ in
                 self?.coordinator?.presentWaterViewController()
+                self?.waterView.isSelected.accept(false)
             })
             .disposed(by: disposeBag)
     }

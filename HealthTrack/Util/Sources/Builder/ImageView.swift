@@ -9,60 +9,70 @@ import Foundation
 import UIKit
 
 open class ImageView {
-    open var imageView = UIImageView()
+    open var view = UIImageView()
     
     public init() {}
     
     public init (_ named: String) {
-        self.imageView.image = UIImage(named: named)
+        self.view.image = UIImage(named: named)
     }
     
     public init (_ image: UIImage) {
-        self.imageView.image = image
+        self.view.image = image
     }
     
     open func image(_ image: UIImage)-> ImageView {
-        imageView.image = image
+        view.image = image
         return self
     }
     
     open func backgrouondColor(_ color: UIColor)-> ImageView {
-        imageView.backgroundColor = color
+        view.backgroundColor = color
         return self
     }
     
     open func alpha(_ alpha: CGFloat)-> ImageView {
-        imageView.alpha = alpha
+        view.alpha = alpha
         return self
     }
     
     open func isOpaque(_ isOpaque: Bool)-> ImageView {
-        imageView.isOpaque = isOpaque
+        view.isOpaque = isOpaque
         return self
     }
     
     open func isHidden(_ isHidden: Bool)-> ImageView {
-        imageView.isHidden = isHidden
+        view.isHidden = isHidden
         return self
     }
     
     open func tag(_ tag: Int)-> ImageView {
-        imageView.tag = tag
+        view.tag = tag
         return self
     }
     
     open func isUserInteractionEnabled(_ isUserInteractionEnabled: Bool)-> ImageView {
-        imageView.isUserInteractionEnabled = isUserInteractionEnabled
+        view.isUserInteractionEnabled = isUserInteractionEnabled
         return self
     }
     
     open func cornerRadius(_ cornerRadius: CGFloat)-> ImageView {
-        imageView.layer.cornerRadius = cornerRadius
+        view.layer.cornerRadius = cornerRadius
         return self
     }
     
     open func masksToBounds(_ masksToBounds: Bool)-> ImageView  {
-        imageView.layer.masksToBounds = masksToBounds
+        view.layer.masksToBounds = masksToBounds
+        return self
+    }
+    
+    open func borderWidth(_ borderWidth: CGFloat)-> ImageView {
+        view.layer.borderWidth = borderWidth
+        return self
+    }
+    
+    open func borderColor(_ borderColor: UIColor)-> ImageView {
+        view.layer.borderColor = borderColor.cgColor
         return self
     }
 }

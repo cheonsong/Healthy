@@ -9,83 +9,83 @@ import Foundation
 import UIKit
 
 open class StackView {
-    open var stackView: UIStackView = UIStackView()
+    open var view: UIStackView = UIStackView()
     
     public init() {}
     
     open func axis(_ axis: NSLayoutConstraint.Axis)-> StackView {
-        stackView.axis = axis
+        view.axis = axis
         return self
     }
     
     open func distributon(_ distributon: UIStackView.Distribution)-> StackView {
-        stackView.distribution = distributon
+        view.distribution = distributon
         return self
     }
     
     open func alignment(_ alignment: UIStackView.Alignment)-> StackView {
-        stackView.alignment = alignment
+        view.alignment = alignment
         return self
     }
     
     open func spacing(_ spacing: CGFloat)-> StackView {
-        stackView.spacing = spacing
+        view.spacing = spacing
         return self
     }
     
     open func isBaselineRelativeArrangement(_ isBaselineRelativeArrangement: Bool)-> StackView {
-        stackView.isBaselineRelativeArrangement = isBaselineRelativeArrangement
+        view.isBaselineRelativeArrangement = isBaselineRelativeArrangement
         return self
     }
     
     open func isLayoutMarginsRelativeArrangement(_ isLayoutMarginsRelativeArrangement: Bool)-> StackView {
-        stackView.isLayoutMarginsRelativeArrangement = isLayoutMarginsRelativeArrangement
+        view.isLayoutMarginsRelativeArrangement = isLayoutMarginsRelativeArrangement
         return self
     }
 
     
     open func backgrouondColor(_ color: UIColor)-> StackView {
-        stackView.backgroundColor = color
+        view.backgroundColor = color
         return self
     }
     
     open func alpha(_ alpha: CGFloat)-> StackView {
-        stackView.alpha = alpha
+        view.alpha = alpha
         return self
     }
     
     open func isOpaque(_ isOpaque: Bool)-> StackView {
-        stackView.isOpaque = isOpaque
+        view.isOpaque = isOpaque
         return self
     }
     
     open func isHidden(_ isHidden: Bool)-> StackView {
-        stackView.isHidden = isHidden
+        view.isHidden = isHidden
         return self
     }
     
     open func contentMode(_ contentMode: UIView.ContentMode)-> StackView {
-        stackView.contentMode = contentMode
+        view.contentMode = contentMode
         return self
     }
     
     open func tag(_ tag: Int)-> StackView {
-        stackView.tag = tag
+        view.tag = tag
         return self
     }
     
     open func isUserInteractionEnabled(_ isUserInteractionEnabled: Bool)-> StackView {
-        stackView.isUserInteractionEnabled = isUserInteractionEnabled
+        view.isUserInteractionEnabled = isUserInteractionEnabled
         return self
     }
     
     open func cornerRadius(_ cornerRadius: CGFloat)-> StackView {
-        stackView.layer.cornerRadius = cornerRadius
+        view.layer.cornerRadius = cornerRadius
         return self
     }
     
     open func masksToBounds(_ masksToBounds: Bool)-> StackView  {
-        stackView.layer.masksToBounds = masksToBounds
+        view.layer.masksToBounds = masksToBounds
         return self
     }
 }
