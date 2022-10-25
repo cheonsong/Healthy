@@ -59,11 +59,6 @@ public class MainInfoView: UIView {
     }
     
     func setConstraints() {
-        self.snp.makeConstraints {
-            $0.width.equalTo((UIScreen.main.bounds.width - 60 - 35) / 2)
-            $0.height.equalTo(self.snp.width).multipliedBy(1.3)
-        }
-        
         titleLabel.snp.makeConstraints {
             $0.top.left.equalToSuperview().inset(20)
         }

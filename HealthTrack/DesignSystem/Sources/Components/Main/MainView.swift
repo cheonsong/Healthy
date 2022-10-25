@@ -10,6 +10,7 @@ import UIKit
 import Util
 import RxSwift
 import RxCocoa
+import SnapKit
 
 public class MainView: UIView {
     
@@ -23,8 +24,15 @@ public class MainView: UIView {
         
         self.infoView = MainInfoView(type: type, isSelected: isSelected)
         self.addSubview(infoView)
-        infoView.snp.makeConstraints {
+        infoView.snp.remakeConstraints {
+            $0.width.equalTo((UIScreen.main.bounds.width - 60 - 35) / 2)
+            $0.height.equalTo(self.snp.width).multipliedBy(1.3)
             $0.edges.equalToSuperview()
+        }
+        
+        self.snp.makeConstraints {
+            $0.width.equalTo((UIScreen.main.bounds.width - 60 - 35) / 2)
+            $0.height.equalTo(self.snp.width).multipliedBy(1.3)
         }
         
         // MainView Selected Action

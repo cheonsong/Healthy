@@ -21,6 +21,7 @@ public final class WaterViewController: UIViewController {
         .textColor(.black)
         .font(.bold25)
         .textAlignment(.center)
+        .attributedTextChangeColor("오늘 당신이 마신\n물은 750 ml 입니다", .b2, ["750 ml"])
         .view
     
     let main = UILabel().then {

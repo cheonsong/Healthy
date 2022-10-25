@@ -44,6 +44,6 @@ extension WaterCoordinator: UIViewControllerTransitioningDelegate {
         WaterTransition()
     }
     public func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        nil
+        WaterTransition()
     }
 }
