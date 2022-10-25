@@ -13,7 +13,7 @@ import RxCocoa
 
 public class MainView: UIView {
     
-    var isSelected: BehaviorRelay<Bool> = .init(value: false)
+    public var isSelected: BehaviorRelay<Bool> = .init(value: false)
     var disposeBag = DisposeBag()
     
     public var infoView: MainInfoView!

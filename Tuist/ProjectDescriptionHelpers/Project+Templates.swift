@@ -50,6 +50,7 @@ extension Project {
     ) -> Project {
         return Project(
             name: name,
+            //settings: .settings(base: .init().automaticCodeSigning(devTeam: "GP9D94CZ57")),
             targets: [
                 Target(
                     name: name,

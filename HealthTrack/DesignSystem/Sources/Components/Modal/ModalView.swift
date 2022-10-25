@@ -79,12 +79,12 @@ open class ModalView: UIView {
             .disposed(by: disposeBag)
     }
     
-    public func present(target: UIView) {
+    public func present(target: UIView, isLong: Bool = false) {
         target.addSubview(self)
         self.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
-        modal.transform = CGAffineTransform(translationX: 0, y: Const.modalHeight)
+        modal.transform = CGAffineTransform(translationX: 0, y: isLong ? Const.modalHeightLong : Const.modalHeight)
         UIView.animate(withDuration: 0.35, animations: {
             self.modal.transform = .identity
         }) 
@@ -92,7 +92,7 @@ open class ModalView: UIView {
     
     public func dismiss() {
         UIView.animate(withDuration: 0.35, animations: {
-            self.modal.transform = CGAffineTransform(translationX: 0, y: Const.modalHeight)
+            self.modal.transform = CGAffineTransform(translationX: 0, y: self.modal.frame.height)
         }, completion: { _ in
             self.removeFromSuperview()
         })

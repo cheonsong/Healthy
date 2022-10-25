@@ -30,7 +30,7 @@ public class WaterCoordinator: NSObject {
         let vc = dependencies.makeWaterViewController()
         vc.coordinator = self
         vc.transitioningDelegate = self
-        vc.modalPresentationStyle = .fullScreen
+        vc.modalPresentationStyle = .overFullScreen
         self.navigationController.present(vc, animated: true)
     }
     
