@@ -27,12 +27,14 @@ public class Navigation: UIView {
         
         backButton.snp.makeConstraints {
             $0.top.bottom.equalToSuperview()
-            $0.left.equalToSuperview().inset(30)
+            $0.left.equalToSuperview().inset(12)
+            $0.width.equalTo(48)
         }
         
         setButton.snp.makeConstraints {
             $0.top.bottom.equalToSuperview()
-            $0.right.equalToSuperview().inset(30)
+            $0.right.equalToSuperview().inset(18)
+            $0.width.equalTo(48)
         }
         
         title.snp.makeConstraints {
