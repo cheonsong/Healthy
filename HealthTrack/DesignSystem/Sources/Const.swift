@@ -18,4 +18,6 @@ public struct Const {
     
     public static let safeAreaTop = (UIApplication.shared.windows.first?.safeAreaInsets.top ?? 0.0)
     public static let safeAreaBottom = (UIApplication.shared.windows.first?.safeAreaInsets.bottom ?? 0.0)
+    
+    public static let calendarCellSize = (fullWidth - 30) / 7
 }

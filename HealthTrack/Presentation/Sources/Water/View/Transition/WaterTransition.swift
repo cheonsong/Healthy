@@ -50,7 +50,7 @@ extension WaterTransition: UIViewControllerAnimatedTransitioning {
         toView.backgroundColor = .b2
         toView.layer.cornerRadius = 10
         
-        let views = [toVC.mainLabel, toVC.drinkButton, toVC.navigation, toVC.chartView, toVC.waterBaseView, toVC.ballonIcon]
+        let views = [toVC.mainLabel, toVC.drinkButton, toVC.navigation, toVC.calendar, toVC.waterBaseView, toVC.ballonIcon]
         views.forEach {
             $0.transform = CGAffineTransform(translationX: -200, y: -350).scaledBy(x: 0.1, y: 0.1)
             $0.alpha = 0

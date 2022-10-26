@@ -42,8 +42,6 @@ public final class WaterViewController: UIViewController {
         .cornerRadius(10)
         .view
     
-    let chartView = View().backgrouondColor(.lightGray).view
-    
     let drinkButton = Button(MainButton(.water)).title("물 마시기").view
     
     let ballonIcon = UIImageView().then {
@@ -58,6 +56,8 @@ public final class WaterViewController: UIViewController {
     let guideLine = View().backgrouondColor(.clear).view
     
     let navigation = Navigation()
+    
+    let calendar = CalendarView()
     
     public static func create()-> WaterViewController {
         let vc = WaterViewController()
@@ -75,11 +75,11 @@ public final class WaterViewController: UIViewController {
     
     public override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        updateValue(0.5)
+        updateValue(1)
     }
     
     func addComponents() {
-        [navigation, guideLine, mainLabel, waterBaseView, chartView, drinkButton, ballonIcon].forEach { view.addSubview($0) }
+        [navigation, guideLine, mainLabel, waterBaseView, calendar, drinkButton, ballonIcon].forEach { view.addSubview($0) }
         waterBaseView.addSubview(waterView)
         ballonIcon.addSubview(ballonLabel)
     }
@@ -90,7 +90,7 @@ public final class WaterViewController: UIViewController {
         }
         
         mainLabel.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).inset(75)
+            $0.top.equalTo(view.safeAreaLayoutGuide).inset(50)
             $0.centerX.equalToSuperview()
         }
         
@@ -117,13 +117,6 @@ public final class WaterViewController: UIViewController {
             $0.width.equalToSuperview().multipliedBy(0)
         }
         
-        chartView.snp.makeConstraints {
-            $0.width.equalTo(Const.fullWidth)
-            $0.centerX.equalToSuperview()
-            $0.centerY.equalTo(guideLine)
-            $0.height.equalTo(200)
-        }
-        
         drinkButton.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(34)
@@ -133,6 +126,11 @@ public final class WaterViewController: UIViewController {
             $0.top.equalTo(waterBaseView.snp.bottom)
             $0.bottom.equalTo(drinkButton.snp.top)
             $0.left.right.equalToSuperview()
+        }
+        
+        calendar.snp.makeConstraints {
+            $0.width.equalTo(Const.fullWidth)
+            $0.center.equalTo(guideLine)
         }
     }
     
