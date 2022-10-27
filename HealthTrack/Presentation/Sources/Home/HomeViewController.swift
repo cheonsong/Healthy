@@ -60,7 +60,7 @@ public class HomeViewController: UIViewController {
     
     func setConstraints() {
         dateLabel.snp.makeConstraints {
-            $0.top.equalTo(self.view.safeAreaLayoutGuide).inset(20)
+            $0.top.equalTo(self.view.safeAreaLayoutGuide).inset(40)
             $0.left.equalToSuperview().inset(Const.padding)
         }
         
