@@ -157,6 +157,20 @@ public final class WaterViewController: UIViewController {
                 self.dismiss(animated: true)
             })
             .disposed(by: disposeBag)
+        
+        view.rx.screenEdgePanGesture()
+            .map({$0.edges = .left; return $0})
+            .when(.began, .changed, .ended)
+            .subscribe(onNext: { [weak self] pan in
+                guard let self = self else { return }
+                switch pan.state {
+                case .ended:
+                    self.dismiss(animated: true)
+                default:
+                    break
+                }
+            })
+            .disposed(by: disposeBag)
     }
     
     func updateValue(_ value: CGFloat) {

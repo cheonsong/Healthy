@@ -128,7 +128,7 @@ public class WaterSetModal: ModalView {
                  .drive(onNext: { [weak self] keyboardHeight in
                      guard let self = self else { return }
                      if keyboardHeight > 0 {
-                         self.modal.transform = CGAffineTransform(translationX: 0, y: -keyboardHeight)
+                         self.modal.transform = CGAffineTransform(translationX: 0, y: -keyboardHeight + Const.safeAreaBottom)
                          self.background.isUserInteractionEnabled = false
                      } else {
                          self.modal.transform = .identity
