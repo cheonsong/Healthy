@@ -15,9 +15,7 @@ import RxGesture
 
 open class ModalView: UIView {
     
-    private let background = View().backgrouondColor(.dim).view
-    
-    private let modalShadowView = View().backgrouondColor(.clear).view
+    public let background = View().backgrouondColor(.dim).view
     
     public let modal = View().backgrouondColor(.gr3).view
     
@@ -37,30 +35,17 @@ open class ModalView: UIView {
     public override func draw(_ rect: CGRect) {
         super.draw(rect)
         
-        modalShadowView.layer.shadowColor = UIColor.black.cgColor
-        modalShadowView.layer.shadowOffset = CGSize(width: 0, height: -4)
-        modalShadowView.layer.shadowRadius = 16
-        modalShadowView.layer.shadowOpacity = 0.1
-        modalShadowView.layer.masksToBounds = false
-        
         modal.roundCorners([.topLeft, .topRight], radius: 50)
     }
     
     func addComponents() {
         self.addSubview(background)
-        self.addSubview(modalShadowView)
-        modalShadowView.addSubview(modal)
+        self.addSubview(modal)
     }
     
     func setConstraints() {
         background.snp.makeConstraints {
             $0.edges.equalToSuperview()
-        }
-        
-        modalShadowView.snp.makeConstraints {
-            $0.height.equalTo(Const.modalHeight)
-            $0.width.equalTo(Const.modalWidth)
-            $0.left.right.bottom.equalToSuperview()
         }
         
         modal.snp.makeConstraints {
