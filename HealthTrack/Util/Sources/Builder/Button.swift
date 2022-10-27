@@ -89,5 +89,71 @@ open class Button {
         view.setImage(image, for: .normal)
         return self
     }
+
+    open func tintColor(_ tintColor: UIColor)-> Button {
+        view.tintColor = tintColor
+        return self
+    }
+    
+    open func tintAdjustmentMode(_ tintAdjustmentMode: UIView.TintAdjustmentMode)-> Button {
+        view.tintAdjustmentMode = tintAdjustmentMode
+        return self
+    }
+    
+    open func clipsToBounds(_ clipsToBounds: Bool)-> Button {
+        view.clipsToBounds = clipsToBounds
+        return self
+    }
+    
+    open func clearsContextBeforeDrawing(_ clearsContextBeforeDrawing: Bool)-> Button {
+        view.clearsContextBeforeDrawing = clearsContextBeforeDrawing
+        return self
+    }
+    
+    open func mask(_ mask: UIView?)-> Button {
+        view.mask = mask
+        return self
+    }
+    
+    open func isMultipleTouchEnabled(_ isMultipleTouchEnabled: Bool)-> Button {
+        view.isMultipleTouchEnabled = isMultipleTouchEnabled
+        return self
+    }
+    
+    open func isExclusiveTouch(_ isExclusiveTouch: Bool)-> Button {
+        view.isExclusiveTouch = isExclusiveTouch
+        return self
+    }
+    
+    open func frame(_ frame: CGRect)-> Button {
+        view.frame = frame
+        return self
+    }
+    
+    open func bounds(_ bounds: CGRect)-> Button {
+        view.bounds = bounds
+        return self
+    }
+    
+    open func center(_ center: CGPoint)-> Button {
+        view.center = center
+        return self
+    }
+    
+    open func transform(_ transform: CGAffineTransform)-> Button {
+        view.transform = transform
+        return self
+    }
+    
+    open func transform3D(_ transform3D: CATransform3D)-> Button {
+        view.transform3D = transform3D
+        return self
+    }
+    
+    @available(iOS 16.0, *)
+    open func anchorPoint(_ anchorPoint: CGPoint)-> Button {
+        view.anchorPoint = anchorPoint
+        return self
+    }
     
 }

@@ -8,45 +8,47 @@
 import Foundation
 import UIKit
 
-class CollectionViewFlowLayout {
+open class CollectionViewFlowLayout {
     var layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
     
-    func itemSize(_ size: CGSize)-> CollectionViewFlowLayout {
+    public init() {}
+    
+    open func itemSize(_ size: CGSize)-> CollectionViewFlowLayout {
         layout.itemSize = size
         return self
     }
     
-    func scrollDirection(_ direction: UICollectionView.ScrollDirection)-> CollectionViewFlowLayout {
+    open func scrollDirection(_ direction: UICollectionView.ScrollDirection)-> CollectionViewFlowLayout {
         layout.scrollDirection = direction
         return self
     }
     
-    func minimumLineSpacing(_ minimumLineSpacing: CGFloat)-> CollectionViewFlowLayout {
+    open func minimumLineSpacing(_ minimumLineSpacing: CGFloat)-> CollectionViewFlowLayout {
         layout.minimumLineSpacing = minimumLineSpacing
         return self
     }
     
-    func minimumInteritemSpacing(_ minimumInteritemSpacing: CGFloat)-> CollectionViewFlowLayout {
+    open func minimumInteritemSpacing(_ minimumInteritemSpacing: CGFloat)-> CollectionViewFlowLayout {
         layout.minimumInteritemSpacing = minimumInteritemSpacing
         return self
     }
     
-    func estimatedItemSize(_ estimatedItemSize: CGSize)-> CollectionViewFlowLayout {
+    open func estimatedItemSize(_ estimatedItemSize: CGSize)-> CollectionViewFlowLayout {
         layout.estimatedItemSize = estimatedItemSize
         return self
     }
     
-    func sectionInset(_ sectionInset: UIEdgeInsets)-> CollectionViewFlowLayout {
+    open func sectionInset(_ sectionInset: UIEdgeInsets)-> CollectionViewFlowLayout {
         layout.sectionInset = sectionInset
         return self
     }
     
-    func sectionInsetReference(_ sectionInsetReference: UICollectionViewFlowLayout.SectionInsetReference)-> CollectionViewFlowLayout {
+    open func sectionInsetReference(_ sectionInsetReference: UICollectionViewFlowLayout.SectionInsetReference)-> CollectionViewFlowLayout {
         layout.sectionInsetReference = sectionInsetReference
         return self
     }
     
-    func headerReferenceSize(_ headerReferenceSize: CGSize)-> CollectionViewFlowLayout {
+    open func headerReferenceSize(_ headerReferenceSize: CGSize)-> CollectionViewFlowLayout {
         layout.headerReferenceSize = headerReferenceSize
         return self
     }
@@ -56,12 +58,12 @@ class CollectionViewFlowLayout {
         return self
     }
     
-    func sectionHeadersPinToVisibleBounds(_ sectionHeadersPinToVisibleBounds: Bool)-> CollectionViewFlowLayout {
+    open func sectionHeadersPinToVisibleBounds(_ sectionHeadersPinToVisibleBounds: Bool)-> CollectionViewFlowLayout {
         layout.sectionHeadersPinToVisibleBounds = sectionHeadersPinToVisibleBounds
         return self
     }
     
-    func sectionFootersPinToVisibleBounds(_ sectionFootersPinToVisibleBounds: Bool)-> CollectionViewFlowLayout {
+    open func sectionFootersPinToVisibleBounds(_ sectionFootersPinToVisibleBounds: Bool)-> CollectionViewFlowLayout {
         layout.sectionFootersPinToVisibleBounds = sectionFootersPinToVisibleBounds
         return self
     }

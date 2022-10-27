@@ -145,4 +145,70 @@ open class Label {
         view.layer.borderColor = borderColor.cgColor
         return self
     }
+    
+    open func tintColor(_ tintColor: UIColor)-> Label {
+        view.tintColor = tintColor
+        return self
+    }
+    
+    open func tintAdjustmentMode(_ tintAdjustmentMode: UIView.TintAdjustmentMode)-> Label {
+        view.tintAdjustmentMode = tintAdjustmentMode
+        return self
+    }
+    
+    open func clipsToBounds(_ clipsToBounds: Bool)-> Label {
+        view.clipsToBounds = clipsToBounds
+        return self
+    }
+    
+    open func clearsContextBeforeDrawing(_ clearsContextBeforeDrawing: Bool)-> Label {
+        view.clearsContextBeforeDrawing = clearsContextBeforeDrawing
+        return self
+    }
+    
+    open func mask(_ mask: UIView?)-> Label {
+        view.mask = mask
+        return self
+    }
+    
+    open func isMultipleTouchEnabled(_ isMultipleTouchEnabled: Bool)-> Label {
+        view.isMultipleTouchEnabled = isMultipleTouchEnabled
+        return self
+    }
+    
+    open func isExclusiveTouch(_ isExclusiveTouch: Bool)-> Label {
+        view.isExclusiveTouch = isExclusiveTouch
+        return self
+    }
+    
+    open func frame(_ frame: CGRect)-> Label {
+        view.frame = frame
+        return self
+    }
+    
+    open func bounds(_ bounds: CGRect)-> Label {
+        view.bounds = bounds
+        return self
+    }
+    
+    open func center(_ center: CGPoint)-> Label {
+        view.center = center
+        return self
+    }
+    
+    open func transform(_ transform: CGAffineTransform)-> Label {
+        view.transform = transform
+        return self
+    }
+    
+    open func transform3D(_ transform3D: CATransform3D)-> Label {
+        view.transform3D = transform3D
+        return self
+    }
+    
+    @available(iOS 16.0, *)
+    open func anchorPoint(_ anchorPoint: CGPoint)-> Label {
+        view.anchorPoint = anchorPoint
+        return self
+    }
 }

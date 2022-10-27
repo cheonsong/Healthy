@@ -88,4 +88,70 @@ open class StackView {
         view.layer.masksToBounds = masksToBounds
         return self
     }
+    
+    open func tintColor(_ tintColor: UIColor)-> StackView {
+        view.tintColor = tintColor
+        return self
+    }
+    
+    open func tintAdjustmentMode(_ tintAdjustmentMode: UIView.TintAdjustmentMode)-> StackView {
+        view.tintAdjustmentMode = tintAdjustmentMode
+        return self
+    }
+    
+    open func clipsToBounds(_ clipsToBounds: Bool)-> StackView {
+        view.clipsToBounds = clipsToBounds
+        return self
+    }
+    
+    open func clearsContextBeforeDrawing(_ clearsContextBeforeDrawing: Bool)-> StackView {
+        view.clearsContextBeforeDrawing = clearsContextBeforeDrawing
+        return self
+    }
+    
+    open func mask(_ mask: UIView?)-> StackView {
+        view.mask = mask
+        return self
+    }
+    
+    open func isMultipleTouchEnabled(_ isMultipleTouchEnabled: Bool)-> StackView {
+        view.isMultipleTouchEnabled = isMultipleTouchEnabled
+        return self
+    }
+    
+    open func isExclusiveTouch(_ isExclusiveTouch: Bool)-> StackView {
+        view.isExclusiveTouch = isExclusiveTouch
+        return self
+    }
+    
+    open func frame(_ frame: CGRect)-> StackView {
+        view.frame = frame
+        return self
+    }
+    
+    open func bounds(_ bounds: CGRect)-> StackView {
+        view.bounds = bounds
+        return self
+    }
+    
+    open func center(_ center: CGPoint)-> StackView {
+        view.center = center
+        return self
+    }
+    
+    open func transform(_ transform: CGAffineTransform)-> StackView {
+        view.transform = transform
+        return self
+    }
+    
+    open func transform3D(_ transform3D: CATransform3D)-> StackView {
+        view.transform3D = transform3D
+        return self
+    }
+    
+    @available(iOS 16.0, *)
+    open func anchorPoint(_ anchorPoint: CGPoint)-> StackView {
+        view.anchorPoint = anchorPoint
+        return self
+    }
 }

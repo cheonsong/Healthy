@@ -75,4 +75,70 @@ open class ImageView {
         view.layer.borderColor = borderColor.cgColor
         return self
     }
+    
+    open func tintColor(_ tintColor: UIColor)-> ImageView {
+        view.tintColor = tintColor
+        return self
+    }
+    
+    open func tintAdjustmentMode(_ tintAdjustmentMode: UIView.TintAdjustmentMode)-> ImageView {
+        view.tintAdjustmentMode = tintAdjustmentMode
+        return self
+    }
+    
+    open func clipsToBounds(_ clipsToBounds: Bool)-> ImageView {
+        view.clipsToBounds = clipsToBounds
+        return self
+    }
+    
+    open func clearsContextBeforeDrawing(_ clearsContextBeforeDrawing: Bool)-> ImageView {
+        view.clearsContextBeforeDrawing = clearsContextBeforeDrawing
+        return self
+    }
+    
+    open func mask(_ mask: UIView?)-> ImageView {
+        view.mask = mask
+        return self
+    }
+    
+    open func isMultipleTouchEnabled(_ isMultipleTouchEnabled: Bool)-> ImageView {
+        view.isMultipleTouchEnabled = isMultipleTouchEnabled
+        return self
+    }
+    
+    open func isExclusiveTouch(_ isExclusiveTouch: Bool)-> ImageView {
+        view.isExclusiveTouch = isExclusiveTouch
+        return self
+    }
+    
+    open func frame(_ frame: CGRect)-> ImageView {
+        view.frame = frame
+        return self
+    }
+    
+    open func bounds(_ bounds: CGRect)-> ImageView {
+        view.bounds = bounds
+        return self
+    }
+    
+    open func center(_ center: CGPoint)-> ImageView {
+        view.center = center
+        return self
+    }
+    
+    open func transform(_ transform: CGAffineTransform)-> ImageView {
+        view.transform = transform
+        return self
+    }
+    
+    open func transform3D(_ transform3D: CATransform3D)-> ImageView {
+        view.transform3D = transform3D
+        return self
+    }
+    
+    @available(iOS 16.0, *)
+    open func anchorPoint(_ anchorPoint: CGPoint)-> ImageView {
+        view.anchorPoint = anchorPoint
+        return self
+    }
 }
