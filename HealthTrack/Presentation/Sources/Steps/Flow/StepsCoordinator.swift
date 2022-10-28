@@ -11,15 +11,15 @@ import Util
 import Domain
 
 // 의존성 주입을 위한 Coordinator Dependency
-public protocol StepsCoordinatorDependencies: CoordinatorType {
+public protocol StepsCoordinatorDependencies {
     func makeStepsViewController() -> StepsViewController
 }
 
-public class StepsCoordinator: NSObject {
+public class StepsCoordinator: NSObject, CoordinatorType {
     
     public var navigationController: UINavigationController
     private var dependencies: StepsCoordinatorDependencies
-    
+    public var childCoordinators: [CoordinatorType] = []
     
     public init(navigation: UINavigationController,
                 dependencies: StepsCoordinatorDependencies) {
