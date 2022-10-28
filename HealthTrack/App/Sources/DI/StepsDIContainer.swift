@@ -19,7 +19,7 @@ class StepsDIContainer {
     // MARK: ViewModel
     
     // MARK: Coordinator
-    func makeWaterCoordinator(navigation: UINavigationController)-> StepsCoordinator {
+    func makeStepsCoordinator(navigation: UINavigationController)-> StepsCoordinator {
         return StepsCoordinator(navigation: navigation, dependencies: self)
     }
 }

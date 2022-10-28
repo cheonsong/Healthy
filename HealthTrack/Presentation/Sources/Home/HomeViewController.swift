@@ -101,7 +101,14 @@ public class HomeViewController: UIViewController, CodeBaseUI {
             .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] _ in
                 self?.coordinator?.presentWaterViewController()
-                self?.waterView.isSelected.accept(false)
+            })
+            .disposed(by: disposeBag)
+        
+        stepView.rx.tapGesture()
+            .when(.recognized)
+            .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] _ in
+                self?.coordinator?.presentStepsViewController()
             })
             .disposed(by: disposeBag)
     }

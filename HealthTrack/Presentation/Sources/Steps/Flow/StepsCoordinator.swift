@@ -44,10 +44,8 @@ public class StepsCoordinator: NSObject, CoordinatorType {
 extension StepsCoordinator: UIViewControllerTransitioningDelegate {
     public func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         StepsTransition()
-        return nil
     }
     public func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         StepsTransition()
-        return nil
     }
 }

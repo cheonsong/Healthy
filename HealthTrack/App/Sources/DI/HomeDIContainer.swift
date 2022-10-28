@@ -33,5 +33,9 @@ extension HomeDIContainer: HomeCoordinatorDependencies {
     func makeWaterCoordinator(navigation: UINavigationController) -> WaterCoordinator {
         return WaterDIContainer().makeWaterCoordinator(navigation: navigation)
     }
+    
+    func makeStepsCoordinator(navigation: UINavigationController) -> Presentation.StepsCoordinator {
+        return StepsDIContainer().makeStepsCoordinator(navigation: navigation)
+    }
 }
 

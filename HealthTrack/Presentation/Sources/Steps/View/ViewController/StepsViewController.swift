@@ -70,7 +70,7 @@ public final class StepsViewController: UIViewController, CodeBaseUI {
         }
         
         circleView.snp.makeConstraints {
-            $0.top.equalTo(mainLabel.snp.bottom).offset(16)
+            $0.top.equalTo(mainLabel.snp.bottom).offset(26)
             $0.size.equalTo(130)
             $0.centerX.equalToSuperview()
         }
@@ -154,7 +154,7 @@ public final class StepsViewController: UIViewController, CodeBaseUI {
     }
     
     func drawBaseCircle() {
-        let center = CGPoint(x: 75, y: 75)
+        let center = CGPoint(x: 65, y: 65)
         print(center)
         let path = UIBezierPath()
         path.addArc(withCenter: center,
@@ -174,12 +174,12 @@ public final class StepsViewController: UIViewController, CodeBaseUI {
     }
     
     func drawCircle() {
-        let center = CGPoint(x: 75, y: 75)
+        let center = CGPoint(x: 65, y: 65)
         let path = UIBezierPath()
         path.addArc(withCenter: center,
                     radius: 130 / 2,
                     startAngle: (-(.pi) / 2),
-                    endAngle: .pi,
+                    endAngle: .pi * 1.5,
                     clockwise: true)
         
         let layer = CAShapeLayer()
@@ -192,8 +192,8 @@ public final class StepsViewController: UIViewController, CodeBaseUI {
         let gaugeAnimation = CABasicAnimation(keyPath: "strokeEnd")
         gaugeAnimation.fromValue = 0
         gaugeAnimation.toValue = 1
-        gaugeAnimation.duration = 0.7
-        gaugeAnimation.timingFunction = CAMediaTimingFunction(controlPoints: 0.4, 0.02, 1, 0.05)
+        gaugeAnimation.duration = 1
+//        gaugeAnimation.timingFunction = CAMediaTimingFunction(controlPoints: 0.4, 0.02, 1, 0.05)
         layer.add(gaugeAnimation, forKey: "strokeEnd")
         
         circleView.layer.addSublayer(layer)

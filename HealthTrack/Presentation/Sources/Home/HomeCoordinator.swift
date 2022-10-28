@@ -13,6 +13,7 @@ import Util
 public protocol HomeCoordinatorDependencies {
     func makeHomeViewController() -> HomeViewController
     func makeWaterCoordinator(navigation: UINavigationController)-> WaterCoordinator
+    func makeStepsCoordinator(navigation: UINavigationController)-> StepsCoordinator
 }
 
 public class HomeCoordinator: CoordinatorType {
@@ -38,6 +39,11 @@ public class HomeCoordinator: CoordinatorType {
     
     public func presentWaterViewController() {
         let coordinator = dependencies.makeWaterCoordinator(navigation: self.navigationController)
+        coordinator.start()
+    }
+    
+    public func presentStepsViewController() {
+        let coordinator = dependencies.makeStepsCoordinator(navigation: self.navigationController)
         coordinator.start()
     }
     
