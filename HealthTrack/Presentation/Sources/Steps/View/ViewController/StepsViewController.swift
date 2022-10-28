@@ -15,7 +15,7 @@ public final class StepsViewController: UIViewController, CodeBaseUI {
     
     var type: Health = .steps
     var disposeBag = DisposeBag()
-//    var coordinator: WaterCoordinator?
+    var coordinator: StepsCoordinator?
     
     let mainLabel = Label("오늘 당신의 걸음은\n9563 걸음 입니다")
         .numberOfLines(0)
