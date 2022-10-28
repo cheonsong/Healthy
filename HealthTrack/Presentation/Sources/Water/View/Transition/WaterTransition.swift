@@ -46,7 +46,8 @@ extension WaterTransition: UIViewControllerAnimatedTransitioning {
         containerView.addSubview(toView)
         containerView.bringSubviewToFront(toView)
         
-        toView.frame = fromVC.waterView.frame
+        let frame = CGRect(x: Const.padding, y: fromVC.welcomeLabel.frame.maxY + 10 + fromVC.waterTitle.frame.height + 10 - fromVC.scrollView.contentOffset.y, width: Const.fullWidth, height: Const.mainViewHeight)
+        toView.frame = frame
         toView.backgroundColor = .b2
         toView.layer.cornerRadius = 10
         
@@ -107,7 +108,8 @@ extension WaterTransition: UIViewControllerAnimatedTransitioning {
                         fromView.backgroundColor = .b2
                         fromView.roundCorners(.allCorners, radius: 10)
                         fromView.subviews.forEach { $0.removeFromSuperview() }
-                        fromView.frame = toVC.waterView.frame
+                        let frame = CGRect(x: Const.padding, y: toVC.welcomeLabel.frame.maxY + 10 + toVC.waterTitle.frame.height + 10 - toVC.scrollView.contentOffset.y, width: Const.fullWidth, height: Const.mainViewHeight)
+                        fromView.frame = frame
                     }
                 )
             },

@@ -22,11 +22,13 @@ public class HomeViewController: UIViewController, CodeBaseUI {
     let dateLabel = Label("2022년 11월 30일")
         .font(.regular16)
         .textColor(.black)
+        .sizeToFit()
         .view
     
     let welcomeLabel = Label("안녕하세요, 천송님")
         .font(.bold25)
         .textColor(.black)
+        .sizeToFit()
         .view
     
     let scrollView    = ScrollView().backgrouondColor(.clear).showsVerticalScrollIndicator(false).view
