@@ -15,29 +15,29 @@ import RxCocoa
 public class MainInfoView: UIView {
     
     var type: Health = .water
-    var isSelected: BehaviorRelay<Bool>!
     var disposeBag = DisposeBag()
     let innerShadowLayer = CAShapeLayer()
     
-    lazy var titleLabel = Label(self.type.text)
+    lazy var todayTitleLabel = Label("음수량").font(.regular16).textColor(.white).view
+    lazy var todayContentslabel = Label("1.3 / 2 " + self.type.unit)
         .textColor(.white)
-        .font(.bold16)
+        .font(.bold25)
+        .attributedTextChangeFont("1.3 / 2 " + self.type.unit, .bold10, [self.type.unit])
+        .view
+    
+    lazy var avgTitleLabel = Label("이번 달 평균").font(.regular16).textColor(.white).view
+    lazy var avgContentslabel = Label("2.6 " + self.type.unit)
+        .textColor(.white)
+        .font(.bold25)
+        .attributedTextChangeFont("2.6 " + self.type.unit, .bold10, [self.type.unit])
         .view
     
     let circleView = View().backgrouondColor(.clear).view
-    
-    lazy var unitLabel = Label("1000 " + self.type.unit)
-        .textColor(.white)
-        .font(.bold20)
-        .attributedTextChangeFont("1000 " + self.type.unit, .bold10, [self.type.unit])
-        .view
-    
     lazy var icon = ImageView(self.type.icon).view
     
-    public convenience init(type: Health, isSelected: BehaviorRelay<Bool>, frame: CGRect = .zero) {
+    public convenience init(type: Health, frame: CGRect = .zero) {
         self.init(frame: frame)
         self.type = type
-        self.isSelected = isSelected
         addComponents()
         setConstraints()
         bind()
@@ -55,38 +55,44 @@ public class MainInfoView: UIView {
         self.backgroundColor = type.mainColor
         self.layer.masksToBounds = true
         self.layer.cornerRadius = 10
-        [titleLabel, circleView, unitLabel, icon].forEach { addSubview($0) }
+        [todayTitleLabel, avgTitleLabel, todayContentslabel, avgContentslabel, circleView, icon].forEach { addSubview($0) }
     }
     
     func setConstraints() {
-        titleLabel.snp.makeConstraints {
-            $0.top.left.equalToSuperview().inset(20)
+        todayTitleLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(13)
+            $0.left.equalToSuperview().inset(Const.padding)
+        }
+        
+        todayContentslabel.snp.makeConstraints {
+            $0.top.equalTo(todayTitleLabel.snp.bottom)
+            $0.left.equalToSuperview().inset(Const.padding)
+        }
+        
+        avgTitleLabel.snp.makeConstraints {
+            $0.left.equalTo(Const.padding)
+            $0.bottom.equalTo(avgContentslabel.snp.top)
+        }
+        
+        avgContentslabel.snp.makeConstraints {
+            $0.left.equalTo(Const.padding)
+            $0.bottom.equalToSuperview().inset(13)
         }
         
         circleView.snp.makeConstraints {
-            $0.center.equalToSuperview()
-            $0.size.equalTo((UIScreen.main.bounds.width - 60 - 35) / 4)
-        }
-        
-        unitLabel.snp.makeConstraints {
-            $0.left.bottom.equalToSuperview().inset(20)
+            $0.right.equalToSuperview().inset(Const.padding)
+            $0.centerY.equalToSuperview()
+            $0.size.equalTo(100)
         }
         
         icon.snp.makeConstraints {
-            $0.center.equalToSuperview()
+            $0.center.equalTo(circleView)
         }
         
     }
     
     func bind() {
-        // MainView Selected Action
-        isSelected.subscribe(onNext: { [weak self] isSelected in
-            guard let self = self else { return }
-            
-            isSelected ? self.drawInnerShadow() : self.innerShadowLayer.removeFromSuperlayer()
-            self.layoutIfNeeded()
-        })
-        .disposed(by: disposeBag)
+        
     }
     
     override public func draw(_ rect: CGRect) {
@@ -96,10 +102,12 @@ public class MainInfoView: UIView {
     }
     
     func drawBaseCircle() {
-        let center = CGPoint(x: self.center.x/2, y: self.center.y/2 - 10)
+        print(self.center)
+        let center = CGPoint(x: 50, y: 50)
+        print(center)
         let path = UIBezierPath()
         path.addArc(withCenter: center,
-                    radius: circleView.frame.height / 2,
+                    radius: 100 / 2,
                     startAngle: -.pi,
                     endAngle: .pi,
                     clockwise: true)
@@ -108,17 +116,17 @@ public class MainInfoView: UIView {
         layer.path = path.cgPath
         layer.strokeColor = type.lightColor.cgColor
         layer.fillColor = UIColor.clear.cgColor
-        layer.lineWidth = 10
+        layer.lineWidth = 15
         layer.lineCap = .round
         
         circleView.layer.addSublayer(layer)
     }
     
     func drawCircle() {
-        let center = CGPoint(x: self.center.x/2, y: self.center.y/2 - 10)
+        let center = CGPoint(x: 50, y: 50)
         let path = UIBezierPath()
         path.addArc(withCenter: center,
-                    radius: circleView.frame.height / 2,
+                    radius: 100 / 2,
                     startAngle: (-(.pi) / 2),
                     endAngle: .pi,
                     clockwise: true)
@@ -127,7 +135,7 @@ public class MainInfoView: UIView {
         layer.path = path.cgPath
         layer.strokeColor = type.deepColor.cgColor
         layer.fillColor = UIColor.clear.cgColor
-        layer.lineWidth = 10
+        layer.lineWidth = 15
         layer.lineCap = .round
         
         let gaugeAnimation = CABasicAnimation(keyPath: "strokeEnd")

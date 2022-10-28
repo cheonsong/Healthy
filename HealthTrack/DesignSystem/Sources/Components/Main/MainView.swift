@@ -22,27 +22,18 @@ public class MainView: UIView {
     public convenience init(type: Health, frame: CGRect = .zero) {
         self.init(frame: frame)
         
-        self.infoView = MainInfoView(type: type, isSelected: isSelected)
+        self.infoView = MainInfoView(type: type)
         self.addSubview(infoView)
         infoView.snp.remakeConstraints {
-            $0.width.equalTo((UIScreen.main.bounds.width - 60 - 35) / 2)
-            $0.height.equalTo(self.snp.width).multipliedBy(1.3)
+            $0.width.equalTo(Const.fullWidth)
+            $0.height.equalTo(Const.mainViewHeight)
             $0.edges.equalToSuperview()
         }
         
         self.snp.makeConstraints {
-            $0.width.equalTo((UIScreen.main.bounds.width - 60 - 35) / 2)
-            $0.height.equalTo(self.snp.width).multipliedBy(1.3)
+            $0.width.equalTo(Const.fullWidth)
+            $0.height.equalTo(Const.mainViewHeight)
         }
-        
-        // MainView Selected Action
-        isSelected.subscribe(onNext: { [weak self] isSelected in
-            guard let self = self else { return }
-            
-            isSelected ? self.hideDropShadow() : self.drawDropShadow()
-            self.layoutIfNeeded()
-        })
-        .disposed(by: disposeBag)
     }
     
     private override init(frame: CGRect) {

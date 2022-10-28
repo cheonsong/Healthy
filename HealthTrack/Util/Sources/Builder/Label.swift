@@ -211,4 +211,9 @@ open class Label {
         view.anchorPoint = anchorPoint
         return self
     }
+    
+    open func sizeToFit()-> Label {
+        view.sizeToFit()
+        return self
+    }
 }
