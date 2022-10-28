@@ -11,7 +11,7 @@ import DesignSystem
 import Util
 import RxSwift
 
-public final class WaterViewController: UIViewController {
+public final class WaterViewController: UIViewController, CodeBaseUI {
     
     var disposeBag = DisposeBag()
     var coordinator: WaterCoordinator?
@@ -78,13 +78,13 @@ public final class WaterViewController: UIViewController {
         updateValue(1)
     }
     
-    func addComponents() {
+    public func addComponents() {
         [navigation, guideLine, mainLabel, waterBaseView, calendar, drinkButton, ballonIcon].forEach { view.addSubview($0) }
         waterBaseView.addSubview(waterView)
         ballonIcon.addSubview(ballonLabel)
     }
     
-    func setConstraints() {
+    public func setConstraints() {
         navigation.snp.makeConstraints {
             $0.top.left.right.equalTo(view.safeAreaLayoutGuide)
         }
@@ -134,7 +134,7 @@ public final class WaterViewController: UIViewController {
         }
     }
     
-    func bind() {
+    public func bind() {
         drinkButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 guard let self = self else { return }

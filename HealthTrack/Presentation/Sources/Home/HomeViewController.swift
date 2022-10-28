@@ -13,7 +13,7 @@ import RxSwift
 import RxCocoa
 import RxGesture
 
-public class HomeViewController: UIViewController {
+public class HomeViewController: UIViewController, CodeBaseUI {
     
     var coordinator: HomeCoordinator?
     
@@ -57,13 +57,13 @@ public class HomeViewController: UIViewController {
         
     }
     
-    func addComponents() {
+    public func addComponents() {
         [dateLabel, welcomeLabel, scrollView].forEach { view.addSubview($0) }
         scrollView.addSubview(stackView)
         [waterTitle, waterView, stepsTitle, stepView, caloriesTitle, caloliesView, sleepTitle, sleepView, View().backgrouondColor(.clear).view].forEach { stackView.addArrangedSubview($0) }
     }
     
-    func setConstraints() {
+    public func setConstraints() {
         dateLabel.snp.makeConstraints {
             $0.top.equalTo(self.view.safeAreaLayoutGuide).inset(40)
             $0.left.equalToSuperview().inset(Const.padding)
@@ -93,7 +93,7 @@ public class HomeViewController: UIViewController {
         stackView.setCustomSpacing(10, after: sleepTitle)
     }
     
-    func bind() {
+    public func bind() {
         waterView.rx.tapGesture()
             .when(.recognized)
             .throttle(.milliseconds(500), scheduler: MainScheduler.instance)

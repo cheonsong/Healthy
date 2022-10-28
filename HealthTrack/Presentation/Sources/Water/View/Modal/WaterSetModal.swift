@@ -18,7 +18,7 @@ enum WaterUnit {
     case l
 }
 
-public class WaterSetModal: ModalView {
+public class WaterSetModal: ModalView, CodeBaseUI {
     
     var unitButtonObservable = BehaviorRelay<WaterUnit>(value: .l)
     
@@ -64,7 +64,7 @@ public class WaterSetModal: ModalView {
         super.init(coder: coder)
     }
     
-    func addComponents() {
+    public func addComponents() {
         [title, ozButton, lButton, aCupTextForm, goalTextForm, buttonStackView].forEach { modal.addSubview($0) }
         [cancelButton, completeButton].forEach { buttonStackView.addArrangedSubview($0) }
         
@@ -74,7 +74,7 @@ public class WaterSetModal: ModalView {
         aCupTextForm.selectedTextRange = aCupTextForm.textRange(from: newPosition, to: newPosition)
     }
     
-    func setConstraints() {
+    public func setConstraints() {
         modal.snp.updateConstraints { make in
             make.height.equalTo(Const.modalHeightLong)
         }
@@ -123,7 +123,7 @@ public class WaterSetModal: ModalView {
         
     }
     
-    func bind() {
+    public func bind() {
         RxKeyboard.instance.visibleHeight
                  .drive(onNext: { [weak self] keyboardHeight in
                      guard let self = self else { return }

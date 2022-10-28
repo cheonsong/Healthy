@@ -10,7 +10,7 @@ import UIKit
 import DesignSystem
 import Util
 
-public class WaterAddModal: ModalView {
+public class WaterAddModal: ModalView, CodeBaseUI {
     
     let cupImageView = ImageView(PresentationAsset.icoCup.image).view
     
@@ -34,7 +34,7 @@ public class WaterAddModal: ModalView {
         super.init(coder: coder)
     }
     
-    func addComponents() {
+    public func addComponents() {
         [cupImageView, plusButton, minusButton, buttonStackView, countLabel].forEach { modal.addSubview($0) }
         buttonStackView.addArrangedSubview(cancelButton)
         buttonStackView.addArrangedSubview(addButton)
@@ -43,7 +43,7 @@ public class WaterAddModal: ModalView {
         addButton.configure(false)
     }
     
-    func setConstraints() {
+    public func setConstraints() {
         cupImageView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalToSuperview().inset(68)
@@ -76,7 +76,7 @@ public class WaterAddModal: ModalView {
         
     }
     
-    func bind() {
+    public func bind() {
         
     }
 }
