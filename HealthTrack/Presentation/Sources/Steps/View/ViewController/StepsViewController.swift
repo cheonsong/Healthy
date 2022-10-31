@@ -96,6 +96,8 @@ public final class StepsViewController: UIViewController, CodeBaseUI {
             .subscribe(onNext: { [weak self] in
                 guard let self = self else { return }
                 // TODO: SetModal
+                let modal = StepsSetModal()
+                modal.present(target: self.view)
             })
             .disposed(by: disposeBag)
         

@@ -77,6 +77,10 @@ public class WaterAddModal: ModalView, CodeBaseUI {
     }
     
     public func bind() {
-        
+        cancelButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                self?.dismiss()
+            })
+            .disposed(by: disposeBag)
     }
 }
