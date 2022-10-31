@@ -28,7 +28,7 @@ public final class StepsViewController: UIViewController, CodeBaseUI {
     let circleView = View().backgrouondColor(.clear).view
     let countLabel = Label("0%").font(.bold25).textColor(.black).view
     
-    let walkButton = Button(MainButton(.steps)).title("걷기").view
+    let consumedLabel = Label("소비 칼로리: 300kcal").font(.bold20).textColor(.black).attributedTextChangeColor("소비 칼로리: 300kcal", .r2, ["300kcal"]).textAlignment(.left).view
     
     let guideLine = View().backgrouondColor(.clear).view
     
@@ -56,7 +56,7 @@ public final class StepsViewController: UIViewController, CodeBaseUI {
     }
     
     public func addComponents() {
-        [navigation, guideLine, mainLabel, circleView, countLabel, calendar, walkButton].forEach { view.addSubview($0) }
+        [navigation, guideLine, mainLabel, circleView, countLabel, consumedLabel, calendar].forEach { view.addSubview($0) }
     }
     
     public func setConstraints() {
@@ -78,32 +78,20 @@ public final class StepsViewController: UIViewController, CodeBaseUI {
         countLabel.snp.makeConstraints {
             $0.center.equalTo(circleView)
         }
-
-        walkButton.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(34)
-        }
         
-        guideLine.snp.makeConstraints {
-            $0.top.equalTo(circleView.snp.bottom)
-            $0.bottom.equalTo(walkButton.snp.top)
-            $0.left.right.equalToSuperview()
+        consumedLabel.snp.makeConstraints {
+            $0.top.equalTo(circleView.snp.bottom).offset(40)
+            $0.left.right.equalToSuperview().inset(Const.padding)
         }
         
         calendar.snp.makeConstraints {
             $0.width.equalTo(Const.fullWidth)
-            $0.center.equalTo(guideLine)
+            $0.top.equalTo(consumedLabel.snp.bottom).offset(30)
+            $0.centerX.equalToSuperview()
         }
     }
     
     public func bind() {
-        walkButton.rx.tap
-            .subscribe(onNext: { [weak self] in
-                guard let self = self else { return }
-                // TODO: AddModal
-            })
-            .disposed(by: disposeBag)
-        
         navigation.setButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 guard let self = self else { return }

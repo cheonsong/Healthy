@@ -51,7 +51,7 @@ extension StepsTransition: UIViewControllerAnimatedTransitioning {
         toView.backgroundColor = .r2
         toView.layer.cornerRadius = 10
         
-        let views = [toVC.mainLabel, toVC.walkButton, toVC.navigation, toVC.calendar, toVC.circleView, toVC.countLabel]
+        let views = [toVC.mainLabel, toVC.navigation, toVC.calendar, toVC.circleView, toVC.countLabel, toVC.consumedLabel]
         views.forEach {
             $0.transform = CGAffineTransform(translationX: -200, y: -350).scaledBy(x: 0.1, y: 0.1)
             $0.alpha = 0

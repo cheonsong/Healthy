@@ -34,10 +34,10 @@ public class HomeViewController: UIViewController, CodeBaseUI {
     let scrollView    = ScrollView().backgrouondColor(.clear).showsVerticalScrollIndicator(false).view
     let stackView     = StackView().axis(.vertical).spacing(30).view
     
-    let waterTitle    = Label("WATER").font(.bold20).textColor(.black).sizeToFit().view
-    let stepsTitle    = Label("STEPS").font(.bold20).textColor(.black).sizeToFit().view
-    let caloriesTitle = Label("CALORIES").font(.bold20).textColor(.black).sizeToFit().view
-    let sleepTitle    = Label("SLEEP").font(.bold20).textColor(.black).sizeToFit().view
+    let waterTitle    = Label("WATER").font(.bold16).textColor(.black).sizeToFit().view
+    let stepsTitle    = Label("STEPS").font(.bold16).textColor(.black).sizeToFit().view
+    let caloriesTitle = Label("CALORIES").font(.bold16).textColor(.black).sizeToFit().view
+    let sleepTitle    = Label("SLEEP").font(.bold16).textColor(.black).sizeToFit().view
     
     let waterView     = MainView(type: .water)
     let stepView      = MainView(type: .steps)
