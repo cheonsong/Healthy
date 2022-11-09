@@ -11,13 +11,15 @@ import Domain
 
 // 의존성 주입을 위한 Coordinator Dependency
 public protocol WaterCoordinatorDependencies {
-    func makeWaterViewController() -> WaterViewController
+    func makeWaterViewController(actions: WaterViewModelActions) -> WaterViewController
+    func makeWaterAddModal()-> WaterAddModal
 }
 
 public class WaterCoordinator: NSObject {
     public var navigationController: UINavigationController
     private var dependencies: WaterCoordinatorDependencies
     
+    private var viewController: WaterViewController!
     
     public init(navigation: UINavigationController,
                 dependencies: WaterCoordinatorDependencies) {
@@ -27,15 +29,22 @@ public class WaterCoordinator: NSObject {
     }
     
     public func start() {
-        let vc = dependencies.makeWaterViewController()
-        vc.coordinator = self
-        vc.transitioningDelegate = self
-        vc.modalPresentationStyle = .overFullScreen
-        self.navigationController.present(vc, animated: true)
+        viewController = dependencies.makeWaterViewController(actions: self)
+        
+        viewController.transitioningDelegate = self
+        viewController.modalPresentationStyle = .overFullScreen
+        self.navigationController.present(viewController, animated: true)
     }
     
     deinit {
         print(#file)
+    }
+}
+
+extension WaterCoordinator: WaterViewModelActions {
+    public func showWaterAddModal() {
+        let modal = dependencies.makeWaterAddModal()
+        modal.present(target: viewController.view)
     }
 }
 

@@ -14,7 +14,6 @@ import RxSwift
 public final class WaterViewController: UIViewController, CodeBaseUI {
     
     var disposeBag = DisposeBag()
-    var coordinator: WaterCoordinator?
     
     let mainLabel = Label("오늘 당신이 마신\n물은 750 ml 입니다")
         .numberOfLines(0)
@@ -59,8 +58,11 @@ public final class WaterViewController: UIViewController, CodeBaseUI {
     
     let calendar = CalendarView()
     
-    public static func create()-> WaterViewController {
+    var viewModel: WaterViewModel!
+    
+    public static func create(with viewModel: WaterViewModel)-> WaterViewController {
         let vc = WaterViewController()
+        vc.viewModel = viewModel
         
         return vc
     }
@@ -138,8 +140,7 @@ public final class WaterViewController: UIViewController, CodeBaseUI {
         drinkButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 guard let self = self else { return }
-                let waterAddModal = WaterAddModal()
-                waterAddModal.present(target: self.view)
+                self.viewModel.actions?.showWaterAddModal()
             })
             .disposed(by: disposeBag)
         
