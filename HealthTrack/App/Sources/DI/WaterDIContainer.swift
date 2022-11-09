@@ -40,4 +40,8 @@ extension WaterDIContainer: WaterCoordinatorDependencies {
     func makeWaterAddModal() -> WaterAddModal {
         return WaterAddModal(viewModel: makeWaterAddViewModel())
     }
+    
+    func makeWaterSetModal() -> WaterSetModal {
+        return WaterSetModal()
+    }
 }

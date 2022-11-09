@@ -58,13 +58,17 @@ public final class WaterViewController: UIViewController, CodeBaseUI {
     
     let calendar = CalendarView()
     
-    var viewModel: WaterViewModel!
+    var viewModel: WaterViewModel?
     
     public static func create(with viewModel: WaterViewModel)-> WaterViewController {
         let vc = WaterViewController()
         vc.viewModel = viewModel
         
         return vc
+    }
+    
+    deinit {
+        print("WaterViewController Deinit")
     }
     
     override public func viewDidLoad() {
@@ -140,7 +144,7 @@ public final class WaterViewController: UIViewController, CodeBaseUI {
         drinkButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 guard let self = self else { return }
-                self.viewModel.actions?.showWaterAddModal()
+                self.viewModel?.actions?.showWaterAddModal()
             })
             .disposed(by: disposeBag)
         
@@ -155,6 +159,7 @@ public final class WaterViewController: UIViewController, CodeBaseUI {
         navigation.backButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 guard let self = self else { return }
+                self.viewModel = nil
                 self.dismiss(animated: true)
             })
             .disposed(by: disposeBag)

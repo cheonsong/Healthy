@@ -13,6 +13,7 @@ import Domain
 public protocol WaterCoordinatorDependencies {
     func makeWaterViewController(actions: WaterViewModelActions) -> WaterViewController
     func makeWaterAddModal()-> WaterAddModal
+    func makeWaterSetModal()-> WaterSetModal
 }
 
 public class WaterCoordinator: NSObject {
@@ -44,6 +45,11 @@ public class WaterCoordinator: NSObject {
 extension WaterCoordinator: WaterViewModelActions {
     public func showWaterAddModal() {
         let modal = dependencies.makeWaterAddModal()
+        modal.present(target: viewController.view)
+    }
+    
+    public func showWaterSetModal() {
+        let modal = dependencies.makeWaterSetModal()
         modal.present(target: viewController.view)
     }
 }

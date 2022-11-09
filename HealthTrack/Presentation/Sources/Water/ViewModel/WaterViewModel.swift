@@ -12,6 +12,7 @@ import RxCocoa
 // Coordinator를 통해 화면이 전환되거나 새로운 뷰가 올라오는 경우
 public protocol WaterViewModelActions {
     func showWaterAddModal()
+    func showWaterSetModal()
 }
 
 protocol WaterViewModelInput {
@@ -38,7 +39,7 @@ extension WaterViewModel: WaterViewModelInput {
     }
     
     func didSetButtonTapped() {
-        
+        self.actions?.showWaterSetModal()
     }
     
 }
