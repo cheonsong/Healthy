@@ -102,9 +102,7 @@ public class MainInfoView: UIView {
     }
     
     func drawBaseCircle() {
-        print(self.center)
         let center = CGPoint(x: 50, y: 50)
-        print(center)
         let path = UIBezierPath()
         path.addArc(withCenter: center,
                     radius: 100 / 2,

@@ -9,9 +9,12 @@ import Foundation
 import UIKit
 import DesignSystem
 import Util
+import RxSwift
+import RxCocoa
 
 public class WaterAddModal: ModalView, CodeBaseUI {
     
+    // MARK: - View
     let cupImageView = ImageView(PresentationAsset.icoCup.image).view
     
     let plusButton = Button(IcoButton(type: .water, icon: .plus)).view as! IcoButton
@@ -21,10 +24,17 @@ public class WaterAddModal: ModalView, CodeBaseUI {
     let addButton = Button(MainButton(.water)).title("추가하기").view as! MainButton
     let cancelButton = Button(MainButton(.water)).title("취소").view as! MainButton
     
-    let countLabel = Label("물 한잔 200 ml").textColor(.black).font(.bold16).view
+    let aCupOfWaterLabel = Label("물 한잔 200 ml").textColor(.black).font(.bold16).view
     
-    public override init(frame: CGRect) {
-        super.init(frame: frame)
+    let countView = View().backgrouondColor(.b2).cornerRadius(15).isHidden(true).view
+    let countLabel = Label("x1").textColor(.white).font(.bold16).view
+    
+    // MARK: - ViewModel
+    var viewModel: WaterAddViewModel?
+  
+    public init(viewModel: WaterAddViewModel) {
+        super.init(frame: .zero)
+        self.viewModel = viewModel
         addComponents()
         setConstraints()
         bind()
@@ -34,10 +44,15 @@ public class WaterAddModal: ModalView, CodeBaseUI {
         super.init(coder: coder)
     }
     
+    deinit {
+        print("WaterAddModal Deinit")
+    }
+    
     public func addComponents() {
-        [cupImageView, plusButton, minusButton, buttonStackView, countLabel].forEach { modal.addSubview($0) }
+        [cupImageView, plusButton, minusButton, buttonStackView, aCupOfWaterLabel, countView].forEach { modal.addSubview($0) }
         buttonStackView.addArrangedSubview(cancelButton)
         buttonStackView.addArrangedSubview(addButton)
+        countView.addSubview(countLabel)
         
         minusButton.configure(false)
         addButton.configure(false)
@@ -66,9 +81,19 @@ public class WaterAddModal: ModalView, CodeBaseUI {
             $0.bottom.equalTo(safeAreaLayoutGuide).inset(38)
         }
         
-        countLabel.snp.makeConstraints {
+        aCupOfWaterLabel.snp.makeConstraints {
             $0.top.equalTo(cupImageView.snp.bottom).offset(35)
             $0.centerX.equalToSuperview()
+        }
+        
+        countView.snp.makeConstraints {
+            $0.top.equalTo(cupImageView.snp.top).offset(-15)
+            $0.right.equalTo(cupImageView.snp.right).offset(15)
+            $0.size.equalTo(30)
+        }
+        
+        countLabel.snp.makeConstraints {
+            $0.center.equalToSuperview()
         }
         
         addButton.snp.removeConstraints()
@@ -77,10 +102,41 @@ public class WaterAddModal: ModalView, CodeBaseUI {
     }
     
     public func bind() {
+        // MARK: Input
         cancelButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.dismiss()
             })
+            .disposed(by: disposeBag)
+        
+        plusButton.rx.tapGesture()
+            .when(.recognized)
+            .subscribe(onNext: { [weak self] _ in
+                self?.viewModel?.didPlus()
+            })
+            .disposed(by: disposeBag)
+        
+        minusButton.rx.tap
+            .subscribe(onNext: { [weak self] _ in
+                self?.viewModel?.didMinus()
+            })
+            .disposed(by: disposeBag)
+        
+        // MARK: Output
+        viewModel?.isAddButtonActive
+            .subscribe(onNext: addButton.configure)
+            .disposed(by: disposeBag)
+        
+        viewModel?.isMinusButtonActive
+            .subscribe(onNext: minusButton.configure)
+            .disposed(by: disposeBag)
+        
+        viewModel?.isCountHidden
+            .bind(to: countView.rx.isHidden)
+            .disposed(by: disposeBag)
+        
+        viewModel?.waterCount
+            .bind(to: countLabel.rx.text)
             .disposed(by: disposeBag)
     }
 }
