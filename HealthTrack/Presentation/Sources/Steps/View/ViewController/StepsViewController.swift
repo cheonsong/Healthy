@@ -52,7 +52,7 @@ public final class StepsViewController: UIViewController, CodeBaseUI {
     
     public override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        updateValue(1)
+        updateValue(0.6)
     }
     
     public func addComponents() {

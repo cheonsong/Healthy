@@ -24,7 +24,10 @@ public class WaterAddModal: ModalView, CodeBaseUI {
     let addButton = Button(MainButton(.water)).title("추가하기").view as! MainButton
     let cancelButton = Button(MainButton(.water)).title("취소").view as! MainButton
     
-    let aCupOfWaterLabel = Label("물 한잔 200 ml").textColor(.black).font(.bold16).view
+    let aCupContainer = View().view
+    let aCupOfWaterLabel = Label("물 한잔").textColor(.black).font(.bold16).view
+    let aCupUnitLabel = Label("ml").textColor(.black).font(.bold16).view
+    lazy var aCupTextForm = TextField(TextForm()).placeholder("한 컵").font(.bold16).delegate(self).view
     
     let countView = View().backgrouondColor(.b2).cornerRadius(15).isHidden(true).view
     let countLabel = Label("x1").textColor(.white).font(.bold16).view
@@ -49,7 +52,8 @@ public class WaterAddModal: ModalView, CodeBaseUI {
     }
     
     public func addComponents() {
-        [cupImageView, plusButton, minusButton, buttonStackView, aCupOfWaterLabel, countView].forEach { modal.addSubview($0) }
+        [cupImageView, plusButton, minusButton, buttonStackView, aCupContainer, countView].forEach { modal.addSubview($0) }
+        [aCupOfWaterLabel, aCupTextForm, aCupUnitLabel].forEach { aCupContainer.addSubview($0) }
         buttonStackView.addArrangedSubview(cancelButton)
         buttonStackView.addArrangedSubview(addButton)
         countView.addSubview(countLabel)
@@ -80,10 +84,27 @@ public class WaterAddModal: ModalView, CodeBaseUI {
             $0.bottom.equalTo(safeAreaLayoutGuide).inset(38)
         }
         
-        aCupOfWaterLabel.snp.makeConstraints {
+        aCupContainer.snp.makeConstraints {
             $0.top.equalTo(cupImageView.snp.bottom).offset(35)
             $0.centerX.equalToSuperview()
         }
+        
+        aCupOfWaterLabel.snp.makeConstraints {
+            $0.left.top.bottom.equalToSuperview()
+        }
+        
+        aCupTextForm.snp.remakeConstraints {
+            $0.width.equalTo(60)
+            $0.height.equalTo(25)
+            $0.left.equalTo(aCupOfWaterLabel.snp.right).offset(6)
+            $0.centerY.equalTo(aCupOfWaterLabel)
+        }
+        
+        aCupUnitLabel.snp.makeConstraints {
+            $0.right.top.bottom.equalToSuperview()
+            $0.left.equalTo(aCupTextForm.snp.right).offset(6)
+        }
+        
         
         countView.snp.makeConstraints {
             $0.top.equalTo(cupImageView.snp.top).offset(-15)
@@ -132,5 +153,22 @@ public class WaterAddModal: ModalView, CodeBaseUI {
         viewModel?.waterCount
             .bind(to: countLabel.rx.text)
             .disposed(by: disposeBag)
+    }
+    
+    public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        self.endEditing(true)
+    }
+}
+
+extension WaterAddModal: UITextFieldDelegate {
+    public func textFieldDidBeginEditing(_ textField: UITextField) {
+        textField.layer.borderColor = UIColor.b2.cgColor
+        textField.layer.borderWidth = 2
+    }
+    
+    public func textFieldDidEndEditing(_ textField: UITextField) {
+        textField.layer.borderColor = UIColor.gr2.cgColor
+        textField.layer.borderWidth = 1
     }
 }

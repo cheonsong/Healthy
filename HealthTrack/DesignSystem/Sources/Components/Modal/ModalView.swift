@@ -12,6 +12,7 @@ import Then
 import RxCocoa
 import RxSwift
 import RxGesture
+import RxKeyboard
 
 open class ModalView: UIView {
     
@@ -62,6 +63,19 @@ open class ModalView: UIView {
                 self?.dismiss()
             })
             .disposed(by: disposeBag)
+        
+        RxKeyboard.instance.visibleHeight
+                 .drive(onNext: { [weak self] keyboardHeight in
+                     guard let self = self else { return }
+                     if keyboardHeight > 0 {
+                         self.modal.transform = CGAffineTransform(translationX: 0, y: -keyboardHeight + Const.safeAreaBottom)
+                         self.background.isUserInteractionEnabled = false
+                     } else {
+                         self.modal.transform = .identity
+                         self.background.isUserInteractionEnabled = true
+                     }
+                 })
+                 .disposed(by: disposeBag)
     }
     
     public func present(target: UIView, isLong: Bool = false) {
