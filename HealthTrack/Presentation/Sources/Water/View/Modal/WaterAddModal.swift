@@ -54,7 +54,6 @@ public class WaterAddModal: ModalView, CodeBaseUI {
         buttonStackView.addArrangedSubview(addButton)
         countView.addSubview(countLabel)
         
-        minusButton.configure(false)
         addButton.configure(false)
     }
     
@@ -109,8 +108,7 @@ public class WaterAddModal: ModalView, CodeBaseUI {
             })
             .disposed(by: disposeBag)
         
-        plusButton.rx.tapGesture()
-            .when(.recognized)
+        plusButton.rx.tap
             .subscribe(onNext: { [weak self] _ in
                 self?.viewModel?.didPlus()
             })
@@ -125,10 +123,6 @@ public class WaterAddModal: ModalView, CodeBaseUI {
         // MARK: Output
         viewModel?.isAddButtonActive
             .subscribe(onNext: addButton.configure)
-            .disposed(by: disposeBag)
-        
-        viewModel?.isMinusButtonActive
-            .subscribe(onNext: minusButton.configure)
             .disposed(by: disposeBag)
         
         viewModel?.isCountHidden

@@ -18,7 +18,6 @@ private protocol WaterAddViewModelInput {
 private protocol WaterAddViewModelOutput {
     var waterCount: PublishRelay<String> { get }
     var isCountHidden: BehaviorRelay<Bool> { get }
-    var isMinusButtonActive: BehaviorRelay<Bool> { get }
     var isAddButtonActive: BehaviorRelay<Bool> { get }
 }
 
@@ -31,7 +30,6 @@ public class WaterAddViewModel: WaterAddViewModelOutput {
     public var waterCount: PublishRelay<String> = .init()
     public var isCountHidden: BehaviorRelay<Bool> = .init(value: true)
     public var isAddButtonActive: BehaviorRelay<Bool> = .init(value: false)
-    public var isMinusButtonActive: BehaviorRelay<Bool> = .init(value: false)
     
     public init() {}
     
@@ -44,26 +42,30 @@ public class WaterAddViewModel: WaterAddViewModelOutput {
 extension WaterAddViewModel: WaterAddViewModelInput {
     public func didPlus() {
         count += 1
-        waterCount.accept("x\(count)")
+        isCountHidden.accept(count == 0)
+        isAddButtonActive.accept(count != 0)
         
-        if count == 1{
-            isCountHidden.accept(false)
-            isMinusButtonActive.accept(true)
-            isAddButtonActive.accept(true)
+        if count != 0 {
+            if count > 0 {
+                waterCount.accept("+\(count)")
+            } else {
+                waterCount.accept("\(count)")
+            }
         }
-        print(count)
     }
     
     public func didMinus() {
         count -= 1
-        if count == 0 {
-            isCountHidden.accept(true)
-            isMinusButtonActive.accept(false)
-            isAddButtonActive.accept(false)
-        } else {
-            waterCount.accept("x\(count)")
+        isCountHidden.accept(count == 0)
+        isAddButtonActive.accept(count != 0)
+        
+        if count != 0 {
+            if count > 0 {
+                waterCount.accept("+\(count)")
+            } else {
+                waterCount.accept("\(count)")
+            }
         }
-        print(count)
     }
     
     public func didAddWater() {

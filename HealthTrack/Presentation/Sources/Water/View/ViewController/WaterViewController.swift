@@ -151,16 +151,15 @@ public final class WaterViewController: UIViewController, CodeBaseUI {
         navigation.setButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 guard let self = self else { return }
-                let waterSetModal = WaterSetModal()
-                waterSetModal.present(target: self.view, isLong: true)
+                self.viewModel?.actions?.showWaterSetModal()
             })
             .disposed(by: disposeBag)
         
         navigation.backButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 guard let self = self else { return }
-                self.viewModel = nil
                 self.dismiss(animated: true)
+                self.viewModel = nil
             })
             .disposed(by: disposeBag)
         
@@ -172,6 +171,7 @@ public final class WaterViewController: UIViewController, CodeBaseUI {
                 switch pan.state {
                 case .ended:
                     self.dismiss(animated: true)
+                    self.viewModel = nil
                 default:
                     break
                 }
