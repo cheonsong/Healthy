@@ -15,6 +15,9 @@ class WaterDIContainer {
     init() {}
     
     // MARK: Usecases
+    func makeValidationUsecase()-> ValidationUseCase {
+        return ValidationUseCase()
+    }
     
     // MARK: ViewModel
     func makeWaterViewModel(actions: WaterViewModelActions)-> WaterViewModel {
@@ -22,7 +25,7 @@ class WaterDIContainer {
     }
     
     func makeWaterAddViewModel()-> WaterAddViewModel {
-        return WaterAddViewModel()
+        return WaterAddViewModel(validation: makeValidationUsecase())
     }
     
     // MARK: Coordinator

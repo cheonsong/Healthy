@@ -141,6 +141,19 @@ public class WaterAddModal: ModalView, CodeBaseUI {
             })
             .disposed(by: disposeBag)
         
+        addButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                self?.viewModel?.didAddWater(Int(self?.aCupTextForm.text ?? "0") ?? 0)
+                self?.dismiss()
+            })
+            .disposed(by: disposeBag)
+        
+        aCupTextForm.rx.text.orEmpty
+            .subscribe(onNext: { [weak self] text in
+                self?.viewModel?.validateText(text)
+            })
+            .disposed(by: disposeBag)
+        
         // MARK: Output
         viewModel?.isAddButtonActive
             .subscribe(onNext: addButton.configure)
@@ -152,6 +165,10 @@ public class WaterAddModal: ModalView, CodeBaseUI {
         
         viewModel?.waterCount
             .bind(to: countLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        viewModel?.validatedText
+            .bind(to: aCupTextForm.rx.text)
             .disposed(by: disposeBag)
     }
     
