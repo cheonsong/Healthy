@@ -34,6 +34,11 @@ public class HomeViewController: UIViewController, CodeBaseUI {
     let scrollView    = ScrollView().backgrouondColor(.clear).showsVerticalScrollIndicator(false).view
     let stackView     = StackView().axis(.vertical).spacing(30).view
     
+    let waterContainer    = View().view
+    let stepsContainer    = View().view
+    let caloriesContainer = View().view
+    let sleepContainer    = View().view
+    
     let waterTitle    = Label("WATER").font(.bold16).textColor(.black).sizeToFit().view
     let stepsTitle    = Label("STEPS").font(.bold16).textColor(.black).sizeToFit().view
     let caloriesTitle = Label("CALORIES").font(.bold16).textColor(.black).sizeToFit().view
@@ -41,7 +46,7 @@ public class HomeViewController: UIViewController, CodeBaseUI {
     
     let waterView     = MainView(type: .water)
     let stepView      = MainView(type: .steps)
-    let caloliesView  = MainView(type: .calolies)
+    let caloriesView  = MainView(type: .calolies)
     let sleepView     = MainView(type: .sleep)
     
     /// MainViewController DI를 위한 Create 함수
@@ -59,10 +64,20 @@ public class HomeViewController: UIViewController, CodeBaseUI {
         
     }
     
+    public override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewDidLoadAnimation()
+    }
+    
     public func addComponents() {
         [dateLabel, welcomeLabel, scrollView].forEach { view.addSubview($0) }
         scrollView.addSubview(stackView)
-        [waterTitle, waterView, stepsTitle, stepView, caloriesTitle, caloliesView, sleepTitle, sleepView, View().backgrouondColor(.clear).view].forEach { stackView.addArrangedSubview($0) }
+        [waterTitle, waterView].forEach { waterContainer.addSubview($0) }
+        [stepsTitle, stepView].forEach { stepsContainer.addSubview($0) }
+        [caloriesTitle, caloriesView].forEach { caloriesContainer.addSubview($0) }
+        [sleepTitle, sleepView].forEach { sleepContainer.addSubview($0) }
+        
+        [waterContainer, stepsContainer, caloriesContainer, sleepContainer, View().backgrouondColor(.clear).view].forEach { stackView.addArrangedSubview($0) }
     }
     
     public func setConstraints() {
@@ -89,10 +104,42 @@ public class HomeViewController: UIViewController, CodeBaseUI {
             $0.centerX.equalToSuperview()
         }
         
-        stackView.setCustomSpacing(10, after: waterTitle)
-        stackView.setCustomSpacing(10, after: stepsTitle)
-        stackView.setCustomSpacing(10, after: caloriesTitle)
-        stackView.setCustomSpacing(10, after: sleepTitle)
+        waterTitle.snp.makeConstraints {
+            $0.top.left.equalToSuperview()
+        }
+        
+        waterView.snp.makeConstraints {
+            $0.top.equalTo(waterTitle.snp.bottom).offset(10)
+            $0.left.right.bottom.equalToSuperview()
+        }
+        
+        sleepTitle.snp.makeConstraints {
+            $0.top.left.equalToSuperview()
+        }
+        
+        sleepView.snp.makeConstraints {
+            $0.top.equalTo(sleepTitle.snp.bottom).offset(10)
+            $0.left.right.bottom.equalToSuperview()
+        }
+        
+        stepsTitle.snp.makeConstraints {
+            $0.top.left.equalToSuperview()
+        }
+        
+        stepView.snp.makeConstraints {
+            $0.top.equalTo(stepsTitle.snp.bottom).offset(10)
+            $0.left.right.bottom.equalToSuperview()
+        }
+        
+        caloriesTitle.snp.makeConstraints {
+            $0.top.left.equalToSuperview()
+        }
+        
+        caloriesView.snp.makeConstraints {
+            $0.top.equalTo(caloriesTitle.snp.bottom).offset(10)
+            $0.left.right.bottom.equalToSuperview()
+        }
+        
     }
     
     public func bind() {
@@ -111,5 +158,29 @@ public class HomeViewController: UIViewController, CodeBaseUI {
 //                self?.coordinator?.presentStepsViewController()
 //            })
 //            .disposed(by: disposeBag)
+    }
+    
+    private func viewDidLoadAnimation() {
+        self.stepsContainer.transform = CGAffineTransform(translationX: 0, y: -200)
+        self.stepsContainer.alpha = 0
+        self.caloriesContainer.transform = CGAffineTransform(translationX: 0, y: -200)
+        self.caloriesContainer.alpha = 0
+        self.sleepContainer.transform = CGAffineTransform(translationX: 0, y: -200)
+        self.sleepContainer.alpha = 0
+        
+        UIView.animate(withDuration: 0.3, animations: {
+            self.stepsContainer.transform = .identity
+            self.stepsContainer.alpha = 1
+        }, completion: { _ in
+            UIView.animate(withDuration: 0.3, animations: {
+                self.caloriesContainer.transform = .identity
+                self.caloriesContainer.alpha = 1
+            }, completion: { _ in
+                UIView.animate(withDuration: 0.3, animations: {
+                    self.sleepContainer.transform = .identity
+                    self.sleepContainer.alpha = 1
+                })
+            })
+        })
     }
 }

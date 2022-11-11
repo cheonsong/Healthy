@@ -24,11 +24,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: scene)
         
+        let splash = SplashViewController()
         let vc = CustomTabBarController()
         
-        window.rootViewController = vc
+        window.rootViewController = splash
         
-        appCoordinator = AppCordinator(tabBarController: vc, appDIContainer: appDIContainer)
+        appCoordinator = AppCordinator(spalsh: splash, tabBarController: vc, appDIContainer: appDIContainer)
         appCoordinator?.start()
         
         self.window = window
