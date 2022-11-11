@@ -19,6 +19,8 @@ public class MainView: UIView {
     
     public var infoView: MainInfoView!
     
+    public var lockView: MainLockView!
+    
     public convenience init(type: Health, frame: CGRect = .zero) {
         self.init(frame: frame)
         
@@ -33,6 +35,16 @@ public class MainView: UIView {
         self.snp.makeConstraints {
             $0.width.equalTo(Const.fullWidth)
             $0.height.equalTo(Const.mainViewHeight)
+        }
+        
+        self.lockView = MainLockView()
+        self.addSubview(lockView)
+        lockView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+        
+        if type == .water {
+            lockView.isHidden = true
         }
     }
     
