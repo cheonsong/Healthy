@@ -21,6 +21,6 @@ public class FetchMonthWaterUsecase: FetchMonthWaterUsecaseProtocol {
     }
     
     public func execute(query: Int) -> Single<[DailyWaterModel]> {
-        return repository.fetchMonthWater(query)
+        return repository.fetchMonthWater(.month(query))
     }
 }

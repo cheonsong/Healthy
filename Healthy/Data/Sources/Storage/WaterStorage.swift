@@ -29,13 +29,6 @@ public class WaterSotrage {
         
         return helper.readWithQuery(query: query)
     }
-    
-    func getDate()-> Int {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyyMMdd"
-        let str = formatter.string(from: Date())
-        return Int(str) ?? 0
-    }
 }
 
 
