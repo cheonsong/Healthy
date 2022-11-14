@@ -20,7 +20,7 @@ public class StepsSetModal: ModalView, CodeBaseUI {
         .textColor(.black)
         .textAlignment(.center)
         .numberOfLines(0)
-        .attributedTextChangeColor("현재 하루 목표\n10000 걸음", .b2, ["10000 걸음"])
+        .attributedTextChangeColor("현재 하루 목표\n10000 걸음", .r2, ["10000 걸음"])
         .view
     
     lazy var goalTextForm = TextFieldBuilder(TextForm()).placeholder("목표량을 입력하세요").delegate(self).view
@@ -29,7 +29,7 @@ public class StepsSetModal: ModalView, CodeBaseUI {
     let healthSyncIcon = ImageViewBuilder(PresentationAsset.icoHealthApp.image).view
     let healthSyncLabel = LabelBuilder("건강 데이터 연동").font(.bold16).textColor(.black).view
     let healthSyncSwitch = UISwitch().then {
-        $0.onTintColor = .b2
+        $0.onTintColor = .r2
     }
     
     let buttonStackView = StackViewBuilder().spacing(30).axis(.horizontal).backgrouondColor(.clear).distributon(.fillEqually).view
@@ -129,7 +129,7 @@ public class StepsSetModal: ModalView, CodeBaseUI {
 
 extension StepsSetModal: UITextFieldDelegate {
     public func textFieldDidBeginEditing(_ textField: UITextField) {
-        textField.layer.borderColor = UIColor.b2.cgColor
+        textField.layer.borderColor = UIColor.r2.cgColor
         textField.layer.borderWidth = 2
     }
     

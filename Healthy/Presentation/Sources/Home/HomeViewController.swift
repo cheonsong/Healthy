@@ -76,7 +76,8 @@ public class HomeViewController: UIViewController, CodeBaseUI {
         [caloriesTitle, caloriesView].forEach { caloriesContainer.addSubview($0) }
         [sleepTitle, sleepView].forEach { sleepContainer.addSubview($0) }
         
-        [waterContainer, stepsContainer, caloriesContainer, sleepContainer,
+        [ViewBuilder().backgrouondColor(.clear).view,
+         waterContainer, stepsContainer, caloriesContainer, sleepContainer,
          ViewBuilder().backgrouondColor(.clear).view].forEach { stackView.addArrangedSubview($0) }
         
         scrollView.roundCorners([.topLeft, .topRight], radius: 20)
@@ -101,8 +102,7 @@ public class HomeViewController: UIViewController, CodeBaseUI {
         }
         
         stackView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(30)
-            $0.bottom.equalToSuperview()
+            $0.top.bottom.equalToSuperview()
             $0.width.equalTo(Const.fullWidth)
             $0.centerX.equalToSuperview()
         }
