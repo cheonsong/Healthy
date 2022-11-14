@@ -15,7 +15,7 @@ import RxCocoa
 
 public class StepsSetModal: ModalView, CodeBaseUI {
     
-    let title = Label("현재 하루 목표\n2 L")
+    let title = LabelBuilder("현재 하루 목표\n2 L")
         .font(.bold20)
         .textColor(.black)
         .textAlignment(.center)
@@ -23,18 +23,18 @@ public class StepsSetModal: ModalView, CodeBaseUI {
         .attributedTextChangeColor("현재 하루 목표\n10000 걸음", .r2, ["10000 걸음"])
         .view
     
-    lazy var goalTextForm = TextField(TextForm()).placeholder("목표량을 입력하세요").delegate(self).view
+    lazy var goalTextForm = TextFieldBuilder(TextForm()).placeholder("목표량을 입력하세요").delegate(self).view
     
-    let healthSyncContainer = View().backgrouondColor(.clear).view
-    let healthSyncIcon = ImageView(PresentationAsset.icoHealthApp.image).view
-    let healthSyncLabel = Label("건강 데이터 연동").font(.bold16).textColor(.black).view
+    let healthSyncContainer = ViewBuilder().backgrouondColor(.clear).view
+    let healthSyncIcon = ImageViewBuilder(PresentationAsset.icoHealthApp.image).view
+    let healthSyncLabel = LabelBuilder("건강 데이터 연동").font(.bold16).textColor(.black).view
     let healthSyncSwitch = UISwitch().then {
         $0.onTintColor = .r2
     }
     
-    let buttonStackView = StackView().spacing(30).axis(.horizontal).backgrouondColor(.clear).distributon(.fillEqually).view
-    let completeButton = Button(MainButton(.steps)).title("완료").view as! MainButton
-    let cancelButton = Button(MainButton(.steps)).title("취소").view as! MainButton
+    let buttonStackView = StackViewBuilder().spacing(30).axis(.horizontal).backgrouondColor(.clear).distributon(.fillEqually).view
+    let completeButton = ButtonBuilder(MainButton(.steps)).title("완료").view as! MainButton
+    let cancelButton = ButtonBuilder(MainButton(.steps)).title("취소").view as! MainButton
     
     public override init(frame: CGRect) {
         super.init(frame: frame)

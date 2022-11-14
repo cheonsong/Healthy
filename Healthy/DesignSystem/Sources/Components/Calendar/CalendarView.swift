@@ -13,9 +13,9 @@ public class CalendarView: UIView {
     
     let weeks = ["일","월","화","수","목","금","토"]
     
-    let title = Label("2021년 11월").font(.bold16).textColor(.black).view
+    let title = LabelBuilder("2021년 11월").font(.bold16).textColor(.black).view
     
-    let stackView = StackView().axis(.horizontal).backgrouondColor(.clear).distributon(.fillEqually).view
+    let stackView = StackViewBuilder().axis(.horizontal).backgrouondColor(.clear).distributon(.fillEqually).view
     
     var flowLayout = UICollectionViewFlowLayout().then {
         $0.minimumInteritemSpacing = 0

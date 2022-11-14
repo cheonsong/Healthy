@@ -12,7 +12,7 @@ import UIKit
 public class CalendarCell: UICollectionViewCell {
     static let identifier = "CalendarCell"
     
-    let commit = View().cornerRadius(5).backgrouondColor(.clear).view
+    let commit = ViewBuilder().cornerRadius(5).backgrouondColor(.clear).view
     
     public override init(frame: CGRect) {
         super.init(frame: frame)

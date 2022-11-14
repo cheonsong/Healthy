@@ -22,7 +22,7 @@ public class WaterSetModal: ModalView, CodeBaseUI {
     
     var unitButtonObservable = BehaviorRelay<WaterUnit>(value: .l)
     
-    let title = Label("현재 하루 목표\n2 L")
+    let title = LabelBuilder("현재 하루 목표\n2 L")
         .font(.bold20)
         .textColor(.black)
         .textAlignment(.center)
@@ -30,27 +30,27 @@ public class WaterSetModal: ModalView, CodeBaseUI {
         .attributedTextChangeColor("현재 하루 목표\n2 L", .b2, ["2 L"])
         .view
     
-    let ozButton = Button()
+    let ozButton = ButtonBuilder()
         .title("Oz")
         .font(.bold20)
         .borderColor(.gr2)
         .cornerRadius(10)
         .view
     
-    let lButton = Button()
+    let lButton = ButtonBuilder()
         .title("L")
         .font(.bold20)
         .borderColor(.gr2)
         .cornerRadius(10)
         .view
     
-    lazy var aCupTextForm = TextField(TextForm()).placeholder("물 한잔의 양을 입력하세요").delegate(self).view
+    lazy var aCupTextForm = TextFieldBuilder(TextForm()).placeholder("물 한잔의 양을 입력하세요").delegate(self).view
     
-    lazy var goalTextForm = TextField(TextForm()).placeholder("목표량을 입력하세요").delegate(self).view
+    lazy var goalTextForm = TextFieldBuilder(TextForm()).placeholder("목표량을 입력하세요").delegate(self).view
     
-    let buttonStackView = StackView().spacing(30).axis(.horizontal).backgrouondColor(.clear).distributon(.fillEqually).view
-    let completeButton = Button(MainButton(.water)).title("완료").view as! MainButton
-    let cancelButton = Button(MainButton(.water)).title("취소").view as! MainButton
+    let buttonStackView = StackViewBuilder().spacing(30).axis(.horizontal).backgrouondColor(.clear).distributon(.fillEqually).view
+    let completeButton = ButtonBuilder(MainButton(.water)).title("완료").view as! MainButton
+    let cancelButton = ButtonBuilder(MainButton(.water)).title("취소").view as! MainButton
     
     public override init(frame: CGRect) {
         super.init(frame: frame)

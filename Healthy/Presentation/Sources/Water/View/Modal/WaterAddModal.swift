@@ -15,22 +15,22 @@ import RxCocoa
 public class WaterAddModal: ModalView, CodeBaseUI {
     
     // MARK: - View
-    let cupImageView = ImageView(PresentationAsset.icoCup.image).view
+    let cupImageView = ImageViewBuilder(PresentationAsset.icoCup.image).view
     
-    let plusButton = Button(IcoButton(type: .water, icon: .plus)).view as! IcoButton
-    let minusButton = Button(IcoButton(type: .water, icon: .minus)).view as! IcoButton
+    let plusButton = ButtonBuilder(IcoButton(type: .water, icon: .plus)).view as! IcoButton
+    let minusButton = ButtonBuilder(IcoButton(type: .water, icon: .minus)).view as! IcoButton
     
-    let buttonStackView = StackView().spacing(30).axis(.horizontal).backgrouondColor(.clear).distributon(.fillEqually).view
-    let addButton = Button(MainButton(.water)).title("추가하기").view as! MainButton
-    let cancelButton = Button(MainButton(.water)).title("취소").view as! MainButton
+    let buttonStackView = StackViewBuilder().spacing(30).axis(.horizontal).backgrouondColor(.clear).distributon(.fillEqually).view
+    let addButton = ButtonBuilder(MainButton(.water)).title("추가하기").view as! MainButton
+    let cancelButton = ButtonBuilder(MainButton(.water)).title("취소").view as! MainButton
     
-    let aCupContainer = View().view
-    let aCupOfWaterLabel = Label("물 한잔").textColor(.black).font(.bold16).view
-    let aCupUnitLabel = Label("ml").textColor(.black).font(.bold16).view
-    lazy var aCupTextForm = TextField(TextForm()).placeholder("한 컵").font(.bold16).delegate(self).view
+    let aCupContainer = ViewBuilder().view
+    let aCupOfWaterLabel = LabelBuilder("물 한잔").textColor(.black).font(.bold16).view
+    let aCupUnitLabel = LabelBuilder("ml").textColor(.black).font(.bold16).view
+    lazy var aCupTextForm = TextFieldBuilder(TextForm()).placeholder("한 컵").font(.bold16).delegate(self).view
     
-    let countView = View().backgrouondColor(.b2).cornerRadius(15).isHidden(true).view
-    let countLabel = Label("x1").textColor(.white).font(.bold16).view
+    let countView = ViewBuilder().backgrouondColor(.b2).cornerRadius(15).isHidden(true).view
+    let countLabel = LabelBuilder("x1").textColor(.white).font(.bold16).view
     
     // MARK: - ViewModel
     var viewModel: WaterAddViewModel?

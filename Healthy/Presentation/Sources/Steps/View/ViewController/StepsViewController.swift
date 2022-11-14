@@ -17,7 +17,7 @@ public final class StepsViewController: UIViewController, CodeBaseUI {
     var disposeBag = DisposeBag()
     var coordinator: StepsCoordinator?
     
-    let mainLabel = Label("오늘 당신의 걸음은\n9563 걸음 입니다")
+    let mainLabel = LabelBuilder("오늘 당신의 걸음은\n9563 걸음 입니다")
         .numberOfLines(0)
         .textColor(.black)
         .font(.bold25)
@@ -25,12 +25,12 @@ public final class StepsViewController: UIViewController, CodeBaseUI {
         .attributedTextChangeColor("오늘 당신의 걸음은\n9563 걸음 입니다", .r2, ["9563 걸음"])
         .view
     
-    let circleView = View().backgrouondColor(.clear).view
-    let countLabel = Label("0%").font(.bold25).textColor(.black).view
+    let circleView = ViewBuilder().backgrouondColor(.clear).view
+    let countLabel = LabelBuilder("0%").font(.bold25).textColor(.black).view
     
-    let consumedLabel = Label("소비 칼로리: 300kcal").font(.bold20).textColor(.black).attributedTextChangeColor("소비 칼로리: 300kcal", .r2, ["300kcal"]).textAlignment(.left).view
+    let consumedLabel = LabelBuilder("소비 칼로리: 300kcal").font(.bold20).textColor(.black).attributedTextChangeColor("소비 칼로리: 300kcal", .r2, ["300kcal"]).textAlignment(.left).view
     
-    let guideLine = View().backgrouondColor(.clear).view
+    let guideLine = ViewBuilder().backgrouondColor(.clear).view
     
     let navigation = Navigation()
     

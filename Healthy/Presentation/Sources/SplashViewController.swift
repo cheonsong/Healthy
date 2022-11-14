@@ -11,7 +11,7 @@ import Util
 
 public class SplashViewController: UIViewController, CodeBaseUI {
     
-    let image = ImageView(PresentationAsset.splash.image)
+    let image = ImageViewBuilder(PresentationAsset.splash.image)
         .frame(CGRect(x: UIScreen.main.bounds.width/2 - 54, y: 50, width: 106, height: 140))
         .view
     

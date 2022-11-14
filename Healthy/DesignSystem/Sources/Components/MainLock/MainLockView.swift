@@ -20,7 +20,7 @@ public class MainLockView: UIView {
         self.backgroundColor = .dim
         self.layer.cornerRadius = 10
         
-        let icoLock = ImageView(DesignSystemAsset.icoLock.image).view
+        let icoLock = ImageViewBuilder(DesignSystemAsset.icoLock.image).view
         addSubview(icoLock)
         icoLock.snp.makeConstraints {
             $0.center.equalToSuperview()

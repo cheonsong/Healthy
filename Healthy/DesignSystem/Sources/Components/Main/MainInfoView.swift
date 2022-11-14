@@ -18,22 +18,22 @@ public class MainInfoView: UIView {
     var disposeBag = DisposeBag()
     let innerShadowLayer = CAShapeLayer()
     
-    lazy var todayTitleLabel = Label("음수량").font(.regular16).textColor(.white).view
-    lazy var todayContentslabel = Label("1.3 / 2 " + self.type.unit)
+    lazy var todayTitleLabel = LabelBuilder("음수량").font(.regular16).textColor(.white).view
+    lazy var todayContentslabel = LabelBuilder("1.3 / 2 " + self.type.unit)
         .textColor(.white)
         .font(.bold25)
         .attributedTextChangeFont("1.3 / 2 " + self.type.unit, .bold10, [self.type.unit])
         .view
     
-    lazy var avgTitleLabel = Label("이번 달 평균").font(.regular16).textColor(.white).view
-    lazy var avgContentslabel = Label("2.6 " + self.type.unit)
+    lazy var avgTitleLabel = LabelBuilder("이번 달 평균").font(.regular16).textColor(.white).view
+    lazy var avgContentslabel = LabelBuilder("2.6 " + self.type.unit)
         .textColor(.white)
         .font(.bold25)
         .attributedTextChangeFont("2.6 " + self.type.unit, .bold10, [self.type.unit])
         .view
     
-    let circleView = View().backgrouondColor(.clear).view
-    lazy var icon = ImageView(self.type.icon).view
+    let circleView = ViewBuilder().backgrouondColor(.clear).view
+    lazy var icon = ImageViewBuilder(self.type.icon).view
     
     public convenience init(type: Health, frame: CGRect = .zero) {
         self.init(frame: frame)

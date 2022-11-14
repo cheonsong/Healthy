@@ -19,30 +19,30 @@ public class HomeViewController: UIViewController, CodeBaseUI {
     
     var disposeBag = DisposeBag()
     
-    let dateLabel = Label("2022년 11월 30일")
+    let dateLabel = LabelBuilder("2022년 11월 30일")
         .font(.regular16)
         .textColor(.black)
         .sizeToFit()
         .view
     
-    let welcomeLabel = Label("안녕하세요, 천송님")
+    let welcomeLabel = LabelBuilder("안녕하세요, 천송님")
         .font(.bold25)
         .textColor(.black)
         .sizeToFit()
         .view
     
-    let scrollView    = ScrollView().backgrouondColor(.clear).showsVerticalScrollIndicator(false).view
-    let stackView     = StackView().axis(.vertical).spacing(30).view
+    let scrollView    = ScrollViewBuilder().backgrouondColor(.clear).showsVerticalScrollIndicator(false).view
+    let stackView     = StackViewBuilder().axis(.vertical).spacing(30).view
     
-    let waterContainer    = View().view
-    let stepsContainer    = View().view
-    let caloriesContainer = View().view
-    let sleepContainer    = View().view
+    let waterContainer    = ViewBuilder().view
+    let stepsContainer    = ViewBuilder().view
+    let caloriesContainer = ViewBuilder().view
+    let sleepContainer    = ViewBuilder().view
     
-    let waterTitle    = Label("WATER").font(.bold16).textColor(.black).sizeToFit().view
-    let stepsTitle    = Label("STEPS").font(.bold16).textColor(.black).sizeToFit().view
-    let caloriesTitle = Label("CALORIES").font(.bold16).textColor(.black).sizeToFit().view
-    let sleepTitle    = Label("SLEEP").font(.bold16).textColor(.black).sizeToFit().view
+    let waterTitle    = LabelBuilder("WATER").font(.bold16).textColor(.black).sizeToFit().view
+    let stepsTitle    = LabelBuilder("STEPS").font(.bold16).textColor(.black).sizeToFit().view
+    let caloriesTitle = LabelBuilder("CALORIES").font(.bold16).textColor(.black).sizeToFit().view
+    let sleepTitle    = LabelBuilder("SLEEP").font(.bold16).textColor(.black).sizeToFit().view
     
     let waterView     = MainView(type: .water)
     let stepView      = MainView(type: .steps)
@@ -77,7 +77,7 @@ public class HomeViewController: UIViewController, CodeBaseUI {
         [caloriesTitle, caloriesView].forEach { caloriesContainer.addSubview($0) }
         [sleepTitle, sleepView].forEach { sleepContainer.addSubview($0) }
         
-        [waterContainer, stepsContainer, caloriesContainer, sleepContainer, View().backgrouondColor(.clear).view].forEach { stackView.addArrangedSubview($0) }
+        [waterContainer, stepsContainer, caloriesContainer, sleepContainer, ViewBuilder().backgrouondColor(.clear).view].forEach { stackView.addArrangedSubview($0) }
     }
     
     public func setConstraints() {

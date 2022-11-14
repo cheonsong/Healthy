@@ -16,9 +16,9 @@ import RxKeyboard
 
 open class ModalView: UIView {
     
-    public let background = View().backgrouondColor(.dim).view
+    public let background = ViewBuilder().backgrouondColor(.dim).view
     
-    public let modal = View().backgrouondColor(.gr3).view
+    public let modal = ViewBuilder().backgrouondColor(.gr3).view
     
     public var disposeBag = DisposeBag()
     

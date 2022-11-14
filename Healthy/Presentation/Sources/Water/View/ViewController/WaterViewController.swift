@@ -15,7 +15,7 @@ public final class WaterViewController: UIViewController, CodeBaseUI {
     
     var disposeBag = DisposeBag()
     
-    let mainLabel = Label("오늘 당신이 마신\n물은 750 ml 입니다")
+    let mainLabel = LabelBuilder("오늘 당신이 마신\n물은 750 ml 입니다")
         .numberOfLines(0)
         .textColor(.black)
         .font(.bold25)
@@ -31,28 +31,28 @@ public final class WaterViewController: UIViewController, CodeBaseUI {
         $0.textAlignment = .center
     }
     
-    let waterBaseView = View()
+    let waterBaseView = ViewBuilder()
         .backgrouondColor(.b3)
         .cornerRadius(10)
         .view
     
-    let waterView = View()
+    let waterView = ViewBuilder()
         .backgrouondColor(.b1)
         .cornerRadius(10)
         .view
     
-    let drinkButton = Button(MainButton(.water)).title("물 마시기").view
+    let drinkButton = ButtonBuilder(MainButton(.water)).title("물 마시기").view
     
     let ballonIcon = UIImageView().then {
         $0.image = PresentationAsset.ballon.image
     }
     
-    let ballonLabel = Label("0%")
+    let ballonLabel = LabelBuilder("0%")
         .textColor(.white)
         .font(.bold16)
         .view
     
-    let guideLine = View().backgrouondColor(.clear).view
+    let guideLine = ViewBuilder().backgrouondColor(.clear).view
     
     let navigation = Navigation()
     

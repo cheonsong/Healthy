@@ -12,9 +12,9 @@ import SnapKit
 
 public class Navigation: UIView {
     
-    public let backButton = Button().image(DesignSystemAsset.icoBack.image).view
-    public let setButton = Button().image(DesignSystemAsset.icoSet.image).view
-    public let title = Label().isHidden(true).view
+    public let backButton = ButtonBuilder().image(DesignSystemAsset.icoBack.image).view
+    public let setButton = ButtonBuilder().image(DesignSystemAsset.icoSet.image).view
+    public let title = LabelBuilder().isHidden(true).view
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
