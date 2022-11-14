@@ -23,6 +23,11 @@ final class MainDIContainer {
 }
 
 extension MainDIContainer: MainCoordinatorDependencies {
+    func makeMyPageCoordinator(navigationController: UINavigationController) -> Presentation.MyPageCoordinator {
+        let di = MyPageDIContainer()
+        return di.makeMyPageCoordinator(navigationController: navigationController)
+    }
+    
     func makeHomeCoordinator(navigationController: UINavigationController) -> HomeCoordinator {
         let di = HomeDIContainer()
         return di.makeHomeCoordinator(navigationController: navigationController)

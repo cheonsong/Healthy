@@ -11,10 +11,12 @@ import RxSwift
 import RxCocoa
 import RxGesture
 import Util
+import DesignSystem
 
 // MainDIContainer 에서 구현
 public protocol MainCoordinatorDependencies {
     func makeHomeCoordinator(navigationController: UINavigationController)-> HomeCoordinator
+    func makeMyPageCoordinator(navigationController: UINavigationController)-> MyPageCoordinator
 }
 
 public class MainCoordinator: CoordinatorType {
@@ -51,19 +53,34 @@ public class MainCoordinator: CoordinatorType {
     
     func serviceInit() {
         // 인디케이터 끝나고
-        let vc1 = getNavigation()
+        let home = getNavigation()
+        let homeCoordinator = dependencies.makeHomeCoordinator(navigationController: home)
         
-        let homeCoordinator = dependencies.makeHomeCoordinator(navigationController: vc1)
+        let my = getNavigation()
+        let myCoordinator = dependencies.makeMyPageCoordinator(navigationController: my)
         
-        vc1.tabBarItem = UITabBarItem(title: "", image: UIImage(systemName: "home"), selectedImage: UIImage(systemName: "home"))
+        let fontAttributes = [NSAttributedString.Key.font: DesignSystemFontFamily.Suit.bold.font(size: 12)]
         
+        home.tabBarItem = UITabBarItem(title: "Home", image: PresentationAsset.icoHomeOff.image, tag: 0)
+        home.tabBarItem.selectedImage = PresentationAsset.icoHomeOn.image
+        home.tabBarItem.setTitleTextAttributes(fontAttributes, for: .normal)
+        home.tabBarItem.setTitleTextAttributes(fontAttributes, for: .selected)
         
-        childCoordinators = [homeCoordinator]
+        my.tabBarItem = UITabBarItem(title: "My", image: PresentationAsset.icoMyOff.image, tag: 0)
+        my.tabBarItem.selectedImage = PresentationAsset.icoMyOn.image
+        my.tabBarItem.setTitleTextAttributes(fontAttributes, for: .normal)
+        my.tabBarItem.setTitleTextAttributes(fontAttributes, for: .selected)
         
-        coordinator.viewControllers = [vc1]
+        childCoordinators = [homeCoordinator, myCoordinator]
+        
+        coordinator.tabBar.tintColor = .b2
+        coordinator.tabBar.unselectedItemTintColor = UIColor(hex: "#A4A6AA")
+        
+        coordinator.viewControllers = [home, my]
         coordinator.modalPresentationStyle = .fullScreen
-        coordinator.selectedIndex          = 1
+        coordinator.selectedIndex          = 0
         
         homeCoordinator.start()
+        myCoordinator.start()
     }
 }

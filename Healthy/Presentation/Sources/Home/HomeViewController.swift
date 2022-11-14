@@ -61,12 +61,11 @@ public class HomeViewController: UIViewController, CodeBaseUI {
         addComponents()
         setConstraints()
         bind()
-        
+        viewDidLoadAnimation()
     }
     
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        viewDidLoadAnimation()
     }
     
     public func addComponents() {
