@@ -27,11 +27,15 @@ public class FetchTodayWaterUsecase: FetchTodayWaterUsecaseProtocol {
                                                                                    isAchieve: false)})
     }
     
-    func getDate()-> Int {
+    func getDate()-> DateModel {
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyyMMdd"
-        let str = formatter.string(from: Date())
-        return Int(str) ?? 0
+        formatter.dateFormat = "yyyy"
+        let year = formatter.string(from: Date())
+        formatter.dateFormat = "MM"
+        let month = formatter.string(from: Date())
+        formatter.dateFormat = "dd"
+        let day = formatter.string(from: Date())
+        return DateModel(year: year, month: month, day: day)
     }
 }
 

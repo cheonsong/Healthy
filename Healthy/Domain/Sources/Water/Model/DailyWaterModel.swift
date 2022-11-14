@@ -9,20 +9,35 @@ import Foundation
 
 public enum DailyWaterQuery {
     case today
-    case month(Int)
+    case month(Month)
 }
 
 public struct DailyWaterModel {
     
-    public var date: Int
+    public var date: DateModel
     public var goal: Int
     public var progress: Int
     public var isAchieve: Bool
     
-    public init(date: Int, goal: Int, progress: Int, isAchieve: Bool) {
+    public init(date: DateModel, goal: Int, progress: Int, isAchieve: Bool) {
         self.date = date
         self.goal = goal
         self.progress = progress
         self.isAchieve = isAchieve
     }
+}
+
+public enum Month: String {
+    case january = "01"
+    case feburary = "02"
+    case march = "03"
+    case april = "04"
+    case may = "05"
+    case june = "06"
+    case july = "07"
+    case august = "08"
+    case september = "09"
+    case october = "10"
+    case november = "11"
+    case december = "12"
 }
