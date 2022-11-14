@@ -46,9 +46,9 @@ extension WaterTransition: UIViewControllerAnimatedTransitioning {
         containerView.addSubview(toView)
         containerView.bringSubviewToFront(toView)
         
-        let frame = CGRect(x: Const.padding, y: fromVC.welcomeLabel.frame.maxY + 10 + fromVC.waterTitle.frame.height + 10 - fromVC.scrollView.contentOffset.y, width: Const.fullWidth, height: Const.mainViewHeight)
+        let frame = CGRect(x: Const.padding, y: fromVC.welcomeLabel.frame.maxY + 10 + fromVC.waterTitle.frame.height + 10 - fromVC.scrollView.contentOffset.y + 30, width: Const.fullWidth, height: Const.mainViewHeight)
         toView.frame = frame
-        toView.backgroundColor = .b2
+        toView.backgroundColor = .white
         toView.layer.cornerRadius = 10
         
         let views = [toVC.mainLabel, toVC.drinkButton, toVC.navigation, toVC.calendar, toVC.waterBaseView, toVC.ballonIcon]
@@ -105,10 +105,10 @@ extension WaterTransition: UIViewControllerAnimatedTransitioning {
                     withRelativeStartTime: 0,
                     relativeDuration: 1,
                     animations: {
-                        fromView.backgroundColor = .b2
+                        fromView.backgroundColor = .white
                         fromView.roundCorners(.allCorners, radius: 10)
                         fromView.subviews.forEach { $0.removeFromSuperview() }
-                        let frame = CGRect(x: Const.padding, y: toVC.welcomeLabel.frame.maxY + 10 + toVC.waterTitle.frame.height + 10 - toVC.scrollView.contentOffset.y, width: Const.fullWidth, height: Const.mainViewHeight)
+                        let frame = CGRect(x: Const.padding, y: toVC.welcomeLabel.frame.maxY + 10 + toVC.waterTitle.frame.height + 10 - toVC.scrollView.contentOffset.y + 30, width: Const.fullWidth, height: Const.mainViewHeight)
                         fromView.frame = frame
                     }
                 )

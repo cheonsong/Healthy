@@ -18,16 +18,16 @@ public class MainInfoView: UIView {
     var disposeBag = DisposeBag()
     let innerShadowLayer = CAShapeLayer()
     
-    lazy var todayTitleLabel = LabelBuilder("음수량").font(.regular16).textColor(.white).view
+    lazy var todayTitleLabel = LabelBuilder("음수량").font(.regular16).textColor(.black).view
     lazy var todayContentslabel = LabelBuilder("1.3 / 2 " + self.type.unit)
-        .textColor(.white)
+        .textColor(.black)
         .font(.bold25)
         .attributedTextChangeFont("1.3 / 2 " + self.type.unit, .bold10, [self.type.unit])
         .view
     
-    lazy var avgTitleLabel = LabelBuilder("이번 달 평균").font(.regular16).textColor(.white).view
+    lazy var avgTitleLabel = LabelBuilder("이번 달 평균").font(.regular16).textColor(.black).view
     lazy var avgContentslabel = LabelBuilder("2.6 " + self.type.unit)
-        .textColor(.white)
+        .textColor(.black)
         .font(.bold25)
         .attributedTextChangeFont("2.6 " + self.type.unit, .bold10, [self.type.unit])
         .view
@@ -52,7 +52,7 @@ public class MainInfoView: UIView {
     }
     
     func addComponents() {
-        self.backgroundColor = type.mainColor
+        self.backgroundColor = .white
         self.layer.masksToBounds = true
         self.layer.cornerRadius = 10
         [todayTitleLabel, avgTitleLabel, todayContentslabel, avgContentslabel, circleView, icon].forEach { addSubview($0) }

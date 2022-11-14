@@ -58,27 +58,13 @@ public class MainView: UIView {
     
     public override func draw(_ rect: CGRect) {
         super.draw(rect)
-        
-        drawDropShadow()
     }
     
     override public func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
-        isSelected.accept(true)
     }
     
     override public func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
-        isSelected.accept(false)
-    }
-    
-    /// Draw Drop Shadow When View Touched
-    func drawDropShadow() {
-        self.layer.applySketchShadow(color: .black, alpha: 0.25, x: 0, y: 0, blur: 10, spread: 1, radius: 10)
-    }
-    
-    /// Draw Drop Shadow When View Touches Ended
-    func hideDropShadow() {
-        self.layer.applySketchShadow(color: .black, alpha: 0, x: 0, y: 0, blur: 10, spread: 1, radius: 10)
     }
 }

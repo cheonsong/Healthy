@@ -17,16 +17,7 @@ public enum Health: String {
     var text: String { return self.rawValue.uppercased() }
     
     var mainColor: UIColor {
-        switch self {
-        case .water:
-            return .b2
-        case .steps:
-            return .r2
-        case .calolies:
-            return .g2
-        case .sleep:
-            return .y2
-        }
+        return .b2
     }
     
     var unit: String {
@@ -43,29 +34,11 @@ public enum Health: String {
     }
     
     var lightColor: UIColor {
-        switch self {
-        case .water:
-            return .b3
-        case .steps:
-            return .r3
-        case .calolies:
-            return .g3
-        case .sleep:
-            return .y3
-        }
+        return .b3
     }
     
     var deepColor: UIColor {
-        switch self {
-        case .water:
-            return .b1
-        case .steps:
-            return .r1
-        case .calolies:
-            return .g1
-        case .sleep:
-            return .y1
-        }
+        return .b1
     }
     
     var icon: UIImage {

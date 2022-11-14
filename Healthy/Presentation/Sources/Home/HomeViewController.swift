@@ -31,7 +31,7 @@ public class HomeViewController: UIViewController, CodeBaseUI {
         .sizeToFit()
         .view
     
-    let scrollView    = ScrollViewBuilder().backgrouondColor(.clear).showsVerticalScrollIndicator(false).view
+    let scrollView    = ScrollViewBuilder().backgrouondColor(.b3).showsVerticalScrollIndicator(false).view
     let stackView     = StackViewBuilder().axis(.vertical).spacing(30).view
     
     let waterContainer    = ViewBuilder().view
@@ -77,12 +77,16 @@ public class HomeViewController: UIViewController, CodeBaseUI {
         [caloriesTitle, caloriesView].forEach { caloriesContainer.addSubview($0) }
         [sleepTitle, sleepView].forEach { sleepContainer.addSubview($0) }
         
-        [waterContainer, stepsContainer, caloriesContainer, sleepContainer, ViewBuilder().backgrouondColor(.clear).view].forEach { stackView.addArrangedSubview($0) }
+        [ViewBuilder().backgrouondColor(.clear).view,
+         waterContainer, stepsContainer, caloriesContainer, sleepContainer,
+         ViewBuilder().backgrouondColor(.clear).view].forEach { stackView.addArrangedSubview($0) }
+        
+        scrollView.roundCorners([.topLeft, .topRight], radius: 20)
     }
     
     public func setConstraints() {
         dateLabel.snp.makeConstraints {
-            $0.top.equalTo(self.view.safeAreaLayoutGuide).inset(40)
+            $0.top.equalTo(self.view.safeAreaLayoutGuide).inset(24)
             $0.left.equalToSuperview().inset(Const.padding)
         }
         
@@ -94,7 +98,7 @@ public class HomeViewController: UIViewController, CodeBaseUI {
         scrollView.snp.makeConstraints {
             $0.width.equalToSuperview()
             $0.bottom.equalTo(view.safeAreaLayoutGuide)
-            $0.top.equalTo(welcomeLabel.snp.bottom).offset(10)
+            $0.top.equalTo(welcomeLabel.snp.bottom).offset(16)
             $0.centerX.equalToSuperview()
         }
         
@@ -161,11 +165,11 @@ public class HomeViewController: UIViewController, CodeBaseUI {
     }
     
     private func viewDidLoadAnimation() {
-        self.stepsContainer.transform = CGAffineTransform(translationX: 0, y: -200)
+        self.stepsContainer.transform = CGAffineTransform(translationX: 0, y: -186)
         self.stepsContainer.alpha = 0
-        self.caloriesContainer.transform = CGAffineTransform(translationX: 0, y: -200)
+        self.caloriesContainer.transform = CGAffineTransform(translationX: 0, y: -186)
         self.caloriesContainer.alpha = 0
-        self.sleepContainer.transform = CGAffineTransform(translationX: 0, y: -200)
+        self.sleepContainer.transform = CGAffineTransform(translationX: 0, y: -186)
         self.sleepContainer.alpha = 0
         
         UIView.animate(withDuration: 0.3, animations: {
