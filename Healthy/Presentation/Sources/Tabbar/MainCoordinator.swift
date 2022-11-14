@@ -19,19 +19,22 @@ public protocol MainCoordinatorDependencies {
     func makeMyPageCoordinator(navigationController: UINavigationController)-> MyPageCoordinator
 }
 
-public class MainCoordinator: CoordinatorType {
+public class MainCoordinator: NSObject, CoordinatorType {
     public var childCoordinators: [CoordinatorType] = []
     
-    public var coordinator : CustomTabBarController
+    public var navigationController : UINavigationController
+    private var transition: UIViewControllerAnimatedTransitioning?
     
     private let dependencies: MainCoordinatorDependencies
     
     var disposeBag: DisposeBag = .init()
     
-    public init(coordinator: CustomTabBarController,
+    public init(navigationController: UINavigationController,
                 dependencies: MainCoordinatorDependencies) {
-        self.coordinator = coordinator
+        self.navigationController = navigationController
         self.dependencies = dependencies
+        super.init()
+        self.navigationController.delegate = self
     }
     
     public func start(){
@@ -53,6 +56,8 @@ public class MainCoordinator: CoordinatorType {
     
     func serviceInit() {
         // 인디케이터 끝나고
+        let tabbarController = CustomTabBarController()
+        
         let home = getNavigation()
         let homeCoordinator = dependencies.makeHomeCoordinator(navigationController: home)
         
@@ -73,14 +78,25 @@ public class MainCoordinator: CoordinatorType {
         
         childCoordinators = [homeCoordinator, myCoordinator]
         
-        coordinator.tabBar.tintColor = .b2
-        coordinator.tabBar.unselectedItemTintColor = UIColor(hex: "#A4A6AA")
+        tabbarController.tabBar.tintColor = .b2
+        tabbarController.tabBar.unselectedItemTintColor = UIColor(hex: "#A4A6AA")
         
-        coordinator.viewControllers = [home, my]
-        coordinator.modalPresentationStyle = .fullScreen
-        coordinator.selectedIndex          = 0
+        tabbarController.viewControllers = [home, my]
+        tabbarController.modalPresentationStyle = .fullScreen
+        tabbarController.selectedIndex          = 0
         
         homeCoordinator.start()
         myCoordinator.start()
+        
+        self.transition =  FadeAnimator(animationDuration: 0.5, isPresenting: false)
+        navigationController.setViewControllers([tabbarController], animated: true)
+        self.transition = nil
     }
 }
+
+extension MainCoordinator: UINavigationControllerDelegate {
+    public func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationController.Operation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return self.transition
+    }
+}
+

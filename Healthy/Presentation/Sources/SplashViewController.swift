@@ -10,7 +10,7 @@ import UIKit
 import Util
 import SnapKit
 
-public class SplashViewController: UIViewController, CodeBaseUI {
+public class SplashViewController: UIViewController, CodeBaseUI, UIViewControllerTransitioningDelegate {
     
     let image = ImageViewBuilder(PresentationAsset.healty.image)
         .view
