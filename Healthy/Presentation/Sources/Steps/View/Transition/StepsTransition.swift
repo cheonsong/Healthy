@@ -46,9 +46,9 @@ extension StepsTransition: UIViewControllerAnimatedTransitioning {
         containerView.addSubview(toView)
         containerView.bringSubviewToFront(toView)
         
-        let frame = CGRect(x: Const.padding, y: fromVC.welcomeLabel.frame.maxY + 10 + fromVC.stepView.frame.minY - fromVC.scrollView.contentOffset.y, width: Const.fullWidth, height: Const.mainViewHeight)
+        let frame = CGRect(x: Const.padding, y: fromVC.welcomeLabel.frame.maxY + 16 + fromVC.stepsContainer.frame.minY + fromVC.stepView.frame.minY - fromVC.scrollView.contentOffset.y + 30, width: Const.fullWidth, height: Const.mainViewHeight)
         toView.frame = frame
-        toView.backgroundColor = .r2
+        toView.backgroundColor = .white
         toView.layer.cornerRadius = 10
         
         let views = [toVC.mainLabel, toVC.navigation, toVC.calendar, toVC.circleView, toVC.countLabel, toVC.consumedLabel]
@@ -105,10 +105,10 @@ extension StepsTransition: UIViewControllerAnimatedTransitioning {
                     withRelativeStartTime: 0,
                     relativeDuration: 1,
                     animations: {
-                        fromView.backgroundColor = .r2
+                        fromView.backgroundColor = .white
                         fromView.roundCorners(.allCorners, radius: 10)
                         fromView.subviews.forEach { $0.removeFromSuperview() }
-                        let frame = CGRect(x: Const.padding, y: toVC.welcomeLabel.frame.maxY + 10 + toVC.stepView.frame.minY - toVC.scrollView.contentOffset.y, width: Const.fullWidth, height: Const.mainViewHeight)
+                        let frame = CGRect(x: Const.padding, y: toVC.welcomeLabel.frame.maxY + 16 + toVC.stepsContainer.frame.minY + toVC.stepView.frame.minY - toVC.scrollView.contentOffset.y + 30, width: Const.fullWidth, height: Const.mainViewHeight)
                         fromView.frame = frame
                     }
                 )
