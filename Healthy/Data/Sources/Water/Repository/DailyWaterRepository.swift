@@ -40,8 +40,8 @@ extension DailyWaterQuery {
         case .today:
             let today = getDate()
             return { $0.date.year == today.year && $0.date.month == today.month && $0.date.day == today.day}
-        case .month(let date):
-            return { $0.date.month == date.rawValue }
+        case .month(let year, let month):
+            return { $0.date.month == month.rawValue && $0.date.year == year }
         }
     }
     

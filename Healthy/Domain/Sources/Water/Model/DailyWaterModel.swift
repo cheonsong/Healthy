@@ -9,7 +9,7 @@ import Foundation
 
 public enum DailyWaterQuery {
     case today
-    case month(Month)
+    case month(String, Month)
 }
 
 public struct DailyWaterModel {
