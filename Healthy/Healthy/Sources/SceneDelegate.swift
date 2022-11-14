@@ -24,10 +24,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: scene)
         
-        let rootVC = UINavigationController()
+        let splash = SplashViewController()
+        let vc = CustomTabBarController()
         
-        appCoordinator = AppCordinator(window: window, navigationController: rootVC)
+        window.rootViewController = splash
+        
+        appCoordinator = AppCordinator(spalsh: splash, tabBarController: vc, appDIContainer: appDIContainer)
         appCoordinator?.start()
+        
+        self.window = window
+        window.makeKeyAndVisible()
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {

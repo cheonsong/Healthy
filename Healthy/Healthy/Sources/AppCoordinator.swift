@@ -9,28 +9,25 @@ import Foundation
 import UIKit
 import Presentation
 
-class AppCordinator: NSObject {
-    private let appDIContainer: AppDIContainer = .init()
+class AppCordinator {
+    var splashVC: SplashViewController
+    var tabBarController: CustomTabBarController
+    private let appDIContainer: AppDIContainer
     
-    var window: UIWindow
-    var navigation: UINavigationController
-    
-    init(window : UIWindow, navigationController: UINavigationController) {
-        self.window = window
-        self.navigation = navigationController
-        super.init()
+    init(spalsh: SplashViewController, tabBarController: CustomTabBarController, appDIContainer: AppDIContainer) {
+        self.splashVC = spalsh
+        self.tabBarController = tabBarController
+        self.appDIContainer = appDIContainer
     }
     
     func start() {
-        let splashVC = SplashViewController()
-        navigation.pushViewController(splashVC, animated: false)
-        window.rootViewController = navigation
-        window.makeKeyAndVisible()
-        
         DispatchQueue.main.asyncAfter(deadline: .now()+3, execute: {
             let mainDIContainer = self.appDIContainer.makeMainDIContainer()
-            let mainCoordinator = mainDIContainer.makeMainCoordinator(navigationController: self.navigation)
+            let mainCoordinator = mainDIContainer.makeMainCoordinator(tabBarController: self.tabBarController)
             mainCoordinator.start()
+            self.splashVC.dismiss(animated: false, completion: {
+                self.splashVC.present(self.tabBarController, animated: false)
+            })
         })
     }
 }
