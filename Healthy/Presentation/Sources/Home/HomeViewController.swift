@@ -19,17 +19,10 @@ public class HomeViewController: UIViewController, CodeBaseUI {
     
     var disposeBag = DisposeBag()
     
-    let dateLabel = LabelBuilder("2022년 11월 30일")
-        .font(.regular16)
-        .textColor(.black)
-        .sizeToFit()
-        .view
-    
-    let welcomeLabel = LabelBuilder("안녕하세요, 천송님")
-        .font(.bold25)
-        .textColor(.black)
-        .sizeToFit()
-        .view
+    let topContainer = ViewBuilder().backgrouondColor(.white).view
+    let dateLabel    = LabelBuilder("2022년 11월 30일").font(.regular16).textColor(.black).sizeToFit().view
+    let welcomeLabel = LabelBuilder("안녕하세요, 천송님").font(.bold25).textColor(.black).sizeToFit().view
+    let icoCalender  = ImageViewBuilder(PresentationAsset.icoCalender.image).view
     
     let scrollView    = ScrollViewBuilder().backgrouondColor(.b3).showsVerticalScrollIndicator(false).view
     let stackView     = StackViewBuilder().axis(.vertical).spacing(30).view
@@ -69,7 +62,8 @@ public class HomeViewController: UIViewController, CodeBaseUI {
     }
     
     public func addComponents() {
-        [dateLabel, welcomeLabel, scrollView].forEach { view.addSubview($0) }
+        [scrollView, topContainer].forEach { view.addSubview($0) }
+        [dateLabel, welcomeLabel, icoCalender].forEach { topContainer.addSubview($0) }
         scrollView.addSubview(stackView)
         [waterTitle, waterView].forEach { waterContainer.addSubview($0) }
         [stepsTitle, stepView].forEach { stepsContainer.addSubview($0) }
@@ -80,10 +74,14 @@ public class HomeViewController: UIViewController, CodeBaseUI {
          waterContainer, stepsContainer, caloriesContainer, sleepContainer,
          ViewBuilder().backgrouondColor(.clear).view].forEach { stackView.addArrangedSubview($0) }
         
-        scrollView.roundCorners([.topLeft, .topRight], radius: 20)
+        topContainer.roundCorners([.bottomLeft, .bottomRight], radius: 20)
     }
     
     public func setConstraints() {
+        topContainer.snp.makeConstraints {
+            $0.top.left.right.equalToSuperview()
+        }
+        
         dateLabel.snp.makeConstraints {
             $0.top.equalToSuperview().inset(24 + Const.safeAreaTop)
             $0.left.equalToSuperview().inset(Const.padding)
@@ -92,12 +90,17 @@ public class HomeViewController: UIViewController, CodeBaseUI {
         welcomeLabel.snp.makeConstraints {
             $0.top.equalTo(dateLabel.snp.bottom).offset(5)
             $0.left.equalToSuperview().inset(Const.padding)
+            $0.bottom.equalToSuperview().inset(32)
+        }
+        
+        icoCalender.snp.makeConstraints {
+            $0.right.bottom.equalToSuperview().inset(32)
         }
         
         scrollView.snp.makeConstraints {
             $0.width.equalToSuperview()
             $0.bottom.equalTo(view.safeAreaLayoutGuide)
-            $0.top.equalTo(welcomeLabel.snp.bottom).offset(16)
+            $0.top.equalTo(topContainer.snp.bottom).offset(-20)
             $0.centerX.equalToSuperview()
         }
         
