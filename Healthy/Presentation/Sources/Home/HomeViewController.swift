@@ -23,6 +23,7 @@ public class HomeViewController: UIViewController, CodeBaseUI {
     let dateLabel    = LabelBuilder("2022년 11월 30일").font(.regular16).textColor(.black).sizeToFit().view
     let welcomeLabel = LabelBuilder("안녕하세요, 천송님").font(.bold25).textColor(.black).sizeToFit().view
     let icoCalender  = ImageViewBuilder(PresentationAsset.icoCalender.image).view
+    let calenderView = ViewBuilder().backgrouondColor(.black).cornerRadius(10).alpha(0).view
     
     let scrollView    = ScrollViewBuilder().backgrouondColor(.b3).showsVerticalScrollIndicator(false).view
     let stackView     = StackViewBuilder().axis(.vertical).spacing(30).view
@@ -63,7 +64,7 @@ public class HomeViewController: UIViewController, CodeBaseUI {
     
     public func addComponents() {
         [scrollView, topContainer].forEach { view.addSubview($0) }
-        [dateLabel, welcomeLabel, icoCalender].forEach { topContainer.addSubview($0) }
+        [dateLabel, welcomeLabel, icoCalender, calenderView].forEach { topContainer.addSubview($0) }
         scrollView.addSubview(stackView)
         [waterTitle, waterView].forEach { waterContainer.addSubview($0) }
         [stepsTitle, stepView].forEach { stepsContainer.addSubview($0) }
@@ -80,6 +81,7 @@ public class HomeViewController: UIViewController, CodeBaseUI {
     public func setConstraints() {
         topContainer.snp.makeConstraints {
             $0.top.left.right.equalToSuperview()
+            $0.height.equalTo(112 + Const.safeAreaTop)
         }
         
         dateLabel.snp.makeConstraints {
@@ -90,17 +92,24 @@ public class HomeViewController: UIViewController, CodeBaseUI {
         welcomeLabel.snp.makeConstraints {
             $0.top.equalTo(dateLabel.snp.bottom).offset(5)
             $0.left.equalToSuperview().inset(Const.padding)
-            $0.bottom.equalToSuperview().inset(32)
         }
         
         icoCalender.snp.makeConstraints {
-            $0.right.bottom.equalToSuperview().inset(32)
+            $0.right.equalToSuperview().inset(32)
+            $0.bottom.equalTo(welcomeLabel)
+        }
+        
+        calenderView.snp.makeConstraints {
+            $0.width.equalTo(Const.fullWidth)
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(welcomeLabel.snp.bottom).offset(30)
+            $0.height.equalTo(300)
         }
         
         scrollView.snp.makeConstraints {
             $0.width.equalToSuperview()
             $0.bottom.equalTo(view.safeAreaLayoutGuide)
-            $0.top.equalTo(topContainer.snp.bottom).offset(-20)
+            $0.top.equalToSuperview().inset(-20 + 112 + Const.safeAreaTop)
             $0.centerX.equalToSuperview()
         }
         
@@ -164,6 +173,14 @@ public class HomeViewController: UIViewController, CodeBaseUI {
 //                self?.coordinator?.presentStepsViewController()
 //            })
 //            .disposed(by: disposeBag)
+        
+        icoCalender.rx.tapGesture()
+            .when(.recognized)
+            .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] _ in
+                self?.topContainerAnimation(isOpening: self?.calenderView.alpha == 0)
+            })
+            .disposed(by: disposeBag)
     }
     
     private func viewDidLoadAnimation() {
@@ -188,5 +205,26 @@ public class HomeViewController: UIViewController, CodeBaseUI {
                 })
             })
         })
+    }
+    
+    private func topContainerAnimation(isOpening: Bool) {
+        if isOpening {
+            UIView.animate(withDuration: 0.5, animations: {
+                self.calenderView.alpha = 1
+                self.topContainer.snp.updateConstraints {
+                    $0.height.equalTo(112 + Const.safeAreaTop + 400)
+                }
+                self.view.layoutIfNeeded()
+            })
+        } else {
+            UIView.animate(withDuration: 0.5, animations: {
+                self.calenderView.alpha = 0
+                self.topContainer.snp.updateConstraints {
+                    $0.height.equalTo(112 + Const.safeAreaTop)
+                }
+                self.view.layoutIfNeeded()
+            })
+        }
+        
     }
 }
