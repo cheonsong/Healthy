@@ -14,6 +14,8 @@
     - 빌더패턴을 이용한 UI빌더 개발
 - Tuist를 활용해 프로젝트 관리 및 모듈화 하기
 - GitHub Action / Fastlane을 통한 CI/CD 구축하기
+- 위젯 만들기
+- 스크립트로 로컬라이징 자동화하기
 
 ## 관련 링크
 [Figma](https://www.figma.com/file/iknf6FjR7hxmCoM2jYFvBk/Health-Care?node-id=0%3A1)
