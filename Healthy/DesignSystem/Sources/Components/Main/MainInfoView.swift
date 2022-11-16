@@ -128,7 +128,7 @@ public class MainInfoView: UIView {
         path.addArc(withCenter: center,
                     radius: 100 / 2,
                     startAngle: (-(.pi) / 2),
-                    endAngle: value * .pi / 2,
+                    endAngle: (-(.pi) / 2) + (value * .pi * 2),
                     clockwise: true)
         
         let layer = CAShapeLayer()
