@@ -79,8 +79,11 @@ for code in languageList:
     # CSV파일에서 한줄씩 읽어와 Strings파일 작성
     for line in reader:
         if line[0] != "" :
-            stringFile.write("//" + line[0] + "\n")
-        stringFile.write("\"" + line[1] + "\" = \"" + line[2+index] + "\";\n" )
+            if line[0] == "Description" : continue
+            stringFile.write("\n//" + line[0] + "\n")
+        if line[1] != "" :
+            if line[1] == "Keys" : continue
+            stringFile.write("\"" + line[1] + "\" = \"" + line[2+index] + "\";\n" )
     # 파일 닫기
     csvFile.close()
     stringFile.close()
