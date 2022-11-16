@@ -1,0 +1,3 @@
+Description,Keys,영어 (en),한국어 (ko),일본어 (ja)
+,HOME_WELCOME_LABEL,"Hello, %@!","안녕하세요, %@님",
+,HOME_DATE_LABEL,"%@, %@ %@",%@년 %@월 %@일,

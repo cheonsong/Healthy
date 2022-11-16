@@ -9,4 +9,5 @@ let project = Project.app(name: "Healthy",
                             Module.designSystem,
                             Module.util
                           ].map(\.project),
-                          resources: .default)
+                          resources: .default,
+                          scripts: [.localize])

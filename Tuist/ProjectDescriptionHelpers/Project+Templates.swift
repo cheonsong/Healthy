@@ -14,14 +14,16 @@ extension Project {
     public static func app(
         name: String,
         dependencies: [TargetDependency] = [],
-        resources: ProjectDescription.ResourceFileElements? = nil
+        resources: ProjectDescription.ResourceFileElements? = nil,
+        scripts: [TargetScript] = []
     ) -> Project {
         return self.project(
             name: name,
             product: .app,
             bundleID: bundleID + "\(name)",
             dependencies: dependencies,
-            resources: resources
+            resources: resources,
+            scripts: scripts
         )
     }
 }
@@ -46,7 +48,8 @@ extension Project {
         bundleID: String,
         schemes: [Scheme] = [],
         dependencies: [TargetDependency] = [],
-        resources: ProjectDescription.ResourceFileElements? = nil
+        resources: ProjectDescription.ResourceFileElements? = nil,
+        scripts: [TargetScript] = []
     ) -> Project {
         return Project(
             name: name,
@@ -61,6 +64,7 @@ extension Project {
                     infoPlist: .file(path: .relativeToRoot("Supporting Files/Info.plist")),
                     sources: ["Sources/**"],
                     resources: resources,
+                    scripts: scripts,
                     dependencies: dependencies
                 ),
                 Target(
