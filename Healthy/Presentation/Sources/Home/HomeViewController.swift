@@ -60,6 +60,12 @@ public class HomeViewController: UIViewController, CodeBaseUI {
     
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        viewWillAppearAction()
+    }
+    
+    public override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        viewDidAppearAction()
     }
     
     public func addComponents() {
@@ -181,6 +187,29 @@ public class HomeViewController: UIViewController, CodeBaseUI {
                 self?.topContainerAnimation(isOpening: self?.calenderView.alpha == 0)
             })
             .disposed(by: disposeBag)
+        
+        // AppState
+        Observable.combineLatest(App.state.waterToday, App.state.waterGoal)
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] today, goal in
+                var text = ""
+                if Int(today * 10) % 10 == 0 {
+                    text = "\(Int(today))"
+                } else {
+                    text = "\(today)"
+                }
+                
+                if Int(goal * 10) % 10 == 0 {
+                    text += " / \(goal) L"
+                } else {
+                    text += " / \(goal) L"
+                }
+                
+                self?.waterView.infoView.todayContentslabel.text = text
+                self?.waterView.infoView.todayContentslabel.textFontChange(text: text, font: .bold10, range: ["L"])
+                self?.waterView.infoView.drawCircle(value: CGFloat(today / goal))
+            })
+            .disposed(by: disposeBag)
     }
     
     private func viewDidLoadAnimation() {
@@ -226,5 +255,28 @@ public class HomeViewController: UIViewController, CodeBaseUI {
             })
         }
         
+    }
+    
+    private func viewWillAppearAction() {
+//        var text = ""
+//        if Int(App.state.waterToday.value * 10) % 10 == 0 {
+//            text = "\(Int(App.state.waterToday.value))"
+//        } else {
+//            text = "\(App.state.waterToday.value)"
+//        }
+//
+//        if Int(App.state.waterGoal.value * 10) % 10 == 0 {
+//            text += " / \(Int(App.state.waterGoal.value)) L"
+//        } else {
+//            text += " / \(App.state.waterGoal.value) L"
+//        }
+//
+//        waterView.infoView.todayContentslabel.text = text
+//        waterView.infoView.todayContentslabel.textFontChange(text: text, font: .bold10, range: ["L"])
+//        waterView.infoView.drawCircle(value: CGFloat(App.state.waterToday.value / App.state.waterGoal.value))
+    }
+    
+    private func viewDidAppearAction() {
+        waterView.infoView.drawCircle(value: CGFloat(App.state.waterToday.value / App.state.waterGoal.value))
     }
 }

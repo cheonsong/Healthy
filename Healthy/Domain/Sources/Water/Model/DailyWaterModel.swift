@@ -15,11 +15,11 @@ public enum DailyWaterQuery {
 public struct DailyWaterModel {
     
     public var date: DateModel
-    public var goal: Int
-    public var progress: Int
+    public var goal: Float
+    public var progress: Float
     public var isAchieve: Bool
     
-    public init(date: DateModel, goal: Int, progress: Int, isAchieve: Bool) {
+    public init(date: DateModel, goal: Float, progress: Float, isAchieve: Bool) {
         self.date = date
         self.goal = goal
         self.progress = progress

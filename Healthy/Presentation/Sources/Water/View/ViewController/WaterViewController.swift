@@ -15,12 +15,11 @@ public final class WaterViewController: UIViewController, CodeBaseUI {
     
     var disposeBag = DisposeBag()
     
-    let mainLabel = LabelBuilder("WATER_MAIN_LABEL".localized([750]))
+    let mainLabel = LabelBuilder()
         .numberOfLines(0)
         .textColor(.black)
         .font(.bold25)
         .textAlignment(.center)
-        .attributedTextChangeColor("WATER_MAIN_LABEL".localized([750]), .b2, ["750 ml"])
         .view
     
     let waterBaseView = ViewBuilder()
@@ -73,7 +72,7 @@ public final class WaterViewController: UIViewController, CodeBaseUI {
     
     public override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        updateValue(1)
+        updateValue(CGFloat(App.state.waterToday.value / App.state.waterGoal.value))
     }
     
     public func addComponents() {
@@ -169,6 +168,28 @@ public final class WaterViewController: UIViewController, CodeBaseUI {
                 }
             })
             .disposed(by: disposeBag)
+        
+        // AppState
+
+        App.state.waterToday
+            .map({Int($0 * 1000)})
+            .subscribe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] value in
+                let text = "\(value) ml"
+                self?.mainLabel.text = "WATER_MAIN_LABEL".localized([text])
+                self?.mainLabel.textColorChange(text: "WATER_MAIN_LABEL".localized([text]), color: .b2, range: [text])
+            })
+            .disposed(by: disposeBag)
+        
+        Observable.combineLatest(App.state.waterToday, App.state.waterGoal, resultSelector: {
+            $0/$1
+        })
+        .skip(1)
+        .subscribe(on: MainScheduler.instance)
+        .subscribe(onNext: { [weak self] value in
+            self?.updateValue(CGFloat(value))
+        })
+        .disposed(by: disposeBag)
     }
     
     func updateValue(_ value: CGFloat) {
@@ -185,7 +206,7 @@ public final class WaterViewController: UIViewController, CodeBaseUI {
     }
     
     func updateValueAnimation(value: CGFloat) {
-        let max = value * 100
+        let max = CGFloat(Int(value * 100))
         updateLabel(value: 0, max: max)
     }
     

@@ -10,11 +10,11 @@ import RealmSwift
 
 public class DailyWaterEntity: Object {
     @Persisted public var date: DateEntity
-    @Persisted public var goal: Int
-    @Persisted public var progress: Int
+    @Persisted public var goal: Float
+    @Persisted public var progress: Float
     @Persisted public var isAchieve: Bool
     
-    public init(date: DateEntity, goal: Int, progress: Int, isAchieve: Bool) {
+    public init(date: DateEntity, goal: Float, progress: Float, isAchieve: Bool) {
         super.init()
         self.date = date
         self.goal = goal

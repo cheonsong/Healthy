@@ -1,4 +1,42 @@
 //Description
 "Keys" = "일본어 (ja)";
+//HOME
 "HOME_WELCOME_LABEL" = "";
 "HOME_DATE_LABEL" = "";
+"" = "";
+//DATE
+"1" = "";
+"2" = "";
+"3" = "";
+"4" = "";
+"5" = "";
+"6" = "";
+"7" = "";
+"8" = "";
+"9" = "";
+"10" = "";
+"11" = "";
+"12" = "";
+"" = "";
+//WATER
+"WATER_MAIN_LABEL" = "";
+"WATER_DRINK_BUTTON" = "";
+"WATER_DRINK_LABEL" = "";
+"WATER_DRINK_TEXTFORM_EX" = "";
+"WATER_SET_TITLE_LABEL" = "";
+"WATER_SET_A_CUP_TEXTFORM" = "";
+"WATER_SET_GOAL_TEXTFORM" = "";
+"" = "";
+"" = "";
+"" = "";
+"" = "";
+//COMMIT
+"COMMIT_DATE_LABEL" = "";
+"" = "";
+//COMMON
+"CANCEL_BUTTON" = "";
+"ADD_BUTTON" = "";
+"COMPLETE_BUTTON" = "";
+"OK_BUTTON" = "";
+"TODAY" = "";
+"MONTH_AVERAGE" = "";

@@ -10,9 +10,9 @@ import RealmSwift
 
 public class WaterEntity: Object {
     @Persisted var unit: String
-    @Persisted var goal: Int
+    @Persisted var goal: Float
     
-    public init(unit: String, goal: Int) {
+    public init(unit: String, goal: Float) {
         self.unit = unit
         self.goal = goal
     }

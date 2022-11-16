@@ -17,19 +17,19 @@ public class MainInfoView: UIView {
     var type: Health = .water
     var disposeBag = DisposeBag()
     let innerShadowLayer = CAShapeLayer()
-    
+    var circleLayer: CALayer? = nil
     lazy var todayTitleLabel = LabelBuilder("TODAY".localized).font(.regular16).textColor(.black).view
-    lazy var todayContentslabel = LabelBuilder("1.3 / 2 " + self.type.unit)
+    public lazy var todayContentslabel = LabelBuilder("0 " + self.type.unit)
         .textColor(.black)
         .font(.bold25)
-        .attributedTextChangeFont("1.3 / 2 " + self.type.unit, .bold10, [self.type.unit])
+        .attributedTextChangeFont("0 " + self.type.unit, .bold10, [self.type.unit])
         .view
     
     lazy var avgTitleLabel = LabelBuilder("MONTH_AVERAGE".localized).font(.regular16).textColor(.black).view
-    lazy var avgContentslabel = LabelBuilder("2.6 " + self.type.unit)
+    public lazy var avgContentslabel = LabelBuilder("0 " + self.type.unit)
         .textColor(.black)
         .font(.bold25)
-        .attributedTextChangeFont("2.6 " + self.type.unit, .bold10, [self.type.unit])
+        .attributedTextChangeFont("0 " + self.type.unit, .bold10, [self.type.unit])
         .view
     
     let circleView = ViewBuilder().backgrouondColor(.clear).view
@@ -98,7 +98,6 @@ public class MainInfoView: UIView {
     override public func draw(_ rect: CGRect) {
         super.draw(rect)
         drawBaseCircle()
-        drawCircle()
     }
     
     func drawBaseCircle() {
@@ -120,13 +119,16 @@ public class MainInfoView: UIView {
         circleView.layer.addSublayer(layer)
     }
     
-    func drawCircle() {
+    public func drawCircle(value: CGFloat) {
+        if let layer = circleLayer {
+            layer.removeFromSuperlayer()
+        }
         let center = CGPoint(x: 50, y: 50)
         let path = UIBezierPath()
         path.addArc(withCenter: center,
                     radius: 100 / 2,
                     startAngle: (-(.pi) / 2),
-                    endAngle: .pi,
+                    endAngle: value * .pi / 2,
                     clockwise: true)
         
         let layer = CAShapeLayer()
@@ -139,11 +141,12 @@ public class MainInfoView: UIView {
         let gaugeAnimation = CABasicAnimation(keyPath: "strokeEnd")
         gaugeAnimation.fromValue = 0
         gaugeAnimation.toValue = 1
-        gaugeAnimation.duration = 0.7
-        gaugeAnimation.timingFunction = CAMediaTimingFunction(controlPoints: 0.4, 0.02, 1, 0.05)
+        gaugeAnimation.duration = 0.3
+//        gaugeAnimation.timingFunction = CAMediaTimingFunction(controlPoints: 0.4, 0.02, 1, 0.05)
         layer.add(gaugeAnimation, forKey: "strokeEnd")
         
         circleView.layer.addSublayer(layer)
+        circleLayer = layer
     }
     
     /// Draw Inner Shadow When Selected

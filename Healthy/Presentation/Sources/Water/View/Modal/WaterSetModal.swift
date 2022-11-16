@@ -39,6 +39,8 @@ public class WaterSetModal: ModalView, CodeBaseUI {
     let ozButton = ButtonBuilder()
         .title("Oz")
         .font(.bold20)
+        .titleColor(.white)
+        .backgroundColor(.gr2)
         .borderColor(.gr2)
         .cornerRadius(10)
         .view
@@ -148,9 +150,9 @@ public class WaterSetModal: ModalView, CodeBaseUI {
                     self.lButton.layer.borderWidth = 1
                     self.lButton.backgroundColor = .white
                 case .l:
-                    self.ozButton.titleColor = .black
+                    self.ozButton.titleColor = .white
                     self.ozButton.layer.borderWidth = 1
-                    self.ozButton.backgroundColor = .white
+                    self.ozButton.backgroundColor = .gr2
                     self.lButton.titleColor = .white
                     self.lButton.layer.borderWidth = 0
                     self.lButton.backgroundColor = .b2
@@ -161,7 +163,7 @@ public class WaterSetModal: ModalView, CodeBaseUI {
         ozButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 guard let self = self else { return }
-                self.unitButtonObservable.accept(.oz)
+                // TODO: ToastMessage
             })
             .disposed(by: disposeBag)
         
