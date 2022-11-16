@@ -9,11 +9,11 @@ import Foundation
 import UIKit
 import Util
 
-public class CalendarView: UIView {
+public class CommitView: UIView {
     
     let weeks = ["일","월","화","수","목","금","토"]
     
-    let title = LabelBuilder("2021년 11월").font(.bold16).textColor(.black).view
+    let title = LabelBuilder("COMMIT_DATE_LABEL".localized([DateConverter.currentYear(), DateConverter.currentMonth().localized])).font(.bold16).textColor(.black).view
     
     let stackView = StackViewBuilder().axis(.horizontal).backgrouondColor(.clear).distributon(.fillEqually).view
     
@@ -64,11 +64,11 @@ public class CalendarView: UIView {
     
 }
 
-extension CalendarView: UICollectionViewDelegate {
+extension CommitView: UICollectionViewDelegate {
     
 }
 
-extension CalendarView: UICollectionViewDataSource {
+extension CommitView: UICollectionViewDataSource {
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 31
     }

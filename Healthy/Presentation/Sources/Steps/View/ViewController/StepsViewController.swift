@@ -34,7 +34,7 @@ public final class StepsViewController: UIViewController, CodeBaseUI {
     
     let navigation = Navigation()
     
-    let calendar = CalendarView()
+    let calendar = CommitView()
     
     public static func create()-> StepsViewController {
         let vc = StepsViewController()

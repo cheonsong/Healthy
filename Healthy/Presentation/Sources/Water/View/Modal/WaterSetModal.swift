@@ -22,12 +22,18 @@ public class WaterSetModal: ModalView, CodeBaseUI {
     
     var unitButtonObservable = BehaviorRelay<WaterUnit>(value: .l)
     
-    let title = LabelBuilder("현재 하루 목표\n2 L")
+    let title = LabelBuilder("WATER_SET_TITLE_LABEL".localized)
         .font(.bold20)
         .textColor(.black)
         .textAlignment(.center)
         .numberOfLines(0)
-        .attributedTextChangeColor("현재 하루 목표\n2 L", .b2, ["2 L"])
+        .view
+    
+    let goalLabel = LabelBuilder("2L")
+        .font(.bold20)
+        .textColor(.b2)
+        .textAlignment(.center)
+        .numberOfLines(0)
         .view
     
     let ozButton = ButtonBuilder()
@@ -44,13 +50,13 @@ public class WaterSetModal: ModalView, CodeBaseUI {
         .cornerRadius(10)
         .view
     
-    lazy var aCupTextForm = TextFieldBuilder(TextForm()).placeholder("물 한잔의 양을 입력하세요").delegate(self).view
+    lazy var aCupTextForm = TextFieldBuilder(TextForm()).placeholder("WATER_SET_A_CUP_TEXTFORM".localized).delegate(self).view
     
-    lazy var goalTextForm = TextFieldBuilder(TextForm()).placeholder("목표량을 입력하세요").delegate(self).view
+    lazy var goalTextForm = TextFieldBuilder(TextForm()).placeholder("WATER_SET_GOAL_TEXTFORM".localized).delegate(self).view
     
     let buttonStackView = StackViewBuilder().spacing(30).axis(.horizontal).backgrouondColor(.clear).distributon(.fillEqually).view
-    let completeButton = ButtonBuilder(MainButton(.water)).title("완료").view as! MainButton
-    let cancelButton = ButtonBuilder(MainButton(.water)).title("취소").view as! MainButton
+    let completeButton = ButtonBuilder(MainButton(.water)).title("COMPLETE_BUTTON".localized).view as! MainButton
+    let cancelButton = ButtonBuilder(MainButton(.water)).title("CANCEL_BUTTON".localized).view as! MainButton
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -65,7 +71,7 @@ public class WaterSetModal: ModalView, CodeBaseUI {
     }
     
     public func addComponents() {
-        [title, ozButton, lButton, aCupTextForm, goalTextForm, buttonStackView].forEach { modal.addSubview($0) }
+        [title, goalLabel, ozButton, lButton, aCupTextForm, goalTextForm, buttonStackView].forEach { modal.addSubview($0) }
         [cancelButton, completeButton].forEach { buttonStackView.addArrangedSubview($0) }
         
         completeButton.configure(false)
@@ -84,15 +90,20 @@ public class WaterSetModal: ModalView, CodeBaseUI {
             $0.centerX.equalToSuperview()
         }
         
+        goalLabel.snp.makeConstraints {
+            $0.top.equalTo(title.snp.bottom)
+            $0.centerX.equalToSuperview()
+        }
+        
         ozButton.snp.makeConstraints {
-            $0.top.equalTo(title.snp.bottom).offset(16)
+            $0.top.equalTo(goalLabel.snp.bottom).offset(16)
             $0.left.equalToSuperview().inset(Const.padding)
             $0.height.equalTo(39)
             $0.width.equalTo(cancelButton)
         }
         
         lButton.snp.makeConstraints {
-            $0.top.equalTo(title.snp.bottom).offset(16)
+            $0.top.equalTo(goalLabel.snp.bottom).offset(16)
             $0.right.equalToSuperview().inset(Const.padding)
             $0.height.equalTo(39)
             $0.width.equalTo(cancelButton)

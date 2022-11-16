@@ -21,13 +21,13 @@ public class WaterAddModal: ModalView, CodeBaseUI {
     let minusButton = ButtonBuilder(IcoButton(type: .water, icon: .minus)).view as! IcoButton
     
     let buttonStackView = StackViewBuilder().spacing(30).axis(.horizontal).backgrouondColor(.clear).distributon(.fillEqually).view
-    let addButton = ButtonBuilder(MainButton(.water)).title("추가하기").view as! MainButton
-    let cancelButton = ButtonBuilder(MainButton(.water)).title("취소").view as! MainButton
+    let addButton = ButtonBuilder(MainButton(.water)).title("ADD_BUTTON".localized).view as! MainButton
+    let cancelButton = ButtonBuilder(MainButton(.water)).title("CANCEL_BUTTON".localized).view as! MainButton
     
     let aCupContainer = ViewBuilder().view
-    let aCupOfWaterLabel = LabelBuilder("물 한잔").textColor(.black).font(.bold16).view
+    let aCupOfWaterLabel = LabelBuilder("WATER_DRINK_LABEL".localized).textColor(.black).font(.bold16).view
     let aCupUnitLabel = LabelBuilder("ml").textColor(.black).font(.bold16).view
-    lazy var aCupTextForm = TextFieldBuilder(TextForm()).placeholder("한 컵").font(.bold16).delegate(self).view
+    lazy var aCupTextForm = TextFieldBuilder(TextForm()).placeholder("WATER_DRINK_TEXTFORM_EX".localized).font(.bold16).delegate(self).view
     
     let countView = ViewBuilder().backgrouondColor(.b2).cornerRadius(15).isHidden(true).view
     let countLabel = LabelBuilder("x1").textColor(.white).font(.bold16).view

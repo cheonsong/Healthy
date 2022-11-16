@@ -20,8 +20,8 @@ public class HomeViewController: UIViewController, CodeBaseUI {
     var disposeBag = DisposeBag()
     
     let topContainer = ViewBuilder().backgrouondColor(.white).view
-    let dateLabel    = LabelBuilder("2022년 11월 30일").font(.regular16).textColor(.black).sizeToFit().view
-    let welcomeLabel = LabelBuilder("안녕하세요, 천송님").font(.bold25).textColor(.black).sizeToFit().view
+    let dateLabel    = LabelBuilder("HOME_DATE_LABEL".localized(["2011", "11".localized, "30"])).font(.regular16).textColor(.black).sizeToFit().view
+    let welcomeLabel = LabelBuilder("HOME_WELCOME_LABEL".localized(["천송"])).font(.bold25).textColor(.black).sizeToFit().view
     let icoCalender  = ImageViewBuilder(PresentationAsset.icoCalender.image).view
     let calenderView = ViewBuilder().backgrouondColor(.black).cornerRadius(10).alpha(0).view
     

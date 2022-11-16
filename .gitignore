@@ -72,3 +72,5 @@ Tuist/Dependencies
 ### Localizing
 Scripts/healthy-368805-2a8fd16b4b65.json
 Scripts/Localize.sh
+Scripts/*.csv
+*.strings

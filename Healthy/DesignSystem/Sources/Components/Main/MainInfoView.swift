@@ -18,14 +18,14 @@ public class MainInfoView: UIView {
     var disposeBag = DisposeBag()
     let innerShadowLayer = CAShapeLayer()
     
-    lazy var todayTitleLabel = LabelBuilder("음수량").font(.regular16).textColor(.black).view
+    lazy var todayTitleLabel = LabelBuilder("TODAY".localized).font(.regular16).textColor(.black).view
     lazy var todayContentslabel = LabelBuilder("1.3 / 2 " + self.type.unit)
         .textColor(.black)
         .font(.bold25)
         .attributedTextChangeFont("1.3 / 2 " + self.type.unit, .bold10, [self.type.unit])
         .view
     
-    lazy var avgTitleLabel = LabelBuilder("이번 달 평균").font(.regular16).textColor(.black).view
+    lazy var avgTitleLabel = LabelBuilder("MONTH_AVERAGE".localized).font(.regular16).textColor(.black).view
     lazy var avgContentslabel = LabelBuilder("2.6 " + self.type.unit)
         .textColor(.black)
         .font(.bold25)

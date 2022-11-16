@@ -15,21 +15,13 @@ public final class WaterViewController: UIViewController, CodeBaseUI {
     
     var disposeBag = DisposeBag()
     
-    let mainLabel = LabelBuilder("오늘 당신이 마신\n물은 750 ml 입니다")
+    let mainLabel = LabelBuilder("WATER_MAIN_LABEL".localized([750]))
         .numberOfLines(0)
         .textColor(.black)
         .font(.bold25)
         .textAlignment(.center)
-        .attributedTextChangeColor("오늘 당신이 마신\n물은 750 ml 입니다", .b2, ["750 ml"])
+        .attributedTextChangeColor("WATER_MAIN_LABEL".localized([750]), .b2, ["750 ml"])
         .view
-    
-    let main = UILabel().then {
-        $0.text = "asdfsdaf"
-        $0.numberOfLines = 0
-        $0.textColor = .black
-        $0.font = .bold10
-        $0.textAlignment = .center
-    }
     
     let waterBaseView = ViewBuilder()
         .backgrouondColor(.b3)
@@ -41,7 +33,7 @@ public final class WaterViewController: UIViewController, CodeBaseUI {
         .cornerRadius(10)
         .view
     
-    let drinkButton = ButtonBuilder(MainButton(.water)).title("물 마시기").view
+    let drinkButton = ButtonBuilder(MainButton(.water)).title("WATER_DRINK_BUTTON".localized).view
     
     let ballonIcon = UIImageView().then {
         $0.image = PresentationAsset.ballon.image
@@ -56,7 +48,7 @@ public final class WaterViewController: UIViewController, CodeBaseUI {
     
     let navigation = Navigation()
     
-    let calendar = CalendarView()
+    let calendar = CommitView()
     
     var viewModel: WaterViewModel?
     
