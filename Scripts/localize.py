@@ -3,6 +3,9 @@ import gspread
 import csv
 import os
 import re
+import time
+
+start = time.time()
 
 scope = [
     "https://spreadsheets.google.com/feeds",
@@ -88,3 +91,4 @@ for code in languageList:
     csvFile.close()
     stringFile.close()
 
+print("time :", time.time() - start)

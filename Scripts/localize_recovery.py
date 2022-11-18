@@ -3,19 +3,23 @@ import gspread
 import csv
 import os
 import re
+import time
+
+start = time.time()
+
 
 scope = [
     "https://spreadsheets.google.com/feeds",
     "https://www.googleapis.com/auth/drive",
 ]
 
-json_key_path = "diary-364506-154725c9cb23.json"    # JSON Key File Path
+json_key_path = "healthy-368805-2a8fd16b4b65.json"    # JSON Key File Path
 
 credential = ServiceAccountCredentials.from_json_keyfile_name(json_key_path, scope)
 gc = gspread.authorize(credential)
 
 # Spread Sheet Key로 열기
-spreadsheet_key = "1m-OJOgLcWXkFNugPWcYUMVxosskWbgtt7Or1CJTtEwI"
+spreadsheet_key = "1VdzKxuzRF5CrVoul1TYyGYFu7vjX6fVvkkrvfUmXzQc"
 doc = gc.open_by_key(spreadsheet_key)
 
 # sheet 선택
@@ -53,7 +57,7 @@ for i in codes:
 
 # 컬럼값으로 디렉토리 생성
 for i in languageList:
-    os.makedirs('../Diary/App/Resources/' + i + '.lproj', exist_ok=True)
+    os.makedirs('../Recovery/Resources/' + i + '.lproj', exist_ok=True)
 csvFile.close()
 
 # Strings 파일 작성
@@ -63,7 +67,7 @@ for code in languageList:
     reader = csv.reader(csvFile)
 
     # Localizable.strings파일 열기 쓰기전용
-    stringFile = open('../Diary/App/Resources/' + code + '.lproj/Localizable.strings', 'w')
+    stringFile = open('../Recovery/Resources/' + code + '.lproj/Localizable.strings', 'w')
 
     # 코드가 몇번째 인덱스인지 확인
     index = languageList.index(code)
@@ -77,3 +81,4 @@ for code in languageList:
     csvFile.close()
     stringFile.close()
 
+print(time.time()-start)
