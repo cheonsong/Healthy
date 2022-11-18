@@ -55,8 +55,8 @@ public class WaterSetModal: ModalView, CodeBaseUI {
     lazy var goalTextForm = TextFieldBuilder(TextForm()).placeholder("WATER_SET_GOAL_TEXTFORM".localized).delegate(self).view
     
     let buttonStackView = StackViewBuilder().spacing(30).axis(.horizontal).backgrouondColor(.clear).distributon(.fillEqually).view
-    let completeButton = ButtonBuilder(MainButton(.water)).title("COMPLETE_BUTTON".localized).view as! MainButton
-    let cancelButton = ButtonBuilder(MainButton(.water)).title("CANCEL_BUTTON".localized).view as! MainButton
+    let completeButton = ButtonBuilder(MainButton()).title("COMPLETE_BUTTON".localized).view as! MainButton
+    let cancelButton = ButtonBuilder(CancelButton()).title("CANCEL_BUTTON".localized).view as! CancelButton
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -92,21 +92,21 @@ public class WaterSetModal: ModalView, CodeBaseUI {
         }
         
         ozButton.snp.makeConstraints {
-            $0.top.equalTo(goalLabel.snp.bottom).offset(16)
+            $0.top.equalTo(goalLabel.snp.bottom).offset(24)
             $0.left.equalToSuperview().inset(Const.padding)
             $0.height.equalTo(39)
             $0.width.equalTo(cancelButton)
         }
         
         lButton.snp.makeConstraints {
-            $0.top.equalTo(goalLabel.snp.bottom).offset(16)
+            $0.top.equalTo(goalLabel.snp.bottom).offset(24)
             $0.right.equalToSuperview().inset(Const.padding)
             $0.height.equalTo(39)
             $0.width.equalTo(cancelButton)
         }
         
         goalTextForm.snp.makeConstraints {
-            $0.top.equalTo(ozButton.snp.bottom).offset(25)
+            $0.top.equalTo(ozButton.snp.bottom).offset(30)
             $0.width.equalTo(Const.fullWidth)
             $0.centerX.equalToSuperview()
         }

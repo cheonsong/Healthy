@@ -33,8 +33,8 @@ public class StepsSetModal: ModalView, CodeBaseUI {
     }
     
     let buttonStackView = StackViewBuilder().spacing(30).axis(.horizontal).backgrouondColor(.clear).distributon(.fillEqually).view
-    let completeButton = ButtonBuilder(MainButton(.steps)).title("완료").view as! MainButton
-    let cancelButton = ButtonBuilder(MainButton(.steps)).title("취소").view as! MainButton
+    let completeButton = ButtonBuilder(MainButton()).title("완료").view as! MainButton
+    let cancelButton = ButtonBuilder(CancelButton()).title("취소").view as! CancelButton
     
     public override init(frame: CGRect) {
         super.init(frame: frame)

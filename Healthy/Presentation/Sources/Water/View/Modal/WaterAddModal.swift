@@ -21,8 +21,8 @@ public class WaterAddModal: ModalView, CodeBaseUI {
     let minusButton = ButtonBuilder(IcoButton(type: .water, icon: .minus)).view as! IcoButton
     
     let buttonStackView = StackViewBuilder().spacing(30).axis(.horizontal).backgrouondColor(.clear).distributon(.fillEqually).view
-    let addButton = ButtonBuilder(MainButton(.water)).title("ADD_BUTTON".localized).view as! MainButton
-    let cancelButton = ButtonBuilder(MainButton(.water)).title("CANCEL_BUTTON".localized).view as! MainButton
+    let addButton = ButtonBuilder(MainButton()).title("ADD_BUTTON".localized).view as! MainButton
+    let cancelButton = ButtonBuilder(CancelButton()).title("CANCEL_BUTTON".localized).view as! CancelButton
     
     let aCupContainer = ViewBuilder().view
     let aCupOfWaterLabel = LabelBuilder("WATER_DRINK_LABEL".localized).textColor(.black).font(.bold16).view
