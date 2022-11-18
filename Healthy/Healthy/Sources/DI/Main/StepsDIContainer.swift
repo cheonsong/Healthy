@@ -10,6 +10,7 @@ import Presentation
 import Domain
 import Data
 import UIKit
+import Util
 
 class StepsDIContainer {
     init() {}
@@ -19,7 +20,7 @@ class StepsDIContainer {
     // MARK: ViewModel
     
     // MARK: Coordinator
-    func makeStepsCoordinator(navigation: UINavigationController)-> StepsCoordinator {
+    func makeStepsCoordinator(navigation: UINavigationController)-> CoordinatorType {
         return StepsCoordinator(navigation: navigation, dependencies: self)
     }
 }

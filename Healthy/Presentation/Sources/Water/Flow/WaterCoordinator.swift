@@ -16,7 +16,9 @@ public protocol WaterCoordinatorDependencies {
     func makeWaterSetModal()-> WaterSetModal
 }
 
-public class WaterCoordinator: NSObject {
+public class WaterCoordinator: CoordinatorType {
+    public var childCoordinators: [Util.CoordinatorType] = []
+    
     public var navigationController: UINavigationController
     private var dependencies: WaterCoordinatorDependencies
     
@@ -31,8 +33,6 @@ public class WaterCoordinator: NSObject {
     
     public func start() {
         viewController = dependencies.makeWaterViewController(actions: self)
-        
-        viewController.transitioningDelegate = self
         viewController.modalPresentationStyle = .overFullScreen
         self.navigationController.present(viewController, animated: true)
     }
@@ -51,14 +51,5 @@ extension WaterCoordinator: WaterViewModelActions {
     public func showWaterSetModal() {
         let modal = dependencies.makeWaterSetModal()
         modal.present(target: viewController.view)
-    }
-}
-
-extension WaterCoordinator: UIViewControllerTransitioningDelegate {
-    public func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        WaterTransition()
-    }
-    public func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        WaterTransition()
     }
 }

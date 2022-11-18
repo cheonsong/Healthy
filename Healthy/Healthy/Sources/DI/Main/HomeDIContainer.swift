@@ -10,6 +10,7 @@ import Domain
 import Data
 import Presentation
 import UIKit
+import Util
 
 final class HomeDIContainer {
     
@@ -30,11 +31,11 @@ extension HomeDIContainer: HomeCoordinatorDependencies {
         return HomeViewController.create()
     }
     
-    func makeWaterCoordinator(navigation: UINavigationController) -> WaterCoordinator {
+    func makeWaterCoordinator(navigation: UINavigationController) -> CoordinatorType {
         return WaterDIContainer().makeWaterCoordinator(navigation: navigation)
     }
     
-    func makeStepsCoordinator(navigation: UINavigationController) -> Presentation.StepsCoordinator {
+    func makeStepsCoordinator(navigation: UINavigationController) -> CoordinatorType {
         return StepsDIContainer().makeStepsCoordinator(navigation: navigation)
     }
 }

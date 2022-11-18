@@ -12,19 +12,19 @@ import Util
 // 의존성 주입을 위한 Coordinator Dependency
 public protocol HomeCoordinatorDependencies {
     func makeHomeViewController() -> HomeViewController
-    func makeWaterCoordinator(navigation: UINavigationController)-> WaterCoordinator
-    func makeStepsCoordinator(navigation: UINavigationController)-> StepsCoordinator
+    func makeWaterCoordinator(navigation: UINavigationController)-> CoordinatorType
+    func makeStepsCoordinator(navigation: UINavigationController)-> CoordinatorType
 }
 
-public class HomeCoordinator: CoordinatorType {
+public class HomeCoordinator: NSObject, CoordinatorType {
     
     public var childCoordinators: [CoordinatorType] = []
-    public var navigationController: UINavigationController
-    private let dependencies: HomeCoordinatorDependencies
-    
+    public var navigationController: UINavigationController!
+    private var dependencies: HomeCoordinatorDependencies
     
     public init(navigation: UINavigationController,
                 dependencies: HomeCoordinatorDependencies) {
+        
         navigationController = navigation
         navigation.view.backgroundColor = .white
         self.dependencies = dependencies
@@ -50,5 +50,5 @@ public class HomeCoordinator: CoordinatorType {
     deinit {
         print(#file)
     }
+    
 }
-

@@ -10,6 +10,7 @@ import Presentation
 import Domain
 import Data
 import UIKit
+import Util
 
 class WaterDIContainer {
     init() {}
@@ -29,7 +30,7 @@ class WaterDIContainer {
     }
     
     // MARK: Coordinator
-    func makeWaterCoordinator(navigation: UINavigationController)-> WaterCoordinator {
+    func makeWaterCoordinator(navigation: UINavigationController)-> CoordinatorType {
         return WaterCoordinator(navigation: navigation, dependencies: self)
     }
 }

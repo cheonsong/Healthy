@@ -17,6 +17,11 @@ private enum Constants {
 
 final class WaterTransition: NSObject {
     
+    var isPresenting: Bool = true
+    
+    init(isPresenting: Bool) {
+        self.isPresenting = isPresenting
+    }
 }
 
 extension WaterTransition: UIViewControllerAnimatedTransitioning {
@@ -27,8 +32,12 @@ extension WaterTransition: UIViewControllerAnimatedTransitioning {
     
     // 애니메이션 정의
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
-        presentAnimation(using: transitionContext)
-        dismissAnimation(using: transitionContext)
+        if isPresenting {
+            presentAnimation(using: transitionContext)
+        } else {
+            dismissAnimation(using: transitionContext)
+        }
+        
     }
     
     func presentAnimation(using transitionContext: UIViewControllerContextTransitioning) {
