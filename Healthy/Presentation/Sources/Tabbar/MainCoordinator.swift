@@ -22,16 +22,17 @@ public protocol MainCoordinatorDependencies {
 public class MainCoordinator: CoordinatorType {
     public var childCoordinators: [CoordinatorType] = []
     
-    public var coordinator : CustomTabBarController
-    
+    public var coordinator : UINavigationController
+    var tabbar: CustomTabBarController
     private let dependencies: MainCoordinatorDependencies
     
     var disposeBag: DisposeBag = .init()
     
-    public init(coordinator: CustomTabBarController,
+    public init(coordinator: UINavigationController,
                 dependencies: MainCoordinatorDependencies) {
         self.coordinator = coordinator
         self.dependencies = dependencies
+        self.tabbar = CustomTabBarController()
     }
     
     public func start(){
@@ -53,6 +54,7 @@ public class MainCoordinator: CoordinatorType {
     
     func serviceInit() {
         // 인디케이터 끝나고
+        
         let home = getNavigation()
         let homeCoordinator = dependencies.makeHomeCoordinator(navigationController: home)
         
@@ -73,14 +75,16 @@ public class MainCoordinator: CoordinatorType {
         
         childCoordinators = [homeCoordinator, myCoordinator]
         
-        coordinator.tabBar.tintColor = .b2
-        coordinator.tabBar.unselectedItemTintColor = UIColor(hex: "#A4A6AA")
+        tabbar.tabBar.tintColor = .b2
+        tabbar.tabBar.unselectedItemTintColor = UIColor(hex: "#A4A6AA")
         
-        coordinator.viewControllers = [home, my]
-        coordinator.modalPresentationStyle = .fullScreen
-        coordinator.selectedIndex          = 0
+        tabbar.viewControllers = [home, my]
+        tabbar.modalPresentationStyle = .fullScreen
+        tabbar.selectedIndex          = 0
         
         homeCoordinator.start()
         myCoordinator.start()
+        
+        coordinator.setViewControllers([tabbar], animated: true)
     }
 }

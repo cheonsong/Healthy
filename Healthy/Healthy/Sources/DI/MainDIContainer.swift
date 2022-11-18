@@ -16,8 +16,8 @@ final class MainDIContainer {
     public init() {}
     
     /// MainCoordinator 생성
-    func makeMainCoordinator(tabBarController: CustomTabBarController)-> MainCoordinator {
-        return MainCoordinator(coordinator: tabBarController, dependencies: self)
+    func makeMainCoordinator(navigationController: UINavigationController)-> MainCoordinator {
+        return MainCoordinator(coordinator: navigationController, dependencies: self)
     }
 
 }

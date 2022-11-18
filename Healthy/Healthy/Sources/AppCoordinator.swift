@@ -11,23 +11,20 @@ import Presentation
 
 class AppCordinator {
     var splashVC: SplashViewController
-    var tabBarController: CustomTabBarController
+    var navigationController: UINavigationController
     private let appDIContainer: AppDIContainer
     
-    init(spalsh: SplashViewController, tabBarController: CustomTabBarController, appDIContainer: AppDIContainer) {
+    init(spalsh: SplashViewController, navigation: UINavigationController, appDIContainer: AppDIContainer) {
         self.splashVC = spalsh
-        self.tabBarController = tabBarController
         self.appDIContainer = appDIContainer
+        self.navigationController = navigation
     }
     
     func start() {
         DispatchQueue.main.asyncAfter(deadline: .now()+3, execute: {
-            let mainDIContainer = self.appDIContainer.makeMainDIContainer()
-            let mainCoordinator = mainDIContainer.makeMainCoordinator(tabBarController: self.tabBarController)
-            mainCoordinator.start()
-            self.splashVC.dismiss(animated: false, completion: {
-                self.splashVC.present(self.tabBarController, animated: false)
-            })
+            let welcomeDIContainer = WelcomeDIContainer()
+            let coordinator = welcomeDIContainer.makeWelcomeCoordinator(navigation: self.navigationController)
+            coordinator.start()
         })
     }
 }

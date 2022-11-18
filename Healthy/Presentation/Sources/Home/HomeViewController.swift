@@ -164,6 +164,8 @@ public class HomeViewController: UIViewController, CodeBaseUI {
     }
     
     public func bind() {
+        
+        // WaterView 터치이벤트
         waterView.rx.tapGesture()
             .when(.recognized)
             .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
@@ -172,14 +174,7 @@ public class HomeViewController: UIViewController, CodeBaseUI {
             })
             .disposed(by: disposeBag)
         
-//        stepView.rx.tapGesture()
-//            .when(.recognized)
-//            .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
-//            .subscribe(onNext: { [weak self] _ in
-//                self?.coordinator?.presentStepsViewController()
-//            })
-//            .disposed(by: disposeBag)
-        
+        // 우상단 달력버튼
         icoCalender.rx.tapGesture()
             .when(.recognized)
             .throttle(.milliseconds(500), scheduler: MainScheduler.instance)

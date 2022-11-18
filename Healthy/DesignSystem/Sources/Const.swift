@@ -22,4 +22,6 @@ public struct Const {
     public static let safeAreaBottom = (UIApplication.shared.windows.first?.safeAreaInsets.bottom ?? 0.0)
     
     public static let calendarCellSize = (fullWidth - 30) / 7
+    
+    public static let welcomeMainTitleStrings: [String] = ["하루", "기록", "건강", "Daily", "Record", "Healthy"]
 }

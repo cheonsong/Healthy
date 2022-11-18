@@ -25,11 +25,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: scene)
         
         let splash = SplashViewController()
-        let vc = CustomTabBarController()
+        let rootVC = UINavigationController()
         
-        window.rootViewController = splash
+        window.rootViewController = rootVC
+        rootVC.setViewControllers([splash], animated: false)
         
-        appCoordinator = AppCordinator(spalsh: splash, tabBarController: vc, appDIContainer: appDIContainer)
+        appCoordinator = AppCordinator(spalsh: splash, navigation: rootVC, appDIContainer: appDIContainer)
         appCoordinator?.start()
         
         self.window = window
