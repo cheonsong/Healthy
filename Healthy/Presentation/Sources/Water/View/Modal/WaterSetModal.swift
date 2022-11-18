@@ -52,8 +52,6 @@ public class WaterSetModal: ModalView, CodeBaseUI {
         .cornerRadius(10)
         .view
     
-    lazy var aCupTextForm = TextFieldBuilder(TextForm()).placeholder("WATER_SET_A_CUP_TEXTFORM".localized).delegate(self).view
-    
     lazy var goalTextForm = TextFieldBuilder(TextForm()).placeholder("WATER_SET_GOAL_TEXTFORM".localized).delegate(self).view
     
     let buttonStackView = StackViewBuilder().spacing(30).axis(.horizontal).backgrouondColor(.clear).distributon(.fillEqually).view
@@ -73,20 +71,16 @@ public class WaterSetModal: ModalView, CodeBaseUI {
     }
     
     public func addComponents() {
-        [title, goalLabel, ozButton, lButton, aCupTextForm, goalTextForm, buttonStackView].forEach { modal.addSubview($0) }
+        [title, goalLabel, ozButton, lButton, goalTextForm, buttonStackView].forEach { modal.addSubview($0) }
         [cancelButton, completeButton].forEach { buttonStackView.addArrangedSubview($0) }
         
         completeButton.configure(false)
         
-        let newPosition = aCupTextForm.endOfDocument
-        aCupTextForm.selectedTextRange = aCupTextForm.textRange(from: newPosition, to: newPosition)
+        let newPosition = goalTextForm.endOfDocument
+        goalTextForm.selectedTextRange = goalTextForm.textRange(from: newPosition, to: newPosition)
     }
     
     public func setConstraints() {
-        modal.snp.updateConstraints { make in
-            make.height.equalTo(Const.modalHeightLong)
-        }
-        
         title.snp.makeConstraints {
             $0.top.equalToSuperview().inset(20)
             $0.centerX.equalToSuperview()
@@ -111,20 +105,14 @@ public class WaterSetModal: ModalView, CodeBaseUI {
             $0.width.equalTo(cancelButton)
         }
         
-        aCupTextForm.snp.makeConstraints {
+        goalTextForm.snp.makeConstraints {
             $0.top.equalTo(ozButton.snp.bottom).offset(25)
             $0.width.equalTo(Const.fullWidth)
             $0.centerX.equalToSuperview()
         }
         
-        goalTextForm.snp.makeConstraints {
-            $0.top.equalTo(aCupTextForm.snp.bottom).offset(25)
-            $0.width.equalTo(Const.fullWidth)
-            $0.centerX.equalToSuperview()
-        }
-        
         buttonStackView.snp.makeConstraints {
-            $0.top.equalTo(goalTextForm.snp.bottom).offset(25)
+//            $0.top.equalTo(goalTextForm.snp.bottom).offset(25)
             $0.width.equalTo(Const.fullWidth)
             $0.height.equalTo(50)
             $0.centerX.equalToSuperview()
