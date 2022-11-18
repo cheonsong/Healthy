@@ -17,7 +17,7 @@ public class MainLockView: UIView {
         super.init(frame: frame)
         
         self.isUserInteractionEnabled = true
-        self.backgroundColor = .dim
+        self.backgroundColor = .black.withAlphaComponent(0.7)
         self.layer.cornerRadius = 10
         
         let icoLock = ImageViewBuilder(DesignSystemAsset.icoLock.image).view

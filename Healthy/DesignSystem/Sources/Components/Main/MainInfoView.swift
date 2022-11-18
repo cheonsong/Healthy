@@ -138,13 +138,6 @@ public class MainInfoView: UIView {
         layer.lineWidth = 15
         layer.lineCap = .round
         
-        let gaugeAnimation = CABasicAnimation(keyPath: "strokeEnd")
-        gaugeAnimation.fromValue = 0
-        gaugeAnimation.toValue = 1
-        gaugeAnimation.duration = 0.3
-//        gaugeAnimation.timingFunction = CAMediaTimingFunction(controlPoints: 0.4, 0.02, 1, 0.05)
-        layer.add(gaugeAnimation, forKey: "strokeEnd")
-        
         circleView.layer.addSublayer(layer)
         circleLayer = layer
     }

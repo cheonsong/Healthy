@@ -16,5 +16,5 @@ public class App {
     
     // MARK: WATER
     var waterGoal: BehaviorRelay<Float> = .init(value: 2)
-    var waterToday: BehaviorRelay<Float> = .init(value: 1.1)
+    var waterToday: BehaviorRelay<Float> = .init(value: 0)
 }

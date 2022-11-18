@@ -200,7 +200,7 @@ public class HomeViewController: UIViewController, CodeBaseUI {
                 }
                 
                 if Int(goal * 10) % 10 == 0 {
-                    text += " / \(goal) L"
+                    text += " / \(Int(goal)) L"
                 } else {
                     text += " / \(goal) L"
                 }

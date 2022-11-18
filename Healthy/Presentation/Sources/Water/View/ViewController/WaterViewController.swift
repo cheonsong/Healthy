@@ -32,7 +32,7 @@ public final class WaterViewController: UIViewController, CodeBaseUI {
         .cornerRadius(10)
         .view
     
-    let drinkButton = ButtonBuilder(MainButton()).ㅇtitle("WATER_DRINK_BUTTON".localized).view
+    let drinkButton = ButtonBuilder(MainButton()).title("WATER_DRINK_BUTTON".localized).view
     
     let ballonIcon = UIImageView().then {
         $0.image = PresentationAsset.ballon.image
