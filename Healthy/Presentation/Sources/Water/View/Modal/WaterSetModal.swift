@@ -52,7 +52,7 @@ public class WaterSetModal: ModalView, CodeBaseUI {
         .cornerRadius(10)
         .view
     
-    lazy var goalTextForm = TextFieldBuilder(TextForm()).placeholder("WATER_SET_GOAL_TEXTFORM".localized).delegate(self).view
+    lazy var goalTextForm = TextFieldBuilder(TextForm()).placeholder("WATER_SET_GOAL_TEXTFORM".localized).view
     
     let buttonStackView = StackViewBuilder().spacing(30).axis(.horizontal).backgrouondColor(.clear).distributon(.fillEqually).view
     let completeButton = ButtonBuilder(MainButton()).title("COMPLETE_BUTTON".localized).view as! MainButton
@@ -173,17 +173,5 @@ public class WaterSetModal: ModalView, CodeBaseUI {
     public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         self.endEditing(true)
-    }
-}
-
-extension WaterSetModal: UITextFieldDelegate {
-    public func textFieldDidBeginEditing(_ textField: UITextField) {
-        textField.layer.borderColor = UIColor.b2.cgColor
-        textField.layer.borderWidth = 2
-    }
-    
-    public func textFieldDidEndEditing(_ textField: UITextField) {
-        textField.layer.borderColor = UIColor.gr2.cgColor
-        textField.layer.borderWidth = 1
     }
 }

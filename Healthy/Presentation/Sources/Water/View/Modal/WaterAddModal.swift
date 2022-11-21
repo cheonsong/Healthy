@@ -27,7 +27,7 @@ public class WaterAddModal: ModalView, CodeBaseUI {
     let aCupContainer = ViewBuilder().view
     let aCupOfWaterLabel = LabelBuilder("WATER_DRINK_LABEL".localized).textColor(.black).font(.bold16).view
     let aCupUnitLabel = LabelBuilder("ml").textColor(.black).font(.bold16).view
-    lazy var aCupTextForm = TextFieldBuilder(TextForm()).placeholder("WATER_DRINK_TEXTFORM_EX".localized).font(.bold16).delegate(self).view
+    lazy var aCupTextForm = TextFieldBuilder(TextForm()).placeholder("WATER_DRINK_TEXTFORM_EX".localized).font(.bold16).view
     
     let countView = ViewBuilder().backgrouondColor(.b2).cornerRadius(15).isHidden(true).view
     let countLabel = LabelBuilder("x1").textColor(.white).font(.bold16).view
@@ -175,17 +175,5 @@ public class WaterAddModal: ModalView, CodeBaseUI {
     public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         self.endEditing(true)
-    }
-}
-
-extension WaterAddModal: UITextFieldDelegate {
-    public func textFieldDidBeginEditing(_ textField: UITextField) {
-        textField.layer.borderColor = UIColor.b2.cgColor
-        textField.layer.borderWidth = 2
-    }
-    
-    public func textFieldDidEndEditing(_ textField: UITextField) {
-        textField.layer.borderColor = UIColor.gr2.cgColor
-        textField.layer.borderWidth = 1
     }
 }
