@@ -61,6 +61,7 @@ public class JoinViewController: UIViewController, CodeBaseUI {
         $0.progressTintColor = .b1
         $0.trackTintColor = .b3
         $0.layer.cornerRadius = 2
+        $0.layer.masksToBounds = true
         $0.progress = self.state.value.progress
     }
     
@@ -69,29 +70,29 @@ public class JoinViewController: UIViewController, CodeBaseUI {
     // NAME
     let nameContainer     = ViewBuilder().backgrouondColor(.clear).view
     let nameTextField     = TextForm("NAME_TEXT".localized)
-    let nameNextButton    = MainButton("NEXT_BUTTON".localized).then { $0.configure(false) }
+    let nameNextButton    = MainButton("NEXT_BUTTON".localized).then { $0.configure(true) }
     
     // GENDER
     let genderContainer   = ViewBuilder().backgrouondColor(.clear).view
     let genderTwiceButton = TwiceButton(left: "MALE_TEXT".localized, right: "FEMALE_TEXT".localized)
-    let genderNextButton  = MainButton("NEXT_BUTTON".localized).then { $0.configure(false) }
+    let genderNextButton  = MainButton("NEXT_BUTTON".localized).then { $0.configure(true) }
     
     // AGE
     let ageContainer      = ViewBuilder().backgrouondColor(.clear).view
     let ageTextField      = TextForm("AGE_TEXT".localized)
-    let ageNextButton     = MainButton("NEXT_BUTTON".localized).then { $0.configure(false) }
+    let ageNextButton     = MainButton("NEXT_BUTTON".localized).then { $0.configure(true) }
     
     // HEIGHT
     let heightContainer   = ViewBuilder().backgrouondColor(.clear).view
     let heightTwiceButton = TwiceButton(left: "cm".localized, right: "inch".localized)
     let heightTextField   = TextForm("HEIGHT_TEXT".localized)
-    let heightNextButton  = MainButton("NEXT_BUTTON".localized).then { $0.configure(false) }
+    let heightNextButton  = MainButton("NEXT_BUTTON".localized).then { $0.configure(true) }
     
     // WEIGHT
     let weightContainer   = ViewBuilder().backgrouondColor(.clear).view
     let weightTwiceButton = TwiceButton(left: "kg".localized, right: "lb".localized)
     let weightTextField   = TextForm("WEIGHT_TEXT".localized)
-    let weightNextButton  = MainButton("COMPLETE_BUTTON".localized).then { $0.configure(false) }
+    let weightNextButton  = MainButton("COMPLETE_BUTTON".localized).then { $0.configure(true) }
     
     public static func create()-> JoinViewController {
         let vc = JoinViewController()
@@ -206,7 +207,7 @@ public class JoinViewController: UIViewController, CodeBaseUI {
         
         weightTextField.snp.makeConstraints {
             $0.left.right.equalToSuperview()
-            $0.top.equalTo(heightTwiceButton.snp.bottom).offset(40)
+            $0.top.equalTo(weightTwiceButton.snp.bottom).offset(40)
         }
         
         weightNextButton.snp.makeConstraints {
@@ -244,6 +245,7 @@ public class JoinViewController: UIViewController, CodeBaseUI {
                 guard let self = self else { return }
                 
                 self.questionLabel.text = stat.localized
+                self.progress.progress = stat.progress
                 
                 switch stat {
                 case .name:

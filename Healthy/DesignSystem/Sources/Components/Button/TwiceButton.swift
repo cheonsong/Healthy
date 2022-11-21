@@ -28,6 +28,7 @@ public class TwiceButton: UIView, CodeBaseUI {
         .titleColor(.white)
         .backgroundColor(.gr2)
         .borderColor(.gr2)
+        .borderWidth(1)
         .cornerRadius(10)
         .view
     
@@ -36,6 +37,7 @@ public class TwiceButton: UIView, CodeBaseUI {
         .titleColor(.white)
         .backgroundColor(.gr2)
         .borderColor(.gr2)
+        .borderWidth(1)
         .cornerRadius(10)
         .view
     
@@ -59,19 +61,24 @@ public class TwiceButton: UIView, CodeBaseUI {
     }
     
     public func addComponents() {
+        self.layer.masksToBounds = true
+        self.buttonStackView.layer.masksToBounds = true
+        
+        self.addSubview(buttonStackView)
+        
         [leftButton, rightButton].forEach {
             buttonStackView.addArrangedSubview($0)
         }
     }
     
     public func setConstraints() {
-        buttonStackView.snp.makeConstraints {
+        self.snp.makeConstraints {
             $0.height.equalTo(39)
             $0.width.equalTo(Const.fullWidth)
         }
         
-        leftButton.snp.makeConstraints {
-            $0.left.top.bottom.equalToSuperview()
+        buttonStackView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
         }
     }
     
@@ -108,10 +115,10 @@ public class TwiceButton: UIView, CodeBaseUI {
                     self.rightButton.backgroundColor = .b2
                 default:
                     self.leftButton.titleColor = .black
-                    self.leftButton.layer.borderWidth = 0
+                    self.leftButton.layer.borderWidth = 1
                     self.leftButton.backgroundColor = .white
                     self.rightButton.titleColor = .black
-                    self.rightButton.layer.borderWidth = 0
+                    self.rightButton.layer.borderWidth = 1
                     self.rightButton.backgroundColor = .white
                 }
             })
