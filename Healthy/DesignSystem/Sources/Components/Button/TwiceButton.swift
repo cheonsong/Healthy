@@ -21,7 +21,18 @@ public enum TwiceButtonCase {
 public class TwiceButton: UIView, CodeBaseUI {
     
     var disposeBag = DisposeBag()
-    public var buttonObservable: BehaviorRelay<TwiceButtonCase> = .init(value: .none)
+    public var selectedButton: BehaviorRelay<TwiceButtonCase> = .init(value: .none)
+    
+    public var selectedButtonTitle: String {
+        switch selectedButton.value {
+        case .left:
+            return leftButton.title
+        case .right:
+            return rightButton.title
+        default:
+            return ""
+        }
+    }
     
     public let leftButton = ButtonBuilder()
         .font(.bold20)
@@ -85,17 +96,17 @@ public class TwiceButton: UIView, CodeBaseUI {
     public func bind() {
         leftButton.rx.tap
             .subscribe(onNext: { [weak self] in
-                self?.buttonObservable.accept(.left)
+                self?.selectedButton.accept(.left)
             })
             .disposed(by: disposeBag)
         
         rightButton.rx.tap
             .subscribe(onNext: { [weak self] in
-                self?.buttonObservable.accept(.right)
+                self?.selectedButton.accept(.right)
             })
             .disposed(by: disposeBag)
         
-        buttonObservable
+        selectedButton
             .subscribe(onNext: { [weak self] state in
                 guard let self = self else { return }
                 switch state {

@@ -12,11 +12,10 @@ import UIKit
 public protocol WelcomCoordinatorDependencies {
     func makeWelcomeViewController(action: WelcomeViewModelAction)-> WelcomeViewContoller
     func makeMainCoordinator(navigaion: UINavigationController)-> MainCoordinator
-    func makeJoinViewController()-> JoinViewController
+    func makeJoinViewController(action: JoinViewModelAction)-> JoinViewController
 }
 
 public protocol WelcomeViewModelAction {
-    func moveToMain()
     func moveToJoin()
 }
 
@@ -40,12 +39,14 @@ public class WelcomeCoordinator: CoordinatorType {
 }
 
 extension WelcomeCoordinator: WelcomeViewModelAction {
+    public func moveToJoin() {
+        let vc = dependencies.makeJoinViewController(action: self)
+        navigationController.pushViewController(vc, animated: true)
+    }
+}
+
+extension WelcomeCoordinator: JoinViewModelAction {
     public func moveToMain() {
         dependencies.makeMainCoordinator(navigaion: self.navigationController).start()
-    }
-    
-    public func moveToJoin() {
-        let vc = dependencies.makeJoinViewController()
-        navigationController.pushViewController(vc, animated: true)
     }
 }

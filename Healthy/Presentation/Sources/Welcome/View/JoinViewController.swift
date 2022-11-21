@@ -12,6 +12,7 @@ import RxCocoa
 import RxSwift
 import SnapKit
 import Util
+import Domain
 
 public enum QuestionCase: Int {
     case name = 1
@@ -55,6 +56,7 @@ public class JoinViewController: UIViewController, CodeBaseUI {
     
     var disposeBag = DisposeBag()
     var state: BehaviorRelay<QuestionCase> = .init(value: .name)
+    var viewModel: JoinViewModel!
     
     let titleLabel = LabelBuilder("JOIN_TITLE_LABEL".localized).font(.bold20).textColor(.black).sizeToFit().view
     lazy var progress = UIProgressView(progressViewStyle: .bar).then {
@@ -94,8 +96,9 @@ public class JoinViewController: UIViewController, CodeBaseUI {
     let weightTextField   = TextForm("WEIGHT_TEXT".localized)
     let weightNextButton  = MainButton("COMPLETE_BUTTON".localized).then { $0.configure(true) }
     
-    public static func create()-> JoinViewController {
+    public static func create(viewModel: JoinViewModel)-> JoinViewController {
         let vc = JoinViewController()
+        vc.viewModel = viewModel
         return vc
     }
     
@@ -237,6 +240,24 @@ public class JoinViewController: UIViewController, CodeBaseUI {
         heightNextButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.state.accept(.weight)
+            })
+            .disposed(by: disposeBag)
+        
+        weightNextButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                guard let self = self else { return }
+                let gender = self.genderTwiceButton.selectedButtonTitle == "MALE_TEXT".localized ? "male" : "female"
+                let model = UserModel(name: self.nameTextField.text ?? "",
+                                      height: Int(self.heightTextField.text ?? "0") ?? 0,
+                                      heightUnit: self.heightTwiceButton.selectedButtonTitle,
+                                      weight: Int(self.weightTextField.text ?? "0") ?? 0,
+                                      weightUnit: self.weightTwiceButton.selectedButtonTitle,
+                                      age: Int(self.ageTextField.text ?? "0") ?? 0,
+                                      gender: gender,
+                                      water: WaterModel(unit: "l", goal: 2))
+                print(model)
+                
+                self.viewModel.completeButtonTapped(model: model)
             })
             .disposed(by: disposeBag)
         
