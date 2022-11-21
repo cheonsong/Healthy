@@ -85,6 +85,6 @@ public class MainCoordinator: CoordinatorType {
         homeCoordinator.start()
         myCoordinator.start()
         
-        coordinator.setViewControllers([tabbar], animated: true)
+        coordinator.present(tabbar, animated: true)
     }
 }
