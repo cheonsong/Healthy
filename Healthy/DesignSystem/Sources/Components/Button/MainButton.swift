@@ -12,6 +12,11 @@ import SnapKit
 
 public class MainButton: UIButton {
     
+    public convenience init(_ title: String) {
+        self.init()
+        self.title = title
+    }
+    
     public override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .b2
