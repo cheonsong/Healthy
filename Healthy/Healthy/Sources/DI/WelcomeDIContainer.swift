@@ -25,4 +25,8 @@ extension WelcomeDIContainer: WelcomCoordinatorDependencies {
     func makeMainCoordinator(navigaion navigation: UINavigationController)-> MainCoordinator {
         return MainDIContainer().makeMainCoordinator(navigationController: navigation)
     }
+    
+    func makeJoinViewController()-> JoinViewController {
+        return JoinViewController.create()
+    }
 }

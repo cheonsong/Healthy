@@ -12,6 +12,7 @@ import UIKit
 public protocol WelcomCoordinatorDependencies {
     func makeWelcomeViewController(action: WelcomeViewModelAction)-> WelcomeViewContoller
     func makeMainCoordinator(navigaion: UINavigationController)-> MainCoordinator
+    func makeJoinViewController()-> JoinViewController
 }
 
 public protocol WelcomeViewModelAction {
@@ -44,6 +45,7 @@ extension WelcomeCoordinator: WelcomeViewModelAction {
     }
     
     public func moveToJoin() {
-        
+        let vc = dependencies.makeJoinViewController()
+        navigationController.pushViewController(vc, animated: true)
     }
 }

@@ -71,7 +71,7 @@ public class WelcomeViewContoller: UIViewController, CodeBaseUI {
     public func bind() {
         startButton.rx.tap
             .subscribe(onNext: { [weak self] in
-                self?.action.moveToMain()
+                self?.action.moveToJoin()
             })
             .disposed(by: disposeBag)
     }
