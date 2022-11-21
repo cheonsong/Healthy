@@ -18,14 +18,14 @@ public class MainInfoView: UIView {
     var disposeBag = DisposeBag()
     let innerShadowLayer = CAShapeLayer()
     var circleLayer: CALayer? = nil
-    lazy var todayTitleLabel = LabelBuilder("TODAY".localized).font(.regular16).textColor(.black).view
+    lazy var todayTitleLabel = LabelBuilder("TODAY_TEXT".localized).font(.regular16).textColor(.black).view
     public lazy var todayContentslabel = LabelBuilder("0 " + self.type.unit)
         .textColor(.black)
         .font(.bold25)
         .attributedTextChangeFont("0 " + self.type.unit, .bold10, [self.type.unit])
         .view
     
-    lazy var avgTitleLabel = LabelBuilder("MONTH_AVERAGE".localized).font(.regular16).textColor(.black).view
+    lazy var avgTitleLabel = LabelBuilder("MONTH_AVERAGE_TEXT".localized).font(.regular16).textColor(.black).view
     public lazy var avgContentslabel = LabelBuilder("0 " + self.type.unit)
         .textColor(.black)
         .font(.bold25)
