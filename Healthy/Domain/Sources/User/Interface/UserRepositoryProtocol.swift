@@ -10,4 +10,5 @@ import RxSwift
 
 public protocol UserRepositoryProtocol {
     func saveUserInfo(model: UserModel)-> Single<UserModel>
+    func fetchUserInfo()-> Single<[UserModel]>
 }
