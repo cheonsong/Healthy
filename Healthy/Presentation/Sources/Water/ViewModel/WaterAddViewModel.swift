@@ -83,6 +83,6 @@ extension WaterAddViewModel: WaterAddViewModelInput {
     }
     
     public func validateText(_ text: String) {
-        validatedText.accept(validationUsecase.excute(text))
+        validatedText.accept(validationUsecase.onlyDigit(text))
     }
 }

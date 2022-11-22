@@ -72,29 +72,29 @@ public class JoinViewController: UIViewController, CodeBaseUI {
     // NAME
     let nameContainer     = ViewBuilder().backgrouondColor(.clear).view
     let nameTextField     = TextForm("NAME_TEXT".localized)
-    let nameNextButton    = MainButton("NEXT_BUTTON".localized).then { $0.configure(true) }
+    let nameNextButton    = MainButton("NEXT_BUTTON".localized).then { $0.configure(false) }
     
     // GENDER
     let genderContainer   = ViewBuilder().backgrouondColor(.clear).view
     let genderTwiceButton = TwiceButton(left: "MALE_TEXT".localized, right: "FEMALE_TEXT".localized)
-    let genderNextButton  = MainButton("NEXT_BUTTON".localized).then { $0.configure(true) }
+    let genderNextButton  = MainButton("NEXT_BUTTON".localized).then { $0.configure(false) }
     
     // AGE
     let ageContainer      = ViewBuilder().backgrouondColor(.clear).view
     let ageTextField      = TextForm("AGE_TEXT".localized)
-    let ageNextButton     = MainButton("NEXT_BUTTON".localized).then { $0.configure(true) }
+    let ageNextButton     = MainButton("NEXT_BUTTON".localized).then { $0.configure(false) }
     
     // HEIGHT
     let heightContainer   = ViewBuilder().backgrouondColor(.clear).view
     let heightTwiceButton = TwiceButton(left: "cm".localized, right: "inch".localized)
     let heightTextField   = TextForm("HEIGHT_TEXT".localized)
-    let heightNextButton  = MainButton("NEXT_BUTTON".localized).then { $0.configure(true) }
+    let heightNextButton  = MainButton("NEXT_BUTTON".localized).then { $0.configure(false) }
     
     // WEIGHT
     let weightContainer   = ViewBuilder().backgrouondColor(.clear).view
     let weightTwiceButton = TwiceButton(left: "kg".localized, right: "lb".localized)
     let weightTextField   = TextForm("WEIGHT_TEXT".localized)
-    let weightNextButton  = MainButton("COMPLETE_BUTTON".localized).then { $0.configure(true) }
+    let weightNextButton  = MainButton("COMPLETE_BUTTON".localized).then { $0.configure(false) }
     
     public static func create(viewModel: JoinViewModel)-> JoinViewController {
         let vc = JoinViewController()
@@ -285,6 +285,72 @@ public class JoinViewController: UIViewController, CodeBaseUI {
                     self.weightContainer.isHidden = false
                 }
             })
+            .disposed(by: disposeBag)
+        
+        // INPUT
+        nameTextField.rx.text.orEmpty
+            .bind(onNext: viewModel.nameTextInput)
+            .disposed(by: disposeBag)
+        
+        genderTwiceButton.selectedButton
+            .bind(onNext: viewModel.genderButtonTapped)
+            .disposed(by: disposeBag)
+        
+        ageTextField.rx.text.orEmpty
+            .bind(onNext: viewModel.ageTextInput)
+            .disposed(by: disposeBag)
+        
+        heightTwiceButton.selectedButton
+            .bind(onNext: viewModel.heightButtonTapped)
+            .disposed(by: disposeBag)
+        
+        heightTextField.rx.text.orEmpty
+            .bind(onNext: viewModel.heightTextInput)
+            .disposed(by: disposeBag)
+        
+        weightTwiceButton.selectedButton
+            .bind(onNext: viewModel.weightButtonTapped)
+            .disposed(by: disposeBag)
+        
+        weightTextField.rx.text.orEmpty
+            .bind(onNext: viewModel.weightTextInput)
+            .disposed(by: disposeBag)
+        
+        // OUTPUT
+        viewModel.nameNextButtonIsActive
+            .bind(to: nameNextButton.rx.isActive)
+            .disposed(by: disposeBag)
+        
+        viewModel.nameValidatedText
+            .bind(to: nameTextField.rx.text)
+            .disposed(by: disposeBag)
+        
+        viewModel.genderNextButtonIsActive
+            .bind(to: genderNextButton.rx.isActive)
+            .disposed(by: disposeBag)
+        
+        viewModel.ageNextButtonIsActive
+            .bind(to: ageNextButton.rx.isActive)
+            .disposed(by: disposeBag)
+        
+        viewModel.ageValidatedText
+            .bind(to: ageTextField.rx.text)
+            .disposed(by: disposeBag)
+        
+        viewModel.heightValidatedText
+            .bind(to: heightTextField.rx.text)
+            .disposed(by: disposeBag)
+        
+        viewModel.heightNextButtonIsActive
+            .bind(to: heightNextButton.rx.isActive)
+            .disposed(by: disposeBag)
+        
+        viewModel.weightValidatedText
+            .bind(to: weightTextField.rx.text)
+            .disposed(by: disposeBag)
+        
+        viewModel.weightNextButtonIsActive
+            .bind(to: weightNextButton.rx.isActive)
             .disposed(by: disposeBag)
     }
     
