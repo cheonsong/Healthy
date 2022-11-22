@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 import Util
 import SnapKit
+import RxSwift
 
 public class MainButton: UIButton {
     
@@ -51,6 +52,14 @@ public class MainButton: UIButton {
         } else {
             self.backgroundColor = .b2
             self.isUserInteractionEnabled = true
+        }
+    }
+}
+
+extension Reactive where Base: MainButton {
+    public var isActive: Binder<Bool> {
+        Binder(base) { base, newProperty in
+            base.configure(newProperty)
         }
     }
 }
