@@ -34,8 +34,8 @@ public class TwiceButton: UIView, CodeBaseUI {
         }
     }
     
-    public let leftButton = ButtonBuilder()
-        .font(.bold20)
+    private let leftButton = ButtonBuilder()
+        .font(.regular20)
         .titleColor(.white)
         .backgroundColor(.gr2)
         .borderColor(.gr2)
@@ -43,8 +43,8 @@ public class TwiceButton: UIView, CodeBaseUI {
         .cornerRadius(10)
         .view
     
-    public let rightButton = ButtonBuilder()
-        .font(.bold20)
+    private let rightButton = ButtonBuilder()
+        .font(.regular20)
         .titleColor(.white)
         .backgroundColor(.gr2)
         .borderColor(.gr2)
@@ -114,21 +114,21 @@ public class TwiceButton: UIView, CodeBaseUI {
                     self.leftButton.titleColor = .white
                     self.leftButton.layer.borderWidth = 0
                     self.leftButton.backgroundColor = .b2
-                    self.rightButton.titleColor = .black
+                    self.rightButton.titleColor = .gr2
                     self.rightButton.layer.borderWidth = 1
                     self.rightButton.backgroundColor = .white
                 case .right:
-                    self.leftButton.titleColor = .black
+                    self.leftButton.titleColor = .gr2
                     self.leftButton.layer.borderWidth = 1
                     self.leftButton.backgroundColor = .white
                     self.rightButton.titleColor = .white
                     self.rightButton.layer.borderWidth = 0
                     self.rightButton.backgroundColor = .b2
                 default:
-                    self.leftButton.titleColor = .black
+                    self.leftButton.titleColor = .gr2
                     self.leftButton.layer.borderWidth = 1
                     self.leftButton.backgroundColor = .white
-                    self.rightButton.titleColor = .black
+                    self.rightButton.titleColor = .gr2
                     self.rightButton.layer.borderWidth = 1
                     self.rightButton.backgroundColor = .white
                 }
