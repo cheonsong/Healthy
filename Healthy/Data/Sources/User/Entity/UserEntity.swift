@@ -17,7 +17,11 @@ public class UserEntity: Object {
     @Persisted public var age: Int
     @Persisted public var gender: String
     
-    @Persisted public var water: WaterEntity
+    @Persisted public var water: WaterEntity?
+    
+    override init() {
+        super.init()
+    }
     
     public init(name: String,
                 height: Int,
@@ -26,7 +30,7 @@ public class UserEntity: Object {
                 weightUnit: String,
                 age: Int,
                 gender: String,
-                water: WaterEntity) {
+                water: WaterEntity?) {
         super.init()
         self.name = name
         self.height = height

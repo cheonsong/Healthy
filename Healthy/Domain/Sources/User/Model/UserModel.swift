@@ -17,9 +17,9 @@ public struct UserModel {
     public var age: Int
     public var gender: String
     
-    public var water: WaterModel
+    public var water: WaterModel?
 
-    public init(name: String, height: Int, heightUnit: String, weight: Int, weightUnit: String, age: Int, gender: String, water: WaterModel) {
+    public init(name: String, height: Int, heightUnit: String, weight: Int, weightUnit: String, age: Int, gender: String, water: WaterModel?) {
         self.name = name
         self.height = height
         self.heightUnit = heightUnit

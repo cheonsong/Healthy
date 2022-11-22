@@ -17,12 +17,12 @@ extension UserModel {
                           weightUnit: self.weightUnit,
                           age: self.age,
                           gender: self.gender,
-                          water: self.water.toEntity())
+                          water: self.water?.toEntity() ?? nil)
     }
 }
 
 extension UserEntity {
-    public func toEntity()-> UserModel {
+    public func toModel()-> UserModel {
         return UserModel(name: self.name,
                          height: self.height,
                          heightUnit: self.heightUnit,
@@ -30,6 +30,6 @@ extension UserEntity {
                          weightUnit: self.weightUnit,
                          age: self.age,
                          gender: self.gender,
-                         water: self.water.toModel())
+                         water: self.water?.toModel() ?? nil)
     }
 }
