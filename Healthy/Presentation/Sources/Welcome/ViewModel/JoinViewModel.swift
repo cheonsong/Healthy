@@ -13,7 +13,7 @@ import RxCocoa
 import DesignSystem
 
 public protocol JoinViewModelAction {
-    func moveToMain()
+    func joinMoveToMain()
 }
 
 public protocol JoinViewModelInput {
@@ -43,13 +43,15 @@ public class JoinViewModel: JoinViewModelOutput {
     
     private var disposeBag = DisposeBag()
     private var validateUsecase: ValidationUseCaseProtocol
+    private var userUsecase: AddUserInfoUsecaseProtocol
     private var action:JoinViewModelAction
     
     public init(validate: ValidationUseCaseProtocol,
+                userUsecase: AddUserInfoUsecaseProtocol,
                 action: JoinViewModelAction) {
         self.validateUsecase = validate
         self.action = action
-        
+        self.userUsecase = userUsecase
         bind()
     }
     
@@ -63,13 +65,13 @@ public class JoinViewModel: JoinViewModelOutput {
     public var ageNextButtonIsActive: BehaviorRelay<Bool>     = .init(value: false)
     public var ageValidatedText: BehaviorRelay<String>        = .init(value: "")
     // HEIGHT
-    private var heightButtonIsTapped: BehaviorRelay<Bool> = .init(value: false)
+    private var heightButtonIsTapped: BehaviorRelay<Bool>     = .init(value: false)
     public var heightValidatedText: BehaviorRelay<String>     = .init(value: "")
     // WEIGHT
-    private var weightButtonIsTapped: BehaviorRelay<Bool> = .init(value: false)
+    private var weightButtonIsTapped: BehaviorRelay<Bool>     = .init(value: false)
     public var weightValidatedText: BehaviorRelay<String>     = .init(value: "")
     
-    public var heightNextButtonIsActive: BehaviorRelay<Bool> = .init(value: false)
+    public var heightNextButtonIsActive: BehaviorRelay<Bool>  = .init(value: false)
     public var weightNextButtonIsActive: BehaviorRelay<Bool>  = .init(value: false)
     
     func bind() {
@@ -91,7 +93,14 @@ extension JoinViewModel: JoinViewModelInput {
     
     /// 모든 정보 작성 후 확인 버튼 터치시
     public func completeButtonTapped(model: UserModel) {
-        action.moveToMain()
+        let _ = userUsecase.excute(model: model)
+            .subscribe(onSuccess: { [weak self] model in
+                UserDefaultsManager.shared.name = model.name
+                UserDefaultsManager.shared.age = model.age
+                UserDefaultsManager.shared.gender = model.gender
+                self?.action.joinMoveToMain()
+            })
+            .disposed(by: disposeBag)
     }
     
     /// 이름 정보 입력 시

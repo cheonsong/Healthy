@@ -9,16 +9,29 @@ import Foundation
 import Presentation
 import UIKit
 import Domain
+import Data
 
 final class WelcomeDIContainer {
     init() {}
     
     // MARK: UseCase
+    func makeAddUserInfoUsercase()-> AddUserInfoUsecase{
+        return AddUserInfoUsecase(repository: UserRepository())
+    }
+    
+    func makeFetchUserInfoUsecase()-> FetchUserInfoUsecase {
+        return FetchUserInfoUsecase(repository: UserRepository())
+    }
     
     // MARK: ViewModel
     func makeJoinViewModel(action: JoinViewModelAction)-> JoinViewModel {
         return JoinViewModel(validate: ValidationUseCase(),
+                             userUsecase: makeAddUserInfoUsercase(),
                              action: action)
+    }
+    
+    func makeWelcomeViewModel(action: WelcomeViewModelAction)-> WelcomeViewModel {
+        return WelcomeViewModel(action: action, usecase: makeFetchUserInfoUsecase())
     }
     
     // MARK: Coordinator
@@ -30,7 +43,7 @@ final class WelcomeDIContainer {
 extension WelcomeDIContainer: WelcomCoordinatorDependencies {
     
     func makeWelcomeViewController(action: WelcomeViewModelAction)-> WelcomeViewContoller {
-        return WelcomeViewContoller.create(action: action)
+        return WelcomeViewContoller.create(viewModel : makeWelcomeViewModel(action: action))
     }
     
     func makeMainCoordinator(navigaion navigation: UINavigationController)-> MainCoordinator {

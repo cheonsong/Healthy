@@ -27,6 +27,11 @@ public class SplashViewController: UIViewController, CodeBaseUI, UIViewControlle
         addComponents()
         setConstraints()
         bind()
+        
+        image.transform = CGAffineTransform(scaleX: 0, y: 0)
+        UIView.animate(withDuration: 0.5, animations: {
+            self.image.transform = .identity
+        })
     }
     
     public func addComponents() {

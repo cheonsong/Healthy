@@ -17,23 +17,28 @@ public protocol WelcomCoordinatorDependencies {
 
 public protocol WelcomeViewModelAction {
     func moveToJoin()
+    func welcomeMoveToMain()
 }
 
-public class WelcomeCoordinator: CoordinatorType {
+public class WelcomeCoordinator: NSObject, CoordinatorType {
     
     public var childCoordinators: [CoordinatorType] = []
     public var navigationController: UINavigationController
     var dependencies: WelcomCoordinatorDependencies
-    
+    private var transition: UIViewControllerAnimatedTransitioning?
     
     public init(navigationController: UINavigationController, dependencies: WelcomCoordinatorDependencies) {
         self.navigationController = navigationController
         self.dependencies = dependencies
+        super.init()
+        self.navigationController.delegate = self
     }
     
     public func start() {
         let vc = dependencies.makeWelcomeViewController(action: self)
-        navigationController.setViewControllers([vc], animated: false)
+        transition = FadeAnimator(animationDuration: 0.5, isPresenting: true)
+        navigationController.setViewControllers([vc], animated: true)
+        transition = nil
     }
     
 }
@@ -43,10 +48,23 @@ extension WelcomeCoordinator: WelcomeViewModelAction {
         let vc = dependencies.makeJoinViewController(action: self)
         navigationController.pushViewController(vc, animated: true)
     }
+    
+    public func welcomeMoveToMain() {
+        dependencies.makeMainCoordinator(navigaion: self.navigationController).start()
+    }
 }
 
 extension WelcomeCoordinator: JoinViewModelAction {
-    public func moveToMain() {
+    public func joinMoveToMain() {
+        let vc = dependencies.makeWelcomeViewController(action: self)
+        navigationController.setViewControllers([vc], animated: true)
         dependencies.makeMainCoordinator(navigaion: self.navigationController).start()
+    }
+}
+
+extension WelcomeCoordinator: UINavigationControllerDelegate {
+    
+    public func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationController.Operation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return self.transition
     }
 }

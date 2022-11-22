@@ -18,6 +18,7 @@ public class WelcomeViewContoller: UIViewController, CodeBaseUI {
     
     var disposeBag = DisposeBag()
     var action: WelcomeViewModelAction!
+    var viewModel: WelcomeViewModel!
     
     let mainTitleLabel = LabelBuilder("WELCOME_MAIN_LABEL".localized)
         .font(DesignSystemFontFamily.Suit.semiBold.font(size: 40))
@@ -34,9 +35,9 @@ public class WelcomeViewContoller: UIViewController, CodeBaseUI {
     
     let startButton = ButtonBuilder(MainButton()).title("WELCOME_START_BUTTON".localized).view as! MainButton
     
-    public static func create(action: WelcomeViewModelAction)-> WelcomeViewContoller {
+    public static func create(viewModel: WelcomeViewModel)-> WelcomeViewContoller {
         let vc = WelcomeViewContoller()
-        vc.action = action
+        vc.viewModel = viewModel
         return vc
     }
     
@@ -44,6 +45,12 @@ public class WelcomeViewContoller: UIViewController, CodeBaseUI {
         addComponents()
         setConstraints()
         bind()
+//        viewModel.viewDidLoad()
+    }
+    
+    public override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.viewDidLoad()
     }
     
     public func addComponents() {
@@ -71,7 +78,7 @@ public class WelcomeViewContoller: UIViewController, CodeBaseUI {
     public func bind() {
         startButton.rx.tap
             .subscribe(onNext: { [weak self] in
-                self?.action.moveToJoin()
+                self?.viewModel.startButtonTapped()
             })
             .disposed(by: disposeBag)
     }
