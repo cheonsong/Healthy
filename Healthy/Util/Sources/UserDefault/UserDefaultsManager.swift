@@ -51,10 +51,24 @@ public struct UserDefaultsManager {
             UserDefaults.standard.set(gender, forKey:  UserDefaultKey.gender.rawValue)
         }
     }
+    
+    public var waterGoal : Float {
+        get {
+            guard let waterGoal = UserDefaults.standard.value(forKey: UserDefaultKey.waterGoal.rawValue) as? Float else {
+                return 2
+            }
+            return waterGoal
+        }
+        
+        set(waterGoal) {
+            UserDefaults.standard.set(waterGoal, forKey:  UserDefaultKey.waterGoal.rawValue)
+        }
+    }
 }
 
 enum UserDefaultKey : String {
     case name
     case age
     case gender
+    case waterGoal
 }

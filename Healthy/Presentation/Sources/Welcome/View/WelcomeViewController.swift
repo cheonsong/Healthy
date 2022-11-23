@@ -45,7 +45,6 @@ public class WelcomeViewContoller: UIViewController, CodeBaseUI {
         addComponents()
         setConstraints()
         bind()
-//        viewModel.viewDidLoad()
     }
     
     public override func viewWillAppear(_ animated: Bool) {

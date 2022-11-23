@@ -43,6 +43,16 @@ public class WelcomeViewModel: WelcomeViewModelInput, WelcomeViewModelOutput {
                 self?.userInfo.accept(models.first)
             })
             .disposed(by: disposeBag)
+        
+        userInfo
+            .subscribe(onNext: { model in
+                guard let model = model else { return }
+                UserDefaultsManager.shared.name = model.name
+                UserDefaultsManager.shared.gender = model.gender
+                UserDefaultsManager.shared.age = model.age
+                App.state.waterGoal.accept(model.water?.goal ?? 2)
+            })
+            .disposed(by: disposeBag)
     }
     
     public func startButtonTapped() {

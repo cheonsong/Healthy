@@ -253,22 +253,8 @@ public class HomeViewController: UIViewController, CodeBaseUI {
     }
     
     private func viewWillAppearAction() {
-//        var text = ""
-//        if Int(App.state.waterToday.value * 10) % 10 == 0 {
-//            text = "\(Int(App.state.waterToday.value))"
-//        } else {
-//            text = "\(App.state.waterToday.value)"
-//        }
-//
-//        if Int(App.state.waterGoal.value * 10) % 10 == 0 {
-//            text += " / \(Int(App.state.waterGoal.value)) L"
-//        } else {
-//            text += " / \(App.state.waterGoal.value) L"
-//        }
-//
-//        waterView.infoView.todayContentslabel.text = text
-//        waterView.infoView.todayContentslabel.textFontChange(text: text, font: .bold10, range: ["L"])
-//        waterView.infoView.drawCircle(value: CGFloat(App.state.waterToday.value / App.state.waterGoal.value))
+        welcomeLabel.text = "HOME_WELCOME_LABEL".localized([UserDefaultsManager.shared.name])
+//        dateLabel.text = "HOME_DATE_LABEL".localized(["2011", "11".localized, "30"])
     }
     
     private func viewDidAppearAction() {
