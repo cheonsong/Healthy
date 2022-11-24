@@ -95,9 +95,9 @@ extension JoinViewModel: JoinViewModelInput {
     public func completeButtonTapped(model: UserModel) {
         let _ = userUsecase.excute(model: model)
             .subscribe(onSuccess: { [weak self] model in
-                UserDefaultsManager.shared.name = model.name
-                UserDefaultsManager.shared.age = model.age
-                UserDefaultsManager.shared.gender = model.gender
+                App.state.name.accept(model.name)
+                App.state.age.accept(model.age)
+                App.state.gender.accept(model.gender)
                 self?.action.joinMoveToMain()
             })
             .disposed(by: disposeBag)

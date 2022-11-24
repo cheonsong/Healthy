@@ -13,7 +13,7 @@ import Domain
 private protocol WaterAddViewModelInput {
     func didPlus()
     func didMinus()
-    func didAddWater(_ aCup: Int)
+    func didAddWater(_ aCup: Float)
     func validateText(_ text: String)
 }
 
@@ -77,8 +77,18 @@ extension WaterAddViewModel: WaterAddViewModelInput {
         }
     }
     
-    public func didAddWater(_ aCup: Int) {
+    // aCup은 ml -> l 단위로 변환해 줘야함
+    public func didAddWater(_ aCup: Float) {
         // TODO: DB업데이트 필요
+        let aCup = aCup / 1000 // 한컵
+        let drink = aCup * Float(count) // 음수량
+        let current = App.state.waterToday.value // 현재값
+        
+        if current + drink <= 0 {
+            App.state.waterToday.accept(0)
+        } else {
+            App.state.waterToday.accept(current + drink)
+        }
         
     }
     

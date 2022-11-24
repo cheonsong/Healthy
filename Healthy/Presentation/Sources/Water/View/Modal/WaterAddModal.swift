@@ -143,7 +143,7 @@ public class WaterAddModal: ModalView, CodeBaseUI {
         
         addButton.rx.tap
             .subscribe(onNext: { [weak self] in
-                self?.viewModel?.didAddWater(Int(self?.aCupTextForm.text ?? "200") ?? 200)
+                self?.viewModel?.didAddWater(Float(self?.aCupTextForm.text ?? "200") ?? 200)
                 self?.dismiss()
             })
             .disposed(by: disposeBag)

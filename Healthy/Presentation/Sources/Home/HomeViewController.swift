@@ -205,6 +205,12 @@ public class HomeViewController: UIViewController, CodeBaseUI {
                 self?.waterView.infoView.drawCircle(value: CGFloat(today / goal))
             })
             .disposed(by: disposeBag)
+        
+        App.state.name
+            .subscribe(onNext: { [weak self] name in
+                self?.welcomeLabel.text = "HOME_WELCOME_LABEL".localized([name])
+            })
+            .disposed(by: disposeBag)
     }
     
     private func viewDidLoadAnimation() {
@@ -253,8 +259,7 @@ public class HomeViewController: UIViewController, CodeBaseUI {
     }
     
     private func viewWillAppearAction() {
-        welcomeLabel.text = "HOME_WELCOME_LABEL".localized([UserDefaultsManager.shared.name])
-//        dateLabel.text = "HOME_DATE_LABEL".localized(["2011", "11".localized, "30"])
+
     }
     
     private func viewDidAppearAction() {

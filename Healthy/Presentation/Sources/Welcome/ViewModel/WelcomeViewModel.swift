@@ -47,9 +47,9 @@ public class WelcomeViewModel: WelcomeViewModelInput, WelcomeViewModelOutput {
         userInfo
             .subscribe(onNext: { model in
                 guard let model = model else { return }
-                UserDefaultsManager.shared.name = model.name
-                UserDefaultsManager.shared.gender = model.gender
-                UserDefaultsManager.shared.age = model.age
+                App.state.name.accept(model.name)
+                App.state.age.accept(model.age)
+                App.state.gender.accept(model.gender)
                 App.state.waterGoal.accept(model.water?.goal ?? 2)
             })
             .disposed(by: disposeBag)
