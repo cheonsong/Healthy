@@ -37,9 +37,12 @@ public class WaterAddViewModel: WaterAddViewModelOutput {
     
     // MARK: - Usecase
     private var validationUsecase: ValidationUseCaseProtocol!
+    private var addWaterUsecase: AddWaterUsecaseProtocol!
     
-    public init(validation: ValidationUseCaseProtocol) {
+    public init(validation: ValidationUseCaseProtocol,
+                addWaterUsecase: AddWaterUsecaseProtocol) {
         self.validationUsecase = validation
+        self.addWaterUsecase = addWaterUsecase
     }
     
     deinit {
@@ -90,6 +93,11 @@ extension WaterAddViewModel: WaterAddViewModelInput {
             App.state.waterToday.accept(current + drink)
         }
         
+        let isAchieve: Bool = (App.state.waterToday.value / App.state.waterGoal.value) >= 1
+        addWaterUsecase.excute(data: DailyWaterModel(date: DateModel.today,
+                                                     goal: App.state.waterGoal.value,
+                                                     progress: App.state.waterToday.value,
+                                                     isAchieve: isAchieve))
     }
     
     public func validateText(_ text: String) {

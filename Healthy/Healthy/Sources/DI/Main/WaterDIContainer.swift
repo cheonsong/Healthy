@@ -16,17 +16,32 @@ class WaterDIContainer {
     init() {}
     
     // MARK: Usecases
-    func makeValidationUsecase()-> ValidationUseCase {
+    func makeValidationUsecase()-> ValidationUseCaseProtocol {
         return ValidationUseCase()
+    }
+    
+    func makeAddWaterUsecase()-> AddWaterUsecaseProtocol {
+        return AddWaterUsecase(repository: DailyWaterRepository())
+    }
+    
+    func makeFetchDailyWaterUsecase()-> FetchTodayWaterUsecaseProtocol {
+        return FetchTodayWaterUsecase(repository: DailyWaterRepository())
+    }
+    
+    func makeFetchMonthWaterUsecase()-> FetchMonthWaterUsecaseProtocol {
+        return FetchMonthWaterUsecase(repository: DailyWaterRepository())
     }
     
     // MARK: ViewModel
     func makeWaterViewModel(actions: WaterViewModelActions)-> WaterViewModel {
-        return WaterViewModel(actions: actions)
+        return WaterViewModel(actions: actions,
+                              fetchDailyWaterUsecase: makeFetchDailyWaterUsecase(),
+                              fetchMonthWaterUsecase: makeFetchMonthWaterUsecase())
     }
     
     func makeWaterAddViewModel()-> WaterAddViewModel {
-        return WaterAddViewModel(validation: makeValidationUsecase())
+        return WaterAddViewModel(validation: makeValidationUsecase(),
+                                 addWaterUsecase: makeAddWaterUsecase())
     }
     
     // MARK: Coordinator
