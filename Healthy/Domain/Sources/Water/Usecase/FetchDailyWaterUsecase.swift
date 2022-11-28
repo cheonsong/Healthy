@@ -21,21 +21,10 @@ public class FetchTodayWaterUsecase: FetchTodayWaterUsecaseProtocol {
     }
     
     public func execute() -> Single<DailyWaterModel> {
-        return repository.fetchTodayWater(.today).map({$0.first ?? DailyWaterModel(date: self.getDate(),
-                                                                                   goal: 2000,
+        return repository.fetchTodayWater(.today).map({$0.first ?? DailyWaterModel(date: DateModel.today,
+                                                                                   goal: 2,
                                                                                    progress: 0,
                                                                                    isAchieve: false)})
-    }
-    
-    func getDate()-> DateModel {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy"
-        let year = formatter.string(from: Date())
-        formatter.dateFormat = "MM"
-        let month = formatter.string(from: Date())
-        formatter.dateFormat = "dd"
-        let day = formatter.string(from: Date())
-        return DateModel(year: year, month: month, day: day)
     }
 }
 

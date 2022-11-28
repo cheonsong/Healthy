@@ -10,7 +10,7 @@ import Domain
 
 extension DailyWaterEntity {
     public func toModel()-> DailyWaterModel {
-        return DailyWaterModel(date: self.date?.toModel() ?? nil,
+        return DailyWaterModel(date: self.date?.toModel() ?? DateModel.today,
                                goal: self.goal,
                                progress: self.progress,
                                isAchieve: self.isAchieve)
@@ -19,7 +19,7 @@ extension DailyWaterEntity {
 
 extension DailyWaterModel {
     public func toEntity()-> DailyWaterEntity {
-        return DailyWaterEntity(date: self.date?.toEntity() ?? nil,
+        return DailyWaterEntity(date: self.date?.toEntity() ?? DateModel.today.toEntity(),
                                 goal: self.goal,
                                 progress: self.progress,
                                 isAchieve: self.isAchieve)

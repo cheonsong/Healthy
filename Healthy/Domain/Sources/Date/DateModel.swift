@@ -18,7 +18,18 @@ public struct DateModel {
         self.day = day
     }
     
-    static func ==(left: DateModel, right: DateModel)-> Bool {
+    public static var today: DateModel {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy"
+        let year = formatter.string(from: Date())
+        formatter.dateFormat = "MM"
+        let month = formatter.string(from: Date())
+        formatter.dateFormat = "dd"
+        let day = formatter.string(from: Date())
+        return DateModel(year: year, month: month, day: day)
+    }
+    
+    public static func ==(left: DateModel, right: DateModel)-> Bool {
         return left.year == right.year && left.month == right.month && left.day == right.day
     }
 }
