@@ -9,13 +9,18 @@ import Foundation
 import RealmSwift
 
 public class DailyWaterEntity: Object {
-    @Persisted public var date: DateEntity?
-    @Persisted public var goal: Float
-    @Persisted public var progress: Float
-    @Persisted public var isAchieve: Bool
+    @objc dynamic public var id: Int = 0
+    @objc dynamic public var date: DateEntity?
+    @objc dynamic public var goal: Float = 0
+    @objc dynamic public var progress: Float = 0
+    @objc dynamic public var isAchieve: Bool = false
     
     override init() {
         super.init()
+    }
+    
+    public override static func primaryKey() -> String? {
+        return "id"
     }
     
     public init(date: DateEntity?, goal: Float, progress: Float, isAchieve: Bool) {

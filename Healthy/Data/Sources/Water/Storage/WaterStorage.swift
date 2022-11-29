@@ -12,7 +12,7 @@ import RealmSwift
 
 public class WaterSotrage {
     private var helper = DBHelper<DailyWaterEntity>()
-    
+    private var disposeBag = DisposeBag()
     public init() {
         
     }
@@ -28,6 +28,15 @@ public class WaterSotrage {
     public func read(query: @escaping (Query<DailyWaterEntity>)-> Query<Bool>)-> Single<[DailyWaterEntity]> {
         
         return helper.readWithQuery(query: query)
+    }
+    
+    public func readAll()-> Single<[DailyWaterEntity]> {
+        return helper.read()
+    }
+    
+    public func lastID()-> Int {
+        
+        return helper.lastID()
     }
 }
 

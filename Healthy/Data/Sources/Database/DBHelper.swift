@@ -86,9 +86,9 @@ struct DBHelper<Q: Object> {
     }
 
     func read()-> Single<[Q]> {
-        let objects = realm!.objects(Q.self)
-        
         return .create(subscribe: { single-> Disposable in
+            let objects = realm.objects(Q.self)
+            Log.d(Array(objects))
             single(.success(Array(objects)))
             
             return Disposables.create()
@@ -103,5 +103,9 @@ struct DBHelper<Q: Object> {
             return Disposables.create()
         })
     }
-
+    
+    func lastID()-> Int {
+        let objects = realm.objects(Q.self)
+        return objects.count
+    }
 }
