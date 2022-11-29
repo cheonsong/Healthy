@@ -10,6 +10,7 @@ import UIKit
 import DesignSystem
 import Util
 import RxSwift
+import RealmSwift
 
 public final class WaterViewController: UIViewController, CodeBaseUI {
     
@@ -68,6 +69,7 @@ public final class WaterViewController: UIViewController, CodeBaseUI {
         addComponents()
         setConstraints()
         bind()
+        viewModel?.viewDidLoad()
     }
     
     public override func viewDidAppear(_ animated: Bool) {
