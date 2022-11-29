@@ -9,6 +9,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 import Domain
+import Util
 
 private protocol WaterAddViewModelInput {
     func didPlus()
@@ -28,6 +29,7 @@ public class WaterAddViewModel: WaterAddViewModelOutput {
     
     // 마신 물 카운트
     var count = 0
+    var disposeBag = DisposeBag()
     
     // MARK: - Output
     public var waterCount: PublishRelay<String> = .init()
@@ -94,10 +96,18 @@ extension WaterAddViewModel: WaterAddViewModelInput {
         }
         
         let isAchieve: Bool = (App.state.waterToday.value / App.state.waterGoal.value) >= 1
-        addWaterUsecase.excute(data: DailyWaterModel(date: DateModel.today,
-                                                     goal: App.state.waterGoal.value,
-                                                     progress: App.state.waterToday.value,
-                                                     isAchieve: isAchieve))
+        
+        let model = DailyWaterModel(date: DateModel.today,
+                                    goal: App.state.waterGoal.value,
+                                    progress: App.state.waterToday.value,
+                                    isAchieve: isAchieve)
+        
+        let _ = addWaterUsecase.excute(data: model)
+            .subscribe(onSuccess: {
+                App.state.waterGoal.accept($0.goal)
+                App.state.waterToday.accept($0.progress)
+            })
+            .disposed(by: disposeBag)
     }
     
     public func validateText(_ text: String) {
