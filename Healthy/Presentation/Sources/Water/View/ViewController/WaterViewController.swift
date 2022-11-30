@@ -195,6 +195,7 @@ public final class WaterViewController: UIViewController, CodeBaseUI {
     }
     
     func updateValue(_ value: CGFloat) {
+        let value = min(value, 1)
         UIView.animate(withDuration: 1, animations: {
             self.waterView.snp.remakeConstraints {
                 $0.height.equalToSuperview()
