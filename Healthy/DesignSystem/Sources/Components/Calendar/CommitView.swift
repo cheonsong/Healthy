@@ -17,7 +17,7 @@ public class CommitView: UIView {
     
     public var data: [DailyWaterModel] = []
     
-    private let title = LabelBuilder("COMMIT_DATE_LABEL".localized([DateConverter.currentYear(), DateConverter.currentMonth().localized])).font(.bold16).textColor(.black).view
+    private let title = LabelBuilder("COMMIT_DATE_LABEL".localized([DateModel.today.year.localized, DateModel.today.month.localized])).font(.bold16).textColor(.black).view
     
     private let stackView = StackViewBuilder().axis(.horizontal).backgrouondColor(.clear).distributon(.fillEqually).view
     
