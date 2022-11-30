@@ -24,7 +24,7 @@ public class CalendarCell: UICollectionViewCell {
         contentView.addSubview(commit)
         commit.snp.makeConstraints {
             $0.center.equalToSuperview()
-            $0.size.equalToSuperview().multipliedBy(0.9)
+            $0.size.equalToSuperview()
         }
     }
     

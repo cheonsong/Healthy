@@ -192,6 +192,12 @@ public final class WaterViewController: UIViewController, CodeBaseUI {
             self?.updateValue(CGFloat(value))
         })
         .disposed(by: disposeBag)
+        
+        viewModel?.monthWater
+            .subscribe(onNext: { [weak self] data in
+                self?.calendar.set(data: data)
+            })
+            .disposed(by: disposeBag)
     }
     
     func updateValue(_ value: CGFloat) {
