@@ -266,7 +266,7 @@ public class JoinViewController: UIViewController, CodeBaseUI {
                 guard let self = self else { return }
                 
                 self.questionLabel.text = stat.localized
-                self.progress.progress = stat.progress
+                self.progress.setProgress(stat.progress, animated: true)
                 
                 switch stat {
                 case .name:
