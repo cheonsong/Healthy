@@ -79,7 +79,7 @@ extension CommitView: UICollectionViewDelegate {
 
 extension CommitView: UICollectionViewDataSource {
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return days[Int(DateModel.today.month) ?? 0]
+        return days[(Int(DateModel.today.month) ?? 0) - 1]
     }
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
