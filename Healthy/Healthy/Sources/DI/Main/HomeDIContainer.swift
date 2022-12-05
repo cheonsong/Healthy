@@ -19,7 +19,12 @@ final class HomeDIContainer {
     // MARK: Usecases
     
     // MARK: ViewModel
-    
+    func makeHomeViewModel(action: HomeViewModelAction)-> HomeViewModel {
+        let waterDI = WaterDIContainer()
+        return HomeViewModel(action: action,
+                             fetchTodayWaterUsecase: waterDI.makeFetchDailyWaterUsecase(),
+                             fetchMonthWaterUsecase: waterDI.makeFetchMonthWaterUsecase())
+    }
     // MARK: Coordinator
     func makeHomeCoordinator(navigationController: UINavigationController) -> HomeCoordinator {
         return HomeCoordinator(navigation: navigationController, dependencies: self)
@@ -27,8 +32,8 @@ final class HomeDIContainer {
 }
 
 extension HomeDIContainer: HomeCoordinatorDependencies {
-    func makeHomeViewController() -> Presentation.HomeViewController {
-        return HomeViewController.create()
+    func makeHomeViewController(action: HomeViewModelAction) -> Presentation.HomeViewController {
+        return HomeViewController.create(viewModel: makeHomeViewModel(action: action))
     }
     
     func makeWaterCoordinator(navigation: UINavigationController) -> CoordinatorType {

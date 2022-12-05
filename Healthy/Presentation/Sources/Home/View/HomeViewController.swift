@@ -17,7 +17,7 @@ import Domain
 public class HomeViewController: UIViewController, CodeBaseUI {
     
     var coordinator: HomeCoordinator?
-    
+    var viewModel: HomeViewModel?
     var disposeBag = DisposeBag()
     
     let topContainer = ViewBuilder().backgrouondColor(.white).view
@@ -45,8 +45,9 @@ public class HomeViewController: UIViewController, CodeBaseUI {
     let sleepView     = MainView(type: .sleep)
     
     /// MainViewController DI를 위한 Create 함수
-    public static func create()-> HomeViewController {
+    public static func create(viewModel: HomeViewModel)-> HomeViewController {
         let vc = HomeViewController()
+        vc.viewModel = viewModel
         return vc
     }
     
@@ -57,6 +58,7 @@ public class HomeViewController: UIViewController, CodeBaseUI {
         setConstraints()
         bind()
         viewDidLoadAnimation()
+        viewModel?.viewDidLoad()
     }
     
     public override func viewWillAppear(_ animated: Bool) {
@@ -171,7 +173,7 @@ public class HomeViewController: UIViewController, CodeBaseUI {
             .when(.recognized)
             .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] _ in
-                self?.coordinator?.presentWaterViewController()
+                self?.viewModel?.waterViewTapped()
             })
             .disposed(by: disposeBag)
         
@@ -188,28 +190,21 @@ public class HomeViewController: UIViewController, CodeBaseUI {
         Observable.combineLatest(App.state.waterToday, App.state.waterGoal)
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] today, goal in
-                var text = ""
-                if Int(today * 10) % 10 == 0 {
-                    text = "\(Int(today))"
-                } else {
-                    text = "\(today)"
-                }
-                
-                if Int(goal * 10) % 10 == 0 {
-                    text += " / \(Int(goal)) L"
-                } else {
-                    text += " / \(goal) L"
-                }
-                
-                self?.waterView.infoView.todayContentslabel.text = text
-                self?.waterView.infoView.todayContentslabel.textFontChange(text: text, font: .bold10, range: ["L"])
-                self?.waterView.infoView.drawCircle(value: CGFloat(today / goal))
+                self?.waterView.infoView.changeToday(today: today, goal: goal)
             })
             .disposed(by: disposeBag)
         
         App.state.name
             .subscribe(onNext: { [weak self] name in
                 self?.welcomeLabel.text = "HOME_WELCOME_LABEL".localized([name])
+            })
+            .disposed(by: disposeBag)
+        
+        App.state.waterMontlyList
+            .subscribe(onNext: { [weak self] list in
+                let map = list.map { $0.progress }
+                let sum = map.reduce(0, +)
+                self?.waterView.infoView.changeAverage(value: sum / Float(DateModel.today.day)!)
             })
             .disposed(by: disposeBag)
     }

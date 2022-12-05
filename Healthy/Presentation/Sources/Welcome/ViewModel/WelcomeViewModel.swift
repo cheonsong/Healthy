@@ -24,12 +24,12 @@ public protocol WelcomeViewModelOutput {
 public class WelcomeViewModel: WelcomeViewModelInput, WelcomeViewModelOutput {
     
     var disposeBag = DisposeBag()
-    var usecase: FetchUserInfoUsecaseProtocol
+    var fetchUserUsecase: FetchUserInfoUsecaseProtocol
     var action: WelcomeViewModelAction
     
     public init(action: WelcomeViewModelAction,
-                usecase: FetchUserInfoUsecaseProtocol) {
-        self.usecase = usecase
+                fetchUserUsecase: FetchUserInfoUsecaseProtocol) {
+        self.fetchUserUsecase = fetchUserUsecase
         self.action = action
     }
     
@@ -37,7 +37,7 @@ public class WelcomeViewModel: WelcomeViewModelInput, WelcomeViewModelOutput {
     public var isMoveToMain: PublishRelay<Bool> = .init()
     
     public func viewDidLoad() {
-        usecase.excute()
+        fetchUserUsecase.excute()
             .subscribe(onSuccess: { [weak self] models in
                 Log.d(models)
                 self?.userInfo.accept(models.first)
@@ -60,7 +60,6 @@ public class WelcomeViewModel: WelcomeViewModelInput, WelcomeViewModelOutput {
             action.moveToJoin()
             return
         }
-        Log.d(info)
         action.welcomeMoveToMain()
         
     }

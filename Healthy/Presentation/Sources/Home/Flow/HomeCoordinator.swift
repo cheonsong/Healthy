@@ -11,7 +11,7 @@ import Util
 
 // 의존성 주입을 위한 Coordinator Dependency
 public protocol HomeCoordinatorDependencies {
-    func makeHomeViewController() -> HomeViewController
+    func makeHomeViewController(action: HomeViewModelAction) -> HomeViewController
     func makeWaterCoordinator(navigation: UINavigationController)-> CoordinatorType
     func makeStepsCoordinator(navigation: UINavigationController)-> CoordinatorType
 }
@@ -31,15 +31,10 @@ public class HomeCoordinator: NSObject, CoordinatorType {
     }
     
     public func start() {
-        let homeVC = dependencies.makeHomeViewController()
+        let homeVC = dependencies.makeHomeViewController(action: self)
         homeVC.coordinator = self
         
         self.navigationController.pushViewController(homeVC, animated: false)
-    }
-    
-    public func presentWaterViewController() {
-        let coordinator = dependencies.makeWaterCoordinator(navigation: self.navigationController)
-        coordinator.start()
     }
     
     public func presentStepsViewController() {
@@ -51,4 +46,11 @@ public class HomeCoordinator: NSObject, CoordinatorType {
         print(#file)
     }
     
+}
+
+extension HomeCoordinator: HomeViewModelAction {
+    public func moveToWaterViewController() {
+        let coordinator = dependencies.makeWaterCoordinator(navigation: self.navigationController)
+        coordinator.start()
+    }
 }
