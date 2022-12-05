@@ -14,12 +14,12 @@ import RxCocoa
 
 public class MainInfoView: UIView {
     
-    var type: Health = .water
-    var disposeBag = DisposeBag()
-    let innerShadowLayer = CAShapeLayer()
-    var circleLayer: CALayer? = nil
-    lazy var todayTitleLabel = LabelBuilder("TODAY_TEXT".localized).font(.regular16).textColor(.black).view
-    public lazy var todayContentslabel = LabelBuilder("0 " + self.type.unit)
+    private var type: Health = .water
+    private var disposeBag = DisposeBag()
+    private let innerShadowLayer = CAShapeLayer()
+    private var circleLayer: CALayer? = nil
+    private lazy var todayTitleLabel = LabelBuilder("TODAY_TEXT".localized).font(.regular16).textColor(.black).view
+    private lazy var todayContentslabel = LabelBuilder("0 " + self.type.unit)
         .textColor(.black)
         .font(.bold25)
         .attributedTextChangeFont("0 " + self.type.unit, .bold10, [self.type.unit])
@@ -32,7 +32,7 @@ public class MainInfoView: UIView {
         .attributedTextChangeFont("0 " + self.type.unit, .bold10, [self.type.unit])
         .view
     
-    let circleView = ViewBuilder().backgrouondColor(.clear).view
+    private let circleView = ViewBuilder().backgrouondColor(.clear).view
     lazy var icon = ImageViewBuilder(self.type.icon).view
     
     public convenience init(type: Health, frame: CGRect = .zero) {
@@ -51,14 +51,14 @@ public class MainInfoView: UIView {
         super.init(coder: coder)
     }
     
-    func addComponents() {
+    private func addComponents() {
         self.backgroundColor = .white
         self.layer.masksToBounds = true
         self.layer.cornerRadius = 10
         [todayTitleLabel, avgTitleLabel, todayContentslabel, avgContentslabel, circleView, icon].forEach { addSubview($0) }
     }
     
-    func setConstraints() {
+    private func setConstraints() {
         todayTitleLabel.snp.makeConstraints {
             $0.top.equalToSuperview().inset(13)
             $0.left.equalToSuperview().inset(Const.padding)
@@ -91,7 +91,7 @@ public class MainInfoView: UIView {
         
     }
     
-    func bind() {
+    private func bind() {
         
     }
     
@@ -100,7 +100,31 @@ public class MainInfoView: UIView {
         drawBaseCircle()
     }
     
-    func drawBaseCircle() {
+    public func changeToday(today: Float, goal: Float) {
+        var text = ""
+        if Int(today * 10) % 10 == 0 {
+            text = "\(Int(today))"
+        } else {
+            text = "\(today)"
+        }
+        
+        if Int(goal * 10) % 10 == 0 {
+            text += " / \(Int(goal)) L"
+        } else {
+            text += " / \(goal) L"
+        }
+        
+        todayContentslabel.text = text
+        todayContentslabel.textFontChange(text: text, font: .bold10, range: ["L"])
+        drawCircle(value: CGFloat(today / goal))
+    }
+    
+    public func changeAverage(value: Float) {
+        avgContentslabel.text = String(value) + " L"
+        avgContentslabel.textFontChange(text: String(value) + " L", font: .bold10, range: ["L"])
+    }
+    
+    private func drawBaseCircle() {
         let center = CGPoint(x: 50, y: 50)
         let path = UIBezierPath()
         path.addArc(withCenter: center,
@@ -143,7 +167,7 @@ public class MainInfoView: UIView {
     }
     
     /// Draw Inner Shadow When Selected
-    func drawInnerShadow() {
+    private func drawInnerShadow() {
         innerShadowLayer.shadowColor = UIColor.black.cgColor
         innerShadowLayer.shadowOffset = CGSize(width: 0.0, height: 0.0)
         innerShadowLayer.shadowOpacity = 0.25

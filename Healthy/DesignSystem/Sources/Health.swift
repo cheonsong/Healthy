@@ -23,7 +23,7 @@ public enum Health: String {
     var unit: String {
         switch self {
         case .water:
-            return "ml"
+            return "L"
         case .steps:
             return "steps"
         case .calolies:

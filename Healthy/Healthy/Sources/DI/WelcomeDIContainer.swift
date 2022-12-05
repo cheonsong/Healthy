@@ -31,7 +31,8 @@ final class WelcomeDIContainer {
     }
     
     func makeWelcomeViewModel(action: WelcomeViewModelAction)-> WelcomeViewModel {
-        return WelcomeViewModel(action: action, usecase: makeFetchUserInfoUsecase())
+        return WelcomeViewModel(action: action,
+                                fetchUserUsecase: makeFetchUserInfoUsecase())
     }
     
     // MARK: Coordinator
