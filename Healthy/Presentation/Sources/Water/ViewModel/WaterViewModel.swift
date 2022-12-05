@@ -71,7 +71,7 @@ extension WaterViewModel: WaterViewModelInput {
         
         fetchMonthWaterUsecase.execute(year: year, month: month)
             .subscribe{ [weak self] models in
-                self?.monthWater.accept(models)
+                App.state.waterMontlyList.accept(models)
             }
             .disposed(by: disposeBag)
     }

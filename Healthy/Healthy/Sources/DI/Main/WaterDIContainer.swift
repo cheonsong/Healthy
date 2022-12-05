@@ -41,7 +41,8 @@ class WaterDIContainer {
     
     func makeWaterAddViewModel()-> WaterAddViewModel {
         return WaterAddViewModel(validation: makeValidationUsecase(),
-                                 addWaterUsecase: makeAddWaterUsecase())
+                                 addWaterUsecase: makeAddWaterUsecase(),
+                                 fetchWaterUsecase: makeFetchMonthWaterUsecase())
     }
     
     // MARK: Coordinator

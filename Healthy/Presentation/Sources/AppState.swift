@@ -9,6 +9,7 @@ import Foundation
 import Util
 import RxSwift
 import RxCocoa
+import Domain
 
 public class App {
     static let state = App()
@@ -22,4 +23,5 @@ public class App {
     // MARK: WATER
     var waterGoal: BehaviorRelay<Float> = .init(value: 2)
     var waterToday: BehaviorRelay<Float> = .init(value: 0)
+    var waterMontlyList: BehaviorRelay<[DailyWaterModel]> = .init(value: [])
 }

@@ -193,7 +193,7 @@ public final class WaterViewController: UIViewController, CodeBaseUI {
         })
         .disposed(by: disposeBag)
         
-        viewModel?.monthWater
+        App.state.waterMontlyList
             .subscribe(onNext: { [weak self] data in
                 self?.calendar.set(data: data)
             })

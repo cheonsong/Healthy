@@ -91,6 +91,8 @@ extension CommitView: UICollectionViewDataSource {
         
         if data.first?.isAchieve ?? false {
             cell.commit.backgroundColor = .b2
+        } else {
+            cell.commit.backgroundColor = .clear
         }
         
         return cell

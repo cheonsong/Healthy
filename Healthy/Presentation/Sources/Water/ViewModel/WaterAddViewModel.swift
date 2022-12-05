@@ -40,11 +40,14 @@ public class WaterAddViewModel: WaterAddViewModelOutput {
     // MARK: - Usecase
     private var validationUsecase: ValidationUseCaseProtocol!
     private var addWaterUsecase: AddWaterUsecaseProtocol!
+    private var fetchWaterUsecase: FetchMonthWaterUsecaseProtocol!
     
     public init(validation: ValidationUseCaseProtocol,
-                addWaterUsecase: AddWaterUsecaseProtocol) {
+                addWaterUsecase: AddWaterUsecaseProtocol,
+                fetchWaterUsecase: FetchMonthWaterUsecaseProtocol) {
         self.validationUsecase = validation
         self.addWaterUsecase = addWaterUsecase
+        self.fetchWaterUsecase = fetchWaterUsecase
     }
     
     deinit {
@@ -103,9 +106,18 @@ extension WaterAddViewModel: WaterAddViewModelInput {
                                     isAchieve: isAchieve)
         
         let _ = addWaterUsecase.excute(data: model)
-            .subscribe(onSuccess: {
-                App.state.waterGoal.accept($0.goal)
-                App.state.waterToday.accept($0.progress)
+            .subscribe(onSuccess: { [weak self] model in
+                guard let self = self else { return }
+                
+                App.state.waterGoal.accept(model.goal)
+                App.state.waterToday.accept(model.progress)
+                
+                self.fetchWaterUsecase.execute(year: DateModel.today.year, month: Month(rawValue: DateModel.today.month)!)
+                    .subscribe{ models in
+                        Log.d(models)
+                        App.state.waterMontlyList.accept(models)
+                    }
+                    .disposed(by: self.disposeBag)
             })
             .disposed(by: disposeBag)
     }
