@@ -18,23 +18,3 @@ extension UIFont {
     public static let regular16 = DesignSystemFontFamily.Suit.regular.font(size: 16)
     public static let regular10 = DesignSystemFontFamily.Suit.regular.font(size: 10)
 }
-
-public struct FontManagser{
-    
-    public static func suit(type: Suit, size: CGFloat)-> UIFont? {
-        return UIFont(name: "SUIT-\(type.rawValue)", size: size)
-    }
-    
-}
-
-public enum Suit: String {
-    case thin = "Thin"
-    case regular = "Regular"
-    case heavy = "Heavy"
-    case bold = "Bold"
-    case light = "Light"
-    case semiBold = "SemiBold"
-    case medium = "Medium"
-    case extraBold = "ExtraBold"
-    case extraLight = "ExtraLight"
-}

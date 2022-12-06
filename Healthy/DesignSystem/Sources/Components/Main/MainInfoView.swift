@@ -109,7 +109,7 @@ public class MainInfoView: UIView {
         }
         
         if goal.hasDecimalNumber {
-            text += " / \(goal) L"
+            text += " / \(goal.secondDecimal) L"
         } else {
             text += " / \(Int(goal)) L"
         }

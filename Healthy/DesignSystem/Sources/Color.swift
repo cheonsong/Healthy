@@ -26,8 +26,11 @@ extension UIColor {
     public static let y2 = UIColor(hex: "#FDD998")
     public static let y3 = UIColor(hex: "#FFECC7")
     
+    /// 9D9D9D
     public static let gr1 = UIColor(hex: "#9D9D9D")
+    /// D9D9D9
     public static let gr2 = UIColor(hex: "#D9D9D9")
+    /// F9F9F9
     public static let gr3 = UIColor(hex: "#F9F9F9")
     
     public static let error = UIColor(hex: "#FF6961")
