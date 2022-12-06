@@ -23,5 +23,7 @@ public struct Const {
     
     public static let calendarCellSize = (fullWidth - 30) / 7
     
-    public static let welcomeMainTitleStrings: [String] = ["하루", "기록", "건강", "Daily", "Record", "Healthy"]
+    public static let welcomeMainTitleStrings: [String] = ["하루", "기록", "건강",    // kor
+                                                           "Daily", "Record", "Healthy",    // en
+                                                           "毎日", "記録", "元気"]    // japan
 }
