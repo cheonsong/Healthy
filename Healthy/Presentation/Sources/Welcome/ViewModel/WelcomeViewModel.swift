@@ -47,16 +47,13 @@ public class WelcomeViewModel: WelcomeViewModelInput, WelcomeViewModelOutput {
         userInfo
             .subscribe(onNext: { model in
                 guard let model = model else { return }
-                App.state.name.accept(model.name)
-                App.state.age.accept(model.age)
-                App.state.gender.accept(model.gender)
-                App.state.waterGoal.accept(model.water?.goal ?? 2)
+                App.state.userInfo.accept(model)
             })
             .disposed(by: disposeBag)
     }
     
     public func startButtonTapped() {
-        guard let info = self.userInfo.value else {
+        guard let _ = self.userInfo.value else {
             action.moveToJoin()
             return
         }

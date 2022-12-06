@@ -32,6 +32,10 @@ class WaterDIContainer {
         return FetchMonthWaterUsecase(repository: DailyWaterRepository())
     }
     
+    func makeUpdateUserInfoUsecase()-> UpdateUserInfoUsecaseProtocol {
+        return UpdateUserInfoUsecase(repository: UserRepository())
+    }
+    
     // MARK: ViewModel
     func makeWaterViewModel(actions: WaterViewModelActions)-> WaterViewModel {
         return WaterViewModel(actions: actions,
@@ -43,6 +47,12 @@ class WaterDIContainer {
         return WaterAddViewModel(validation: makeValidationUsecase(),
                                  addWaterUsecase: makeAddWaterUsecase(),
                                  fetchWaterUsecase: makeFetchMonthWaterUsecase())
+    }
+    
+    func makeWaterSetViewModel()-> WaterSetViewModel {
+        return WaterSetViewModel(updateUserInfoUsecase: makeUpdateUserInfoUsecase(),
+                                 validationUsecase: makeValidationUsecase(),
+                                 addDailyWaterUsecase: makeAddWaterUsecase())
     }
     
     // MARK: Coordinator
@@ -62,6 +72,6 @@ extension WaterDIContainer: WaterCoordinatorDependencies {
     }
     
     func makeWaterSetModal() -> WaterSetModal {
-        return WaterSetModal()
+        return WaterSetModal(viewModel: makeWaterSetViewModel())
     }
 }

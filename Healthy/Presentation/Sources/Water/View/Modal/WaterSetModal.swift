@@ -20,6 +20,8 @@ enum WaterUnit {
 
 public class WaterSetModal: ModalView, CodeBaseUI {
     
+    var viewModel: WaterSetViewModel!
+    
     var unitButtonObservable = BehaviorRelay<WaterUnit>(value: .l)
     
     let title = LabelBuilder("WATER_SET_TITLE_LABEL".localized)
@@ -58,9 +60,9 @@ public class WaterSetModal: ModalView, CodeBaseUI {
     let completeButton = ButtonBuilder(MainButton()).title("COMPLETE_BUTTON".localized).view as! MainButton
     let cancelButton = ButtonBuilder(CancelButton()).title("CANCEL_BUTTON".localized).view as! CancelButton
     
-    public override init(frame: CGRect) {
-        super.init(frame: frame)
-        
+    public init(viewModel: WaterSetViewModel) {
+        super.init(frame: .zero)
+        self.viewModel = viewModel
         addComponents()
         setConstraints()
         bind()
@@ -166,6 +168,27 @@ public class WaterSetModal: ModalView, CodeBaseUI {
             .subscribe(onNext: { [weak self] in
                 guard let self = self else { return }
                 self.dismiss()
+            })
+            .disposed(by: disposeBag)
+        
+        goalTextForm.rx.text.orEmpty
+            .subscribe(onNext: { [weak self] text in
+                self?.viewModel.goalTextFormInput(text: text)
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.validatedText
+            .bind(to: goalTextForm.rx.text)
+            .disposed(by: disposeBag)
+        
+        viewModel.isCompleteButtonActive
+            .bind(to: completeButton.rx.isActive)
+            .disposed(by: disposeBag)
+        
+        completeButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                self?.viewModel.completeButtonTapped()
+                self?.dismiss()
             })
             .disposed(by: disposeBag)
     }

@@ -29,4 +29,15 @@ public struct UserModel {
         self.gender = gender
         self.water = water
     }
+    
+    public init() {
+        self.name = ""
+        self.height = 0
+        self.heightUnit = ""
+        self.weight = 0
+        self.weightUnit = ""
+        self.age = 1
+        self.gender = ""
+        self.water = nil
+    }
 }

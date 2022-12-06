@@ -12,12 +12,13 @@ import RxSwift
 public class UserRepository: UserRepositoryProtocol {
     
     let storage: UserSotrage
+    var disposeBag = DisposeBag()
     
     public init() {
         self.storage = UserSotrage()
     }
     
-    public func saveUserInfo(model: UserModel)-> Single<UserModel> {
+    public func addUserInfo(model: UserModel)-> Single<UserModel> {
         return storage.add(model.toEntity()).map{ $0.toModel() }
     }
     
@@ -27,5 +28,9 @@ public class UserRepository: UserRepositoryProtocol {
                 $0.toModel()
             }
         })
+    }
+    
+    public func updateUserInfo(model: UserModel) -> Single<UserModel> {
+        return storage.update(model.toEntity()).map{ $0.toModel() }
     }
 }

@@ -16,10 +16,12 @@ public class UserSotrage {
     }
     
     public func add(_ data: UserEntity)-> Single<UserEntity> {
+        data.id = 1
         return helper.add(data)
     }
     
     public func update(_ data: UserEntity)-> Single<UserEntity> {
+        data.id = 1
         return helper.update(data)
     }
     

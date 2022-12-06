@@ -1,18 +1,18 @@
 //
-//  AddUserInfoUsecase.swift
+//  UpdateUserInfoUsecase.swift
 //  Domain
 //
-//  Created by cheonsong on 2022/11/11.
+//  Created by cheonsong on 2022/12/05.
 //
 
 import Foundation
 import RxSwift
 
-public protocol AddUserInfoUsecaseProtocol {
+public protocol UpdateUserInfoUsecaseProtocol {
     func excute(model: UserModel)-> Single<UserModel>
 }
 
-public class AddUserInfoUsecase: AddUserInfoUsecaseProtocol {
+public class UpdateUserInfoUsecase: UpdateUserInfoUsecaseProtocol {
     
     var repository: UserRepositoryProtocol
     
@@ -21,6 +21,6 @@ public class AddUserInfoUsecase: AddUserInfoUsecaseProtocol {
     }
     
     public func excute(model: UserModel) -> Single<UserModel> {
-        return repository.addUserInfo(model: model)
+        return repository.updateUserInfo(model: model)
     }
 }

@@ -9,6 +9,7 @@ import Foundation
 import RxSwift
 
 public protocol UserRepositoryProtocol {
-    func saveUserInfo(model: UserModel)-> Single<UserModel>
+    func addUserInfo(model: UserModel)-> Single<UserModel>
     func fetchUserInfo()-> Single<[UserModel]>
+    func updateUserInfo(model: UserModel)-> Single<UserModel>
 }

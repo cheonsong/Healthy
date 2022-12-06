@@ -9,6 +9,7 @@ import Foundation
 import RealmSwift
 
 public class UserEntity: Object {
+    @Persisted(primaryKey: true) var id: Int
     @Persisted public var name: String
     @Persisted public var height: Int
     @Persisted public var heightUnit: String
