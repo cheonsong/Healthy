@@ -103,15 +103,15 @@ public class MainInfoView: UIView {
     public func changeToday(today: Float, goal: Float) {
         var text = ""
         if today.hasDecimalNumber {
-            text = "\(Int(today))"
-        } else {
             text = "\(today.secondDecimal)"
+        } else {
+            text = "\(Int(today))"
         }
         
-        if Int(goal * 10) % 10 == 0 {
-            text += " / \(Int(goal)) L"
-        } else {
+        if goal.hasDecimalNumber {
             text += " / \(goal) L"
+        } else {
+            text += " / \(Int(goal)) L"
         }
         
         todayContentslabel.text = text
