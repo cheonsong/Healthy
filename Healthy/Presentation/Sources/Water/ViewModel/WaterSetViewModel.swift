@@ -59,16 +59,19 @@ extension WaterSetViewModel: WaterSetViewModelInput {
     
     public func completeButtonTapped() {
         var model = App.state.userInfo.value
-        model.water?.goal = self.goal
+        model.water?.goal = self.goal / 1000
+        
         updateUserInfoUsecase.excute(model: model)
             .subscribe(onSuccess: { [weak self] userInfo in
-                guard let self = self else { return }
+                guard let self = self,
+                      let water = userInfo.water else { return }
+                
                 App.state.userInfo.accept(userInfo)
                 
-                let isAchieve: Bool = (App.state.waterToday.value / (userInfo.water?.goal ?? 2)) >= 1
+                let isAchieve: Bool = (App.state.waterToday.value / (water.goal)) >= 1
                 
                 let dailyModel = DailyWaterModel(date: DateModel.today,
-                                            goal: userInfo.water?.goal ?? 2,
+                                            goal: water.goal,
                                             progress: App.state.waterToday.value,
                                             isAchieve: isAchieve)
                 
