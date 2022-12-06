@@ -45,9 +45,10 @@ public class WelcomeViewModel: WelcomeViewModelInput, WelcomeViewModelOutput {
             .disposed(by: disposeBag)
         
         userInfo
-            .subscribe(onNext: { model in
+            .subscribe(onNext: { [weak self] model in
                 guard let model = model else { return }
                 App.state.userInfo.accept(model)
+                self?.action.welcomeMoveToMain()
             })
             .disposed(by: disposeBag)
     }
