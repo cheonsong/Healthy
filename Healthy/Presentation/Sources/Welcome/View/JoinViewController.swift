@@ -246,15 +246,17 @@ public class JoinViewController: UIViewController, CodeBaseUI {
         weightNextButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 guard let self = self else { return }
+                
                 let gender = self.genderTwiceButton.selectedButtonTitle == "MALE_TEXT".localized ? "male" : "female"
+                let goal = self.weightTwiceButton.selectedButtonTitle == "kg" ? (Float(self.weightTextField.text!) ?? 0) * 0.03 : (Float(self.weightTextField.text!) ?? 0) * 0.45 * 0.03
                 let model = UserModel(name: self.nameTextField.text ?? "",
-                                      height: Int(self.heightTextField.text ?? "0") ?? 0,
+                                      height: Int(self.heightTextField.text!) ?? 0,
                                       heightUnit: self.heightTwiceButton.selectedButtonTitle,
-                                      weight: Int(self.weightTextField.text ?? "0") ?? 0,
+                                      weight: Int(self.weightTextField.text!) ?? 0,
                                       weightUnit: self.weightTwiceButton.selectedButtonTitle,
                                       age: Int(self.ageTextField.text ?? "0") ?? 0,
                                       gender: gender,
-                                      water: WaterModel(unit: "l", goal: 2))
+                                      water: WaterModel(unit: "l", goal: goal))
                 print(model)
                 
                 self.viewModel.completeButtonTapped(model: model)
