@@ -18,7 +18,9 @@ final class MyPageDIContainer {
     // MARK: Usecases
     
     // MARK: ViewModel
-    
+    func makeMyPageViewModel(action: MyPageViewModelAction)-> MyPageViewModel {
+        return MyPageViewModel(action: action)
+    }
     // MARK: Coordinator
     func makeMyPageCoordinator(navigationController: UINavigationController) -> MyPageCoordinator {
         return MyPageCoordinator(navigation: navigationController, dependencies: self)
@@ -26,8 +28,8 @@ final class MyPageDIContainer {
 }
 
 extension MyPageDIContainer: MyPageCoordinatorDependencies {
-    func makeMyPageViewController() -> MyPageViewController {
-        return MyPageViewController.create()
+    func makeMyPageViewController(action: MyPageViewModelAction) -> MyPageViewController {
+        return MyPageViewController.create(viewModel: makeMyPageViewModel(action: action))
     }
 }
 

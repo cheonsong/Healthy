@@ -10,7 +10,7 @@ import Util
 import UIKit
 
 public protocol MyPageCoordinatorDependencies {
-    func makeMyPageViewController() -> MyPageViewController
+    func makeMyPageViewController(action: MyPageViewModelAction) -> MyPageViewController
 }
 
 public class MyPageCoordinator: CoordinatorType {
@@ -27,7 +27,13 @@ public class MyPageCoordinator: CoordinatorType {
     }
     
     public func start() {
-        let vc = dependencies.makeMyPageViewController()
+        let vc = dependencies.makeMyPageViewController(action: self)
         navigationController.pushViewController(vc, animated: false)
+    }
+}
+
+extension MyPageCoordinator: MyPageViewModelAction {
+    public func moveToEditViewController() {
+        
     }
 }

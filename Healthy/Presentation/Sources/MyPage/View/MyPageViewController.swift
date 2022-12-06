@@ -16,6 +16,7 @@ import DesignSystem
 public class MyPageViewController: UIViewController, CodeBaseUI {
     
     var disposeBag = DisposeBag()
+    var viewModel: MyPageViewModel!
     
     let dateLabel    = LabelBuilder("HOME_DATE_LABEL".localized([DateModel.today.year, ("MONTH_" + DateModel.today.month).localized, DateModel.today.day])).font(.regular16).textColor(.black).sizeToFit().view
     let welcomeLabel = LabelBuilder("HOME_WELCOME_LABEL".localized(["천송"])).font(.bold25).textColor(.black).sizeToFit().view
@@ -29,8 +30,9 @@ public class MyPageViewController: UIViewController, CodeBaseUI {
     let appVersionView = MyPageView(text: "MYPAGE_APP_VERSION_LABEL".localized)
     //let editMyInfoView = MyPageView(text: "")
     
-    public static func create()-> MyPageViewController {
+    public static func create(viewModel: MyPageViewModel)-> MyPageViewController {
         let vc = MyPageViewController()
+        vc.viewModel = viewModel
         return vc
     }
     
