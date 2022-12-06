@@ -42,9 +42,14 @@ public class HomeViewModel: HomeViewModelOutput {
 extension HomeViewModel: HomeViewModelInput {
     func viewDidLoad() {
         fetchTodayWaterUsecase.execute()
-            .subscribe(onSuccess: {
-                App.state.waterToday.accept($0.progress)
-                App.state.waterGoal.accept($0.goal)
+            .subscribe(onSuccess: { model in
+                guard let model = model else {
+                    App.state.waterToday.accept(0)
+                    return
+                }
+                
+                App.state.waterToday.accept(model.progress)
+                App.state.waterGoal.accept(model.goal)
             })
             .disposed(by: disposeBag)
         

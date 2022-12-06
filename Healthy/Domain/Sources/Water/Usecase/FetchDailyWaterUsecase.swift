@@ -9,7 +9,7 @@ import Foundation
 import RxSwift
 
 public protocol FetchTodayWaterUsecaseProtocol {
-    func execute()-> Single<DailyWaterModel>
+    func execute()-> Single<DailyWaterModel?>
 }
 
 public class FetchTodayWaterUsecase: FetchTodayWaterUsecaseProtocol {
@@ -20,11 +20,8 @@ public class FetchTodayWaterUsecase: FetchTodayWaterUsecaseProtocol {
         self.repository = repository
     }
     
-    public func execute() -> Single<DailyWaterModel> {
-        return repository.fetchTodayWater(.today).map({$0.first ?? DailyWaterModel(date: DateModel.today,
-                                                                                   goal: 2,
-                                                                                   progress: 0,
-                                                                                   isAchieve: false)})
+    public func execute() -> Single<DailyWaterModel?> {
+        return repository.fetchTodayWater(.today).map({$0.first ?? nil})
     }
 }
 

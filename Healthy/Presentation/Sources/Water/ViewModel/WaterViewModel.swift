@@ -59,13 +59,6 @@ extension WaterViewModel: WaterViewModelInput {
     }
     
     func viewDidLoad() {
-        fetchDailyWaterUsecase.execute()
-            .subscribe {
-                App.state.waterToday.accept($0.progress)
-                App.state.waterGoal.accept($0.goal)
-            }
-            .disposed(by: disposeBag)
-        
         let year = DateModel.today.year
         let month: Month = Month(rawValue: DateModel.today.month)!
         
