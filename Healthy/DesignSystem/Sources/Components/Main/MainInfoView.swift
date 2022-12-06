@@ -105,7 +105,7 @@ public class MainInfoView: UIView {
         if Int(today * 10) % 10 == 0 {
             text = "\(Int(today))"
         } else {
-            text = "\(today)"
+            text = "\(today.secondDemical)"
         }
         
         if Int(goal * 10) % 10 == 0 {
@@ -120,8 +120,8 @@ public class MainInfoView: UIView {
     }
     
     public func changeAverage(value: Float) {
-        avgContentslabel.text = String(value) + " L"
-        avgContentslabel.textFontChange(text: String(value) + " L", font: .bold10, range: ["L"])
+        avgContentslabel.text = value.secondDemical + " L"
+        avgContentslabel.textFontChange(text: value.secondDemical + " L", font: .bold10, range: ["L"])
     }
     
     private func drawBaseCircle() {
