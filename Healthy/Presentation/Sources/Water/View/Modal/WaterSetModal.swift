@@ -191,6 +191,20 @@ public class WaterSetModal: ModalView, CodeBaseUI {
                 self?.dismiss()
             })
             .disposed(by: disposeBag)
+        
+        App.state.waterGoal
+            .subscribe(onNext: { [weak self] value in
+                var text = ""
+            
+                if value.hasDecimalNumber {
+                    text = value.secondDecimal
+                } else {
+                    text = String(Int(value))
+                }
+                
+                self?.goalLabel.text = text + "L"
+            })
+            .disposed(by: disposeBag)
     }
     
     public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
