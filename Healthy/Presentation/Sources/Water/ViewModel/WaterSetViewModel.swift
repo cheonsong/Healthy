@@ -58,7 +58,7 @@ extension WaterSetViewModel: WaterSetViewModelInput {
     }
     
     public func completeButtonTapped() {
-        var model = App.state.userInfo.value
+        guard var model = App.state.userInfo.value else { return }
         model.water?.goal = self.goal / 1000
         
         updateUserInfoUsecase.excute(model: model)

@@ -40,13 +40,7 @@ public class WelcomeViewModel: WelcomeViewModelInput, WelcomeViewModelOutput {
         fetchUserUsecase.excute()
             .subscribe(onSuccess: { [weak self] models in
                 Log.d(models)
-                self?.userInfo.accept(models.first)
-            })
-            .disposed(by: disposeBag)
-        
-        userInfo
-            .subscribe(onNext: { [weak self] model in
-                guard let model = model else { return }
+                guard let model = models.first else { return }
                 App.state.userInfo.accept(model)
                 self?.action.welcomeMoveToMain()
             })
@@ -54,7 +48,7 @@ public class WelcomeViewModel: WelcomeViewModelInput, WelcomeViewModelOutput {
     }
     
     public func startButtonTapped() {
-        guard let _ = self.userInfo.value else {
+        guard let _ = App.state.userInfo.value else {
             action.moveToJoin()
             return
         }

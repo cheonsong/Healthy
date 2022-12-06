@@ -7,6 +7,7 @@
 
 import Foundation
 import Util
+import Domain
 
 public protocol MyPageViewModelAction {
     func moveToEditViewController()
@@ -26,9 +27,12 @@ protocol MyPageViewModelOutput {
 public class MyPageViewModel: MyPageViewModelOutput {
     
     var action: MyPageViewModelAction
+    var dataInitUsecase: InitUserInfoUsecaseProtocol
     
-    public init(action: MyPageViewModelAction) {
+    public init(action: MyPageViewModelAction,
+                dataInitUsecase: InitUserInfoUsecaseProtocol) {
         self.action = action
+        self.dataInitUsecase = dataInitUsecase
     }
 }
 

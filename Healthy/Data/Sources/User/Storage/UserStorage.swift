@@ -28,4 +28,8 @@ public class UserSotrage {
     public func read()-> Single<[UserEntity]> {
         return helper.read()
     }
+    
+    public func removeAll()-> Single<Void> {
+        return helper.deleteAll()
+    }
 }

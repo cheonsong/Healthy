@@ -12,4 +12,5 @@ public protocol UserRepositoryProtocol {
     func addUserInfo(model: UserModel)-> Single<UserModel>
     func fetchUserInfo()-> Single<[UserModel]>
     func updateUserInfo(model: UserModel)-> Single<UserModel>
+    func initUserInfo()-> Single<Void>
 }

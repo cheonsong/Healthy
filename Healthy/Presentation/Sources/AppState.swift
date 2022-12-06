@@ -17,6 +17,7 @@ public class App {
     
     private init() {
         userInfo.subscribe(onNext: { [weak self] model in
+            guard let model = model else { return }
             self?.name.accept(model.name)
             self?.age.accept(model.age)
             self?.gender.accept(model.gender)
@@ -29,7 +30,7 @@ public class App {
     var name: BehaviorRelay<String> = .init(value: "")
     var age: BehaviorRelay<Int> = .init(value: 1)
     var gender: BehaviorRelay<String> = .init(value: "")
-    var userInfo: BehaviorRelay<UserModel> = .init(value: UserModel())
+    var userInfo: BehaviorRelay<UserModel?> = .init(value: nil)
     
     // MARK: WATER
     var waterGoal: BehaviorRelay<Float> = .init(value: 2)

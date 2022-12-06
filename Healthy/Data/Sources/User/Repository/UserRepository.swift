@@ -33,4 +33,8 @@ public class UserRepository: UserRepositoryProtocol {
     public func updateUserInfo(model: UserModel) -> Single<UserModel> {
         return storage.update(model.toEntity()).map{ $0.toModel() }
     }
+    
+    public func initUserInfo()-> Single<Void> {
+        return storage.removeAll()
+    }
 }

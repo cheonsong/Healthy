@@ -16,10 +16,14 @@ final class MyPageDIContainer {
     init() {}
     
     // MARK: Usecases
+    func makeDataInitUsecase()-> InitUserInfoUsecaseProtocol {
+        return InitUserInfoUsecase(repository: UserRepository())
+    }
     
     // MARK: ViewModel
     func makeMyPageViewModel(action: MyPageViewModelAction)-> MyPageViewModel {
-        return MyPageViewModel(action: action)
+        return MyPageViewModel(action: action,
+                               dataInitUsecase: makeDataInitUsecase())
     }
     // MARK: Coordinator
     func makeMyPageCoordinator(navigationController: UINavigationController) -> MyPageCoordinator {

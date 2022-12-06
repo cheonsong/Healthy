@@ -80,5 +80,23 @@ public class MyPageViewController: UIViewController, CodeBaseUI {
                 self?.welcomeLabel.text = "HOME_WELCOME_LABEL".localized([name])
             })
             .disposed(by: disposeBag)
+        
+        dataResetView.tapGesture
+            .subscribe(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                
+                let popup = PopupView()
+                popup.title = "NOTICE_TEXT".localized
+                popup.contents = "INIT_DATA_WARNING_TEXT".localized
+                popup.cancelIsHidden = false
+                popup.completeAction = {
+                    self.viewModel.initDataTapped()
+                }
+                self.tabBarController?.view.addSubview(popup)
+                popup.snp.makeConstraints {
+                    $0.edges.equalToSuperview()
+                }
+            })
+            .disposed(by: disposeBag)
     }
 }
