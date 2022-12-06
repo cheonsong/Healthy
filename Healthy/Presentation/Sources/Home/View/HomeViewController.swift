@@ -23,7 +23,7 @@ public class HomeViewController: UIViewController, CodeBaseUI {
     let topContainer = ViewBuilder().backgrouondColor(.white).view
     let dateLabel    = LabelBuilder("HOME_DATE_LABEL".localized([DateModel.today.year, ("MONTH_" + DateModel.today.month).localized, DateModel.today.day])).font(.regular16).textColor(.black).sizeToFit().view
     let welcomeLabel = LabelBuilder("HOME_WELCOME_LABEL".localized(["천송"])).font(.bold25).textColor(.black).sizeToFit().view
-    let icoCalender  = ImageViewBuilder(PresentationAsset.icoCalender.image).view
+    let icoCalender  = ImageViewBuilder(PresentationAsset.icoCalender.image).isHidden(true).view
     let calenderView = ViewBuilder().backgrouondColor(.black).cornerRadius(10).alpha(0).view
     
     let scrollView    = ScrollViewBuilder().backgrouondColor(.b3).showsVerticalScrollIndicator(false).view
