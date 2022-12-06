@@ -16,7 +16,7 @@ public class MainInfoView: UIView {
     
     private var type: Health = .water
     private var disposeBag = DisposeBag()
-    private let innerShadowLayer = CAShapeLayer()
+    
     private var circleLayer: CALayer? = nil
     private lazy var todayTitleLabel = LabelBuilder("TODAY_TEXT".localized).font(.regular16).textColor(.black).view
     private lazy var todayContentslabel = LabelBuilder("0 " + self.type.unit)
@@ -164,22 +164,5 @@ public class MainInfoView: UIView {
         
         circleView.layer.addSublayer(layer)
         circleLayer = layer
-    }
-    
-    /// Draw Inner Shadow When Selected
-    private func drawInnerShadow() {
-        innerShadowLayer.shadowColor = UIColor.black.cgColor
-        innerShadowLayer.shadowOffset = CGSize(width: 0.0, height: 0.0)
-        innerShadowLayer.shadowOpacity = 0.25
-        innerShadowLayer.shadowRadius = 10
-        innerShadowLayer.fillRule = .evenOdd
-        
-        let shadowPath = CGMutablePath()
-        let inset = -innerShadowLayer.shadowRadius * 2.0
-        shadowPath.addRect(self.bounds.insetBy(dx: inset, dy: inset))
-        shadowPath.addRect(self.bounds)
-        innerShadowLayer.path = shadowPath
-        
-        self.layer.addSublayer(innerShadowLayer)
     }
 }
