@@ -10,16 +10,35 @@ import UIKit
 import Util
 import SnapKit
 
+public enum NavigationType {
+    case setting
+    case save
+    
+    var image: UIImage {
+        switch self {
+        case .setting:
+            return DesignSystemAsset.icoSet.image
+        case .save:
+            return DesignSystemAsset.icoSave.image
+        }
+    }
+}
+
 public class Navigation: UIView {
     
     public let backButton = ButtonBuilder().image(DesignSystemAsset.icoBack.image).view
-    public let setButton = ButtonBuilder().image(DesignSystemAsset.icoSet.image).view
+    public let rightButton = ButtonBuilder().image(DesignSystemAsset.icoSet.image).view
     public let title = LabelBuilder().isHidden(true).view
     
-    public override init(frame: CGRect) {
+    public convenience init(_ type: NavigationType) {
+        self.init(frame: .zero)
+        rightButton.setImage(type.image, for: .normal)
+    }
+    
+    private override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .white
-        [backButton, title, setButton].forEach { addSubview($0) }
+        [backButton, title, rightButton].forEach { addSubview($0) }
         
         self.snp.makeConstraints {
             $0.height.equalTo(50)
@@ -31,7 +50,7 @@ public class Navigation: UIView {
             $0.width.equalTo(48)
         }
         
-        setButton.snp.makeConstraints {
+        rightButton.snp.makeConstraints {
             $0.top.bottom.equalToSuperview()
             $0.right.equalToSuperview().inset(18)
             $0.width.equalTo(48)

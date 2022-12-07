@@ -92,7 +92,7 @@ public final class StepsViewController: UIViewController, CodeBaseUI {
     }
     
     public func bind() {
-        navigation.setButton.rx.tap
+        navigation.rightButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 guard let self = self else { return }
                 // TODO: SetModal

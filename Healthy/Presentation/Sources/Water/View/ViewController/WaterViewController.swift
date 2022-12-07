@@ -46,7 +46,7 @@ public final class WaterViewController: UIViewController, CodeBaseUI {
     
     let guideLine = ViewBuilder().backgrouondColor(.clear).view
     
-    let navigation = Navigation()
+    let navigation = Navigation(.setting)
     
     let calendar = CommitView()
     
@@ -141,7 +141,7 @@ public final class WaterViewController: UIViewController, CodeBaseUI {
             })
             .disposed(by: disposeBag)
         
-        navigation.setButton.rx.tap
+        navigation.rightButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 guard let self = self else { return }
                 self.viewModel?.actions?.showWaterSetModal()
