@@ -82,6 +82,27 @@ public class PopupView: UIView, CodeBaseUI {
         }
     }
     
+    /// 팝업을 만들어주는 함수
+    /// - Parameter title: 제목
+    /// - Parameter contents: 내용
+    /// - Parameter isCancelHidden: 취소 히든 여부
+    /// - Parameter completeAction: 완료 버튼 액션
+    /// - Parameter cancelAction: 취소 버튼 액션
+    /// - Returns PopupView
+    public static func makePopup(title: String,
+                          contents: String,
+                          isCancelHidden: Bool,
+                          completeAction: (()->Void)? = nil,
+                          cancelAction: (()->Void)? = nil)-> PopupView {
+        let popup = PopupView()
+        popup.title = title
+        popup.contents = contents
+        popup.cancelIsHidden = isCancelHidden
+        popup.completeAction = completeAction
+        popup.cancelAction = cancelAction
+        return popup
+    }
+    
     /// EX) popup.completeAction = { ~~ }
     public var completeAction: (()->Void)? = nil
     /// EX) popup.cancelAction = { ~~ }
