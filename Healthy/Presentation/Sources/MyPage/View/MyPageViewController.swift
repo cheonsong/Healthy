@@ -81,17 +81,30 @@ public class MyPageViewController: UIViewController, CodeBaseUI {
             })
             .disposed(by: disposeBag)
         
+        // MARK: Input Bind
         dataResetView.tapGesture
             .subscribe(onNext: { [weak self] _ in
                 guard let self = self else { return }
                 
-                let popup = PopupView()
-                popup.title = "NOTICE_TEXT".localized
-                popup.contents = "INIT_DATA_WARNING_TEXT".localized
-                popup.cancelIsHidden = false
-                popup.completeAction = {
+                let popup = PopupView.makePopup(title: "NOTICE_TEXT".localized,
+                                                contents: "INIT_DATA_WARNING_TEXT".localized,
+                                                isCancelHidden: false,
+                                                completeAction:  {
                     self.viewModel.initDataTapped()
+                })
+                self.tabBarController?.view.addSubview(popup)
+                popup.snp.makeConstraints {
+                    $0.edges.equalToSuperview()
                 }
+            })
+            .disposed(by: disposeBag)
+        
+        // MARK: Output Bind
+        viewModel.dataInitComplete
+            .subscribe(onNext: {
+                let popup = PopupView.makePopup(title: "NOTICE_TEXT".localized,
+                                                contents: "INIT_DATA_COMPLETE_TEXT".localized,
+                                                isCancelHidden: true)
                 self.tabBarController?.view.addSubview(popup)
                 popup.snp.makeConstraints {
                     $0.edges.equalToSuperview()

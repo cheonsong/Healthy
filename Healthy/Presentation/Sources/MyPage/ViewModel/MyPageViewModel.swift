@@ -8,6 +8,8 @@
 import Foundation
 import Util
 import Domain
+import RxSwift
+import RxCocoa
 
 public protocol MyPageViewModelAction {
     func moveToEditViewController()
@@ -21,13 +23,19 @@ protocol MyPageViewModelInpput {
 }
 
 protocol MyPageViewModelOutput {
-    
+    var dataInitComplete: PublishRelay<Void> { get }
 }
 
 public class MyPageViewModel: MyPageViewModelOutput {
     
+    var disposeBag = DisposeBag()
+    
+    // MARK: Action & Usecase
     var action: MyPageViewModelAction
     var dataInitUsecase: InitUserInfoUsecaseProtocol
+    
+    // MARK: Output
+    var dataInitComplete: PublishRelay<Void> = .init()
     
     public init(action: MyPageViewModelAction,
                 dataInitUsecase: InitUserInfoUsecaseProtocol) {
@@ -46,7 +54,14 @@ extension MyPageViewModel: MyPageViewModelInpput {
     }
     
     func initDataTapped() {
-        
+        dataInitUsecase.excute()
+            .subscribe(onSuccess: { [weak self] in
+                self?.dataInitComplete.accept(())
+                Timer.scheduledTimer(withTimeInterval: 3, repeats: false, block: {_ in
+                    exit(0)
+                })
+            })
+            .disposed(by: disposeBag)
     }
     
     func appVersionTapped() {
