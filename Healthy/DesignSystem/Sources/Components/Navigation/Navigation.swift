@@ -28,17 +28,21 @@ public class Navigation: UIView {
     
     public let backButton = ButtonBuilder().image(DesignSystemAsset.icoBack.image).view
     public let rightButton = ButtonBuilder().image(DesignSystemAsset.icoSet.image).view
-    public let title = LabelBuilder().font(.bold16).isHidden(true).view
+    public let titleLabel = LabelBuilder().font(.bold20).isHidden(true).view
     
-    public convenience init(_ type: NavigationType) {
+    public convenience init(_ type: NavigationType, _ title: String? = nil) {
         self.init(frame: .zero)
         rightButton.setImage(type.image, for: .normal)
+        if let title = title {
+            titleLabel.text = title
+            titleLabel.isHidden = false
+        }
     }
     
     private override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .white
-        [backButton, title, rightButton].forEach { addSubview($0) }
+        [backButton, titleLabel, rightButton].forEach { addSubview($0) }
         
         self.snp.makeConstraints {
             $0.height.equalTo(50)
@@ -56,7 +60,7 @@ public class Navigation: UIView {
             $0.width.equalTo(48)
         }
         
-        title.snp.makeConstraints {
+        titleLabel.snp.makeConstraints {
             $0.center.equalToSuperview()
         }
     }

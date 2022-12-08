@@ -18,10 +18,7 @@ public class EditViewController: UIViewController, CodeBaseUI {
     
     var disposeBag = DisposeBag()
     
-    let navigation = Navigation(.save).then {
-        $0.title.text = "MYPAGE_EDIT_LABEL".localized
-        $0.title.isHidden = false
-    }
+    let navigation        = Navigation(.save, "MYPAGE_EDIT_LABEL".localized)
     let scrollView        = ScrollViewBuilder().backgrouondColor(.clear).view
     let stackView         = StackViewBuilder().axis(.vertical).backgrouondColor(.clear).spacing(20).view
     // NAME
