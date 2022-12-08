@@ -8,12 +8,13 @@
 import UIKit
 
 @main
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        AppDelegate.configure(application: application)
         return true
     }
 
@@ -31,6 +32,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
 
-
+    public class func configure(application: UIApplication) {
+        if #available(iOS 10.0, *) {
+            
+            let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+            UNUserNotificationCenter.current().requestAuthorization(
+                options: authOptions,
+                completionHandler: { (granted, error) in
+                    if granted {
+                        print("사용자가 푸시를 허용했습니다")
+                        DispatchQueue.main.async {
+                            application.registerForRemoteNotifications()
+                        }
+                    } else {
+                        print("사용자가 푸시를 거절했습니다")
+                    }
+                })
+        } else {
+            let settings: UIUserNotificationSettings =
+            UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+            application.registerUserNotificationSettings(settings)
+        }
+    }
 }
 

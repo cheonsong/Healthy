@@ -13,6 +13,7 @@ import RxSwift
 import RxCocoa
 import RxGesture
 import Domain
+import UserNotifications
 
 public class HomeViewController: UIViewController, CodeBaseUI {
     
@@ -59,6 +60,8 @@ public class HomeViewController: UIViewController, CodeBaseUI {
         bind()
         viewDidLoadAnimation()
         viewModel?.viewDidLoad()
+        UNUserNotificationCenter.current().delegate = self
+        setNotification()
     }
     
     public override func viewWillAppear(_ animated: Bool) {
@@ -260,5 +263,49 @@ public class HomeViewController: UIViewController, CodeBaseUI {
     
     private func viewDidAppearAction() {
         waterView.infoView.drawCircle(value: CGFloat(App.state.waterToday.value / App.state.waterGoal.value))
+    }
+    
+    func setNotification() {
+        let notificationCenter = UNUserNotificationCenter.current()
+        
+        notificationCenter.removeAllPendingNotificationRequests()
+        
+        let lunchContent = UNMutableNotificationContent()
+        lunchContent.title = "LUNCH_PUSH_TITLE".localized
+        lunchContent.body = "LUNCH_PUSH_CONTENT".localized
+        var lunchDate = DateComponents()
+        lunchDate.hour = 12
+        lunchDate.minute = 00
+        
+        let trigger = UNCalendarNotificationTrigger(dateMatching: lunchDate, repeats: false)
+        let lunchRequest = UNNotificationRequest(identifier: UUID().uuidString, content: lunchContent, trigger: trigger)
+        
+        let dinnerContent = UNMutableNotificationContent()
+        dinnerContent.title = "DINNER_PUSH_TITLE".localized
+        dinnerContent.body = "DINNER_PUSH_CONTENT".localized
+        var dinnerDate = DateComponents()
+        dinnerDate.hour = 19
+        dinnerDate.minute = 00
+        
+        let trigger2 = UNCalendarNotificationTrigger(dateMatching: dinnerDate, repeats: false)
+        let lunchRequest2 = UNNotificationRequest(identifier: UUID().uuidString, content: dinnerContent, trigger: trigger2)
+        
+        notificationCenter.add(lunchRequest, withCompletionHandler: nil)
+        notificationCenter.add(lunchRequest2, withCompletionHandler: nil)
+    }
+}
+
+extension HomeViewController: UNUserNotificationCenterDelegate {
+    public func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        completionHandler()
+    }
+    
+    public func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        if #available(iOS 14.0, *) {
+            completionHandler([.list, .badge, .sound, .banner])
+        } else {
+            // Fallback on earlier versions
+            completionHandler([.badge, .sound])
+        }
     }
 }

@@ -77,3 +77,6 @@ Scripts/*.csv
 Healthy/Healthy/Resources/en.lproj/Localizable.strings
 Healthy/Healthy/Resources/ko.lproj/Localizable.strings
 Healthy/Healthy/Resources/ja.lproj/Localizable.strings
+
+Certificate/*.p8
+Certificate/*.certSigningRequest
