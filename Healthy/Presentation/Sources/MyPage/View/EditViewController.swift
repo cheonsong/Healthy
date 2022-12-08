@@ -17,6 +17,7 @@ import RxKeyboard
 public class EditViewController: UIViewController, CodeBaseUI {
     
     var disposeBag = DisposeBag()
+    var viewModel: EditViewModel!
     
     let navigation        = Navigation(.save, "MYPAGE_EDIT_LABEL".localized)
     let scrollView        = ScrollViewBuilder().backgrouondColor(.clear).view
@@ -45,8 +46,9 @@ public class EditViewController: UIViewController, CodeBaseUI {
     let weightTextForm    = TextForm().then { $0.tag = 4 }
     
     
-    public static func create()-> EditViewController {
+    public static func create(viewModel: EditViewModel)-> EditViewController {
         let vc = EditViewController()
+        vc.viewModel = viewModel
         return vc
     }
     
@@ -215,6 +217,78 @@ public class EditViewController: UIViewController, CodeBaseUI {
             .subscribe(onNext: { [weak self] _ in
                 self?.view.endEditing(true)
                 self?.isContainerHidden(false)
+            })
+            .disposed(by: disposeBag)
+        
+        // MARK: Input Binding
+        ageTextForm.rx.text.orEmpty
+            .subscribe(onNext: { [weak self] text in
+                self?.viewModel.ageTextInput(text: text)
+            })
+            .disposed(by: disposeBag)
+        
+        heightTextForm.rx.text.orEmpty
+            .subscribe(onNext: { [weak self] text in
+                self?.viewModel.heightTextInput(text: text)
+            })
+            .disposed(by: disposeBag)
+        
+        weightTextForm.rx.text.orEmpty
+            .subscribe(onNext: { [weak self] text in
+                self?.viewModel.weightTextInput(text: text)
+            })
+            .disposed(by: disposeBag)
+        
+        navigation.rightButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                guard var model = App.state.userInfo.value,
+                      let self = self else { return }
+                
+                model.name       = self.nameTextForm.text ?? ""
+                model.age        = Int(self.ageTextForm.text ?? "0") ?? model.age
+                model.gender     = self.genderTwiceButton.selectedButtonTitle == "MALE_TEXT".localized ? "male" : "female"
+                model.height     = Int(self.heightTextForm.text ?? "0") ?? model.height
+                model.heightUnit = self.heightTwiceButton.selectedButtonTitle
+                model.weight     = Int(self.weightTextForm.text ?? "0") ?? model.weight
+                model.weightUnit = self.weightTwiceButton.selectedButtonTitle
+                
+                self.viewModel.saveButtonTapped(model: model)
+            })
+            .disposed(by: disposeBag)
+        
+        navigation.backButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                self?.navigationController?.popViewController(animated: true)
+            })
+            .disposed(by: disposeBag)
+        
+        //MARK: Output Binding
+        viewModel.validatedAgeText
+            .bind(to: ageTextForm.rx.text)
+            .disposed(by: disposeBag)
+        
+        viewModel.validatedHeightText
+            .bind(to: heightTextForm.rx.text)
+            .disposed(by: disposeBag)
+        
+        viewModel.validatedWeightText
+            .bind(to: weightTextForm.rx.text)
+            .disposed(by: disposeBag)
+        
+        viewModel.isSaveSuccess
+            .subscribe(onNext: { [weak self] isSuccess in
+                guard let self = self else { return }
+                
+                if isSuccess {
+                    self.navigationController?.popViewController(animated: true)
+                } else {
+                    let popup = PopupView.makePopup(title: "NOTICE_TEXT".localized, contents: "EDIT_USERINFO_FAIL_TEXT".localized, isCancelHidden: true)
+                    
+                    self.tabBarController?.view.addSubview(popup)
+                    popup.snp.makeConstraints {
+                        $0.edges.equalToSuperview()
+                    }
+                }
             })
             .disposed(by: disposeBag)
     }

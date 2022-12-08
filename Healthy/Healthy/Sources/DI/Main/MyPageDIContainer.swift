@@ -25,6 +25,12 @@ final class MyPageDIContainer {
         return MyPageViewModel(action: action,
                                dataInitUsecase: makeDataInitUsecase())
     }
+    
+    func makeEditViewModel()-> EditViewModel {
+        return EditViewModel(validateUsecase: ValidationUseCase(),
+                             updateUserInfoUsecase: UpdateUserInfoUsecase(repository: UserRepository()))
+    }
+    
     // MARK: Coordinator
     func makeMyPageCoordinator(navigationController: UINavigationController) -> MyPageCoordinator {
         return MyPageCoordinator(navigation: navigationController, dependencies: self)
@@ -37,7 +43,7 @@ extension MyPageDIContainer: MyPageCoordinatorDependencies {
     }
     
     func makeEditViewController() -> EditViewController {
-        return EditViewController.create()
+        return EditViewController.create(viewModel: makeEditViewModel())
     }
 }
 
