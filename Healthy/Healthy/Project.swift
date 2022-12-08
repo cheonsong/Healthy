@@ -1,7 +1,7 @@
 import ProjectDescription
 import ProjectDescriptionHelpers
 
-let project = Project.app(name: "Healthy",
+let project = Project.app(name: Module.app.name,
                           dependencies: [
                             Module.domain,
                             Module.data,

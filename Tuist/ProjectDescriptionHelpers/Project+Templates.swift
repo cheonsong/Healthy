@@ -7,7 +7,7 @@ import ProjectDescription
 
 extension Project {
     
-    static let bundleID = "com.cheonsong.health"
+    static let bundleID = "com.cheonsong.healthy"
     static let iosVersion = "13.0"
     
     /// Helper function to create the Project for this ExampleApp
@@ -20,7 +20,7 @@ extension Project {
         return self.project(
             name: name,
             product: .app,
-            bundleID: bundleID + "\(name)",
+            bundleID: bundleID,
             dependencies: dependencies,
             resources: resources,
             scripts: scripts
@@ -60,19 +60,20 @@ extension Project {
                     platform: .iOS,
                     product: product,
                     bundleId: bundleID,
-                    deploymentTarget: .iOS(targetVersion: iosVersion, devices: [.iphone, .ipad]),
+                    deploymentTarget: .iOS(targetVersion: iosVersion, devices: [.iphone]),
                     infoPlist: .file(path: .relativeToRoot("Supporting Files/Info.plist")),
                     sources: ["Sources/**"],
                     resources: resources,
                     scripts: scripts,
-                    dependencies: dependencies
+                    dependencies: dependencies,
+                    settings: .settings(configurations: [.release(name: .release, settings: SettingsDictionary().automaticCodeSigning(devTeam: "7ZK7Q3JHK4")), .debug(name: .debug, settings: SettingsDictionary().automaticCodeSigning(devTeam: "7ZK7Q3JHK4"))])
                 ),
                 Target(
                     name: "\(name)Tests",
                     platform: .iOS,
                     product: .unitTests,
                     bundleId: bundleID,
-                    deploymentTarget: .iOS(targetVersion: iosVersion, devices: [.iphone, .ipad]),
+                    deploymentTarget: .iOS(targetVersion: iosVersion, devices: [.iphone]),
                     infoPlist: .file(path: .relativeToRoot("Supporting Files/Info.plist")),
                     sources: "Tests/**",
                     dependencies: [
