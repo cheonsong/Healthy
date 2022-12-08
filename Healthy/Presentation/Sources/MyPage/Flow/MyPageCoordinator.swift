@@ -11,6 +11,7 @@ import UIKit
 
 public protocol MyPageCoordinatorDependencies {
     func makeMyPageViewController(action: MyPageViewModelAction) -> MyPageViewController
+    func makeEditViewController()-> EditViewController
 }
 
 public class MyPageCoordinator: CoordinatorType {
@@ -34,6 +35,7 @@ public class MyPageCoordinator: CoordinatorType {
 
 extension MyPageCoordinator: MyPageViewModelAction {
     public func moveToEditViewController() {
-        
+        let vc = dependencies.makeEditViewController()
+        navigationController.pushViewController(vc, animated: true)
     }
 }

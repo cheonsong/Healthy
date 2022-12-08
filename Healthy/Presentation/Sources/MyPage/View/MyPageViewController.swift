@@ -82,6 +82,14 @@ public class MyPageViewController: UIViewController, CodeBaseUI {
             .disposed(by: disposeBag)
         
         // MARK: Input Bind
+        editMyInfoView.tapGesture
+            .subscribe(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                
+                self.viewModel.editInfoTapped()
+            })
+            .disposed(by: disposeBag)
+        
         dataResetView.tapGesture
             .subscribe(onNext: { [weak self] _ in
                 guard let self = self else { return }
