@@ -17,7 +17,6 @@ public protocol MyPageViewModelAction {
 
 protocol MyPageViewModelInpput {
     func editInfoTapped()
-    func setAlarmTapped()
     func initDataTapped()
     func appVersionTapped()
 }
@@ -47,10 +46,6 @@ public class MyPageViewModel: MyPageViewModelOutput {
 extension MyPageViewModel: MyPageViewModelInpput {
     func editInfoTapped() {
         action.moveToEditViewController()
-    }
-    
-    func setAlarmTapped() {
-        
     }
     
     func initDataTapped() {

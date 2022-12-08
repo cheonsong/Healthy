@@ -107,6 +107,12 @@ public class MyPageViewController: UIViewController, CodeBaseUI {
             })
             .disposed(by: disposeBag)
         
+        alarmSetView.tapGesture
+            .subscribe(onNext: { _ in
+                UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+            })
+            .disposed(by: disposeBag)
+        
         // MARK: Output Bind
         viewModel.dataInitComplete
             .subscribe(onNext: {
