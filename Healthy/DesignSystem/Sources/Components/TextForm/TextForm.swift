@@ -29,6 +29,7 @@ public class TextForm: UITextField {
         tintColor = .clear
         
         self.snp.makeConstraints {
+            $0.width.equalTo(Const.fullWidth)
             $0.height.equalTo(39)
         }
     }

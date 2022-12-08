@@ -28,7 +28,7 @@ public class Navigation: UIView {
     
     public let backButton = ButtonBuilder().image(DesignSystemAsset.icoBack.image).view
     public let rightButton = ButtonBuilder().image(DesignSystemAsset.icoSet.image).view
-    public let title = LabelBuilder().isHidden(true).view
+    public let title = LabelBuilder().font(.bold16).isHidden(true).view
     
     public convenience init(_ type: NavigationType) {
         self.init(frame: .zero)
