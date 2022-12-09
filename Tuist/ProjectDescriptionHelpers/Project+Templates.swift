@@ -66,7 +66,7 @@ extension Project {
                     resources: resources,
                     scripts: scripts,
                     dependencies: dependencies,
-                    settings: .settings(configurations: [.release(name: .release, settings: SettingsDictionary().automaticCodeSigning(devTeam: "7ZK7Q3JHK4")), .debug(name: .debug, settings: SettingsDictionary().automaticCodeSigning(devTeam: "7ZK7Q3JHK4"))])
+                    settings: .settings(configurations: [.release(name: .release, settings: makeSettingDictionary()), .debug(name: .debug, settings: makeSettingDictionary())])
                 ),
                 Target(
                     name: "\(name)Tests",
@@ -83,6 +83,11 @@ extension Project {
             ],
             schemes: schemes
         )
+    }
+    
+    static func makeSettingDictionary()-> SettingsDictionary {
+        return SettingsDictionary().automaticCodeSigning(devTeam: "7ZK7Q3JHK4").merging(["VERSIONING_SYSTEM": "apple-generic",
+                                                                                         "CURRENT_PROJECT_VERSION": "1.0.0"])
     }
 }
 
