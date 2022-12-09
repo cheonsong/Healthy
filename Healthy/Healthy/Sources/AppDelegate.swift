@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Domain
+import Presentation
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
@@ -30,6 +32,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // Called when the user discards a scene session.
         // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
+    }
+    
+    func applicationWillEnterForeground(_ application: UIApplication) {
+        if DateModel.today.day != Presentation.App.state.date.value.day {
+            exit(0)
+        }
     }
 
     public class func configure(application: UIApplication) {

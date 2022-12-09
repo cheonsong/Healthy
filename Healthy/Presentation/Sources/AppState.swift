@@ -12,7 +12,7 @@ import RxCocoa
 import Domain
 
 public class App {
-    static let state = App()
+    public static let state = App()
     var disposeBag = DisposeBag()
     
     private init() {
@@ -25,6 +25,8 @@ public class App {
         })
         .disposed(by: disposeBag)
     }
+    // MARK: DATE
+    public var date: BehaviorRelay<DateModel> = .init(value: DateModel.today)
     
     // MARK: USER
     var name: BehaviorRelay<String> = .init(value: "")

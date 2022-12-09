@@ -16,6 +16,7 @@ public protocol HomeViewModelAction {
 
 protocol HomeViewModelInput {
     func viewDidLoad()
+    func viewWillAppear()
     func waterViewTapped()
 }
 
@@ -62,5 +63,9 @@ extension HomeViewModel: HomeViewModelInput {
     
     func waterViewTapped() {
         action.moveToWaterViewController()
+    }
+    
+    func viewWillAppear() {
+        App.state.date.accept(DateModel.today)
     }
 }
