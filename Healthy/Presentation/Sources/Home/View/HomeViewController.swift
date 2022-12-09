@@ -67,6 +67,7 @@ public class HomeViewController: UIViewController, CodeBaseUI {
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         viewWillAppearAction()
+        viewModel?.viewWillAppear()
     }
     
     public override func viewDidAppear(_ animated: Bool) {
@@ -277,7 +278,7 @@ public class HomeViewController: UIViewController, CodeBaseUI {
         lunchDate.hour = 12
         lunchDate.minute = 00
         
-        let trigger = UNCalendarNotificationTrigger(dateMatching: lunchDate, repeats: false)
+        let trigger = UNCalendarNotificationTrigger(dateMatching: lunchDate, repeats: true)
         let lunchRequest = UNNotificationRequest(identifier: UUID().uuidString, content: lunchContent, trigger: trigger)
         
         let dinnerContent = UNMutableNotificationContent()
@@ -287,7 +288,7 @@ public class HomeViewController: UIViewController, CodeBaseUI {
         dinnerDate.hour = 19
         dinnerDate.minute = 00
         
-        let trigger2 = UNCalendarNotificationTrigger(dateMatching: dinnerDate, repeats: false)
+        let trigger2 = UNCalendarNotificationTrigger(dateMatching: dinnerDate, repeats: true)
         let lunchRequest2 = UNNotificationRequest(identifier: UUID().uuidString, content: dinnerContent, trigger: trigger2)
         
         notificationCenter.add(lunchRequest, withCompletionHandler: nil)
