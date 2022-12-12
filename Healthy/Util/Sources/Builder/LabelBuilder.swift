@@ -206,12 +206,6 @@ open class LabelBuilder {
         return self
     }
     
-    @available(iOS 16.0, *)
-    open func anchorPoint(_ anchorPoint: CGPoint)-> LabelBuilder {
-        view.anchorPoint = anchorPoint
-        return self
-    }
-    
     open func sizeToFit()-> LabelBuilder {
         view.sizeToFit()
         return self

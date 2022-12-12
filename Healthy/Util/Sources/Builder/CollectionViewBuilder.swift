@@ -154,10 +154,5 @@ open class CollectionViewBuilder {
         view.transform3D = transform3D
         return self
     }
-    
-    @available(iOS 16.0, *)
-    open func anchorPoint(_ anchorPoint: CGPoint)-> CollectionViewBuilder {
-        view.anchorPoint = anchorPoint
-        return self
-    }
+
 }

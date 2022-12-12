@@ -148,10 +148,4 @@ open class StackViewBuilder {
         view.transform3D = transform3D
         return self
     }
-    
-    @available(iOS 16.0, *)
-    open func anchorPoint(_ anchorPoint: CGPoint)-> StackViewBuilder {
-        view.anchorPoint = anchorPoint
-        return self
-    }
 }

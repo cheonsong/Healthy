@@ -150,10 +150,4 @@ open class ButtonBuilder {
         return self
     }
     
-    @available(iOS 16.0, *)
-    open func anchorPoint(_ anchorPoint: CGPoint)-> ButtonBuilder {
-        view.anchorPoint = anchorPoint
-        return self
-    }
-    
 }
