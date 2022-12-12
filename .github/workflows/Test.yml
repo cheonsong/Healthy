@@ -20,6 +20,9 @@ jobs:
     # uses 키워드를 통해 Github Actions에서 기본으로 제공하는 액션을 사용 가능. 아래 액션은 repository 에 체크아웃하는 것
     - uses: actions/checkout@v2
     # shell 이용해서 하나의 command 수행
+    - uses: fwal/setup-swift@2040b795e5c453c3a05fcb8316496afc8a74f192
+      with:
+        swift-version: "5.7.0"
     - name: Start xcode build 🛠
       run: |
         curl -Ls https://install.tuist.io | bash
