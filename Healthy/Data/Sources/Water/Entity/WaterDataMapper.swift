@@ -9,15 +9,15 @@ import Foundation
 import Domain
 
 extension DailyWaterEntity {
-    public func toModel()-> DailyWaterModel {
-        return DailyWaterModel(date: self.date?.toModel() ?? DateModel.today,
+    public func toModel()-> Domain.DailyWaterModel {
+        return Domain.DailyWaterModel(date: self.date?.toModel() ?? DateModel.today,
                                goal: self.goal,
                                progress: self.progress,
                                isAchieve: self.isAchieve)
     }
 }
 
-extension DailyWaterModel {
+extension Domain.DailyWaterModel {
     public func toEntity()-> DailyWaterEntity {
         return DailyWaterEntity(date: self.date?.toEntity() ?? DateModel.today.toEntity(),
                                 goal: self.goal,

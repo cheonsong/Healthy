@@ -23,8 +23,8 @@ protocol WaterViewModelInput {
 }
 
 protocol WaterViewModelOutput {
-    var todayWater: BehaviorRelay<DailyWaterModel?> { get }
-    var monthWater: BehaviorRelay<[DailyWaterModel]> { get }
+    var todayWater: BehaviorRelay<Domain.DailyWaterModel?> { get }
+    var monthWater: BehaviorRelay<[Domain.DailyWaterModel]> { get }
 }
 
 public class WaterViewModel: WaterViewModelOutput {
@@ -45,8 +45,8 @@ public class WaterViewModel: WaterViewModelOutput {
     }
     
     // MARK: - OUTPUT
-    var todayWater = BehaviorRelay<DailyWaterModel?>(value: nil)
-    var monthWater = BehaviorRelay<[DailyWaterModel]>(value: [])
+    var todayWater = BehaviorRelay<Domain.DailyWaterModel?>(value: nil)
+    var monthWater = BehaviorRelay<[Domain.DailyWaterModel]>(value: [])
 }
 
 extension WaterViewModel: WaterViewModelInput {

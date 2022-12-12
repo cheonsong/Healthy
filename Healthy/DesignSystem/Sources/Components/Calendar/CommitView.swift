@@ -15,7 +15,7 @@ public class CommitView: UIView {
     private let weeks = ["일","월","화","수","목","금","토"]
     private let days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
     
-    public var data: [DailyWaterModel] = []
+    public var data: [Domain.DailyWaterModel] = []
     
     private let title = LabelBuilder("COMMIT_DATE_LABEL".localized([DateModel.today.year.localized, DateModel.today.month.localized])).font(.bold16).textColor(.black).view
     
@@ -46,7 +46,7 @@ public class CommitView: UIView {
         super.init(coder: coder)
     }
     
-    public func set(data: [DailyWaterModel]) {
+    public func set(data: [Domain.DailyWaterModel]) {
         self.data = data
         collectionView.reloadData()
     }

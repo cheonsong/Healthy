@@ -20,20 +20,20 @@ public class DailyWaterRepository: WaterRepositoryProtocol {
         self.storage = WaterSotrage()
     }
     
-    public func fetchTodayWater(_ query: DailyWaterQuery) -> Single<[DailyWaterModel]> {
+    public func fetchTodayWater(_ query: DailyWaterQuery) -> Single<[Domain.DailyWaterModel]> {
         return storage.read(query: query.query).map({ entities in
             entities.map { $0.toModel() }
         })
     }
     
-    public func fetchMonthWater(_ query: DailyWaterQuery) -> Single<[DailyWaterModel]> {
+    public func fetchMonthWater(_ query: DailyWaterQuery) -> Single<[Domain.DailyWaterModel]> {
         return storage.read(query: query.query).map({ entities in
             entities.map { $0.toModel() }
         })
     }
     
-    public func saveTodayWater(data: DailyWaterModel) -> Single<DailyWaterModel> {
-        var single: Single<DailyWaterModel>!
+    public func saveTodayWater(data: Domain.DailyWaterModel) -> Single<Domain.DailyWaterModel> {
+        var single: Single<Domain.DailyWaterModel>!
         storage.read(query: { $0.date.year == DateModel.today.year && $0.date.month == DateModel.today.month && $0.date.day == DateModel.today.day })
             .subscribe { [weak self] result in
                 guard let self = self else { return }

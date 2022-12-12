@@ -9,7 +9,7 @@ import Foundation
 import RxSwift
 
 public protocol AddWaterUsecaseProtocol {
-    func excute(data: DailyWaterModel)-> Single<DailyWaterModel>
+    func excute(data: Domain.DailyWaterModel)-> Single<Domain.DailyWaterModel>
 }
 
 public class AddWaterUsecase: AddWaterUsecaseProtocol {
@@ -20,7 +20,7 @@ public class AddWaterUsecase: AddWaterUsecaseProtocol {
         self.repository = repository
     }
     
-    public func excute(data: DailyWaterModel) -> Single<DailyWaterModel> {
+    public func excute(data: Domain.DailyWaterModel) -> Single<Domain.DailyWaterModel> {
         return repository.saveTodayWater(data: data)
     }
 }

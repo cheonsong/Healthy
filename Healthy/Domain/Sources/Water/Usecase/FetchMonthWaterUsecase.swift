@@ -9,7 +9,7 @@ import Foundation
 import RxSwift
 
 public protocol FetchMonthWaterUsecaseProtocol {
-    func execute(year: String, month: Month)-> Single<[DailyWaterModel]>
+    func execute(year: String, month: Month)-> Single<[Domain.DailyWaterModel]>
 }
 
 public class FetchMonthWaterUsecase: FetchMonthWaterUsecaseProtocol {
@@ -20,7 +20,7 @@ public class FetchMonthWaterUsecase: FetchMonthWaterUsecaseProtocol {
         self.repository = repository
     }
     
-    public func execute(year: String, month: Month) -> Single<[DailyWaterModel]> {
+    public func execute(year: String, month: Month) -> Single<[Domain.DailyWaterModel]> {
         return repository.fetchMonthWater(.month(year, month))
     }
 }

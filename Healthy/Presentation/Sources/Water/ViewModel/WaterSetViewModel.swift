@@ -70,7 +70,7 @@ extension WaterSetViewModel: WaterSetViewModelInput {
                 
                 let isAchieve: Bool = (App.state.waterToday.value / (water.goal)) >= 1
                 
-                let dailyModel = DailyWaterModel(date: DateModel.today,
+                let dailyModel = Domain.DailyWaterModel(date: DateModel.today,
                                             goal: water.goal,
                                             progress: App.state.waterToday.value,
                                             isAchieve: isAchieve)
