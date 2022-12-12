@@ -80,3 +80,6 @@ Healthy/Healthy/Resources/ja.lproj/Localizable.strings
 
 Certificate/*.p8
 Certificate/*.certSigningRequest
+
+### Fastlane
+Fastlane/report.xml
