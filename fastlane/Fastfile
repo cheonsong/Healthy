@@ -69,7 +69,7 @@ lane :release do
   # 7. 빌드 및 내보내기 🏗
   gym(
     workspace: "Healthy.xcworkspace",
-    scheme: "Healthy,
+    scheme: "Healthy",
     configuration: "Release",
     export_options: {
       method: "app-store",
