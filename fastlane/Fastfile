@@ -34,14 +34,6 @@ lane :set_version do |options|
     xcodeproj: "./Healthy/Healthy/Healthy.xcodeproj" 
     )
   version_number = "#{lane_context[SharedValues::VERSION_NUMBER]}(#{lane_context[SharedValues::BUILD_NUMBER]})"
-  commit_version_bump(
-    message: "Update version - #{version_number}",
-    xcodeproj: "./Healthy/Healthy/Healthy.xcodeproj",
-    force: true,
-    settings: "Supporting Files/info.plist"
-    )
-  add_git_tag(tag: "v#{version_number}")
-  push_to_git_remote
 end
 
 
