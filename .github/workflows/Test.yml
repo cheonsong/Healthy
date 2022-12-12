@@ -21,7 +21,7 @@ jobs:
     - uses: actions/checkout@v2
     - uses: tuist/tuist-action@0.13.0
       with:
-        commnad: 'build'
+        command: 'build'
         arguments: ''
     # shell 이용해서 하나의 command 수행
     - name: Start xcode build 🛠
