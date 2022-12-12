@@ -22,7 +22,11 @@ jobs:
         with:
           ruby-version: ${{ matrix.ruby }}
       - run: brew install fastlane
-      - run: make project
+      - uses: tuist/tuist-action@0.13.0
+        with:
+          command: 'build'
+          arguments: ''
+      - run: pod install
       - run: fastlane release
         env:
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
