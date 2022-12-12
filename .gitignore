@@ -68,3 +68,15 @@ Derived/
 
 ### Tuist managed dependencies ###
 Tuist/Dependencies
+
+### Localizing
+Scripts/healthy-368805-2a8fd16b4b65.json
+Scripts/Localize.sh
+Scripts/*.csv
+*.strings
+Healthy/Healthy/Resources/en.lproj/Localizable.strings
+Healthy/Healthy/Resources/ko.lproj/Localizable.strings
+Healthy/Healthy/Resources/ja.lproj/Localizable.strings
+
+Certificate/*.p8
+Certificate/*.certSigningRequest

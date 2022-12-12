@@ -28,7 +28,7 @@ extension Module {
     public var name: String {
         switch self {
         case .app:
-            return "App"
+            return "Healthy"
         case .data:
             return "Data"
         case .presentation:
@@ -43,7 +43,7 @@ extension Module {
     }
     
     public var path: ProjectDescription.Path {
-        return .relativeToRoot("HealthTrack/" + self.name)
+        return .relativeToRoot("Healthy/" + self.name)
     }
     
     public var project: TargetDependency {

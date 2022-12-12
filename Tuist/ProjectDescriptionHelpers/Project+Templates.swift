@@ -7,21 +7,23 @@ import ProjectDescription
 
 extension Project {
     
-    static let bundleID = "com.cheonsong.health"
+    static let bundleID = "com.cheonsong.healthy"
     static let iosVersion = "13.0"
     
     /// Helper function to create the Project for this ExampleApp
     public static func app(
         name: String,
         dependencies: [TargetDependency] = [],
-        resources: ProjectDescription.ResourceFileElements? = nil
+        resources: ProjectDescription.ResourceFileElements? = nil,
+        scripts: [TargetScript] = []
     ) -> Project {
         return self.project(
             name: name,
             product: .app,
-            bundleID: bundleID + "\(name)",
+            bundleID: bundleID,
             dependencies: dependencies,
-            resources: resources
+            resources: resources,
+            scripts: scripts
         )
     }
 }
@@ -46,28 +48,32 @@ extension Project {
         bundleID: String,
         schemes: [Scheme] = [],
         dependencies: [TargetDependency] = [],
-        resources: ProjectDescription.ResourceFileElements? = nil
+        resources: ProjectDescription.ResourceFileElements? = nil,
+        scripts: [TargetScript] = []
     ) -> Project {
         return Project(
             name: name,
+            //settings: .settings(base: .init().automaticCodeSigning(devTeam: "GP9D94CZ57")),
             targets: [
                 Target(
                     name: name,
                     platform: .iOS,
                     product: product,
                     bundleId: bundleID,
-                    deploymentTarget: .iOS(targetVersion: iosVersion, devices: [.iphone, .ipad]),
+                    deploymentTarget: .iOS(targetVersion: iosVersion, devices: [.iphone]),
                     infoPlist: .file(path: .relativeToRoot("Supporting Files/Info.plist")),
                     sources: ["Sources/**"],
                     resources: resources,
-                    dependencies: dependencies
+                    scripts: scripts,
+                    dependencies: dependencies,
+                    settings: .settings(configurations: [.release(name: .release, settings: makeSettingDictionary()), .debug(name: .debug, settings: makeSettingDictionary())])
                 ),
                 Target(
                     name: "\(name)Tests",
                     platform: .iOS,
                     product: .unitTests,
                     bundleId: bundleID,
-                    deploymentTarget: .iOS(targetVersion: iosVersion, devices: [.iphone, .ipad]),
+                    deploymentTarget: .iOS(targetVersion: iosVersion, devices: [.iphone]),
                     infoPlist: .file(path: .relativeToRoot("Supporting Files/Info.plist")),
                     sources: "Tests/**",
                     dependencies: [
@@ -77,6 +83,11 @@ extension Project {
             ],
             schemes: schemes
         )
+    }
+    
+    static func makeSettingDictionary()-> SettingsDictionary {
+        return SettingsDictionary().automaticCodeSigning(devTeam: "7ZK7Q3JHK4").merging(["VERSIONING_SYSTEM": "apple-generic",
+                                                                                         "CURRENT_PROJECT_VERSION": "1.0.0"])
     }
 }
 
@@ -95,4 +106,6 @@ public extension TargetDependency {
     static let lottie: TargetDependency          = .external(name: "Lottie")
     static let rxGesture: TargetDependency       = .external(name: "RxGesture")
     static let swiftyJson: TargetDependency      = .external(name: "SwiftyJSON")
+    static let rxRealm: TargetDependency         = .external(name: "RxRealm")
+    static let realm: TargetDependency           = .external(name: "RealmSwift")
 }
