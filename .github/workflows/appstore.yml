@@ -26,7 +26,7 @@ jobs:
         with:
           ruby-version: ${{ matrix.ruby }}
       - run: brew install fastlane
-      - run: pod install
+      - run: make project
       - run: fastlane release
         env:
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
