@@ -19,10 +19,8 @@ jobs:
     steps:
     # uses 키워드를 통해 Github Actions에서 기본으로 제공하는 액션을 사용 가능. 아래 액션은 repository 에 체크아웃하는 것
     - uses: actions/checkout@v2
-    - uses: tuist/tuist-action@0.13.0
-      with:
-        command: 'build'
-        arguments: ''
+    # tuist 다운
+    run: curl -Ls https://install.tuist.io | bash
     # shell 이용해서 하나의 command 수행
     - name: Start xcode build 🛠
       run: |
