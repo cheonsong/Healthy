@@ -27,6 +27,6 @@ jobs:
     - name: Start xcode build 🛠
       run: |
         curl -Ls https://install.tuist.io | bash
-        tuist test
+        tuist test Healthy
 #        make project
 #        xcodebuild test -workspace Healthy.xcworkspace -scheme Healthy -destination 'platform=iOS Simulator,name=iPhone 11,OS=latest'
