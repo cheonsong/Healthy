@@ -20,9 +20,11 @@ platform :ios do
 lane :set_version do |options|
   case options[:version]
   when "major", "minor", "patch"
-    increment_version_number(bump_type: options[:version])
+    increment_version_number(bump_type: options[:version],
+			     xcodeproj: "./Healthy/Healthy/Healthy.xcodeproj")
   else
-    increment_version_number(version_number: options[:version])
+    increment_version_number(version_number: options[:version],
+			     xcodeproj: "./Healthy/Healthy/Healthy.xcodeproj"))
   end
   
   # 가장 흔한 빌드번호 규칙은, 특정 버전번호에 해당하는 n번째 빌드의 빌드번호는 n이어야 한다는 것이다. 
