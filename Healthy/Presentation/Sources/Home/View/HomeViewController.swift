@@ -31,9 +31,9 @@ public class HomeViewController: UIViewController, CodeBaseUI {
     let stackView     = StackViewBuilder().axis(.vertical).spacing(30).view
     
     let waterContainer    = ViewBuilder().view
-    let stepsContainer    = ViewBuilder().view
-    let caloriesContainer = ViewBuilder().view
-    let sleepContainer    = ViewBuilder().view
+    let stepsContainer    = ViewBuilder().isHidden(true).view
+    let caloriesContainer = ViewBuilder().isHidden(true).view
+    let sleepContainer    = ViewBuilder().isHidden(true).view
     
     let waterTitle    = LabelBuilder("WATER_TEXT".localized).font(.bold16).textColor(.black).sizeToFit().view
     let stepsTitle    = LabelBuilder("STEPS_TEXT".localized).font(.bold16).textColor(.black).sizeToFit().view
