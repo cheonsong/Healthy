@@ -20,41 +20,29 @@ end
 target 'Healthy' do
   project 'Healthy/Healthy/Healthy.xcodeproj'
 
-  pod 'RealmSwift'
-
 end
 
 target 'Domain' do
   project 'Healthy/Domain/Domain.xcodeproj'
-
-  pod 'RealmSwift'
 
 end
 
 target 'DesignSystem' do
   project 'Healthy/DesignSystem/DesignSystem.xcodeproj'
 
-  pod 'RealmSwift'
-
 end
 
 target 'Presentation' do
   project 'Healthy/Presentation/Presentation.xcodeproj'
 
-  pod 'RealmSwift'
-
 end
 
 target 'Data' do
   project 'Healthy/Data/Data.xcodeproj'
-
   pod 'RealmSwift'
-
 end
 
 target 'Util' do
   project 'Healthy/Util/Util.xcodeproj'
-
-  pod 'RealmSwift'
 
 end
