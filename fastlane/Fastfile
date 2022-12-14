@@ -17,7 +17,7 @@ default_platform(:ios)
 
 platform :ios do
   desc "AppVersion올리기"
-lane :set_version do |options|
+lane :upload do |options|
   case options[:version]
   when "major", "minor", "patch"
     increment_version_number(bump_type: options[:version],
@@ -33,7 +33,27 @@ lane :set_version do |options|
     build_number: Time.new.strftime("%Y.%m%d.%H%M"), # 2021년 4월 17일 14시 53분 -> 2021.0417.1453
     xcodeproj: "./Healthy/Healthy/Healthy.xcodeproj" 
     )
-  version_number = "#{lane_context[SharedValues::VERSION_NUMBER]}(#{lane_context[SharedValues::BUILD_NUMBER]})"
+
+  match(
+    git_url: "git@github.com:cheonsong/Healthy.git",
+    storage_mode: "git",
+    type: "appstore"
+    )
+
+# 7. 빌드 및 내보내기 🏗
+  gym(
+    workspace: "Healthy.xcworkspace",
+    scheme: "Healthy",
+    configuration: "Release",
+    export_options: {
+      method: "app-store",
+      signingStyle: "manual"
+    }
+    )
+
+  # 8. 앱스토어 업로드 🎉
+  upload_to_testflight
+  
 end
 
 
