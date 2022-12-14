@@ -32,15 +32,15 @@ lane :upload do |options|
 
   # 5. 매치 인증서 확인
   match(
-    git_url: "git@github.com:cheonsong/Healthy.git",
-    storage_mode: "git",
     type: "appstore"
     )
 
-  # 6. 코코아팟 설치
-  cocoapods(use_bundle_exec: false)
-
   # 7. 빌드 및 내보내기 🏗
+build_app(
+  scheme: "Healthy",
+  export_method: "app-store",
+)
+
   build_app(workspace: "Healthy.xcworkspace", scheme: "Healthy", configuration: "Release")
 
   # 8. 앱스토어 업로드 🎉
