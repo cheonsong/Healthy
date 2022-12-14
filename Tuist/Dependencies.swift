@@ -32,3 +32,7 @@ public extension Package {
     static let swiftyJson: Package    = .remote(url: "https://github.com/SwiftyJSON/SwiftyJSON.git", requirement: .upToNextMajor(from: "4.0.0"))
     static let rxRealm: Package       = .remote(url: "https://github.com/RxSwiftCommunity/RxRealm.git", requirement: .branch("main"))
 }
+
+public extension CarthageDependencies.Dependency {
+    static let realm: CarthageDependencies.Dependency = .github(path: "realm/realm-swift", requirement: .branch("master"))
+}

@@ -39,7 +39,7 @@ end
 
 target 'Data' do
   project 'Healthy/Data/Data.xcodeproj'
-  pod 'RealmSwift'
+  #pod 'RealmSwift'
 end
 
 target 'Util' do
