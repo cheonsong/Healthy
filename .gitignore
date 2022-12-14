@@ -82,4 +82,5 @@ Certificate/*.p8
 Certificate/*.certSigningRequest
 
 ### Fastlane
-Fastlane/report.xml
+fastlane/report.xml
+fastlane/.env
