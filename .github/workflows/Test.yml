@@ -28,5 +28,4 @@ jobs:
       run: |
         curl -Ls https://install.tuist.io | bash
         make project
-        tuist test
-#        xcodebuild test -workspace Healthy.xcworkspace -scheme Healthy -destination 'platform=iOS Simulator,name=iPhone 11,OS=latest'
+        xcodebuild test -workspace Healthy.xcworkspace -scheme Healthy -destination 'platform=iOS Simulator,name=iPhone 11,OS=latest'
