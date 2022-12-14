@@ -27,88 +27,27 @@ lane :upload do |options|
 			     xcodeproj: "./Healthy/Healthy/Healthy.xcodeproj")
   end
   
-  # 가장 흔한 빌드번호 규칙은, 특정 버전번호에 해당하는 n번째 빌드의 빌드번호는 n이어야 한다는 것이다. 
-  # 하지만 자동화 과정에서는 이 규칙을 적용 할 수 없으므로, 현재시간을 조합하여 중복될 일 없는 빌드번호를 만든다.
-  increment_build_number(
-    build_number: Time.new.strftime("%Y.%m%d.%H%M"), # 2021년 4월 17일 14시 53분 -> 2021.0417.1453
-    xcodeproj: "./Healthy/Healthy/Healthy.xcodeproj" 
-    )
+  # 빌드 번호 올리기
+  increment_build_number(xcodeproj: "./Healthy/Healthy/Healthy.xcodeproj", build_number: latest_testflight_build_number + 1)
 
+  # 5. 매치 인증서 확인
   match(
     git_url: "git@github.com:cheonsong/Healthy.git",
     storage_mode: "git",
     type: "appstore"
     )
 
-# 7. 빌드 및 내보내기 🏗
-  gym(
-    workspace: "Healthy.xcworkspace",
-    scheme: "Healthy",
-    configuration: "Release",
-    export_options: {
-      method: "app-store",
-      signingStyle: "manual"
-    }
-    )
-
-  # 8. 앱스토어 업로드 🎉
-  upload_to_testflight
-  
-end
-
-
-lane :release do
-  # 5. keychain 초기화 🔑
-  create_keychain(
-    name: ENV["KEYCHAIN_NAME"],
-    password: ENV["KEYCHAIN_PASSWORD"],
-    timeout: 1800,
-    default_keychain: true,
-    unlock: true,
-    lock_when_sleeps: false
-  )
-
-  app_store_connect_api_key(
-    key_id: ENV["APP_STORE_CONNECT_API_KEY_ID"],
-    issuer_id: ENV["APP_STORE_CONNECT_API_ISSUER_ID"],
-    key_content: ENV["APP_STORE_CONNECT_API_KEY_CONTENT"]
-    )
-
-  # 6. match를 실행하여 인증서 및 프로파일 불러오기 ✍🏼
-  match(
-    git_url: "git@github.com:cheonsong/Healthy.git",
-    storage_mode: "git",
-    type: "appstore",
-    readonly: true,
-    keychain_name: ENV["KEYCHAIN_NAME"],
-    keychain_password: ENV["KEYCHAIN_PASSWORD"]
-    )
+  # 6. 코코아팟 설치
+  cocoapods(use_bundle_exec: false)
 
   # 7. 빌드 및 내보내기 🏗
-  gym(
-    workspace: "Healthy.xcworkspace",
-    scheme: "Healthy",
-    configuration: "Release",
-    export_options: {
-      method: "app-store",
-      signingStyle: "manual"
-    }
-    )
+  build_app(workspace: "Healthy.xcworkspace", scheme: "Healthy", configuration: "Release")
 
   # 8. 앱스토어 업로드 🎉
-  deliver(
-    submit_for_review: false,
-    force: true,
-    skip_screenshots: true,
-    automatic_release: true,
-    precheck_include_in_app_purchases: false,
-    copyright: "© #{Time.now.year} cheonsong, Inc.",
-    submission_information: {    
-      export_compliance_encryption_updated: false,
-      export_compliance_uses_encryption: false,
-      add_id_info_uses_idfa: false
-      }
+  upload_to_testflight(
+      skip_waiting_for_build_processing: true
     )
+  
 end
 
 # lane이 모두 완료된 뒤 호출됨
