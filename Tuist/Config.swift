@@ -2,6 +2,6 @@ import ProjectDescription
 
 let config = Config(
     compatibleXcodeVersions: .all,
-    swiftVersion: "5.7",
+    swiftVersion: "5.5",
     generationOptions: .options()
 )
