@@ -8,6 +8,9 @@
 
 당신의 하루를 기록하는 건강 도우미
 
+## [ Release Note ]
+[Release Note](https://cheonsong.notion.site/Release-Note-cf5cfd1391ac4d3e8258d0b10dbabb87)
+
 ## [ Role ]
 기획, 디자인, 개발   
 [기획 및 디자인 링크](https://www.figma.com/file/iknf6FjR7hxmCoM2jYFvBk/Health-Care?node-id=0%3A1)
