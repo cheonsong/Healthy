@@ -27,7 +27,7 @@ extension UIApplication {
     
     public class func isUpdateAvailable()-> Bool {
         guard let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String,
-              let url = URL(string: "http://itunes.apple.com/lookup?bundleId=com.heelpass.good-listener"),
+              let url = URL(string: "http://itunes.apple.com/lookup?bundleId=com.cheonsong.healthy"),
               let data = try? Data(contentsOf: url),
               let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any],
               let results = json["results"] as? [[String: Any]],

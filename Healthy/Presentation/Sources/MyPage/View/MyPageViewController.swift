@@ -43,10 +43,13 @@ public class MyPageViewController: UIViewController, CodeBaseUI {
         bind()
     }
     
+    public override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        appVersionView.isNeedsUpdate(UIApplication.isUpdateAvailable())
+    }
+    
     public func addComponents() {
         view.backgroundColor = .white
-        appVersionView.isNeedsUpdate(false)
-        
         [dateLabel, welcomeLabel, topLine, stackView].forEach { view.addSubview($0) }
         [editMyInfoView, alarmSetView, dataResetView, appVersionView].forEach { stackView.addArrangedSubview($0) }
     }
@@ -110,6 +113,21 @@ public class MyPageViewController: UIViewController, CodeBaseUI {
         alarmSetView.tapGesture
             .subscribe(onNext: { _ in
                 UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+            })
+            .disposed(by: disposeBag)
+        
+        appVersionView.tapGesture
+            .filter({ _ in return UIApplication.isUpdateAvailable()})
+            .subscribe(onNext: { _ in
+                guard let url = URL(string: "https://apps.apple.com/kr/app/healthy/id1658676877") else {
+                    return
+                }
+                
+                if UIApplication.shared.canOpenURL(url) {
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                } else {
+                    print("can't open app store url")
+                }
             })
             .disposed(by: disposeBag)
         
