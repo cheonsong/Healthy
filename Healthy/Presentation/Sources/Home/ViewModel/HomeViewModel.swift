@@ -12,6 +12,7 @@ import RxCocoa
 
 public protocol HomeViewModelAction {
     func moveToWaterViewController()
+    func showGuide()
 }
 
 protocol HomeViewModelInput {

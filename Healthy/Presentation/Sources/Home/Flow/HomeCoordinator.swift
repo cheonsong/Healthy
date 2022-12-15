@@ -53,4 +53,9 @@ extension HomeCoordinator: HomeViewModelAction {
         let coordinator = dependencies.makeWaterCoordinator(navigation: self.navigationController)
         coordinator.start()
     }
+    
+    public func showGuide() {
+        let vc = GuideViewController()
+        navigationController.present(vc, animated: true)
+    }
 }

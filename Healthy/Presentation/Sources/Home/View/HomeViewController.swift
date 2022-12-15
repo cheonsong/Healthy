@@ -18,7 +18,7 @@ import UserNotifications
 public class HomeViewController: UIViewController, CodeBaseUI {
     
     var coordinator: HomeCoordinator?
-    var viewModel: HomeViewModel?
+    var viewModel: HomeViewModel!
     var disposeBag = DisposeBag()
     
     let topContainer = ViewBuilder().backgrouondColor(.white).view
@@ -44,6 +44,8 @@ public class HomeViewController: UIViewController, CodeBaseUI {
     let stepView      = MainView(type: .steps)
     let caloriesView  = MainView(type: .calolies)
     let sleepView     = MainView(type: .sleep)
+    
+    let guideIcon = ImageViewBuilder(PresentationAsset.icoQuestion.image).view
     
     /// MainViewController DI를 위한 Create 함수
     public static func create(viewModel: HomeViewModel)-> HomeViewController {
@@ -77,7 +79,7 @@ public class HomeViewController: UIViewController, CodeBaseUI {
     
     public func addComponents() {
         [scrollView, topContainer].forEach { view.addSubview($0) }
-        [dateLabel, welcomeLabel, icoCalender, calenderView].forEach { topContainer.addSubview($0) }
+        [dateLabel, welcomeLabel, icoCalender, calenderView, guideIcon].forEach { topContainer.addSubview($0) }
         scrollView.addSubview(stackView)
         [waterTitle, waterView].forEach { waterContainer.addSubview($0) }
         [stepsTitle, stepView].forEach { stepsContainer.addSubview($0) }
@@ -110,6 +112,12 @@ public class HomeViewController: UIViewController, CodeBaseUI {
         icoCalender.snp.makeConstraints {
             $0.right.equalToSuperview().inset(32)
             $0.bottom.equalTo(welcomeLabel)
+        }
+        
+        guideIcon.snp.makeConstraints {
+            $0.right.equalToSuperview().inset(32)
+            $0.top.equalTo(dateLabel)
+            $0.size.equalTo(20)
         }
         
         calenderView.snp.makeConstraints {
@@ -177,7 +185,7 @@ public class HomeViewController: UIViewController, CodeBaseUI {
             .when(.recognized)
             .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] _ in
-                self?.viewModel?.waterViewTapped()
+                self?.viewModel.waterViewTapped()
             })
             .disposed(by: disposeBag)
         
@@ -187,6 +195,12 @@ public class HomeViewController: UIViewController, CodeBaseUI {
             .throttle(.milliseconds(500), scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] _ in
                 self?.topContainerAnimation(isOpening: self?.calenderView.alpha == 0)
+            })
+            .disposed(by: disposeBag)
+        
+        guideIcon.tapGesture
+            .subscribe(onNext: { [weak self] _ in
+                self?.viewModel.action.showGuide()
             })
             .disposed(by: disposeBag)
         
