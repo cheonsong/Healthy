@@ -6,7 +6,9 @@
 ## [ About ]
 ![Group 10161@3x](https://user-images.githubusercontent.com/59193640/207803440-b58ac00a-f657-43b2-b4cc-ee7bdbfdac0d.png)
 
-당신의 하루를 기록하는 건강 도우미
+당신의 하루를 기록하는 건강 도우미   
+글로벌 출시
+> ko, en, ja
 
 ## [ Release Note ]
 [Release Note](https://cheonsong.notion.site/Release-Note-cf5cfd1391ac4d3e8258d0b10dbabb87)
@@ -21,7 +23,7 @@ MVVM, Coordinator, Clean Architecture
 #### ThirdParty Library
 Realm, RxSwift, SnapKit, Then
 #### Project
-Tuist, Fastlane
+Tuist, Fastlane, Localize
 
 ## [ Project Architecture ]
 ![Architecture](https://user-images.githubusercontent.com/59193640/207800387-d332fe4f-9707-4d28-a8de-0a317c137eea.png)
