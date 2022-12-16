@@ -28,6 +28,7 @@ public class MyPageViewController: UIViewController, CodeBaseUI {
     let alarmSetView = MyPageView(text: "MYPAGE_ALARM_SET_LABEL".localized)
     let dataResetView = MyPageView(text: "MYPAGE_RESET_LABEL".localized)
     let appVersionView = MyPageView(text: "MYPAGE_APP_VERSION_LABEL".localized)
+    let customerServiceView = MyPageView(text: "CS_TITLE_LABEL".localized)
     //let editMyInfoView = MyPageView(text: "")
     
     public static func create(viewModel: MyPageViewModel)-> MyPageViewController {
@@ -51,7 +52,7 @@ public class MyPageViewController: UIViewController, CodeBaseUI {
     public func addComponents() {
         view.backgroundColor = .white
         [dateLabel, welcomeLabel, topLine, stackView].forEach { view.addSubview($0) }
-        [editMyInfoView, alarmSetView, dataResetView, appVersionView].forEach { stackView.addArrangedSubview($0) }
+        [editMyInfoView, alarmSetView, dataResetView, appVersionView, customerServiceView].forEach { stackView.addArrangedSubview($0) }
     }
     
     public func setConstraints() {
@@ -128,6 +129,12 @@ public class MyPageViewController: UIViewController, CodeBaseUI {
                 } else {
                     print("can't open app store url")
                 }
+            })
+            .disposed(by: disposeBag)
+        
+        customerServiceView.tapGesture
+            .subscribe(onNext: { [weak self] _ in
+                self?.viewModel.customerServiceTapped()
             })
             .disposed(by: disposeBag)
         

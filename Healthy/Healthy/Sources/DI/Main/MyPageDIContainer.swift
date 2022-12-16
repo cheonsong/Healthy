@@ -45,5 +45,9 @@ extension MyPageDIContainer: MyPageCoordinatorDependencies {
     func makeEditViewController() -> EditViewController {
         return EditViewController.create(viewModel: makeEditViewModel())
     }
+    
+    func makeCSViewController() -> CSViewController {
+        return CSViewController.create()
+    }
 }
 

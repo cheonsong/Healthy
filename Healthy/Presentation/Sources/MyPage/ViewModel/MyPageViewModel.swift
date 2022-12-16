@@ -13,12 +13,14 @@ import RxCocoa
 
 public protocol MyPageViewModelAction {
     func moveToEditViewController()
+    func moveToCustomerService()
 }
 
 protocol MyPageViewModelInpput {
     func editInfoTapped()
     func initDataTapped()
     func appVersionTapped()
+    func customerServiceTapped()
 }
 
 protocol MyPageViewModelOutput {
@@ -61,5 +63,9 @@ extension MyPageViewModel: MyPageViewModelInpput {
     
     func appVersionTapped() {
         
+    }
+    
+    func customerServiceTapped() {
+        action.moveToCustomerService()
     }
 }
