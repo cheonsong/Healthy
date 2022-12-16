@@ -81,6 +81,8 @@ Healthy/Healthy/Resources/ja.lproj/Localizable.strings
 Certificate/*.p8
 Certificate/*.certSigningRequest
 
+Configurations/*.xcconfig
+
 ### Fastlane
 fastlane/report.xml
 fastlane/.env

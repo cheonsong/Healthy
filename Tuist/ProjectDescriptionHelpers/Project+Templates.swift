@@ -66,7 +66,7 @@ extension Project {
                     resources: resources,
                     scripts: scripts,
                     dependencies: dependencies,
-                    settings: .settings(configurations: [.release(name: .release, settings: makeSettingDictionary()), .debug(name: .debug, settings: makeSettingDictionary())])
+                    settings: .settings(configurations: [.release(name: .release, settings: makeSettingDictionary(), xcconfig: .relativeToRoot("Configurations/release.xcconfig")), .debug(name: .debug, settings: makeSettingDictionary(), xcconfig: .relativeToRoot("Configurations/debug.xcconfig"))])
                 ),
                 Target(
                     name: "\(name)Tests",
