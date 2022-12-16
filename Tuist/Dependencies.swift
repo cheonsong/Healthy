@@ -16,7 +16,9 @@ let dependencies = Dependencies(
             .lottie,
             .rxGesture,
             .swiftyJson,
-            .rxKeyboard
+            .rxKeyboard,
+            .moya,
+            .slackKit
     ],
     platforms: [.iOS]
 )
@@ -31,6 +33,8 @@ public extension Package {
     static let rxGesture: Package     = .remote(url: "https://github.com/RxSwiftCommunity/RxGesture", requirement: .upToNextMajor(from: "4.0.4"))
     static let swiftyJson: Package    = .remote(url: "https://github.com/SwiftyJSON/SwiftyJSON.git", requirement: .upToNextMajor(from: "4.0.0"))
     static let rxRealm: Package       = .remote(url: "https://github.com/RxSwiftCommunity/RxRealm.git", requirement: .branch("main"))
+    static let moya: Package          = .remote(url: "https://github.com/Moya/Moya.git", requirement: .branch("master"))
+    static let slackKit: Package = .remote(url: "https://github.com/pvzig/SlackKit.git", requirement: .branch("main"))
 }
 
 public extension CarthageDependencies.Dependency {

@@ -15,6 +15,7 @@ import UIKit
 public class CSViewController: UIViewController, CodeBaseUI {
     
     var disposeBag = DisposeBag()
+    var viewModel: CSViewModel!
     
     let navigation = Navigation(.none, "CS_TITLE_LABEL".localized)
     let sendButton = MainButton("SEND_BUTTON".localized).then {
@@ -24,8 +25,9 @@ public class CSViewController: UIViewController, CodeBaseUI {
     let textViewContainer = ViewBuilder().backgrouondColor(.clear).cornerRadius(10).borderColor(.gr2).borderWidth(1).view
     lazy var textView = TextViewBuilder().font(.regular16).textColor(.black).textContainerInset(UIEdgeInsets(top: 0, left: 0, bottom: 15, right: 15)).delegate(self).view
     
-    public static func create()-> CSViewController {
+    public static func create(viewModel: CSViewModel)-> CSViewController {
         let vc = CSViewController()
+        vc.viewModel = viewModel
         return vc
     }
     
@@ -71,6 +73,13 @@ public class CSViewController: UIViewController, CodeBaseUI {
                 self?.navigationController?.popViewController(animated: true)
             })
             .disposed(by: disposeBag)
+        
+        sendButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                self?.viewModel.sendButtonTapped(message: self?.textView.text ?? "")
+            })
+            .disposed(by: disposeBag)
+        
     }
     
     public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

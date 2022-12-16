@@ -31,6 +31,10 @@ final class MyPageDIContainer {
                              updateUserInfoUsecase: UpdateUserInfoUsecase(repository: UserRepository()))
     }
     
+    func makeCSViewModel()-> CSViewModel {
+        return CSViewModel(usecase: SendMessageToSlackUsecase())
+    }
+    
     // MARK: Coordinator
     func makeMyPageCoordinator(navigationController: UINavigationController) -> MyPageCoordinator {
         return MyPageCoordinator(navigation: navigationController, dependencies: self)
@@ -47,7 +51,7 @@ extension MyPageDIContainer: MyPageCoordinatorDependencies {
     }
     
     func makeCSViewController() -> CSViewController {
-        return CSViewController.create()
+        return CSViewController.create(viewModel: makeCSViewModel())
     }
 }
 

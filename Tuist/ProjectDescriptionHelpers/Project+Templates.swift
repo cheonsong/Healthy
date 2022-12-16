@@ -107,5 +107,7 @@ public extension TargetDependency {
     static let rxGesture: TargetDependency       = .external(name: "RxGesture")
     static let swiftyJson: TargetDependency      = .external(name: "SwiftyJSON")
     static let rxRealm: TargetDependency         = .external(name: "RxRealm")
-    static let realm: TargetDependency           = .external(name: "RealmSwift")
+    static let realmSwift: TargetDependency           = .xcframework(path: .relativeToRoot("Healthy/Data/Framework/RealmSwift.xcframework"))
+    static let realm: TargetDependency = .xcframework(path: .relativeToRoot("Healthy/Data/Framework/Realm.xcframework"))
+    static let slackKit: TargetDependency = .external(name: "SlackKit")
 }
