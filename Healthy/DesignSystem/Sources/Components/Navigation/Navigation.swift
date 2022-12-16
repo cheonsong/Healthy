@@ -13,6 +13,7 @@ import SnapKit
 public enum NavigationType {
     case setting
     case save
+    case none
     
     var image: UIImage {
         switch self {
@@ -20,6 +21,8 @@ public enum NavigationType {
             return DesignSystemAsset.icoSet.image
         case .save:
             return DesignSystemAsset.icoSave.image
+        case .none:
+            return UIImage()
         }
     }
 }
