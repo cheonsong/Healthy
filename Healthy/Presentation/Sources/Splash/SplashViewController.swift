@@ -12,7 +12,7 @@ import SnapKit
 
 public class SplashViewController: UIViewController, CodeBaseUI, UIViewControllerTransitioningDelegate {
     
-    let image = ImageViewBuilder(PresentationAsset.healty.image)
+    let image = ImageViewBuilder(PresentationAsset.healthy.image)
         .view
     
     var animator: UIDynamicAnimator?

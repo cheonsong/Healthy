@@ -68,7 +68,7 @@ public class CSViewController: UIViewController, CodeBaseUI {
     public func bind() {
         navigation.backButton.rx.tap
             .subscribe(onNext: { [weak self] in
-                self?.dismiss(animated: true)
+                self?.navigationController?.popViewController(animated: true)
             })
             .disposed(by: disposeBag)
     }
@@ -95,11 +95,13 @@ public class CSViewController: UIViewController, CodeBaseUI {
 extension CSViewController: UITextViewDelegate {
     public func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
         textViewContainer.layer.borderColor = UIColor.b2.cgColor
+        textViewContainer.layer.borderWidth = 2
         return true
     }
     
     public func textViewDidEndEditing(_ textView: UITextView) {
         textViewContainer.layer.borderColor = UIColor.gr2.cgColor
+        textViewContainer.layer.borderWidth = 1
         textView.text = textView.text.trimmingCharacters(in: .whitespacesAndNewlines)
         sendButton.configure(!textView.text.isEmpty)
     }
