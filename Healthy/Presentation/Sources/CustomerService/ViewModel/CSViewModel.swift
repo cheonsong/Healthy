@@ -9,6 +9,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 import Domain
+import Util
 
 protocol CSViewModelInput {
     func sendButtonTapped(category: String, message: String)
@@ -37,6 +38,10 @@ public class CSViewModel: CSViewModelOutput {
 extension CSViewModel: CSViewModelInput {
     public func sendButtonTapped(category: String, message: String) {
         usecase.send(category: category, message: message)
+            .subscribe(onSuccess: { [weak self] isSuccess in
+                self?.isSendMessageSuccess.accept(isSuccess)
+            })
+            .disposed(by: disposeBag)
     }
 }
 

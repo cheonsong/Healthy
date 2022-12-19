@@ -11,6 +11,7 @@ import Util
 import RxSwift
 import RxCocoa
 import UIKit
+import Toaster
 
 public class CSViewController: UIViewController, CodeBaseUI {
     
@@ -122,6 +123,18 @@ public class CSViewController: UIViewController, CodeBaseUI {
         textView.rx.text.orEmpty
             .map { !$0.isEmpty }
             .bind(to: textViewPlaceHolder.rx.isHidden)
+            .disposed(by: disposeBag)
+        
+        viewModel.isSendMessageSuccess
+            .subscribe(onNext: { [weak self] isSuccess in
+                guard let self = self else { return }
+                if isSuccess {
+                    self.navigationController?.popViewController(animated: true)
+                    Toast.makeToast(text: "CS_SEND_SUCCESS".localized)
+                } else {
+                    Toast.makeToast(text: "NETWORK_ERROR".localized)
+                }
+            })
             .disposed(by: disposeBag)
     }
     
