@@ -64,6 +64,7 @@ public class HomeViewController: UIViewController, CodeBaseUI {
         viewModel?.viewDidLoad()
         UNUserNotificationCenter.current().delegate = self
         setNotification()
+        updatePopup()
     }
     
     public override func viewWillAppear(_ animated: Bool) {
@@ -307,6 +308,22 @@ public class HomeViewController: UIViewController, CodeBaseUI {
         
         notificationCenter.add(lunchRequest, withCompletionHandler: nil)
         notificationCenter.add(lunchRequest2, withCompletionHandler: nil)
+    }
+    
+    func updatePopup() {
+        if UserDefaultsManager.shared.isFirst {
+            let popup = PopupView.makePopup(title: "NOTICE_TEXT".localized, contents: "UPDATE_POPUP_CONTENTS".localized, isCancelHidden: true)
+            popup.completeAction = {
+                UserDefaultsManager.shared.isFirst = false
+            }
+            popup.cancelAction = {
+                UserDefaultsManager.shared.isFirst = false
+            }
+            self.tabBarController?.view.addSubview(popup)
+            popup.snp.makeConstraints {
+                $0.edges.equalToSuperview()
+            }
+        }
     }
 }
 
