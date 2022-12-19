@@ -13,6 +13,7 @@ enum ServiceError: Error {
     case moyaError(MoyaError)
     case invalidResponse(responseCode: Int, message: String)
     case tokenExpired
+    case jsonParsingError
 }
 
 extension ServiceError: LocalizedError {
@@ -24,6 +25,8 @@ extension ServiceError: LocalizedError {
             return message
         case .tokenExpired:
             return "AccessToken Expired"
+        case .jsonParsingError:
+            return "Json Parsing Error"
         }
     }
 }

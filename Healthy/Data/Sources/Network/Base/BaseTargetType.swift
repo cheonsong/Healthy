@@ -33,7 +33,7 @@ extension BaseSlackTargetType {
         return Data()
     }
     
-    var authorizationType: AuthorizationType? {
+    public var authorizationType: AuthorizationType? {
         return .bearer
     }
 }
