@@ -87,7 +87,7 @@ extension Project {
     
     static func makeSettingDictionary()-> SettingsDictionary {
         return SettingsDictionary().automaticCodeSigning(devTeam: "7ZK7Q3JHK4").merging(["VERSIONING_SYSTEM": "apple-generic",
-                                                                                         "BUILD_LIBRARY_FOR_DISTRIBUTION": "YES"])
+                                                                                         "BUILD_LIBRARY_FOR_DISTRIBUTION": "NO"])
     }
 }
 
