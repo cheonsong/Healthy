@@ -51,7 +51,7 @@ struct SlackMessageModel: Encodable {
         print(message)
         self.channel = channel
         self.date = date
-        self.blocks = [SectionModel(text: TextModel(text: "\n*문의 : \(category)*")),
+        self.blocks = [SectionModel(text: TextModel(text: "\n*유형 : \(category)*")),
                        SectionModel(text: TextModel(text: "시간 : \(date)")),
                        SectionModel(text: TextModel(text: message)),
                        SectionModel(text: TextModel(text: "===================================================================="))

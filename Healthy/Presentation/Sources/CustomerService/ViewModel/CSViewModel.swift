@@ -11,7 +11,7 @@ import RxCocoa
 import Domain
 
 protocol CSViewModelInput {
-    func sendButtonTapped(message: String)
+    func sendButtonTapped(category: String, message: String)
 }
 
 protocol CSViewModelOutput {
@@ -35,8 +35,8 @@ public class CSViewModel: CSViewModelOutput {
 }
 
 extension CSViewModel: CSViewModelInput {
-    public func sendButtonTapped(message: String) {
-        usecase.send(message: message)
+    public func sendButtonTapped(category: String, message: String) {
+        usecase.send(category: category, message: message)
     }
 }
 
