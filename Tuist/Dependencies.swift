@@ -18,7 +18,7 @@ let dependencies = Dependencies(
             .swiftyJson,
             .rxKeyboard,
             .moya,
-            .slackKit
+            .toaster
     ],
     platforms: [.iOS]
 )
@@ -34,9 +34,5 @@ public extension Package {
     static let swiftyJson: Package    = .remote(url: "https://github.com/SwiftyJSON/SwiftyJSON.git", requirement: .upToNextMajor(from: "4.0.0"))
     static let rxRealm: Package       = .remote(url: "https://github.com/RxSwiftCommunity/RxRealm.git", requirement: .branch("main"))
     static let moya: Package          = .remote(url: "https://github.com/Moya/Moya.git", requirement: .branch("master"))
-    static let slackKit: Package = .remote(url: "https://github.com/pvzig/SlackKit.git", requirement: .branch("main"))
-}
-
-public extension CarthageDependencies.Dependency {
-    static let realm: CarthageDependencies.Dependency = .github(path: "realm/realm-swift", requirement: .branch("master"))
+    static let toaster: Package       = .remote(url: "https://github.com/devxoul/Toaster.git", requirement: .branch("master"))
 }

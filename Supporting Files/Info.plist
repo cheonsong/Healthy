@@ -2,12 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>SlackBotToken</key>
-	<string>$(SLACK_BOT_TOKEN)</string>
-	<key>SlackClientSecret</key>
-	<string>$(SLACK_CLIENT_SECRET)</string>
-	<key>SlackClientID</key>
-	<string>$(SLACK_CLIENT_ID)</string>
+	<key>SlackChannel</key>
+	<string>$(SLACK_CHANNEL)</string>
 	<key>SlackBotUserToken</key>
 	<string>$(SLACK_BOT_USER_AUTH_TOKEN)</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
