@@ -10,27 +10,27 @@ import Moya
 import Domain
 import Util
 
-enum SlackTargetType {
+public enum SlackTargetType {
     case postMessage(String, String)
 }
 
 extension SlackTargetType: BaseSlackTargetType {
     
-    var path: String {
+    public var path: String {
         switch self {
         case .postMessage(_, _):
             return "/chat.postMessage"
         }
     }
     
-    var method: Moya.Method {
+    public var method: Moya.Method {
         switch self {
         case .postMessage(_, _):
             return .post
         }
     }
     
-    var task: Moya.Task {
+    public var task: Moya.Task {
         switch self {
         case .postMessage(let category, let message):
             let date = "\(DateModel.today.year)-\(DateModel.today.month)-\(DateModel.today.day)"

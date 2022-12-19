@@ -10,6 +10,7 @@ import Domain
 import Data
 import Presentation
 import UIKit
+import Util
 
 final class MyPageDIContainer {
     
@@ -32,7 +33,8 @@ final class MyPageDIContainer {
     }
     
     func makeCSViewModel()-> CSViewModel {
-        return CSViewModel(usecase: SendMessageToSlackUsecase(repository: SlackRepository()))
+        
+        return CSViewModel(usecase: SendMessageToSlackUsecase(repository: SlackRepository(provider: SlackRepository.makeProvider(token: Configure.getConfig(.slackBotToken)))))
     }
     
     // MARK: Coordinator

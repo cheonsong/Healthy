@@ -6,9 +6,10 @@
 //
 
 import Foundation
+import RxSwift
 
 public protocol SendMessageToSlackUsecaseProtocol {
-    func send(category: String, message: String)
+    func send(category: String, message: String)-> Single<Bool>
 }
 
 public class SendMessageToSlackUsecase: SendMessageToSlackUsecaseProtocol {
@@ -19,7 +20,7 @@ public class SendMessageToSlackUsecase: SendMessageToSlackUsecaseProtocol {
         self.repository = repository
     }
     
-    public func send(category: String, message: String) {
-        repository.send(category: category, message: message)
+    public func send(category: String, message: String)-> Single<Bool> {
+        return repository.send(category: category, message: message)
     }
 }

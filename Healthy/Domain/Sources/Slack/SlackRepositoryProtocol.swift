@@ -7,7 +7,8 @@
 
 import Foundation
 import Util
+import RxSwift
 
 public protocol SlackRepositoryProtocol {
-    func send(category: String, message: String)
+    func send(category: String, message: String) -> Single<Bool>
 }
