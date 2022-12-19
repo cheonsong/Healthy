@@ -8,18 +8,18 @@
 import Foundation
 
 public protocol SendMessageToSlackUsecaseProtocol {
-    func send(message chat: String)
+    func send(category: String, message: String)
 }
 
 public class SendMessageToSlackUsecase: SendMessageToSlackUsecaseProtocol {
     
-    let bot: SlackBot?
+    var repository: SlackRepositoryProtocol
     
-    public init() {
-        bot = SlackBot()
+    public init(repository: SlackRepositoryProtocol) {
+        self.repository = repository
     }
     
-    public func send(message chat: String) {
-        bot?.send(chat)
+    public func send(category: String, message: String) {
+        repository.send(category: category, message: message)
     }
 }

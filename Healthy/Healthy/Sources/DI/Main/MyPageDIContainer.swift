@@ -32,7 +32,7 @@ final class MyPageDIContainer {
     }
     
     func makeCSViewModel()-> CSViewModel {
-        return CSViewModel(usecase: SendMessageToSlackUsecase())
+        return CSViewModel(usecase: SendMessageToSlackUsecase(repository: SlackRepository()))
     }
     
     // MARK: Coordinator
