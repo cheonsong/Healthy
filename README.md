@@ -17,76 +17,81 @@
 
 ## 화면별 설명
 
-- 시작
-    
-    ![Welcome](https://user-images.githubusercontent.com/59193640/208603163-6346c464-6235-4261-b0aa-017c1a481166.png)
-    
-    - 시작화면에서 Realm Database에 담긴 사용자 정보를 불러옵니다.
-    - 데이터베이스에 해당 유저 정보가 있다면 바로 메인화면으로 이동합니다.
-    - 사용자 정보가 존재하지 않는다면 시작하기 버튼을 눌렀을때 회원정보 입력 화면으로 이동합니다.
-    
-- 가입
-    
-    ![Welcome_Name](https://user-images.githubusercontent.com/59193640/208603235-e5d05bcd-1d92-4698-b6d0-7153ab1e0109.png)
+<details>
+    <summary>시작</summary>
+    <img src="https://user-images.githubusercontent.com/59193640/208603163-6346c464-6235-4261-b0aa-017c1a481166.png" width=150 height=266>
+    <ul>
+        <li>시작화면에서 Realm Database에 담긴 사용자 정보를 불러옵니다.</li>
+        <li>데이터베이스에 해당 유저 정보가 있다면 바로 메인화면으로 이동합니다.</li>
+        <li>사용자 정보가 존재하지 않는다면 시작하기 버튼을 눌렀을때 회원정보 입력 화면으로 이동합니다.</li>
+    </ul>
+</details>
 
-    - 이름, 나이, 성별, 키, 몸무게 총 다섯가지 정보를 입력 받습니다.
-    - 입력받은 정보는 Realm DB파일에 저장됩니다.
-    - 입력받은 정보를 기반으로 추천 음수량을 제공합니다.
-    
-- 메인
-    
-    ![Main](https://user-images.githubusercontent.com/59193640/208603275-f3f49e6a-cb69-474e-8158-ed22fd326abe.png)
-    
-    Healthy의 메인 화면입니다.
-    
-    - 우상단 물음표 버튼을 누르면 앱 사용 가이드를 확인할 수 있습니다.
-    - 메인페이지에서는 전체적인 목표 달성도를 한눈에 확인 할 수 있습니다.
-    - 현재  한가지 기능밖에 없지만 총 세가지 기능(걸음, 수면, 음식)을 추가하는것을 목표로 하고있습니다.
-    
-- 음수량 확인
-    
-    ![Water_Main](https://user-images.githubusercontent.com/59193640/208603294-5173993a-2ac5-43a3-84e2-698109617441.png)
-    
-    음수량을 확인하는 화면입니다.
-    
-    - 오늘의 음수량을 수치와, 프로그레스바를 통해 시각적으로 확인이 가능합니다.
-    - 우상단의 설정버튼을 통해 목표 음수량을 수정 가능합니다.
-    - 중단의 달력은 Github의 Commit그래프에서 영감을 받아 월별 달성도를 한눈에 확인 가능하도록 구성했습니다.
-    - 하단 물마시기 버튼은 오늘 마신 물을 추가할 수 있는 기능입니다.
-- 음수량 추가
-    
-    ![Water_Add](https://user-images.githubusercontent.com/59193640/208603340-98a59fa5-46d7-48b9-b9d8-2d193f16a96f.png)
+<details>
+    <summary>가입</summary>
+    <img src="https://user-images.githubusercontent.com/59193640/208603235-e5d05bcd-1d92-4698-b6d0-7153ab1e0109.png" width=150 height=266>
+    <ul>
+        <li>이름, 나이, 성별, 키, 몸무게 총 다섯가지 정보를 입력 받습니다.</li>
+        <li>입력받은 정보는 Realm DB파일에 저장됩니다.</li>
+        <li>입력받은 정보를 기반으로 추천 음수량을 제공합니다.</li>
+    </ul>
+</details>
 
-    오늘 마신 물을 추가하는 화면입니다.
-    
-    - 따로 페이지를 분리하지는 않았고 모달형식으로 노출됩니다.
-    - 물 한잔의 양은 기본적으로 200ml이며 물을 추가 및 삭제 할 수 있습니다.
-    - 변경된 정보는 즉각 Realm DB파일에 기록되며, 정상적으로 기록됐다면 음수량 확인 화면의 정보도 즉각적으로 변경됩니다.
-- 음수량 목표 설정
+<details>
+    <summary>메인</summary>
+    <img src="https://user-images.githubusercontent.com/59193640/208603275-f3f49e6a-cb69-474e-8158-ed22fd326abe.png" width=150 height=266>
+    <ul>
+        <li>우상단 물음표 버튼을 누르면 앱 사용 가이드를 확인할 수 있습니다.</li>
+        <li>메인페이지에서는 전체적인 목표 달성도를 한눈에 확인 할 수 있습니다.</li>
+        <li>현재 한가지 기능밖에 없지만 총 세가지 기능(걸음, 수면, 음식)을 추가하는것을 목표로 하고있습니다.</li>
+    </ul>
+</details>
+   
+<details>
+    <summary>음수량 확인</summary>
+    <img src="https://user-images.githubusercontent.com/59193640/208603294-5173993a-2ac5-43a3-84e2-698109617441.png" width=150 height=266>
+    <ul>
+        <li>오늘의 음수량을 수치와, 프로그레스바를 통해 시각적으로 확인이 가능합니다.</li>
+        <li>우상단의 설정버튼을 통해 목표 음수량을 수정 가능합니다.</li>
+        <li>중단의 달력은 Github의 Commit그래프에서 영감을 받아 월별 달성도를 한눈에 확인 가능하도록 구성했습니다.</li>
+        <li>하단 물마시기 버튼은 오늘 마신 물을 추가할 수 있는 기능입니다.</li>
+    </ul>
+</details>
 
-    ![Water_Set](https://user-images.githubusercontent.com/59193640/208603370-ee201a09-4eca-4b13-ad75-91fb9d91f53e.png)
+<details>
+    <summary>음수량 추가</summary>
+    <img src="https://user-images.githubusercontent.com/59193640/208603340-98a59fa5-46d7-48b9-b9d8-2d193f16a96f.png" width=150 height=266>
+    <ul>
+        <li>따로 페이지를 분리하지는 않았고 모달형식으로 노출됩니다.</li>
+        <li>물 한잔의 양은 기본적으로 200ml이며 물을 추가 및 삭제 할 수 있습니다.</li>
+        <li>변경된 정보는 즉각 Realm DB파일에 기록되며, 정상적으로 기록됐다면 음수량 확인 화면의 정보도 즉각적으로 변경됩니다.</li>
+    </ul>
+</details>
 
-    목표치를 변경할 수 있는 화면입니다.
-    
-    - 기본값은 사용자 정보에 맞는 추천값입니다.
-    - 추가하기와 동일하게 모달형식으로 노출됩니다.
-    - 현재 하루 목표를 보여주며 사용자가 변경한 정보는 Realm DB에 저장됩니다.
-    - 변경된 즉시 비율에 맞게 음수량확인화면의 프로그래스바가 변경됩니다.
-    
-- 고객센터
+<details>
+    <summary>음수량 목표 설정</summary>
+    <img src="https://user-images.githubusercontent.com/59193640/208603370-ee201a09-4eca-4b13-ad75-91fb9d91f53e.png" width=150 height=266>
+    <ul>
+        <li>기본값은 사용자 정보에 맞는 추천값입니다.</li>
+        <li>추가하기와 동일하게 모달형식으로 노출됩니다.</li>
+        <li>현재 하루 목표를 보여주며 사용자가 변경한 정보는 Realm DB에 저장됩니다.</li>
+        <li>변경된 즉시 비율에 맞게 음수량확인화면의 프로그래스바가 변경됩니다.</li>
+    </ul>
+</details>
 
-    ![CS](https://user-images.githubusercontent.com/59193640/208603432-ff6e938f-56e1-43b8-b326-6bec89b9ecb5.png)
-
-    ![Untitled](https://user-images.githubusercontent.com/59193640/208603418-4b1f4561-970b-4209-8729-ff4c48042ec2.png)
-
-    사용자의 피드백을 즉각적으로 받을 수 있는 고객센터 화면입니다.
-    
-    - 사용자는 카테고리를 선택하고, 내용을 입력하여 전송하면 Slack API를 통해 미리 설정해둔 슬랙채널로 해당 메세지가 전송돼 개발자가 바로 확인이 가능합니다.
-    - 최초배포에는 없던 기능이지만 필요성이 느껴져 업데이트한 기능입니다.
+<details>
+    <summary>고객센터</summary>
+    <img src="https://user-images.githubusercontent.com/59193640/208603432-ff6e938f-56e1-43b8-b326-6bec89b9ecb5.png" width=150 height=266>
+    <img src="https://user-images.githubusercontent.com/59193640/208603418-4b1f4561-970b-4209-8729-ff4c48042ec2.png" width=150 height=266>
+    <ul>
+        <li>사용자는 카테고리를 선택하고, 내용을 입력하여 전송하면 Slack API를 통해 미리 설정해둔 슬랙채널로 해당 메세지가 전송돼 개발자가 바로 확인이 가능합니다.</li>
+        <li>최초배포에는 없던 기능이지만 필요성이 느껴져 업데이트한 기능입니다.</li>
+    </ul>
+</details>
 
 ## 시연 영상 (44초)
 
-![a](https://user-images.githubusercontent.com/59193640/208603464-14bbe489-1500-4788-ac5a-0f9c682d697c.mp4)
+<img src="https://user-images.githubusercontent.com/59193640/208603464-14bbe489-1500-4788-ac5a-0f9c682d697c.mp4" width=150 height=266>
 
 
 ## 성과
