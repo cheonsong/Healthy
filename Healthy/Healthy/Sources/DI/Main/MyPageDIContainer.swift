@@ -34,7 +34,7 @@ final class MyPageDIContainer {
     
     func makeCSViewModel()-> CSViewModel {
         
-        return CSViewModel(usecase: SendMessageToSlackUsecase(repository: SlackRepository(provider: SlackRepository.makeProvider(token: Configure.getConfig(.slackBotToken)))))
+        return CSViewModel(usecase: SendMessageToSlackUsecase(repository: SlackRepository(provider: SlackRepository.makeProvider(token: XCConfig.config(.slackBotToken)))))
     }
     
     // MARK: Coordinator

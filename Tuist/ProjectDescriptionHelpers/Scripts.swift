@@ -8,6 +8,5 @@
 import ProjectDescription
 
 extension ProjectDescription.TargetScript {
-    public static let localize = TargetScript.pre(script: "python3.10 ../../Scripts/localize.py", name: "Localize", basedOnDependencyAnalysis: false, runForInstallBuildsOnly: true)
-    //public static let localize = TargetScript.pre(path: .relativeToRoot("Scripts/Localize.sh"), name: "Localize")
+    public static let localize = TargetScript.pre(path: .relativeToRoot("Scripts/Localize.sh"), name: "Localize")
 }

@@ -35,7 +35,7 @@ extension SlackTargetType: BaseSlackTargetType {
         case .postMessage(let category, let message):
             let date = "\(DateModel.today.year)-\(DateModel.today.month)-\(DateModel.today.day)"
             
-            return .requestJSONEncodable(SlackMessageModel(channel: Configure.getConfig(.slackChannel), date: date, category: category, message: message))
+            return .requestJSONEncodable(SlackMessageModel(channel: XCConfig.config(.slackChannel), date: date, category: category, message: message))
         }
     }
 }
@@ -52,7 +52,7 @@ struct SlackMessageModel: Encodable {
         self.channel = channel
         self.date = date
         self.blocks = [SectionModel(text: TextModel(text: "\n*유형 : \(category)*")),
-                       SectionModel(text: TextModel(text: "시간 : \(date)")),
+                       SectionModel(text: TextModel(text: "시간 : \(date), 지역 : \(Locale.current.identifier)")),
                        SectionModel(text: TextModel(text: message)),
                        SectionModel(text: TextModel(text: "===================================================================="))
         ]
