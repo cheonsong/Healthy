@@ -6,15 +6,23 @@
 //
 
 import SwiftUI
+import WidgetKit
 
-struct WaterEntryView: View {
+struct WaterEntryView : View {
+    var entry: Provider.Entry
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack {
+            CircularProgressView(progress: 0.2)
+            Image("icoWater")
+                .renderingMode(.original)
+                .foregroundColor(.white)
+        }
     }
 }
-
 struct WaterEntryView_Previews: PreviewProvider {
     static var previews: some View {
-        WaterEntryView()
+        WaterEntryView(entry: SimpleEntry(date: Date(), configuration: ConfigurationIntent()))
+            .previewContext(WidgetPreviewContext(family: .systemSmall))
     }
 }

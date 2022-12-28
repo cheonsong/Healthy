@@ -20,34 +20,28 @@ struct WidgetExtensionAttributes: ActivityAttributes {
 }
 
 struct WidgetExtensionLiveActivity: Widget {
-    private let kind: String = "SimpleTodoWidget"
+    private let kind: String = "WaterWidget"
     
     public var body: some WidgetConfiguration {
         IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: Provider(), content: {
-            WidgetExtensionEntryView(entry: $0)
+            WaterEntryView(entry: $0)
         })
-        .configurationDisplayName("My Widget")
-        .description("This is an example widget.")
+        .configurationDisplayName("Water")
+        .description("View the current achievement.")
     }
 }
-//
-//struct WidgetExtensionLiveActivity_Previews: PreviewProvider {
-//    static let attributes = WidgetExtensionAttributes(name: "Me")
-//    static let contentState = WidgetExtensionAttributes.ContentState(value: 3)
-//
-//    @available(iOSApplicationExtension 16.2, *)
-//    static var previews: some View {
-//        attributes
-//            .previewContext(contentState, viewKind: .dynamicIsland(.compact))
-//            .previewDisplayName("Island Compact")
-//        attributes
-//            .previewContext(contentState, viewKind: .dynamicIsland(.expanded))
-//            .previewDisplayName("Island Expanded")
-//        attributes
-//            .previewContext(contentState, viewKind: .dynamicIsland(.minimal))
-//            .previewDisplayName("Minimal")
-//        attributes
-//            .previewContext(contentState, viewKind: .content)
-//            .previewDisplayName("Notification")
-//    }
-//}
+
+struct WidgetExtensionLiveActivity_Previews: PreviewProvider {
+    
+    static var previews: some View {
+        WaterEntryView(entry: SimpleEntry(date: Date(),
+                                                    configuration: ConfigurationIntent()))
+        .previewContext(WidgetPreviewContext(family: .systemSmall))
+    }
+}
+
+extension String {
+    
+}
+
+

@@ -8,6 +8,7 @@
 import WidgetKit
 import SwiftUI
 import Intents
+import DesignSystem
 
 struct Provider: IntentTimelineProvider {
     func placeholder(in context: Context) -> SimpleEntry {
@@ -40,20 +41,12 @@ struct SimpleEntry: TimelineEntry {
     let configuration: ConfigurationIntent
 }
 
-struct WidgetExtensionEntryView : View {
-    var entry: Provider.Entry
-
-    var body: some View {
-        Text(entry.date, style: .time)
-    }
-}
-
 struct WidgetExtension: Widget {
     let kind: String = "WidgetExtension"
 
     var body: some WidgetConfiguration {
         IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: Provider()) { entry in
-            WidgetExtensionEntryView(entry: entry)
+            WaterEntryView(entry: entry)
         }
         .configurationDisplayName("My Widget")
         .description("This is an example widget.")
@@ -62,7 +55,7 @@ struct WidgetExtension: Widget {
 
 struct WidgetExtension_Previews: PreviewProvider {
     static var previews: some View {
-        WidgetExtensionEntryView(entry: SimpleEntry(date: Date(), configuration: ConfigurationIntent()))
+        WaterEntryView(entry: SimpleEntry(date: Date(), configuration: ConfigurationIntent()))
             .previewContext(WidgetPreviewContext(family: .systemSmall))
     }
 }
