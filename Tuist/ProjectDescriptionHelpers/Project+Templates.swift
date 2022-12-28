@@ -67,6 +67,7 @@ extension Project {
                     infoPlist: .file(path: .relativeToRoot("Supporting Files/Info.plist")),
                     sources: ["Sources/**"],
                     resources: resources,
+                    entitlements: .relativeToRoot("Supporting Files/Healthy.entitlements"),
                     scripts: scripts,
                     dependencies: dependencies,
                     settings: .settings(configurations: [.release(name: .release, settings: makeSettingDictionary(), xcconfig: .relativeToRoot("Configurations/release.xcconfig")), .debug(name: .debug, settings: makeSettingDictionary(), xcconfig: .relativeToRoot("Configurations/debug.xcconfig"))])
@@ -89,8 +90,10 @@ extension Project {
     }
     
     static func makeSettingDictionary()-> SettingsDictionary {
-        return SettingsDictionary().automaticCodeSigning(devTeam: "7ZK7Q3JHK4").merging(["VERSIONING_SYSTEM": "apple-generic",
-                                                                                         "BUILD_LIBRARY_FOR_DISTRIBUTION": "NO"])
+        return SettingsDictionary()
+            .automaticCodeSigning(devTeam: "7ZK7Q3JHK4")
+            .merging(["VERSIONING_SYSTEM": "apple-generic",
+                      "BUILD_LIBRARY_FOR_DISTRIBUTION": "NO"])
     }
     
     static func makeWidgetTarget()-> [Target] {
@@ -102,6 +105,7 @@ extension Project {
                        infoPlist: .file(path: .relativeToRoot("WidgetExtension/Info.plist")),
                        sources: [.glob(.relativeToRoot("WidgetExtension/**"))],
                        resources: [.glob(pattern: .relativeToRoot("WidgetExtension/Resources/**"))],
+                       entitlements: .relativeToRoot("Supporting Files/WidgetExtension.entitlements"),
                        dependencies: [],
                        settings: .settings(configurations: [
                         .debug(name: .debug, settings: makeSettingDictionary().merging(["MTL_ENABLE_DEBUG_INFO": "INCLUDE_SOURCE"])),
