@@ -101,6 +101,7 @@ extension Project {
                        deploymentTarget: .iOS(targetVersion: iosVersion, devices: [.iphone]),
                        infoPlist: .file(path: .relativeToRoot("WidgetExtension/Info.plist")),
                        sources: [.glob(.relativeToRoot("WidgetExtension/**"))],
+                       resources: [.glob(pattern: .relativeToRoot("WidgetExtension/Resources/**"))],
                        dependencies: [],
                        settings: .settings(configurations: [
                         .debug(name: .debug, settings: makeSettingDictionary().merging(["MTL_ENABLE_DEBUG_INFO": "INCLUDE_SOURCE"])),
