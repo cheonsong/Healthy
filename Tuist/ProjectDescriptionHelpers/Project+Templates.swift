@@ -8,7 +8,7 @@ import ProjectDescription
 extension Project {
     
     static let bundleID = "com.cheonsong.healthy"
-    static let iosVersion = "13.0"
+    static let iosVersion = "14.0"
     
     /// Helper function to create the Project for this ExampleApp
     public static func app(
@@ -51,6 +51,9 @@ extension Project {
         resources: ProjectDescription.ResourceFileElements? = nil,
         scripts: [TargetScript] = []
     ) -> Project {
+        
+        let widget: [Target] = product == .app ? makeWidgetTarget() : []
+        
         return Project(
             name: name,
             //settings: .settings(base: .init().automaticCodeSigning(devTeam: "GP9D94CZ57")),
@@ -80,7 +83,7 @@ extension Project {
                         .target(name: "\(name)")
                     ]
                 )
-            ],
+            ] + widget,
             schemes: schemes
         )
     }
@@ -88,6 +91,21 @@ extension Project {
     static func makeSettingDictionary()-> SettingsDictionary {
         return SettingsDictionary().automaticCodeSigning(devTeam: "7ZK7Q3JHK4").merging(["VERSIONING_SYSTEM": "apple-generic",
                                                                                          "BUILD_LIBRARY_FOR_DISTRIBUTION": "NO"])
+    }
+    
+    static func makeWidgetTarget()-> [Target] {
+        return [Target(name: "WidgetExtension",
+                       platform: .iOS,
+                       product: .appExtension,
+                       bundleId: bundleID + ".WidgetExtension",
+                       deploymentTarget: .iOS(targetVersion: iosVersion, devices: [.iphone]),
+                       infoPlist: .file(path: .relativeToRoot("WidgetExtension/Info.plist")),
+                       sources: [.glob(.relativeToRoot("WidgetExtension/**"))],
+                       dependencies: [],
+                       settings: .settings(configurations: [
+                        .debug(name: .debug, settings: makeSettingDictionary().merging(["MTL_ENABLE_DEBUG_INFO": "INCLUDE_SOURCE"])),
+                        .release(name: .release, settings: makeSettingDictionary().merging(["MTL_ENABLE_DEBUG_INFO": "NO"]))
+                       ]))]
     }
 }
 

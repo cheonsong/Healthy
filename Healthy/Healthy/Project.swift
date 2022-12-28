@@ -8,6 +8,6 @@ let project = Project.app(name: Module.app.name,
                             Module.presentation,
                             Module.designSystem,
                             Module.util
-                          ].map(\.project),
+                          ].map(\.project) + [.target(name: "WidgetExtension")],
                           resources: .default,
                           scripts: [.localize])
