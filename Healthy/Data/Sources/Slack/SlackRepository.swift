@@ -28,7 +28,7 @@ public class SlackRepository: SlackRepositoryProtocol, Networkable {
     
     public func send(category: String, message: String) -> Single<Bool> {
         return provider.rx.request(.postMessage(category, message))
-            .flatMap { $0.mappingToSwiftJSON() }
+            .toJSON()
             .flatMap { data -> Single<Bool> in
                 return Single.create { single -> Disposable in
                     // 응답 데이터를 JSON객체로 파싱

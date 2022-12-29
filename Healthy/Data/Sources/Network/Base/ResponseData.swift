@@ -13,19 +13,13 @@ import Util
 import SwiftyJSON
 
 extension Response {
-    
     func checkStatusCode() {
         Log.d(self.statusCode)
     }
-    
-    func mappingToSwiftJSON()-> Single<JSON> {
-        return .create { [weak self] single -> Disposable in
-            guard let self = self else {
-                return single(.failure(ServiceError.jsonParsingError)) as! Disposable
-            }
-            single(.success(JSON(self.data)))
-            
-            return Disposables.create()
-        }
+}
+
+extension Single<Response> {
+    func toJSON()-> Single<JSON> {
+        return self.map { JSON($0.data) }
     }
 }
