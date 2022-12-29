@@ -66,8 +66,8 @@ struct WidgetExtension: Widget {
         IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: Provider()) { entry in
             WaterEntryView(entry: entry)
         }
-        .configurationDisplayName("Water")
-        .description("View the current achievement.")
+        .configurationDisplayName(WidgetExtensionStrings.waterText)
+        .description(WidgetExtensionStrings.widgetWaterDescription)
     }
 }
 
