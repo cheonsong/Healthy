@@ -106,7 +106,7 @@ extension Project {
                        sources: [.glob(.relativeToRoot("WidgetExtension/**"))],
                        resources: [.glob(pattern: .relativeToRoot("WidgetExtension/Resources/**"))],
                        entitlements: .relativeToRoot("Supporting Files/WidgetExtension.entitlements"),
-                       dependencies: [],
+                       dependencies: [Module.designSystem.project, Module.data.project, Module.domain.project],
                        settings: .settings(configurations: [
                         .debug(name: .debug, settings: makeSettingDictionary().merging(["MTL_ENABLE_DEBUG_INFO": "INCLUDE_SOURCE"])),
                         .release(name: .release, settings: makeSettingDictionary().merging(["MTL_ENABLE_DEBUG_INFO": "NO"]))
