@@ -11,11 +11,14 @@ import RxSwift
 import Util
 
 struct DBHelper<Q: Object> {
-    private var realm: Realm!
-    
-    init() {
-        self.realm = try! Realm()
+    private var realm: Realm {
+        let container = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.com.cheonsong.healthy")
+        let realmURL = container?.appendingPathComponent("default.realm")
+        let config = Realm.Configuration(fileURL: realmURL, schemaVersion: 1)
+        return try! Realm(configuration: config)
     }
+    
+    init() {}
 
     func add(_ object: Q)-> Single<Q> {
         return .create(subscribe: { single-> Disposable in
