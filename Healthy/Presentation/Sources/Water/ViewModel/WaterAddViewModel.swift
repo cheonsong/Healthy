@@ -10,6 +10,7 @@ import RxSwift
 import RxCocoa
 import Domain
 import Util
+import WidgetKit
 
 private protocol WaterAddViewModelInput {
     func didPlus()
@@ -111,6 +112,8 @@ extension WaterAddViewModel: WaterAddViewModelInput {
                 
                 App.state.waterGoal.accept(model.goal)
                 App.state.waterToday.accept(model.progress)
+                
+                WidgetCenter.shared.reloadTimelines(ofKind: "Water")
                 
                 self.fetchWaterUsecase.execute(year: DateModel.today.year, month: Month(rawValue: DateModel.today.month)!)
                     .subscribe{ models in

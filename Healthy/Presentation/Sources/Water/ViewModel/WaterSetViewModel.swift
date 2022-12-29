@@ -10,6 +10,7 @@ import RxSwift
 import RxCocoa
 import Domain
 import Util
+import WidgetKit
 
 private protocol WaterSetViewModelInput {
     func goalTextFormInput(text: String)
@@ -80,6 +81,8 @@ extension WaterSetViewModel: WaterSetViewModelInput {
                         
                         App.state.waterGoal.accept(model.goal)
                         App.state.waterToday.accept(model.progress)
+                        
+                        WidgetCenter.shared.reloadTimelines(ofKind: "Water")
                     })
                     .disposed(by: self.disposeBag)
                 
