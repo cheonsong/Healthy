@@ -28,7 +28,7 @@ public class ValidationUseCase: ValidationUseCaseProtocol {
         if text == " " { return "" }
         
         if text.count > 15 {
-            text.removeLast()
+            text = String(text[text.startIndex..<text.index(text.startIndex, offsetBy: 15)])
         }
         
         return text

@@ -18,7 +18,9 @@ let dependencies = Dependencies(
             .swiftyJson,
             .rxKeyboard,
             .moya,
-            .toaster
+            .toaster,
+            .quick,
+            .nimble
     ],
     platforms: [.iOS]
 )
@@ -35,4 +37,6 @@ public extension Package {
     static let rxRealm: Package       = .remote(url: "https://github.com/RxSwiftCommunity/RxRealm.git", requirement: .branch("main"))
     static let moya: Package          = .remote(url: "https://github.com/Moya/Moya.git", requirement: .branch("master"))
     static let toaster: Package       = .remote(url: "https://github.com/devxoul/Toaster.git", requirement: .branch("master"))
+    static let quick: Package         = .remote(url: "https://github.com/Quick/Quick.git", requirement: .branch("main"))
+    static let nimble: Package        = .remote(url: "https://github.com/Quick/Nimble.git", requirement: .branch("main"))
 }

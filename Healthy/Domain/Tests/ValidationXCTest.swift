@@ -8,7 +8,7 @@
 import XCTest
 import Domain
 
-final class ValidationUsecaseTest: XCTestCase {
+final class ValidationXCTest: XCTestCase {
     
     var sut: ValidationUseCase?
 
@@ -59,7 +59,7 @@ final class ValidationUsecaseTest: XCTestCase {
     }
     
     func testValidationUsecase_WhenOver15_ShouldReturnUnder15() {
-        let text = "akgnekl wkefnse"
+        let text = "akgnekl wkefnse124124"
         
         let validatedText = sut?.nameValidation(text)
         

@@ -82,7 +82,8 @@ extension Project {
                     sources: "Tests/**",
                     dependencies: [
                         .target(name: "\(name)")
-                    ]
+                    ],
+                    settings: .settings(configurations: [.release(name: .release, settings: makeSettingDictionary(), xcconfig: .relativeToRoot("Configurations/release.xcconfig")), .debug(name: .debug, settings: makeSettingDictionary(), xcconfig: .relativeToRoot("Configurations/debug.xcconfig"))])
                 )
             ] + widget,
             schemes: schemes
@@ -134,4 +135,6 @@ public extension TargetDependency {
     static let realm: TargetDependency         = .xcframework(path: .relativeToRoot("Healthy/Data/Framework/Realm.xcframework"))
     static let slackKit: TargetDependency      = .external(name: "SlackKit")
     static let toaster: TargetDependency       = .external(name: "Toaster")
+    static let quick: TargetDependency         = .external(name: "Quick")
+    static let nimble: TargetDependency        = .external(name: "Nimble")
 }
