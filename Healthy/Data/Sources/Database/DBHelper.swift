@@ -54,14 +54,14 @@ struct DBHelper<Q: Object> {
         })
     }
 
-    func delete(_ object: Q)-> Single<Void> {
+    func delete(_ object: Q)-> Single<Bool> {
         return .create(subscribe: { single-> Disposable in
             do {
                 try realm.write {
                     realm.delete(object)
                 }
                 
-                single(.success(()))
+                single(.success((true)))
                 
                 return Disposables.create()
                 

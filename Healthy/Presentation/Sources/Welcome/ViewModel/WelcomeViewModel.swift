@@ -40,7 +40,7 @@ public class WelcomeViewModel: WelcomeViewModelInput, WelcomeViewModelOutput {
         fetchUserUsecase.excute()
             .subscribe(onSuccess: { [weak self] models in
                 Log.d(models)
-                guard let model = models.first else { return }
+                guard let model = models else { return }
                 App.state.userInfo.accept(model)
                 self?.action.welcomeMoveToMain()
             })

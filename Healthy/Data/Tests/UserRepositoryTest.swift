@@ -53,5 +53,17 @@ class UserRepositoryTest: QuickSpec {
                 }
             }
         }
+        
+        describe("유저 정보 삭제") {
+            context("데이터 초기화시 유저정보를 삭제합니다.") {
+                it("삭제 성공시 TRUE 반환") {
+                    await sut.deleteUserInfo_Test(model: testModel)
+                        .subscribe(onSuccess: { isSuccess in
+                            expect(isSuccess).to(beTrue())
+                        })
+                        .dispose()
+                }
+            }
+        }
     }
 }

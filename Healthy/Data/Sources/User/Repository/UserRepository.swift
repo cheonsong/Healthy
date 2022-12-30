@@ -47,4 +47,8 @@ extension UserRepository {
     public func updateUserInfo_Test(model: UserModel)-> Single<UserModel> {
         return storage.update_Test(model.toEntity()).map { $0.toModel() }
     }
+    
+    public func deleteUserInfo_Test(model: UserModel) async-> Single<Bool> {
+        return await storage.delete_Test(model.toEntity())
+    }
 }

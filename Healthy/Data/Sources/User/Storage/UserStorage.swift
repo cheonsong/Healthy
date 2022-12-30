@@ -7,6 +7,7 @@
 
 import Foundation
 import RxSwift
+import RealmSwift
 
 public class UserSotrage {
     private var helper = DBHelper<UserEntity>()
@@ -41,5 +42,9 @@ public class UserSotrage {
     public func update_Test(_ data: UserEntity)-> Single<UserEntity> {
         data.id = 2
         return helper.update(data)
+    }
+    
+    public func delete_Test(_ data: UserEntity) async-> Single<Bool> {
+        return await helper.delete(try! helper.readWithQuery(query: {$0.id == 2}).value.first!)
     }
 }
