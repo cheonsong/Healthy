@@ -24,7 +24,9 @@ public enum ConfigureEnum {
 public struct XCConfig {
     
     public static func config(_ config: ConfigureEnum)-> String {
-        return Bundle.main.object(forInfoDictionaryKey: config.key) as? String ?? "Invalid Key"
+        let key = Bundle.main.object(forInfoDictionaryKey: config.key) as? String ?? "Invalid Key"
+        Log.d("XCCONFIG:: \(config.key) = \(key)")
+        return key
     }
     
 }
