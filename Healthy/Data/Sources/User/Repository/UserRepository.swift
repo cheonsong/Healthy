@@ -38,3 +38,13 @@ public class UserRepository: UserRepositoryProtocol {
         return storage.removeAll()
     }
 }
+
+extension UserRepository {
+    public func addUserInfo_Test(model: UserModel)-> Single<UserModel> {
+        return storage.add_Test(model.toEntity()).map{ $0.toModel() }
+    }
+    
+    public func updateUserInfo_Test(model: UserModel)-> Single<UserModel> {
+        return storage.update_Test(model.toEntity()).map { $0.toModel() }
+    }
+}

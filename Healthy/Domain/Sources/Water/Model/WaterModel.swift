@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct WaterModel {
+public struct WaterModel: Equatable {
     
     public var unit: String
     public var goal: Float

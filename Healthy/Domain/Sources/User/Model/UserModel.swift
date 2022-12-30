@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct UserModel {
+public struct UserModel: Equatable {
     
     public var name: String
     public var height: Int
@@ -40,4 +40,9 @@ public struct UserModel {
         self.gender = ""
         self.water = nil
     }
+    
+    public static func == (lhs: UserModel, rhs: UserModel) -> Bool {
+        return lhs.name == rhs.name && lhs.height == rhs.height && lhs.heightUnit == rhs.heightUnit && lhs.weight == rhs.weight && lhs.weightUnit == rhs.weightUnit && lhs.age == rhs.age && lhs.gender == rhs.gender && lhs.water == rhs.water && lhs.name == rhs.name
+    }
+    
 }

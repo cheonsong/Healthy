@@ -32,4 +32,14 @@ public class UserSotrage {
     public func removeAll()-> Single<Void> {
         return helper.deleteAll()
     }
+    
+    public func add_Test(_ data: UserEntity)-> Single<UserEntity> {
+        data.id = 2
+        return helper.add(data)
+    }
+    
+    public func update_Test(_ data: UserEntity)-> Single<UserEntity> {
+        data.id = 2
+        return helper.update(data)
+    }
 }
