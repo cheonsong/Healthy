@@ -14,6 +14,7 @@
 - Realm, RxSwift, SnapKit, Then, RxMoya
 - Tuist, Fastlane, Localize
 - Figma, Slack
+- WidgetKit
 
 ## 화면별 설명
 
@@ -103,6 +104,7 @@
 - [UIBuilder](https://github.com/cheonsong/UIBuilder)와 DesignSystem을 이용해 개발 생산성을 높이고, UI 구현 로직을 깔끔하게 정리함 또한 사용자에게 일관된 사용자경험을 제공함
 - xcconfig를 통해 debug, release용으로 API Key값을 분리하고, 공개 저장소에 Key값이 공개되는 위험을 방지함
 - 한국어, 영어, 일본어 로컬라이징을 통해 세가지 언어를 지원하며, 로컬라이징 자동화를 구축해 개발 생산성을 향상함
+- SwiftUI를 통한 Widget을 구현해 사용자으 접근성, 사용성을 향상함
 
 ## **회고**
 
